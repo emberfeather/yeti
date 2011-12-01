@@ -3,6 +3,19 @@
 @colorSecondary: #ffc253;
 @colorTertiary: #e5f1f1;
 
+/**
+ * Modular Scale
+ * 16px @ 1:1.618
+ * 
+ * http://modularscale.com/scale/?px1=16&px2=&ra1=1.618&ra2=0
+ * 
+ * 4.236
+ * 2.618
+ * 1.618
+ * 1
+ * 0.618
+ */
+
 .border-radius (@radius: 0.5em) {
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
@@ -16,9 +29,37 @@ html {
 }
 
 body {
+	font: 16px/1.5 'Convergence', cursive;
 	background: @colorBackground;
+	font-variant-ligatures: common-ligatures;
 	color: @colorBase;
 	height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montez', cursive;
+	margin: .5em 0;
+}
+
+h1 {
+	font-size: 4.236em;
+	text-align: center;
+}
+
+h2 {
+	font-size: 2.618em;
+}
+
+h3 {
+	font-size: 1.618em;
+}
+
+h4 {
+	font-size: 1em;
+}
+
+p {
+	margin-bottom: 1em;
 }
 
 a {
@@ -34,7 +75,7 @@ a {
 
 .outer_container {
 	background: url(img/background.png) center bottom no-repeat;
-	padding: 1.5em 0 55em 0;
+	padding: 1.5em 0 45em 0;
 }
 
 .container {
@@ -45,6 +86,6 @@ a {
 footer {
 	position: fixed;
 	bottom: 1.5em;
-	font-size: .9em;
+	font-size: 0.618em;
 	text-align: center;
 }
