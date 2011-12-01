@@ -3,8 +3,18 @@ layout: master
 title: Start a Snowball Fight!
 ---
 
-<div class="grid_16">
-	<p>
-		Snowballs are the only way to go. Ready fight!
-	</p>
+<div class="grid_16" id="loans">
+	<noscript>
+		<p>
+			<strong>JavaScript is required for Yeti!</strong>
+		</p>
+	</noscript>
 </div>
+
+<script id="loanTemplate" type="text/x-jquery-tmpl">
+	<div class="loan">
+		$<input type="number" step="0.01" min="0.01" name="principal" value="${principal}" /> borrowed
+		at <input type="number" step="0.01" min="0" name="rate" value="${interest}" class="small" />% interest
+		with a $<input type="number" step="0.01" min="0" name="minPayment" value="${minPayment}" /> minimum payment
+	</div>
+</script>
