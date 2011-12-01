@@ -79,7 +79,7 @@ input {
 	font: 16px/1.5 'Convergence', cursive;
 	background: fadeout(@colorSecondary, 75%);
 	.border-radius(.35em);
-	border: 1px dotted @colorSecondary;
+	border: 2px solid @colorSecondary;
 	padding: .25em;
 	width: 5.5em;
 	
@@ -87,10 +87,18 @@ input {
 		width: 3.25em;
 	}
 	
+	&:focus {
+		outline: none;
+		outline-offset: 0px;
+		border: 2px solid darken(@colorSecondary, 25%);
+	}
+	
 	&[type=button] {
-		padding: .5em 1em;
+		.border-radius(1.2em);
+		background: fadeout(@colorBase, 75%);
+		border: 2px solid @colorBase;
+		padding: .25em .85em;
 		width: auto;
-		text-shadow: 2px 2px 2px @colorBackground;
 	}
 }
 
@@ -115,12 +123,14 @@ input {
 }
 
 footer {
-	position: fixed;
-	bottom: 1.5em;
 	font-size: 0.618em;
 	text-align: center;
 }
 
 .float-right {
 	float: right;
+}
+
+.output {
+	font-weight: bold;
 }
