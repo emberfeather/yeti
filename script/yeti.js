@@ -7,24 +7,41 @@
 		factory(jQuery);
 	}
 }(function($){
-	var loanContainer;
-	var loans;
-	var loanTemplate;
+	var containers = {};
+	var buttons = {};
 	
 	$(function(){
-		loanContainer = $('#loans');
-		loanTemplate = $('#loanTemplate').template('loan');
+		containers.loan = $('#loans');
+		containers.payment = $('#payment');
+		containers.details = $('#details');
+		containers.extraDetails = $('#extraDetails');
 		
-		// Clear any holder text
-		loanContainer.empty();
+		$('#loanTemplate').template('loan');
+		$('#buttonTemplate').template('button');
 		
-		// Add initial loan
-		var loan = $.tmpl('loan', {
-			principal: 5000,
-			interest: 8.5,
-			minPayment: 50
+		buttons.addLoan = $.tmpl('button', {
+			value: '+ Add'
 		});
 		
-		loanContainer.append(loan);
+		buttons.addLoan.insertAfter(containers.loan);
+		
+		$('input', buttons.addLoan).click(function() {
+			addLoan();
+		});
+		
+		// Add initial loan
+		addLoan(5000, 8.5, 50);
 	});
+	
+	function addLoan(principal, interest, minPayment) {
+		var loan = $.tmpl('loan', {
+			principal: principal || 0,
+			interest: interest || .0,
+			minPayment: minPayment || 0
+		});
+		
+		loan.hide().appendTo(containers.loan).slideDown(400, function() {
+			$('input:first', loan).focus();
+		});
+	}
 }));

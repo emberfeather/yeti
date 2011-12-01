@@ -38,7 +38,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Montez', cursive;
-	margin: .5em 0;
+	margin: .35em 0 .15em 0;
+	text-shadow: 2px 2px 2px @colorBackground;
 }
 
 h1 {
@@ -74,15 +75,27 @@ a {
 }
 
 input {
-	padding: .25em;
+	color: @colorBase;
+	font: 16px/1.5 'Convergence', cursive;
 	background: fadeout(@colorSecondary, 75%);
 	.border-radius(.35em);
-	font: 16px/1.5 'Convergence', cursive;
 	border: 1px dotted @colorSecondary;
+	padding: .25em;
+	width: 5.5em;
+	
+	&.small {
+		width: 3.25em;
+	}
+	
+	&[type=button] {
+		padding: .5em 1em;
+		width: auto;
+		text-shadow: 2px 2px 2px @colorBackground;
+	}
 }
 
 .outer_container {
-	background: url(img/background.png) center bottom no-repeat;
+	background: url(img/bottom.png) center bottom no-repeat;
 	padding: 1.5em 0 45em 0;
 }
 
@@ -96,14 +109,6 @@ input {
 	padding: .5em;
 	.border-radius();
 	
-	input {
-		width: 5.5em;
-		
-		&.small {
-			width: 3.25em;
-		}
-	}
-	
 	&:nth-of-type(2n+1) {
 		background: fadeout(lighten(@colorTertiary, 10%), 30%);
 	}
@@ -114,4 +119,8 @@ footer {
 	bottom: 1.5em;
 	font-size: 0.618em;
 	text-align: center;
+}
+
+.float-right {
+	float: right;
 }

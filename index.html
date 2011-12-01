@@ -3,18 +3,42 @@ layout: master
 title: Start a Snowball Fight!
 ---
 
-<div class="grid_16" id="loans">
-	<noscript>
+<noscript>
+	<div class="grid_16">
 		<p>
 			<strong>JavaScript is required for Yeti!</strong>
 		</p>
-	</noscript>
+	</div>
+</noscript>
+
+<div id="loans" class="grid_16">
+	<h2>Debt</h2>
 </div>
+
+<div id="payment" class="grid_16">
+	<h2>Payment</h2>
+	
+	<p>
+		Paying $<input type="number" step="0.01" min="0.01" id="payment" name="payment" value="0" />
+		towards debt each month will pay off your debt in <span class="output payoff_year">&#8734;</span> years
+		and <span class="output payoff_month">&#8734;</span> months.
+	</p>
+</div>
+
+<div id="details" />
+
+<div id="extraDetails" />
 
 <script id="loanTemplate" type="text/x-jquery-tmpl">
 	<div class="loan">
 		$<input type="number" step="0.01" min="0.01" name="principal" value="${principal}" /> borrowed
 		at <input type="number" step="0.01" min="0" name="rate" value="${interest}" class="small" />% interest
 		with a $<input type="number" step="0.01" min="0" name="minPayment" value="${minPayment}" /> minimum payment
+	</div>
+</script>
+
+<script id="buttonTemplate" type="text/x-jquery-tmpl">
+	<div class="grid_16">
+		<input type="button" value="${value}" />
 	</div>
 </script>
