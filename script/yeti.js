@@ -72,6 +72,7 @@
 			
 			saveData();
 			
+			// Ensure there is always at least one loan
 			if(!$('.loan', containers.loan).length) {
 				addLoan();
 			}
