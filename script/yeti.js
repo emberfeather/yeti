@@ -160,16 +160,11 @@
 		var payment = $('input[name="payment"]', containers.payment).val();
 		var paymentContainer = $('.payment', containers.payment);
 		
-		// If the there is no repayment amount, set it
-		if(payment == 0) {
-			payment = parseFloat((totalPeriodInterest * 1.25).toFixed(2));
+		// If the there is not enough repayment, calculate it
+		if(payment < totalPeriodInterest) {
+			payment = payment == 0 ? parseFloat((totalPeriodInterest * 1.25).toFixed(2)) : totalPeriodInterest;
 			
 			$('input[name="payment"]', containers.payment).val(payment);
-		}
-		
-		if(payment < totalPeriodInterest) {
-			setError(paymentContainer, 'Needs a repayment amount greater than the interest charges: ' + currency + totalPeriodInterest.toFixed(2));
-			isValid = false;
 		} else {
 			removeError(paymentContainer);
 		}
