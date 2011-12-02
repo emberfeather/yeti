@@ -108,6 +108,8 @@
 			var loan = {};
 			var ele = $(element);
 			
+			var hasFocus = $(':focus', ele).length > 0;
+			
 			loan.principal = parseFloat($('input[name="principal"]', element).val()) || 0;
 			loan.rate = parseFloat($('input[name="rate"]', element).val()) || 0.0;
 			loan.minPayment = parseFloat($('input[name="minPayment"]', element).val()) || 0;
@@ -115,6 +117,16 @@
 			// Only care about loans with principals
 			if(loan.principal <= 0) {
 				return;
+			}
+			
+			var periodRate = (loan.rate / ppy);
+			var periodInterest = parseFloat((loan.principal * (periodRate / 100)).toFixed(2));
+			
+			// If the loan still has the focus and there is a rate set but not a min payment, calculate the min payment
+			if(hasFocus && loan.rate > 0 && loan.minPayment == 0) {
+				loan.minPayment = periodInterest;
+				
+				$('input[name="minPayment"]', ele).val(loan.minPayment);
 			}
 			
 			// Need a minimum payment if there is an interest rate
@@ -125,12 +137,9 @@
 				return;
 			}
 			
-			var periodRate = (loan.rate / ppy);
-			var periodInterest = parseFloat((loan.principal * (periodRate / 100)).toFixed(2));
-			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
-				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + currency + periodInterest);
+				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + currency + periodInterest.toFixed(2));
 				isValid = false;
 				
 				return;
@@ -151,8 +160,15 @@
 		var payment = $('input[name="payment"]', containers.payment).val();
 		var paymentContainer = $('.payment', containers.payment);
 		
+		// If the there is no repayment amount, set it
+		if(payment == 0) {
+			payment = parseFloat((totalPeriodInterest * 1.25).toFixed(2));
+			
+			$('input[name="payment"]', containers.payment).val(payment);
+		}
+		
 		if(payment < totalPeriodInterest) {
-			setError(paymentContainer, 'Needs a repayment amount greater than the interest charges: ' + currency + totalPeriodInterest);
+			setError(paymentContainer, 'Needs a repayment amount greater than the interest charges: ' + currency + totalPeriodInterest.toFixed(2));
 			isValid = false;
 		} else {
 			removeError(paymentContainer);
@@ -204,6 +220,9 @@
 			return;
 		}
 		
+		// Recheck the loan data to auto calculate any missing data
+		checkStatus();
+		
 		// Save the loans
 		var loans = [];
 		
@@ -224,8 +243,6 @@
 		// Save the payment
 		localStorage.payment = parseFloat($('input[name="payment"]', containers.payment).val()) || 0.0;
 		
-		// Recheck the loan data
-		checkStatus();
 	}
 	
 	function setError(element, message) {
@@ -239,7 +256,7 @@
 			});
 			
 			element.data('error', error);
-			element.append(error);
+			error.hide().appendTo(element).slideDown(slideDuration);
 		}
 		
 		error.text('⇒ ' + message);
