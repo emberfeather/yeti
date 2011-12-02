@@ -57,10 +57,12 @@
 		});
 		
 		loan.hide().appendTo(containers.loan).slideDown(slideDuration, function() {
-			$('input:first', loan).focus();
 			$('input.delete', loan).click(function(){
 				removeLoan(loan);
 			});
+			
+			// Auto focus on the new loan
+			$('input[type="number"]:first', loan).focus();
 		});
 	}
 	
