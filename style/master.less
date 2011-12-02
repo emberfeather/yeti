@@ -2,6 +2,23 @@
 @colorBase: darken(@colorBackground, 40%);
 @colorSecondary: #ffc253;
 @colorTertiary: #e5f1f1;
+@colorDelete: #ac1f1f;
+
+.border-radius (@radius: 0.5em) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transition(@effect: all, @duration: 1s, @timing: ease-in-out) {
+	-webkit-transition: @effect @duration @timing;
+	-moz-transition: @effect @duration @timing;
+	-ms-transition: @effect @duration @timing;
+	-o-transition: @effect @duration @timing;
+	transition: @effect @duration @timing;
+}
 
 /**
  * Modular Scale
@@ -15,14 +32,6 @@
  * 1
  * 0.618
  */
-
-.border-radius (@radius: 0.5em) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius: @radius;
-	-ms-border-radius: @radius;
-	-o-border-radius: @radius;
-	border-radius: @radius;
-}
 
 html {
 	height: 100%;
@@ -99,6 +108,12 @@ input {
 		border: 2px solid @colorBase;
 		padding: .25em .85em;
 		width: auto;
+		cursor: pointer;
+		
+		&.delete {
+			background: fadeout(@colorDelete, 75%);
+			border: 2px solid @colorDelete;
+		}
 	}
 }
 
@@ -131,6 +146,23 @@ footer {
 	float: right;
 }
 
+.delete {
+	color: @colorDelete;
+}
+
 .output {
 	font-weight: bold;
+}
+
+.ghost {
+	opacity: 0;
+}
+
+.corporeal {
+	&:hover {
+		.ghost {
+			.transition(all, .35s, ease-in);
+			opacity: 1;
+		}
+	}
 }

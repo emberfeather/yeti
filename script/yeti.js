@@ -9,6 +9,7 @@
 }(function($){
 	var containers = {};
 	var buttons = {};
+	var slideDuration = 380;
 	
 	$(function(){
 		containers.loan = $('#loans');
@@ -40,8 +41,21 @@
 			minPayment: minPayment || 0
 		});
 		
-		loan.hide().appendTo(containers.loan).slideDown(400, function() {
+		loan.hide().appendTo(containers.loan).slideDown(slideDuration, function() {
 			$('input:first', loan).focus();
+			$('input.delete', loan).click(function(){
+				removeLoan(loan);
+			});
+		});
+	}
+	
+	function removeLoan(loan) {
+		loan.slideUp(slideDuration, function(){
+			loan.remove();
+			
+			if(!$('.loan', containers.loan).length) {
+				addLoan();
+			}
 		});
 	}
 }));
