@@ -15,64 +15,10 @@
 	var ppy = 12;
 	
 	$(function(){
-		containers.loan = $('#loans');
-		containers.payment = $('#payment');
-		containers.details = $('#details');
-		containers.extraDetails = $('#extraDetails');
+		loadTemplates();
+		loadContainers();
+		loadData();
 		
-		$('#buttonTemplate').template('button');
-		$('#errorTemplate').template('error');
-		$('#loanTemplate').template('loan');
-		$('#paymentTemplate').template('payment');
-		
-		// Add an add button for loans
-		containers.addLoan = $.tmpl('button', {
-			value: '+ Add'
-		});
-		
-		containers.addLoan.insertAfter(containers.loan);
-		
-		buttons.addLoan = $('input', containers.addLoan).click(function() {
-			addLoan();
-		});
-		
-		// Add a calculation button
-		containers.calculate = $.tmpl('button', {
-			className: 'status',
-			value: 'Waiting For Snow&hellip;'
-		});
-		
-		containers.calculate.insertAfter(containers.payment);
-		
-		buttons.calculate = $('input', containers.calculate);
-		
-		buttons.calculate.click(function() {
-			console.log('Calculate clicked.');
-		});
-		
-		// Bind to the changes to save the form data
-		containers.loan.on('input', saveData);
-		containers.payment.on('input', saveData);
-		
-		// Check for previously saved loans
-		if(localStorage.loans) {
-			var loans = JSON.parse(localStorage.loans);
-			
-			$.each(loans, function(i, value) {
-				addLoan(value.principal, value.rate, value.minPayment);
-			});
-		} else {
-			// Add sample loan
-			addLoan(5000, 8.5, 50);
-		}
-		
-		// Add the payment information
-		$.tmpl('payment', {
-			currency: currency,
-			payment: localStorage.payment || 0.00
-		}).appendTo(containers.payment);
-		
-		// Trigger the check for valid data
 		checkStatus();
 	});
 	
@@ -84,7 +30,7 @@
 			currency: currency
 		});
 		
-		loan.hide().appendTo(containers.loan).slideDown(slideDuration, function() {
+		loan.hide().appendTo(containers.loans).slideDown(slideDuration, function() {
 			$('input.delete', loan).click(function(){
 				removeLoan(loan);
 			});
@@ -104,7 +50,7 @@
 		var totalPeriodInterest = 0.0;
 		var loans = [];
 		
-		$('.loan', containers.loan).each(function(i, element){
+		$('.loan', containers.loans).each(function(i, element){
 			var loan = {};
 			var ele = $(element);
 			
@@ -157,14 +103,14 @@
 		});
 		
 		// Check for valid payment data
-		var payment = $('input[name="payment"]', containers.payment).val();
-		var paymentContainer = $('.payment', containers.payment);
+		var payment = $('input[name="payment"]', containers.payments).val();
+		var paymentContainer = $('.payment', containers.payments);
 		
 		// If the there is not enough repayment, calculate it
 		if(payment < totalPeriodInterest) {
 			payment = payment == 0 ? parseFloat((totalPeriodInterest * 1.25).toFixed(2)) : totalPeriodInterest;
 			
-			$('input[name="payment"]', containers.payment).val(payment);
+			$('input[name="payment"]', containers.payments).val(payment);
 		} else {
 			removeError(paymentContainer);
 		}
@@ -180,6 +126,67 @@
 		buttons.calculate.removeAttr('disabled');
 		
 		// Check if the schedule has already been calculated
+	}
+	
+	function loadData() {
+		// Add an add button for loans
+		containers.addLoan = $.tmpl('button', {
+			value: '+ Add'
+		});
+		
+		containers.addLoan.insertAfter(containers.loans);
+		
+		buttons.addLoan = $('input', containers.addLoan).click(function() {
+			addLoan();
+		});
+		
+		// Add a calculation button
+		containers.calculate = $.tmpl('button', {
+			className: 'status',
+			value: 'Waiting For Snow&hellip;'
+		});
+		
+		containers.calculate.insertAfter(containers.payments);
+		
+		buttons.calculate = $('input', containers.calculate);
+		
+		buttons.calculate.click(function() {
+			console.log('Calculate clicked.');
+		});
+		
+		// Check for previously saved loans
+		if(localStorage.loans) {
+			var loans = JSON.parse(localStorage.loans);
+			
+			$.each(loans, function(i, value) {
+				addLoan(value.principal, value.rate, value.minPayment);
+			});
+		} else {
+			// Add sample loan
+			addLoan(5000, 8.5, 50);
+		}
+	}
+	
+	function loadContainers() {
+		containers.content = $('#content');
+		
+		containers.loans = $.tmpl('loans')
+			.appendTo(containers.content)
+			.on('input', saveData);
+		containers.payments = $.tmpl('payments', {
+				currency: currency,
+				payment: localStorage.payment || 0.00
+			})
+			.appendTo(containers.content)
+			.on('input', saveData);
+	}
+	
+	function loadTemplates() {
+		$('[data-template]').each(function(i, element){
+			var ele = $(element);
+			
+			ele.template(ele.data('template'));
+		});
 	}
 	
 	function removeError(element) {
@@ -204,7 +211,7 @@
 			saveData();
 			
 			// Ensure there is always at least one loan
-			if(!$('.loan', containers.loan).length) {
+			if(!$('.loan', containers.loans).length) {
 				addLoan();
 			}
 		});
@@ -221,7 +228,7 @@
 		// Save the loans
 		var loans = [];
 		
-		$('.loan', containers.loan).each(function(i, element){
+		$('.loan', containers.loans).each(function(i, element){
 			var loan = {};
 			
 			loan.principal = parseFloat($('input[name="principal"]', element).val()) || 0;
@@ -236,7 +243,7 @@
 		localStorage.loans = JSON.stringify(loans);
 		
 		// Save the payment
-		localStorage.payment = parseFloat($('input[name="payment"]', containers.payment).val()) || 0.0;
+		localStorage.payment = parseFloat($('input[name="payment"]', containers.payments).val()) || 0.0;
 		
 	}
 	

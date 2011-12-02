@@ -11,19 +11,19 @@ title: Start a Snowball Fight!
 	</div>
 </noscript>
 
-<div id="loans" class="grid_16">
-	<h2>Debt</h2>
-</div>
+<script data-template="amortization" type="text/x-jquery-tmpl">
+	<div class="grid_7">
+		Chart here...
+	</div>
+	
+	<div class="grid_9">
+		<p class="${className}">
+			<input type="button" value="${value}" />
+		</p>
+	</div>
+</script>
 
-<div id="payment" class="grid_16">
-	<h2>Repayment</h2>
-</div>
-
-<div id="details" />
-
-<div id="extraDetails" />
-
-<script id="buttonTemplate" type="text/x-jquery-tmpl">
+<script data-template="button" type="text/x-jquery-tmpl">
 	<div class="grid_16">
 		<p class="${className}">
 			<input type="button" value="${value}" />
@@ -31,13 +31,13 @@ title: Start a Snowball Fight!
 	</div>
 </script>
 
-<script id="errorTemplate" type="text/x-jquery-tmpl">
+<script data-template="message" type="text/x-jquery-tmpl">
 	<div class="${className}">
 		${message}
 	</div>
 </script>
 
-<script id="loanTemplate" type="text/x-jquery-tmpl">
+<script data-template="loan" type="text/x-jquery-tmpl">
 	<div class="loan corporeal">
 		<div class="float-right ghost"><input type="button" class="delete" value="&#x2718; Remove" /></div>
 		${currency}<input type="number" step="0.01" min="0.01" name="principal" value="${principal}" /> borrowed
@@ -46,9 +46,19 @@ title: Start a Snowball Fight!
 	</div>
 </script>
 
-<script id="paymentTemplate" type="text/x-jquery-tmpl">
-	<div class="payment">
-		${currency}<input type="number" step="0.01" min="0.00" name="payment" value="${payment}" />
-		available monthly to pay off debt.
+<script data-template="loans" type="text/x-jquery-tmpl">
+	<div id="loans" class="grid_16">
+		<h2>Debt</h2>
+	</div>
+</script>
+
+<script data-template="payments" type="text/x-jquery-tmpl">
+	<div id="payment" class="grid_16">
+		<h2>Repayment</h2>
+		
+		<div class="payment">
+			${currency}<input type="number" step="0.01" min="0.00" name="payment" value="${payment}" />
+			available monthly to pay off debt.
+		</div>
 	</div>
 </script>
