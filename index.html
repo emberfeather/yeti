@@ -19,7 +19,7 @@ title: Start a Snowball Fight!
 	<h2>Payment</h2>
 	
 	<p>
-		Paying $<input type="number" step="0.01" min="0.01" id="payment" name="payment" value="0" />
+		Paying $<input type="number" step="0.01" min="0.00" id="payment" name="payment" value="0" />
 		towards debt each month will pay off your debt in <span class="output payoff_year">&#8734; years</span>
 		and <span class="output payoff_month">&#8734; months</span>.
 	</p>
@@ -33,7 +33,7 @@ title: Start a Snowball Fight!
 	<div class="loan corporeal">
 		<div class="float-right ghost"><input type="button" class="delete" value="&#x2718; Remove" /></div>
 		$<input type="number" step="0.01" min="0.01" name="principal" value="${principal}" /> borrowed
-		at <input type="number" step="0.01" min="0" name="rate" value="${interest}" class="small" />% interest
+		at <input type="number" step="0.01" min="0" name="rate" value="${rate}" class="small" />% interest
 		with a $<input type="number" step="0.01" min="0" name="minPayment" value="${minPayment}" /> minimum payment
 	</div>
 </script>
