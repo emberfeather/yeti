@@ -1,4 +1,5 @@
 @colorBackground: #b5cfd0;
+@colorBackgroundAlt: #c2d6d5;
 @colorBase: darken(@colorBackground, 40%);
 @colorSecondary: #ffc253;
 @colorTertiary: #e5f1f1;
@@ -20,6 +21,13 @@
 	transition: @effect @duration @timing;
 }
 
+.linear-gradient(@from, @to) {
+	background-image: -webkit-linear-gradient(@from, @to);
+	background-image: -moz-linear-gradient(@from, @to);
+	background-image: -o-linear-gradient(@from, @to);
+	background-image: linear-gradient(@from, @to);
+}
+
 /**
  * Modular Scale
  * 16px @ 1:1.618
@@ -39,10 +47,10 @@ html {
 
 body {
 	font: 16px/1.5 'Convergence', cursive;
-	background: @colorBackground;
 	font-variant-ligatures: common-ligatures;
 	color: @colorBase;
 	height: 100%;
+	background: @colorBackground;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -123,7 +131,7 @@ input {
 }
 
 .container {
-	background: fadeout(lighten(@colorTertiary, 10%), 30%);
+	.linear-gradient(fadeout(@colorBackground, 45%), fadeout(@colorBackgroundAlt, 45%));
 	.border-radius();
 }
 
