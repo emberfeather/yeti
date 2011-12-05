@@ -12,7 +12,6 @@
 		currency: '$',
 		slideDuration: 380,
 		strategyOrder: [
-			'interestHighLow',
 			'interestHighLow'
 		],
 		ppy: 12
@@ -22,22 +21,24 @@
 	var containers = {};
 	var lastUpdated = new Date();
 	
-	var strategies = {
-		// Highest Interest First
-		interestHighLow: function(loans) {
-			// Sort the loans by the interest rate, descending
-			return loans.sort(function(a, b) {
-				var diff = b.rate - a.rate
-				
-				// If they have the same interest rate, want the one with the lowest balance first
-				if(diff === 0) {
-					return a.principal - b.principal;
-				}
-				
-				return diff;
-			});
-		}
+	var strategies = {};
+	
+	// Highest Interest First
+	strategies.interestHighLow = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = b.rate - a.rate
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return diff;
+		});
 	};
+	
+	strategies.interestHighLow.label = 'Highest Rate First';
 	
 	$(function(){
 		loadTemplates();
@@ -279,13 +280,14 @@
 		var usedStrategies = [];
 		var usedLoanOrders = [];
 		
+		// Determine the strategies to use
 		$.each($.yeti.strategyOrder, function(i, strategy) {
 			// Use a copy of the loans to let the strategies have their own order
 			var loanOrder = strategies[strategy](JSON.parse(JSON.stringify(loans)));
 			
 			// Check if the loan repayment order is already being used
-			var isUsed = false;
 			var orderCheck = JSON.stringify(loanOrder);
+			var isUsed = false;
 			
 			$.each(usedLoanOrders, function(j, usedLoanOrder) {
 				if(orderCheck === usedLoanOrder) {
