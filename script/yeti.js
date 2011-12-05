@@ -61,12 +61,18 @@
 		
 		var listing = $.tmpl('strategy', {
 			currency: $.yeti.currency,
-			interest: toMoney(totals.interest),
+			interest: toMoney(totals.interest).toFixed(2),
 			label: strategies[strategy].label,
 			loans: loans,
-			principal: toMoney(totals.principal),
+			principal: toMoney(totals.principal).toFixed(2),
 			strategy: strategy
 		})	.appendTo($('ul', containers.strategies));
+		
+		listing.on('click', function() {
+			$('h2', containers.details).text(strategies[strategy].label);
+			
+			containers.details.show();
+		});
 	}
 	
 	function addLoan(principal, rate, minPayment, callback) {
@@ -173,10 +179,10 @@
 		var updatedOn = lastUpdatedOn;
 		
 		// Clear any previous calculations
-		containers.strategies.empty();
-		containers.details.empty();
-		
-		$('<ul />').appendTo(containers.strategies);
+		$('ul', containers.strategies).empty();
+		$('.details', containers.strategies).empty();
+		containers.strategies.hide();
+		containers.details.hide();
 		
 		// Check for valid loan data
 		var isValid = true;
@@ -252,6 +258,9 @@
 		if(!loans.length || !isValid) {
 			return;
 		}
+		
+		// Show the strategies
+		containers.strategies.show();
 		
 		// Update the schedule
 		updateSchedules(loans, payment, updatedOn);
