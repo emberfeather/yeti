@@ -19,7 +19,7 @@
 	
 	var buttons = {};
 	var containers = {};
-	var lastUpdated = new Date();
+	var lastUpdatedOn = new Date();
 	
 	var strategies = {};
 	
@@ -66,9 +66,78 @@
 		});
 	}
 	
+	function calculateSchedule(evnt, strategy, loans, payment, updatedOn) {
+		var schedule = [];
+		var hasBalance = true;
+		
+		var startOn = new Date();
+		
+		// Prime the balances
+		$.each(loans, function(i, loan) {
+			loan.balance = loan.principal;
+			loan.schedule = [];
+			loan.periodRate = (loan.rate / $.yeti.ppy);
+		});
+		
+		while(hasBalance && updatedOn == lastUpdatedOn) {
+			var extra = payment;
+			
+			// Handle minimum payments
+			$.each(loans, function(i, loan) {
+				if(loan.balance > 0) {
+					var amount = Math.min(loan.balance, loan.minPayment);
+					var interest = loan.balance * (loan.periodRate / 100);
+					
+					loan.balance -= amount;
+					extra -= amount;
+					
+					loan.schedule.push({
+						amount: amount,
+						interest: toMoney(interest),
+						principal: toMoney(amount - interest),
+						balance: loan.balance
+					});
+				}
+			});
+			
+			// Handle extra money
+			$.each(loans, function(i, loan) {
+				if(loan.balance > 0) {
+					var amount = Math.min(loan.balance, extra);
+					
+					loan.balance -= amount;
+					extra -= amount;
+					
+					var pos = loan.schedule.length - 1;
+					
+					loan.schedule[pos].amount += amount;
+					loan.schedule[pos].principal += amount;
+					loan.schedule[pos].balance = loan.balance;
+					
+					// Check if all the extra money is spent
+					if(extra <= 0) {
+						return false;
+					}
+				}
+			});
+			
+			// Determine if all the loans have been repaid
+			hasBalance = false;
+			
+			$.each(loans, function(i, loan) {
+				if(loan.balance > 0) {
+					hasBalance = true;
+					
+					return false;
+				}
+			});
+		}
+	}
+	
 	function checkStatus() {
 		// Update the timestamp for last data change
-		lastUpdated = new Date();
+		lastUpdatedOn = new Date();
+		var updatedOn = lastUpdatedOn;
 		
 		// Check for valid loan data
 		var isValid = true;
@@ -148,11 +217,12 @@
 		// TODO Check if the schedule has already been calculated
 		
 		// Update the schedule
-		updateSchedules(loans, payment);
+		updateSchedules(loans, payment, updatedOn);
 	}
 	
 	function loadContainers() {
-		containers.content = $('#content');
+		containers.content = $('#content')
+			.on('snowball', calculateSchedule);
 		
 		containers.loans = $.tmpl('loans')
 			.appendTo(containers.content)
@@ -275,7 +345,11 @@
 		element.addClass('error');
 	}
 	
-	function updateSchedules(loans, payment) {
+	function toMoney(amount) {
+		return parseFloat(parseFloat(amount).toFixed(2));
+	}
+	
+	function updateSchedules(loans, payment, updatedOn) {
 		// Determine repayment strategies to use based on order of strategies
 		var usedStrategies = [];
 		var usedLoanOrders = [];
@@ -299,9 +373,26 @@
 			
 			// Only want to add strategies that offer a unique repayment order
 			if(!isUsed) {
-				usedStrategies.push(strategy);
+				usedStrategies.push({
+					strategy: strategy,
+					loans: loanOrder
+				});
+				
 				usedLoanOrders.push(orderCheck);
 			}
 		});
+		
+		// If data has not changed
+		if(updatedOn == lastUpdatedOn) {
+			$.each(usedStrategies, function(i, strategy) {
+				// Trigger the schedule calculation for all the strategies
+				containers.content.trigger('snowball', [
+							strategy.strategy,
+							strategy.loans,
+							payment,
+							updatedOn
+						])
+			});
+		}
 	}
 }));
