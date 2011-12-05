@@ -41,10 +41,6 @@
 	}
 	
 	function checkStatus() {
-		// Start off with the button disabled
-		buttons.calculate.attr('disabled', 'disabled');
-		buttons.calculate.va;('Checking for Snow…');
-		
 		// Check for valid loan data
 		var isValid = true;
 		var totalPeriodInterest = 0.0;
@@ -117,15 +113,28 @@
 		
 		// Only continue if all loans and payment values are valid
 		if(!loans.length || !isValid) {
-			buttons.calculate.val('Waiting for Snow…');
-			
 			return;
 		}
 		
-		buttons.calculate.val('Pack Snowballs!');
-		buttons.calculate.removeAttr('disabled');
+		// TODO Check if the schedule has already been calculated
 		
-		// Check if the schedule has already been calculated
+		// Update the schedule
+		updateSchedule(loans, payment);
+	}
+	
+	function loadContainers() {
+		containers.content = $('#content');
+		
+		containers.loans = $.tmpl('loans')
+			.appendTo(containers.content)
+			.on('input', saveData);
+		
+		containers.payments = $.tmpl('payments', {
+				currency: currency,
+				payment: localStorage.payment || 0.00
+			})
+			.appendTo(containers.content)
+			.on('input', saveData);
 	}
 	
 	function loadData() {
@@ -140,20 +149,6 @@
 			addLoan();
 		});
 		
-		// Add a calculation button
-		containers.calculate = $.tmpl('button', {
-			className: 'status',
-			value: 'Waiting For Snow&hellip;'
-		});
-		
-		containers.calculate.insertAfter(containers.payments);
-		
-		buttons.calculate = $('input', containers.calculate);
-		
-		buttons.calculate.click(function() {
-			console.log('Calculate clicked.');
-		});
-		
 		// Check for previously saved loans
 		if(localStorage.loans) {
 			var loans = JSON.parse(localStorage.loans);
@@ -165,20 +160,6 @@
 			// Add sample loan
 			addLoan(5000, 8.5, 50);
 		}
-	}
-	
-	function loadContainers() {
-		containers.content = $('#content');
-		
-		containers.loans = $.tmpl('loans')
-			.appendTo(containers.content)
-			.on('input', saveData);
-		containers.payments = $.tmpl('payments', {
-				currency: currency,
-				payment: localStorage.payment || 0.00
-			})
-			.appendTo(containers.content)
-			.on('input', saveData);
 	}
 	
 	function loadTemplates() {
@@ -263,5 +244,25 @@
 		
 		error.text('⇒ ' + message);
 		element.addClass('error');
+	}
+	
+	function updateSchedule(loans, payment) {
+		var schedule = {};
+		
+		$.each(loans, function(i, loan) {
+			return;
+		});
+		
+		var amort = $.tmpl('amortization', {
+			schedule: schedule
+		});
+		
+		if(!containers.amortization) {
+			containers.content.append(amort);
+		} else {
+			containsers.amortization.replaceWith(amort);
+		}
+		
+		containers.amortization = amort;
 	}
 }));

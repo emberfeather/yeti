@@ -117,15 +117,6 @@ input {
 	}
 }
 
-.status {
-	margin: 1em 0;
-	text-align: center;
-	
-	input {
-		font-size: 1.618em;
-	}
-}
-
 .outer_container {
 	background: url(img/bottom.png) center bottom no-repeat;
 	padding: 1.5em 0 45em 0;
@@ -138,12 +129,28 @@ input {
 
 .loan,
 .payment {
-	margin-bottom: 1em;
 	padding: .5em;
 	.border-radius();
+	clear: both;
 	
 	&:nth-of-type(2n) {
 		background: fadeout(lighten(@colorTertiary, 10%), 30%);
+	}
+}
+
+.button {
+	margin: 1em 0;
+}
+
+.amortization {
+	width: 100%;
+	
+	thead {
+		th {
+			border: 1px solid;
+			text-align: center;
+			vertical-align: middle;
+		}
 	}
 }
 
