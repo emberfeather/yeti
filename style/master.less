@@ -120,7 +120,7 @@ input {
 
 .outer_container {
 	background: url(img/bottom.png) center bottom no-repeat;
-	padding: 1.5em 0 45em 0;
+	padding: 1.5em 0 42em 0;
 }
 
 .loan,
@@ -130,12 +130,28 @@ input {
 	clear: both;
 	
 	&:nth-of-type(2n) {
-		background: fadeout(lighten(@colorTertiary, 10%), 30%);
+		background: fadeout(@colorTertiary, 45%);
 	}
 }
 
 .button {
 	margin: 1em 0;
+}
+
+#strategies {
+	ul {
+		margin-bottom: 1em;
+		
+		li {
+			padding: .25em;
+			margin: .25em 0;
+			list-style: none;
+		}
+		
+		span {
+			float: right;
+		}
+	}
 }
 
 .amortization {

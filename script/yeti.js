@@ -48,8 +48,25 @@
 		checkStatus();
 	});
 	
-	function addStrategy(evnt, strategy, loans, updatedOn) {
-		console.log('Strategy has been calculated: ', strategy)
+	function addStrategy(evnt, strategy, loans) {
+		var totals = {
+			interest: 0,
+			principal: 0
+		};
+		
+		$.each(loans, function(i, loan) {
+			totals.interest += loan.interest;
+			totals.principal += loan.principal;
+		});
+		
+		var listing = $.tmpl('strategy', {
+			currency: $.yeti.currency,
+			interest: toMoney(totals.interest),
+			label: strategies[strategy].label,
+			loans: loans,
+			principal: toMoney(totals.principal),
+			strategy: strategy
+		})	.appendTo($('ul', containers.strategies));
 	}
 	
 	function addLoan(principal, rate, minPayment) {
@@ -76,7 +93,7 @@
 		
 		var startOn = new Date();
 		
-		// Prime the balances
+		// Prime the loan for scheduling
 		$.each(loans, function(i, loan) {
 			loan.balance = loan.principal;
 			loan.interest = 0;
@@ -145,8 +162,7 @@
 		
 		containers.content.trigger('snowball.packed', [
 					strategy,
-					loans,
-					updatedOn
+					loans
 				]);
 	}
 	
@@ -154,6 +170,12 @@
 		// Update the timestamp for last data change
 		lastUpdatedOn = new Date();
 		var updatedOn = lastUpdatedOn;
+		
+		// Clear any previous calculations
+		containers.strategies.empty();
+		containers.details.empty();
+		
+		$('<ul />').appendTo(containers.strategies);
 		
 		// Check for valid loan data
 		var isValid = true;
