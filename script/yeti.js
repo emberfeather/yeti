@@ -12,6 +12,7 @@
 		currency: '$',
 		slideDuration: 380,
 		strategyOrder: [
+			'interestHighLow',
 			'interestHighLow'
 		],
 		ppy: 12
@@ -282,7 +283,23 @@
 			// Use a copy of the loans to let the strategies have their own order
 			var loanOrder = strategies[strategy](JSON.parse(JSON.stringify(loans)));
 			
-			console.log(i, strategy, loanOrder);
+			// Check if the loan repayment order is already being used
+			var isUsed = false;
+			var orderCheck = JSON.stringify(loanOrder);
+			
+			$.each(usedLoanOrders, function(j, usedLoanOrder) {
+				if(orderCheck === usedLoanOrder) {
+					isUsed = true;
+					
+					return false;
+				}
+			});
+			
+			// Only want to add strategies that offer a unique repayment order
+			if(!isUsed) {
+				usedStrategies.push(strategy);
+				usedLoanOrders.push(orderCheck);
+			}
 		});
 	}
 }));
