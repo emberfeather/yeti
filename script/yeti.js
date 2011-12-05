@@ -7,12 +7,15 @@
 		factory(jQuery);
 	}
 }(function($){
-	var containers = {};
+	$.yeti = {
+		allowLocalSave: true,
+		currency: '$',
+		slideDuration: 380,
+		ppy: 12
+	};
+	
 	var buttons = {};
-	var slideDuration = 380;
-	var allowLocalSave = true;
-	var currency = '$';
-	var ppy = 12;
+	var containers = {};
 	
 	$(function(){
 		loadTemplates();
@@ -22,15 +25,22 @@
 		checkStatus();
 	});
 	
+	var strategies = {
+		// Highest Interest First
+		interestHighLow: function(loans) {
+			// TODO Sort the loans by the interest rate, descending
+		}
+	};
+	
 	function addLoan(principal, rate, minPayment) {
 		var loan = $.tmpl('loan', {
 			principal: principal || 0,
 			rate: rate || 0.0,
 			minPayment: minPayment || 0,
-			currency: currency
+			currency: $.yeti.currency
 		});
 		
-		loan.hide().appendTo(containers.loans).slideDown(slideDuration, function() {
+		loan.hide().appendTo(containers.loans).slideDown($.yeti.slideDuration, function() {
 			$('input.delete', loan).click(function(){
 				removeLoan(loan);
 			});
@@ -61,7 +71,7 @@
 				return;
 			}
 			
-			var periodRate = (loan.rate / ppy);
+			var periodRate = (loan.rate / $.yeti.ppy);
 			var periodInterest = parseFloat((loan.principal * (periodRate / 100)).toFixed(2));
 			
 			// If the loan still has the focus and there is a rate set but not a min payment, calculate the min payment
@@ -81,7 +91,7 @@
 			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
-				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + currency + periodInterest.toFixed(2));
+				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + $.yeti.currency + periodInterest.toFixed(2));
 				isValid = false;
 				
 				return;
@@ -130,7 +140,7 @@
 			.on('input', saveData);
 		
 		containers.payments = $.tmpl('payments', {
-				currency: currency,
+				currency: $.yeti.currency,
 				payment: localStorage.payment || 0.00
 			})
 			.appendTo(containers.content)
@@ -177,7 +187,7 @@
 		
 		var error = element.data('error');
 		
-		error.slideUp(slideDuration, function(){
+		error.slideUp($.yeti.slideDuration, function(){
 			element.removeClass('error');
 			element.removeData('error');
 			
@@ -186,7 +196,7 @@
 	}
 	
 	function removeLoan(loan) {
-		loan.slideUp(slideDuration, function(){
+		loan.slideUp($.yeti.slideDuration, function(){
 			loan.remove();
 			
 			saveData();
@@ -199,7 +209,7 @@
 	}
 	
 	function saveData() {
-		if(!allowLocalSave) {
+		if(!$.yeti.allowLocalSave) {
 			return;
 		}
 		
@@ -239,7 +249,7 @@
 			});
 			
 			element.data('error', error);
-			error.hide().appendTo(element).slideDown(slideDuration);
+			error.hide().appendTo(element).slideDown($.yeti.slideDuration);
 		}
 		
 		error.text('⇒ ' + message);
@@ -247,22 +257,6 @@
 	}
 	
 	function updateSchedule(loans, payment) {
-		var schedule = {};
 		
-		$.each(loans, function(i, loan) {
-			return;
-		});
-		
-		var amort = $.tmpl('amortization', {
-			schedule: schedule
-		});
-		
-		if(!containers.amortization) {
-			containers.content.append(amort);
-		} else {
-			containsers.amortization.replaceWith(amort);
-		}
-		
-		containers.amortization = amort;
 	}
 }));
