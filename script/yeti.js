@@ -48,6 +48,10 @@
 		checkStatus();
 	});
 	
+	function addStrategy(evnt, strategy, loans, updatedOn) {
+		console.log('Strategy has been calculated: ', strategy)
+	}
+	
 	function addLoan(principal, rate, minPayment) {
 		var loan = $.tmpl('loan', {
 			principal: principal || 0,
@@ -66,7 +70,7 @@
 		});
 	}
 	
-	function calculateSchedule(evnt, strategy, loans, payment, updatedOn) {
+	function calculateStrategy(evnt, strategy, loans, payment, updatedOn) {
 		var schedule = [];
 		var hasBalance = true;
 		
@@ -75,6 +79,7 @@
 		// Prime the balances
 		$.each(loans, function(i, loan) {
 			loan.balance = loan.principal;
+			loan.interest = 0;
 			loan.schedule = [];
 			loan.periodRate = (loan.rate / $.yeti.ppy);
 		});
@@ -89,6 +94,7 @@
 					var interest = loan.balance * (loan.periodRate / 100);
 					
 					loan.balance -= amount;
+					loan.interest += toMoney(interest);
 					extra -= amount;
 					
 					loan.schedule.push({
@@ -132,6 +138,16 @@
 				}
 			});
 		}
+		
+		if(updatedOn != lastUpdatedOn) {
+			return;
+		}
+		
+		containers.content.trigger('snowball.packed', [
+					strategy,
+					loans,
+					updatedOn
+				]);
 	}
 	
 	function checkStatus() {
@@ -214,15 +230,14 @@
 			return;
 		}
 		
-		// TODO Check if the schedule has already been calculated
-		
 		// Update the schedule
 		updateSchedules(loans, payment, updatedOn);
 	}
 	
 	function loadContainers() {
 		containers.content = $('#content')
-			.on('snowball', calculateSchedule);
+			.on('snowball.pack', calculateStrategy)
+			.on('snowball.packed', addStrategy);
 		
 		containers.loans = $.tmpl('loans')
 			.appendTo(containers.content)
@@ -234,6 +249,12 @@
 			})
 			.appendTo(containers.content)
 			.on('input', saveData);
+		
+		containers.strategies = $.tmpl('strategies')
+			.appendTo(containers.content);
+		
+		containers.details = $.tmpl('details')
+			.appendTo(containers.content);
 	}
 	
 	function loadData() {
@@ -382,17 +403,18 @@
 			}
 		});
 		
-		// If data has not changed
-		if(updatedOn == lastUpdatedOn) {
-			$.each(usedStrategies, function(i, strategy) {
-				// Trigger the schedule calculation for all the strategies
-				containers.content.trigger('snowball', [
-							strategy.strategy,
-							strategy.loans,
-							payment,
-							updatedOn
-						])
-			});
+		if(updatedOn != lastUpdatedOn) {
+			return;
 		}
+		
+		$.each(usedStrategies, function(i, strategy) {
+			// Trigger the schedule calculation for all the strategies
+			containers.content.trigger('snowball.pack', [
+						strategy.strategy,
+						strategy.loans,
+						payment,
+						updatedOn
+					]);
+		});
 	}
 }));

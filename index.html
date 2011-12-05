@@ -40,16 +40,7 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="details" type="text/x-jquery-tmpl">
-	<div class="grid_6">
-		<p>
-			Chart here...
-		</p>
-	</div>
-	
-	<div class="grid_6">
-		<p>
-			Text Description...
-		</p>
+	<div id="details" class="grid_9">
 	</div>
 </script>
 
@@ -75,12 +66,17 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="payments" type="text/x-jquery-tmpl">
-	<div id="payment" class="grid_12">
+	<div id="payments" class="grid_12">
 		<h2>Repayment</h2>
 		
 		<div class="payment">
 			${currency}<input type="number" step="0.01" min="0.00" name="payment" value="${payment}" />
 			available monthly to pay off debt.
 		</div>
+	</div>
+</script>
+
+<script data-template="strategies" type="text/x-jquery-tmpl">
+	<div id="strategies" class="grid_3">
 	</div>
 </script>
