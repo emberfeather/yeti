@@ -11,6 +11,9 @@
 		allowLocalSave: true,
 		currency: '$',
 		slideDuration: 380,
+		strategyOrder: [
+			'interestHighLow'
+		],
 		ppy: 12
 	};
 	
@@ -21,7 +24,17 @@
 	var strategies = {
 		// Highest Interest First
 		interestHighLow: function(loans) {
-			// TODO Sort the loans by the interest rate, descending
+			// Sort the loans by the interest rate, descending
+			return loans.sort(function(a, b) {
+				var diff = b.rate - a.rate
+				
+				// If they have the same interest rate, want the one with the lowest balance first
+				if(diff === 0) {
+					return a.principal - b.principal;
+				}
+				
+				return diff;
+			});
 		}
 	};
 	
@@ -261,6 +274,15 @@
 	}
 	
 	function updateSchedules(loans, payment) {
+		// Determine repayment strategies to use based on order of strategies
+		var usedStrategies = [];
+		var usedLoanOrders = [];
 		
+		$.each($.yeti.strategyOrder, function(i, strategy) {
+			// Use a copy of the loans to let the strategies have their own order
+			var loanOrder = strategies[strategy](JSON.parse(JSON.stringify(loans)));
+			
+			console.log(i, strategy, loanOrder);
+		});
 	}
 }));
