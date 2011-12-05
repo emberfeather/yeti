@@ -21,13 +21,6 @@
 	transition: @effect @duration @timing;
 }
 
-.linear-gradient(@from, @to) {
-	background-image: -webkit-linear-gradient(@from, @to);
-	background-image: -moz-linear-gradient(@from, @to);
-	background-image: -o-linear-gradient(@from, @to);
-	background-image: linear-gradient(@from, @to);
-}
-
 /**
  * Modular Scale
  * 16px @ 1:1.618
@@ -128,11 +121,6 @@ input {
 .outer_container {
 	background: url(img/bottom.png) center bottom no-repeat;
 	padding: 1.5em 0 45em 0;
-}
-
-.container {
-	.linear-gradient(fadeout(@colorBackground, 45%), fadeout(@colorBackgroundAlt, 45%));
-	.border-radius();
 }
 
 .loan,
