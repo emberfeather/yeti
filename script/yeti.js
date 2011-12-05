@@ -16,6 +16,14 @@
 	
 	var buttons = {};
 	var containers = {};
+	var lastUpdated = new Date();
+	
+	var strategies = {
+		// Highest Interest First
+		interestHighLow: function(loans) {
+			// TODO Sort the loans by the interest rate, descending
+		}
+	};
 	
 	$(function(){
 		loadTemplates();
@@ -24,13 +32,6 @@
 		
 		checkStatus();
 	});
-	
-	var strategies = {
-		// Highest Interest First
-		interestHighLow: function(loans) {
-			// TODO Sort the loans by the interest rate, descending
-		}
-	};
 	
 	function addLoan(principal, rate, minPayment) {
 		var loan = $.tmpl('loan', {
@@ -51,6 +52,9 @@
 	}
 	
 	function checkStatus() {
+		// Update the timestamp for last data change
+		lastUpdated = new Date();
+		
 		// Check for valid loan data
 		var isValid = true;
 		var totalPeriodInterest = 0.0;
@@ -129,7 +133,7 @@
 		// TODO Check if the schedule has already been calculated
 		
 		// Update the schedule
-		updateSchedule(loans, payment);
+		updateSchedules(loans, payment);
 	}
 	
 	function loadContainers() {
@@ -256,7 +260,7 @@
 		element.addClass('error');
 	}
 	
-	function updateSchedule(loans, payment) {
+	function updateSchedules(loans, payment) {
 		
 	}
 }));
