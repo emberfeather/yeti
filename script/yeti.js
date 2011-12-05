@@ -69,7 +69,9 @@
 		})	.appendTo($('ul', containers.strategies));
 	}
 	
-	function addLoan(principal, rate, minPayment) {
+	function addLoan(principal, rate, minPayment, callback) {
+		callback = callback || $.noop;
+		
 		var loan = $.tmpl('loan', {
 			principal: principal || 0,
 			rate: rate || 0.0,
@@ -82,8 +84,7 @@
 				removeLoan(loan);
 			});
 			
-			// Auto focus on the new loan
-			$('input[type="number"]:first', loan).focus();
+			callback.apply(this);
 		});
 	}
 	
@@ -288,7 +289,10 @@
 		containers.addLoan.insertAfter(containers.loans);
 		
 		buttons.addLoan = $('input', containers.addLoan).click(function() {
-			addLoan();
+			addLoan(0, 0, 0, function() {
+				// Auto focus on the new loan
+				$('input[type="number"]:first', this).focus();
+			});
 		});
 		
 		// Check for previously saved loans
