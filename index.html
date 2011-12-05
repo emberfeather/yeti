@@ -4,7 +4,7 @@ title: Start a Snowball Fight!
 ---
 
 <noscript>
-	<div class="grid_16">
+	<div class="grid_12">
 		<p>
 			<strong>JavaScript is required for Yeti!</strong>
 		</p>
@@ -12,21 +12,43 @@ title: Start a Snowball Fight!
 </noscript>
 
 <script data-template="amortization" type="text/x-jquery-tmpl">
-	<div class="grid_7">
-		Chart here...
-	</div>
-	
-	<div class="grid_9">
-		<p class="${className}">
-			<input type="button" value="${value}" />
-		</p>
+	<div class="grid_4">
+		<table class="amortization">
+			<thead>
+				<tr>
+					<th rowspan="2">Month</th>
+					<th colspan="2">Payment</th>
+					<th rowspan="2">Balance</th>
+				</tr>
+				<tr>
+					<th>Interest</th>
+					<th>Principal</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 	</div>
 </script>
 
 <script data-template="button" type="text/x-jquery-tmpl">
-	<div class="grid_16">
-		<p class="${className}">
+	<div class="grid_12">
+		<div class="button ${className}">
 			<input type="button" value="${value}" />
+		</div>
+	</div>
+</script>
+
+<script data-template="details" type="text/x-jquery-tmpl">
+	<div class="grid_6">
+		<p>
+			Chart here...
+		</p>
+	</div>
+	
+	<div class="grid_6">
+		<p>
+			Text Description...
 		</p>
 	</div>
 </script>
@@ -47,13 +69,13 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="loans" type="text/x-jquery-tmpl">
-	<div id="loans" class="grid_16">
+	<div id="loans" class="grid_12">
 		<h2>Debt</h2>
 	</div>
 </script>
 
 <script data-template="payments" type="text/x-jquery-tmpl">
-	<div id="payment" class="grid_16">
+	<div id="payment" class="grid_12">
 		<h2>Repayment</h2>
 		
 		<div class="payment">
