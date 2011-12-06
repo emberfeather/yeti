@@ -99,8 +99,8 @@ title: Start a Snowball Fight!
 		<ol class="repayOrder"></ol>
 		
 		<p>
-			Repaying the ${toCurrency(principal)} incurs ${toCurrency(interest)} in interest paid. All debt will be paid
-			off in ${toComma(payments)} months.
+			At ${toCurrency(payment)} a month it will take ${toComma(payments)} month{{if payments != 1}}s{{/if}}
+			to repay ${toCurrency(principal)} in debt plus the ${toCurrency(interest)} in interest.
 		</p>
 	</div>
 </script>

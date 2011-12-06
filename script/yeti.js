@@ -48,7 +48,7 @@
 		checkStatus();
 	});
 	
-	function addStrategy(evnt, strategy, loans) {
+	function addStrategy(evnt, strategy, loans, payment) {
 		var stats = {
 			interest: 0,
 			principal: 0,
@@ -62,7 +62,6 @@
 		});
 		
 		var listing = $.tmpl('strategy', {
-			currency: $.yeti.currency,
 			interest: stats.interest,
 			label: strategies[strategy].label,
 			loans: loans,
@@ -71,7 +70,7 @@
 		})	.appendTo($('ul', containers.strategies));
 		
 		listing.on('click', function() {
-			showStrategy.apply(this, [strategy, loans, stats]);
+			showStrategy.apply(this, [strategy, loans, stats, payment]);
 		});
 	}
 	
@@ -81,8 +80,7 @@
 		var loan = $.tmpl('loan', {
 			principal: principal || 0,
 			rate: rate || 0.0,
-			minPayment: minPayment || 0,
-			currency: $.yeti.currency
+			minPayment: minPayment || 0
 		});
 		
 		loan.hide().appendTo(containers.loans).slideDown($.yeti.slideDuration, function() {
@@ -169,7 +167,8 @@
 		
 		containers.content.trigger('snowball.packed', [
 					strategy,
-					loans
+					loans,
+					payment
 				]);
 	}
 	
@@ -276,7 +275,6 @@
 			.on('input', saveData);
 		
 		containers.payments = $.tmpl('payments', {
-				currency: $.yeti.currency,
 				payment: localStorage.payment || 0.00
 			})
 			.appendTo(containers.content)
@@ -401,17 +399,17 @@
 		element.addClass('error');
 	}
 	
-	function showStrategy(strategy, loans, stats) {
+	function showStrategy(strategy, loans, stats, payment) {
 		var container = $('.details', containers.details).empty();
 		
 		$('h2', containers.details).text(strategies[strategy].label);
 		
 		var details = $.tmpl('strategyDetail', {
-			currency: $.yeti.currency,
 			strategy: strategy,
 			principal: stats.principal,
 			interest: stats.interest,
-			payments: stats.payments
+			payments: stats.payments,
+			payment: payment
 		});
 		
 		// Add the loan repayment order
