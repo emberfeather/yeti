@@ -114,6 +114,7 @@ input {
 	&[type=button] {
 		.border-radius();
 		background: fadeout(@colorBase, 75%);
+		text-shadow: 1px 1px 1px fadeout(@colorTertiary, 25%);
 		border: 2px solid @colorBase;
 		padding: .25em .75em;
 		width: auto;
@@ -122,18 +123,6 @@ input {
 		&.delete {
 			background: fadeout(@colorDelete, 75%);
 			border: 2px solid @colorDelete;
-		}
-	}
-}
-
-dl {
-	dt {
-		float: left;
-		font-weight: bold;
-		margin-right: 1.5em;
-		
-		&:after {
-			content: ':';
 		}
 	}
 }
@@ -175,6 +164,7 @@ dl {
 			
 			&.selected {
 				background: fadeout(@colorSecondary, 75%);
+				text-shadow: 1px 1px 1px fadeout(@colorTertiary, 25%);
 			}
 		}
 		
@@ -189,6 +179,21 @@ dl {
 				content: " ❄";
 			}
 		}
+	}
+}
+
+#details {
+	ol {
+		font-size: 1.618em;
+		
+		li {
+			margin-left: 2em;
+		}
+	}
+	
+	ol,
+	strong {
+		text-shadow: 1px 1px 1pxfadeout(@colorTertiary, 25%);
 	}
 }
 
