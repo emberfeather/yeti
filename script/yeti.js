@@ -188,6 +188,7 @@
 		// Check for valid loan data
 		var isValid = true;
 		var totalPeriodInterest = 0.0;
+		var totalMinPayment = 0.0;
 		var loans = [];
 		
 		$('.loan', containers.loans).each(function(i, element){
@@ -217,7 +218,7 @@
 			
 			// Need a minimum payment if there is an interest rate
 			if(loan.rate > 0 && loan.minPayment == 0) {
-				setError(ele, 'Needs a minimum payment since there is an interest rate');
+				setMessage(ele, 'Needs a minimum payment since there is an interest rate');
 				isValid = false;
 				
 				return;
@@ -225,7 +226,7 @@
 			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
-				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
+				setMessage(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
 				isValid = false;
 				
 				return;
@@ -236,8 +237,9 @@
 				removeError(ele);
 			}
 			
-			// Keep a running sum of the interest amount
+			// Keep a running total
 			totalPeriodInterest += periodInterest;
+			totalMinPayment += loan.minPayment;
 			
 			loans.push(loan);
 		});
@@ -248,7 +250,7 @@
 		
 		// If the there is not enough repayment, calculate it
 		if(payment < totalPeriodInterest) {
-			payment = payment == 0 ? toMoney(totalPeriodInterest * 1.25) : totalPeriodInterest;
+			payment = payment == 0 ? toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment)) : totalPeriodInterest;
 			
 			$('input[name="payment"]', containers.payments).val(payment);
 		} else {
@@ -383,22 +385,23 @@
 		
 	}
 	
-	function setError(element, message) {
-		var error;
+	function setMessage(element, value, type) {
+		var message;
+		type = type || 'error';
 		
-		error = element.data('error');
+		message = element.data(type);
 		
-		if(!error) {
-			error = $.tmpl('error', {
+		if(!message) {
+			message = $.tmpl('message', {
 				className: 'message'
 			});
 			
-			element.data('error', error);
-			error.hide().appendTo(element).slideDown($.yeti.slideDuration);
+			element.data(type, message);
+			message.hide().appendTo(element).slideDown($.yeti.slideDuration);
 		}
 		
-		error.text('⇒ ' + message);
-		element.addClass('error');
+		message.text('⇒ ' + value);
+		element.addClass(type);
 	}
 	
 	function showStrategy(strategy, loans, stats, payment) {
