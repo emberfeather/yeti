@@ -504,9 +504,9 @@
 		
 		// Check for 'best' solution
 		if(element.hasClass('best')) {
-			header.addClass('best');
+			containers.details.addClass('best');
 		} else {
-			header.removeClass('best');
+			containers.details.removeClass('best');
 		}
 		
 		var details = $.tmpl('strategyDetail', {
