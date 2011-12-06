@@ -387,6 +387,7 @@
 	
 	function setMessage(element, value, type) {
 		var message;
+		var isNew = false;
 		type = type || 'error';
 		
 		message = element.data(type);
@@ -394,13 +395,23 @@
 		if(!message) {
 			message = $.tmpl('message', {
 				className: 'message'
-			});
+			}).appendTo(element);
 			
 			element.data(type, message);
-			message.hide().appendTo(element).slideDown($.yeti.slideDuration);
+			
+			isNew = true;
+		}
+		
+		if(isNew) {
+			message.hide();
 		}
 		
 		message.text('⇒ ' + value);
+		
+		if(isNew) {
+			message.slideDown($.yeti.slideDuration);
+		}
+		
 		element.addClass(type);
 	}
 	
