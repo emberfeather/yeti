@@ -196,6 +196,7 @@
 			var ele = $(element);
 			
 			var hasFocus = $(':focus', ele).length > 0;
+			var hasError = false;
 			
 			loan.principal = parseFloat($('input[name="principal"]', element).val()) || 0;
 			loan.rate = parseFloat($('input[name="rate"]', element).val()) || 0.0;
@@ -218,16 +219,20 @@
 			
 			// Need a minimum payment if there is an interest rate
 			if(loan.rate > 0 && loan.minPayment == 0) {
-				setMessage(ele, 'Needs a minimum payment since there is an interest rate');
-				isValid = false;
+				if(!hasFocus) {
+					setMessage(ele, 'Needs a minimum payment since there is an interest rate');
+					isValid = false;
+				}
 				
 				return;
 			}
 			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
-				setMessage(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
-				isValid = false;
+				if(!hasFocus) {
+					setMessage(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
+					isValid = false;
+				}
 				
 				return;
 			}
@@ -250,7 +255,7 @@
 		
 		// If the there is not enough repayment, calculate it
 		if(payment < totalPeriodInterest) {
-			payment = payment == 0 ? toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment)) : totalPeriodInterest;
+			payment = toMoney(Math.max(totalPeriodInterest * (payment == 0 ? 1.25 : 1), totalMinPayment));
 			
 			$('input[name="payment"]', containers.payments).val(payment);
 		} else {
@@ -276,13 +281,13 @@
 		
 		containers.loans = $.tmpl('loans')
 			.appendTo(containers.content)
-			.on('input', saveData);
+			.on('input change', saveData);
 		
 		containers.payments = $.tmpl('payments', {
 				payment: localStorage.payment || 0.00
 			})
 			.appendTo(containers.content)
-			.on('input', saveData);
+			.on('input change', saveData);
 		
 		containers.strategies = $.tmpl('strategies')
 			.appendTo(containers.content);
@@ -402,15 +407,7 @@
 			isNew = true;
 		}
 		
-		if(isNew) {
-			message.hide();
-		}
-		
 		message.text('⇒ ' + value);
-		
-		if(isNew) {
-			message.slideDown($.yeti.slideDuration);
-		}
 		
 		element.addClass(type);
 	}
