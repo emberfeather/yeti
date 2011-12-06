@@ -285,9 +285,10 @@
 			
 			// Need a minimum payment if there is an interest rate
 			if(loan.rate > 0 && loan.minPayment == 0) {
+				isValid = false;
+				
 				if(!hasFocus) {
 					setMessage(ele, 'Needs a minimum payment since there is an interest rate');
-					isValid = false;
 				}
 				
 				return;
@@ -295,9 +296,10 @@
 			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
+				isValid = false;
+				
 				if(!hasFocus) {
 					setMessage(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
-					isValid = false;
 				}
 				
 				return;
