@@ -482,9 +482,19 @@
 	}
 	
 	function showStrategy(strategy, loans, stats, payment) {
+		var element = $(this);
 		var container = $('.details', containers.details).empty();
 		
-		$('h2', containers.details).text(strategies[strategy].label);
+		var header = $('h2', containers.details);
+		
+		header.text(strategies[strategy].label);
+		
+		// Check for 'best' solution
+		if(element.hasClass('best')) {
+			header.addClass('best');
+		} else {
+			header.removeClass('best');
+		}
 		
 		var details = $.tmpl('strategyDetail', {
 			strategy: strategy,

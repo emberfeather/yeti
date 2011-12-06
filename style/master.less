@@ -59,6 +59,12 @@ h1 {
 
 h2 {
 	font-size: 2.618em;
+	
+	&.best {
+		&:after {
+			content: " ❄";
+		}
+	}
 }
 
 h3 {
@@ -155,10 +161,11 @@ dl {
 		margin-bottom: 1em;
 		
 		li {
-			padding: .25em;
+			padding: .5em;
 			margin: .25em 0;
 			list-style: none;
 			cursor: pointer;
+			.border-radius(.25em);
 			
 			&:nth-of-type(2n) {
 				background: fadeout(@colorTertiary, 45%);
@@ -169,13 +176,12 @@ dl {
 			float: right;
 		}
 		
-	}
-	
-	.best {
-		font-weight: bold;
-		
-		&:after {
-			content: "❄";
+		.best {
+			font-weight: bold;
+			
+			&:after {
+				content: " ❄";
+			}
 		}
 	}
 }
