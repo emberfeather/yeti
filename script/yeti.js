@@ -72,6 +72,8 @@
 		listing.on('click', function() {
 			showStrategy.apply(this, [strategy, loans, stats, payment]);
 		});
+		
+		showStrategyBest();
 	}
 	
 	function addLoan(principal, rate, minPayment, callback) {
@@ -418,6 +420,25 @@
 		details.appendTo(container);
 		
 		containers.details.show();
+	}
+	
+	function showStrategyBest() {
+		var minInterest = 999999999;
+		
+		// Find the lowest minimum interest
+		$('li', containers.strategies).each(function() {
+			var ele = $(this);
+			var interest = parseFloat(ele.data('interest'));
+			
+			if(interest < minInterest) {
+				minInterest = interest;
+			}
+		}).removeClass('best');
+		
+		$('li[data-interest="' + minInterest + '"]', containers.strategies)
+			.addClass('best')
+			.first()
+			.trigger('click');
 	}
 	
 	function toMoney(amount) {
