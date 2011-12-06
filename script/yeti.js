@@ -145,6 +145,7 @@
 		callback = callback || $.noop;
 		
 		var loan = $.tmpl('loan', {
+			currency: $.yeti.currency,
 			principal: principal || 0,
 			rate: rate || 0.0,
 			minPayment: minPayment || 0
@@ -364,6 +365,7 @@
 			.on('input change', saveData);
 		
 		containers.payments = $.tmpl('payments', {
+				currency: $.yeti.currency,
 				payment: localStorage.payment || 0.00
 			})
 			.appendTo(containers.content)
