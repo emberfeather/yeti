@@ -49,29 +49,29 @@
 	});
 	
 	function addStrategy(evnt, strategy, loans) {
-		var totals = {
+		var stats = {
 			interest: 0,
-			principal: 0
+			principal: 0,
+			payments: 0
 		};
 		
 		$.each(loans, function(i, loan) {
-			totals.interest += loan.interest;
-			totals.principal += loan.principal;
+			stats.interest += loan.interest;
+			stats.principal += loan.principal;
+			stats.payments = (loan.schedule.length > stats.payments ? loan.schedule.length : stats.payment);
 		});
 		
 		var listing = $.tmpl('strategy', {
 			currency: $.yeti.currency,
-			interest: totals.interest.toFixed(2),
+			interest: stats.interest,
 			label: strategies[strategy].label,
 			loans: loans,
-			principal: totals.principal.toFixed(2),
+			principal: stats.principal,
 			strategy: strategy
 		})	.appendTo($('ul', containers.strategies));
 		
 		listing.on('click', function() {
-			$('h2', containers.details).text(strategies[strategy].label);
-			
-			containers.details.show();
+			showStrategy.apply(this, [strategy, loans, stats]);
 		});
 	}
 	
@@ -205,7 +205,7 @@
 			}
 			
 			var periodRate = (loan.rate / $.yeti.ppy);
-			var periodInterest = parseFloat((loan.principal * (periodRate / 100)).toFixed(2));
+			var periodInterest = toMoney(loan.principal * (periodRate / 100));
 			
 			// If the loan still has the focus and there is a rate set but not a min payment, calculate the min payment
 			if(hasFocus && loan.rate > 0 && loan.minPayment == 0) {
@@ -224,7 +224,7 @@
 			
 			// Need a minimum payment that pays at least the interest
 			if(loan.rate > 0 && loan.minPayment < periodInterest) {
-				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + $.yeti.currency + periodInterest.toFixed(2));
+				setError(ele, 'Needs a minimum payment greater than the interest charge: ' + toCurrency(periodInterest));
 				isValid = false;
 				
 				return;
@@ -247,7 +247,7 @@
 		
 		// If the there is not enough repayment, calculate it
 		if(payment < totalPeriodInterest) {
-			payment = payment == 0 ? parseFloat((totalPeriodInterest * 1.25).toFixed(2)) : totalPeriodInterest;
+			payment = payment == 0 ? toMoney(totalPeriodInterest * 1.25) : totalPeriodInterest;
 			
 			$('input[name="payment"]', containers.payments).val(payment);
 		} else {
@@ -401,6 +401,27 @@
 		element.addClass('error');
 	}
 	
+	function showStrategy(strategy, loans, stats) {
+		var container = $('.details', containers.details).empty();
+		
+		$('h2', containers.details).text(strategies[strategy].label);
+		
+		var details = $.tmpl('strategyDetail', {
+			currency: $.yeti.currency,
+			strategy: strategy,
+			principal: stats.principal,
+			interest: stats.interest,
+			payments: stats.payments
+		});
+		
+		// Add the loan repayment order
+		$.tmpl('strategyOrder', loans).appendTo($('.repayOrder', details));
+		
+		details.appendTo(container);
+		
+		containers.details.show();
+	}
+	
 	function toMoney(amount) {
 		return parseFloat(parseFloat(amount).toFixed(2));
 	}
@@ -453,3 +474,26 @@
 		});
 	}
 }));
+
+// Global so that the templating can use to format data
+function toComma(amount) {
+	var value = parseFloat(amount) + '';
+	var parts = value.split('.');
+	
+	var whole = parts[0];
+	var part = parts[1] ? '.' + parts[1] : '';
+	
+	var regex = /(\d+)(\d{3})/;
+	
+	while(regex.test(whole)) {
+		whole = whole.replace(regex, '$1' + ',' + '$2');
+	}
+	
+	return whole + part;
+}
+
+function toCurrency(amount) {
+	var value = toComma(parseFloat(amount).toFixed(2));
+	
+	return $.yeti.currency + value;
+}

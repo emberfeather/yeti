@@ -118,6 +118,18 @@ input {
 	}
 }
 
+dl {
+	dt {
+		float: left;
+		font-weight: bold;
+		margin-right: 1.5em;
+		
+		&:after {
+			content: ':';
+		}
+	}
+}
+
 .outer_container {
 	background: url(img/bottom.png) center bottom no-repeat;
 	padding: 1.5em 0 42em 0;

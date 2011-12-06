@@ -43,7 +43,7 @@ title: Start a Snowball Fight!
 	<div id="details" class="grid_7">
 		<h2>Repayment Details</h2>
 		
-		<div class="details></div>
+		<div class="details"></div>
 	</div>
 </script>
 
@@ -88,8 +88,23 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="strategy" type="text/x-jquery-tmpl">
-	<li data-strategy="${strategy}" class="best">
-		<span class="interest"><abbr title="Interest spent">${currency}${interest}</abbr></span>
+	<li data-strategy="${strategy}" data-interest="${interest}">
+		<span class="interest"><abbr title="Interest spent">${toCurrency(interest)}</abbr></span>
 		${label}
 	</li>
+</script>
+
+<script data-template="strategyDetail" type="text/x-jquery-tmpl">
+	<div>
+		<ol class="repayOrder"></ol>
+		
+		<p>
+			Repaying the ${toCurrency(principal)} incurs ${toCurrency(interest)} in interest paid. All debt will be paid
+			off in ${toComma(payments)} months.
+		</p>
+	</div>
+</script>
+
+<script data-template="strategyOrder" type="text/x-jquery-tmpl">
+	<li>${toCurrency(principal)} @ ${rate}%</li>
 </script>
