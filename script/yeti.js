@@ -12,7 +12,10 @@
 		currency: '$',
 		slideDuration: 380,
 		strategyOrder: [
-			'interestHighLow'
+			'interestHighLow',
+			'interestLowHigh',
+			'balanceLowHigh',
+			'balanceHighLow'
 		],
 		ppy: 12
 	};
@@ -27,7 +30,7 @@
 	strategies.interestHighLow = function(loans) {
 		// Sort the loans by the interest rate, descending
 		return loans.sort(function(a, b) {
-			var diff = b.rate - a.rate
+			var diff = b.rate - a.rate;
 			
 			// If they have the same interest rate, want the one with the lowest balance first
 			if(diff === 0) {
@@ -39,6 +42,57 @@
 	};
 	
 	strategies.interestHighLow.label = 'Highest Rate First';
+	
+	// Lowest Interest First
+	strategies.interestLowHigh = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = a.rate - b.rate;
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return diff;
+		});
+	};
+	
+	strategies.interestLowHigh.label = 'Lowest Rate First';
+	
+	// Highest Balance First
+	strategies.balanceHighLow = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = b.principal - a.principal;
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return b.rate - a.rate;
+			}
+			
+			return diff;
+		});
+	};
+	
+	strategies.balanceHighLow.label = 'Highest Balance First';
+	
+	// Lowest Balance First
+	strategies.balanceLowHigh = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = a.principal - b.principal;
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return b.rate - a.rate;
+			}
+			
+			return diff;
+		});
+	};
+	
+	strategies.balanceLowHigh.label = 'Lowest Balance First';
 	
 	$(function(){
 		loadTemplates();
@@ -58,7 +112,7 @@
 		$.each(loans, function(i, loan) {
 			stats.interest += loan.interest;
 			stats.principal += loan.principal;
-			stats.payments = (loan.schedule.length > stats.payments ? loan.schedule.length : stats.payment);
+			stats.payments = (loan.schedule.length > stats.payments ? loan.schedule.length : stats.payments);
 		});
 		
 		var listing = $.tmpl('strategy', {
