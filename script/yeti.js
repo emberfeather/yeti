@@ -586,7 +586,7 @@
 
 // Global so that the templating can use to format data
 function toComma(amount) {
-	var value = parseFloat(amount) + '';
+	var value = amount + '';
 	var parts = value.split('.');
 	
 	var whole = parts[0];
