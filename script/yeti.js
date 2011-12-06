@@ -61,10 +61,10 @@
 		
 		var listing = $.tmpl('strategy', {
 			currency: $.yeti.currency,
-			interest: toMoney(totals.interest).toFixed(2),
+			interest: totals.interest.toFixed(2),
 			label: strategies[strategy].label,
 			loans: loans,
-			principal: toMoney(totals.principal).toFixed(2),
+			principal: totals.principal.toFixed(2),
 			strategy: strategy
 		})	.appendTo($('ul', containers.strategies));
 		

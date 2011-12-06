@@ -147,10 +147,23 @@ input {
 			margin: .25em 0;
 			list-style: none;
 			cursor: pointer;
+			
+			&:nth-of-type(2n) {
+				background: fadeout(@colorTertiary, 45%);
+			}
 		}
 		
-		span {
+		.interest {
 			float: right;
+		}
+		
+	}
+	
+	.best {
+		font-weight: bold;
+		
+		&:after {
+			content: "❄";
 		}
 	}
 }
