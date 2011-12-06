@@ -498,6 +498,18 @@
 		var element = $(this);
 		var container = $('.details', containers.details).empty();
 		
+		// Mark the selected strategy
+		var parentList = element.parent();
+		
+		if(parentList.data('selected')) {
+			parentList.data('selected').removeClass('selected');
+		}
+		
+		element.addClass('selected');
+		
+		parentList.data('selected', element);
+		
+		// Change the header text
 		var header = $('h2', containers.details);
 		
 		header.text(strategies[strategy].label);
