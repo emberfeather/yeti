@@ -648,6 +648,23 @@
 }(jQuery, google));
 
 // Global so that the templating can use to format data
+function convertMonths(value) {
+	var years = parseInt(value / 12);
+	var months = value % 12;
+	
+	var output = '';
+	
+	if(years > 0) {
+		output += ' ' + years + ' year' + (years != 1 ? 's' : '');
+	}
+	
+	if(months > 0) {
+		output += ' ' + months + ' month' + (months != 1 ? 's' : '');
+	}
+	
+	return output;
+}
+
 function toComma(amount) {
 	var value = amount + '';
 	var parts = value.split('.');
