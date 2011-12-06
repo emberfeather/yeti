@@ -1,12 +1,4 @@
-(function(factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD Registration
-		define([ 'jquery' ], factory);
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-}(function($){
+(function($, goog){
 	$.yeti = {
 		allowLocalSave: true,
 		currency: '$',
@@ -20,11 +12,30 @@
 		ppy: 12
 	};
 	
+	// Load the Google charts
+	var chartDefer = $.Deferred();
+	
+	goog.load("visualization", "1", {
+		packages: [
+			"corechart"
+		]
+	});
+	
+	goog.setOnLoadCallback(function() {
+		chartDefer.resolve();
+	});
+	
 	var buttons = {};
 	var containers = {};
 	var lastUpdatedOn = new Date();
-	
 	var strategies = {};
+	
+	/**
+	 * Define Strategies
+	 * 
+	 * Strategies are used to determine the order that the extra money from the snowball should be paid.
+	 * Adding a new strategy is as simple as reordering the loans in the order desired.
+	 */
 	
 	// Highest Interest First
 	strategies.interestHighLow = function(loans) {
@@ -509,6 +520,44 @@
 		
 		details.appendTo(container);
 		
+		chartDefer.then(function() {
+			var data = new goog.visualization.DataTable();
+			
+			data.addColumn('string', 'Payment');
+			data.addRows(stats.payments);
+			
+			// Add the payment numbers
+			for(var i = 0; i < stats.payments; i++) {
+				data.setValue(i, 0, i + '');
+			}
+			
+			$.each(loans, function(i, loan){
+				data.addColumn('number', toCurrency(loan.principal) + ' @ ' + loan.rate + '%');
+				
+				for(var j = 0; j < loan.schedule.length; j++) {
+					data.setValue(j, i + 1, parseFloat(loan.schedule[j].balance.toFixed(2)));
+				}
+			});
+			
+			var chart = new goog.visualization.LineChart($('.chart', details).get(0));
+			
+			chart.draw(data, {
+				width: 540,
+				height: 300,
+				backgroundColor: 'transparent',
+				legend: 'bottom',
+				vAxis: {
+					format: '\u00A4#,###.00'
+				},
+				chartArea: {
+					left: 0,
+					top: 0,
+					width: "100%",
+					height: "90%"
+				}
+			});
+		});
+		
 		containers.details.show();
 	}
 	
@@ -582,7 +631,7 @@
 					]);
 		});
 	}
-}));
+}(jQuery, google));
 
 // Global so that the templating can use to format data
 function toComma(amount) {
