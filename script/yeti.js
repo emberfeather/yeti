@@ -252,15 +252,30 @@
 		// Check for valid payment data
 		var payment = $('input[name="payment"]', containers.payments).val();
 		var paymentContainer = $('.payment', containers.payments);
+		var hasFocus = $(':focus', paymentContainer).length > 0;
 		
 		// If the there is not enough repayment, calculate it
-		if(payment < totalPeriodInterest) {
-			payment = toMoney(Math.max(totalPeriodInterest * (payment == 0 ? 1.25 : 1), totalMinPayment));
-			
-			$('input[name="payment"]', containers.payments).val(payment);
-		} else {
-			removeError(paymentContainer);
+		if(payment < totalPeriodInterest || payment < totalMinPayment) {
+			if(payment == 0) {
+				payment = toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment * 1.25));
+				
+				$('input[name="payment"]', containers.payments).val(payment);
+			} else if(payment < totalMinPayment) {
+				if(!hasFocus) {
+					setMessage(paymentContainer, 'Needs a repayment amount large enough to cover the minimum payment: ' + toCurrency(totalMinPayment));
+				}
+				
+				return;
+			} else {
+				if(!hasFocus) {
+					setMessage(paymentContainer, 'Needs a repayment amount large enough to cover the interest: ' + toCurrency(totalPeriodInterest));
+				}
+				
+				return;
+			}
 		}
+		
+		removeError(paymentContainer);
 		
 		// Only continue if all loans and payment values are valid
 		if(!loans.length || !isValid) {
