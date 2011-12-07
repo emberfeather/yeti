@@ -84,7 +84,14 @@ title: Start a Snowball Fight!
 
 <script data-template="strategy" type="text/x-jquery-tmpl">
 	<li data-strategy="${strategy}" data-interest="${interest}">
-		<span class="interest"><abbr title="Principal + Interest paid">${toCurrency(principal + interest)}</abbr></span>
+		<span class="interest"><abbr title="Principal &amp; Interest paid">${toCurrency(principal + interest)}</abbr></span>
+		${label}
+	</li>
+</script>
+
+<script data-template="strategyInfinity" type="text/x-jquery-tmpl">
+	<li data-strategy="${strategy}">
+		<span class="interest"><abbr title="Never repaid">&#8734;</abbr></span>
 		${label}
 	</li>
 </script>
@@ -97,6 +104,18 @@ title: Start a Snowball Fight!
 			At <strong>${toCurrency(payment)}</strong> a month it will take <strong>${convertMonths(payments)}</strong>
 			to repay <strong>${toCurrency(principal)}</strong> in debt
 			plus the <strong>${toCurrency(interest)}</strong> paid in interest.
+		</p>
+		
+		<div class="chart"></div>
+	</div>
+</script>
+
+<script data-template="strategyDetailInfinity" type="text/x-jquery-tmpl">
+	<div>
+		<ol class="repayOrder"></ol>
+		
+		<p>
+			The debt will never be repaid as only the interest is being paid.
 		</p>
 		
 		<div class="chart"></div>

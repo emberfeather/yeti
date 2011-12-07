@@ -2,7 +2,7 @@
 	$.yeti = {
 		allowLocalSave: true,
 		currency: '$',
-		interestOnlyThreshold: 500,
+		interestOnlyThreshold: 1,
 		slideDuration: 380,
 		strategyOrder: [
 			'interestHighLow',
@@ -126,16 +126,18 @@
 		var stats = {
 			interest: 0,
 			principal: 0,
-			payments: 0
+			payments: 0,
+			isInterestOnly: true
 		};
 		
 		$.each(loans, function(i, loan) {
 			stats.interest += loan.interest;
 			stats.principal += loan.principal;
-			stats.payments = (loan.schedule.length > stats.payments ? loan.schedule.length : stats.payments);
+			stats.payments = (loan.payments > stats.payments ? loan.payments : stats.payments);
+			stats.isInterestOnly = stats.isInterestOnly && loan.isInterestOnly;
 		});
 		
-		var listing = $.tmpl('strategy', {
+		var listing = $.tmpl((stats.isInterestOnly ? 'strategyInfinity' : 'strategy'), {
 			interest: toMoney(stats.interest),
 			label: strategies[strategy].label,
 			loans: loans,
@@ -255,6 +257,12 @@
 		if(updatedOn != lastUpdatedOn) {
 			return;
 		}
+		
+		// Determine some post-calulation properties
+		$.each(loans, function(i, loan) {
+			loan.payments = loan.schedule.length;
+			loan.isInterestOnly = loan.balance > 0;
+		});
 		
 		containers.content.trigger('snowball.packed', [
 					strategy,
@@ -546,7 +554,7 @@
 			containers.details.removeClass('best');
 		}
 		
-		var details = $.tmpl('strategyDetail', {
+		var details = $.tmpl((stats.isInterestOnly ? 'strategyDetailInfinity' : 'strategyDetail'), {
 			strategy: strategy,
 			principal: stats.principal,
 			interest: stats.interest,
