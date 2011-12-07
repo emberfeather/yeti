@@ -369,9 +369,9 @@
 			if(payment == 0) {
 				payment = toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment * 1.25));
 			} else if(payment < totalMinPayment) {
-				payment = toMoney(totalMinPayment);
+				payment = toMoney(totalMinPayment * 1.05);
 			} else if(payment < totalPaymentInterest) {
-				payment = toMoney(totalPaymentInterest);
+				payment = toMoney(totalPaymentInterest * 1.05);
 			}
 			
 			// Automatically update the payment amount
@@ -717,7 +717,7 @@
 		// Trigger the schedule calculation for the minimum payment strategy
 		containers.content.trigger('snowball.pack', [
 			'minimumPayment',
-			loans,
+			JSON.parse(JSON.stringify(loans)),
 			payment,
 			updatedOn
 		]);
