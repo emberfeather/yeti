@@ -130,6 +130,7 @@
 	function addStrategy(evnt, strategy, loans, payment) {
 		var stats = {
 			interest: 0,
+			minPayment: 0,
 			principal: 0,
 			payments: 0,
 			isInterestOnly: true
@@ -138,6 +139,7 @@
 		$.each(loans, function(i, loan) {
 			stats.interest += loan.interest;
 			stats.principal += loan.principal;
+			stats.minPayment += loan.minPayment;
 			stats.payments = (loan.payments > stats.payments ? loan.payments : stats.payments);
 			stats.isInterestOnly = stats.isInterestOnly && loan.isInterestOnly;
 		});
@@ -590,7 +592,7 @@
 			principal: stats.principal,
 			interest: stats.interest,
 			payments: stats.payments,
-			payment: payment
+			payment: (strategies[strategy].noExtra ? stats.minPayment : payment)
 		});
 		
 		// Add the loan repayment order
