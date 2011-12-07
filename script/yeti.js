@@ -288,7 +288,6 @@
 			var ele = $(element);
 			
 			var hasFocus = $(':focus', ele).length > 0;
-			var hasError = false;
 			
 			loan.principal = parseFloat($('input[name="principal"]', element).val()) || 0;
 			loan.rate = parseFloat($('input[name="rate"]', element).val()) || 0.0;
@@ -332,9 +331,7 @@
 			}
 			
 			// Remove any lingering errors
-			if(ele.hasClass('error')) {
-				removeError(ele);
-			}
+			removeMessage(ele);
 			
 			// Keep a running total
 			totalPeriodInterest += periodInterest;
@@ -372,7 +369,7 @@
 			$('input[name="payment"]', containers.payments).val(payment);
 		}
 		
-		removeError(paymentContainer);
+		removeMessage(paymentContainer);
 		
 		// Pause before updating schedules in case the user is still typing
 		$.wait($.yeti.pauseDuration).then(function() {
@@ -459,21 +456,6 @@
 		});
 	}
 	
-	function removeError(element) {
-		if(!element.hasClass('error')) {
-			return;
-		};
-		
-		var error = element.data('error');
-		
-		error.slideUp($.yeti.animationDuration, function(){
-			element.removeClass('error');
-			element.removeData('error');
-			
-			error.remove();
-		});
-	}
-	
 	function removeLoan(loan) {
 		loan.slideUp($.yeti.animationDuration, function(){
 			loan.remove();
@@ -484,6 +466,23 @@
 			if(!$('.loan', containers.loans).length) {
 				addLoan();
 			}
+		});
+	}
+	
+	function removeMessage(element, type) {
+		type = type || 'error';
+		
+		if(!element.hasClass(type)) {
+			return;
+		};
+		
+		var message = element.data(type);
+		
+		message.slideUp($.yeti.animationDuration, function(){
+			element.removeClass(type);
+			element.removeData(type);
+			
+			message.remove();
 		});
 	}
 	
