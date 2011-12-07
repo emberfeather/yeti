@@ -133,7 +133,7 @@
 			minPayment: 0,
 			principal: 0,
 			payments: 0,
-			isInterestOnly: true
+			isInterestOnly: false
 		};
 		
 		$.each(loans, function(i, loan) {
@@ -141,7 +141,10 @@
 			stats.principal += loan.principal;
 			stats.minPayment += loan.minPayment;
 			stats.payments = (loan.payments > stats.payments ? loan.payments : stats.payments);
-			stats.isInterestOnly = stats.isInterestOnly && loan.isInterestOnly;
+			
+			if(loan.isInterestOnly) {
+				stats.isInterestOnly = true;
+			}
 		});
 		
 		var listing = $.tmpl((stats.isInterestOnly ? 'strategyInfinity' : 'strategy'), {
