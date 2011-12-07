@@ -303,7 +303,7 @@
 			var periodInterest = toMoney(loan.principal * (periodRate / 100));
 			
 			// If the loan still has the focus and there is a rate set but not a min payment, calculate the min payment
-			if(hasFocus && loan.rate > 0 && loan.minPayment == 0) {
+			if(!hasFocus && loan.rate > 0 && loan.minPayment == 0) {
 				loan.minPayment = periodInterest;
 				
 				$('input[name="minPayment"]', ele).val(loan.minPayment);
