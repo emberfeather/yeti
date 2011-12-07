@@ -2,6 +2,7 @@
 	$.yeti = {
 		allowLocalSave: true,
 		currency: '$',
+		interestOnlyThreshold: 500,
 		slideDuration: 380,
 		strategyOrder: [
 			'interestHighLow',
@@ -135,10 +136,10 @@
 		});
 		
 		var listing = $.tmpl('strategy', {
-			interest: stats.interest,
+			interest: toMoney(stats.interest),
 			label: strategies[strategy].label,
 			loans: loans,
-			principal: stats.principal,
+			principal: toMoney(stats.principal),
 			strategy: strategy
 		})	.appendTo($('ul', containers.strategies));
 		
@@ -171,8 +172,8 @@
 	function calculateStrategy(evnt, strategy, loans, payment, updatedOn) {
 		var schedule = [];
 		var hasBalance = true;
-		
-		var startOn = new Date();
+		var interestOnlyCount = 0;
+		var extraUsed = 0;
 		
 		// Prime the loan for scheduling
 		$.each(loans, function(i, loan) {
@@ -182,30 +183,34 @@
 			loan.periodRate = (loan.rate / $.yeti.ppy);
 		});
 		
-		while(hasBalance && updatedOn == lastUpdatedOn) {
+		while(hasBalance && updatedOn == lastUpdatedOn && interestOnlyCount < $.yeti.interestOnlyThreshold) {
 			var extra = payment;
 			
 			// Handle minimum payments
 			$.each(loans, function(i, loan) {
 				if(loan.balance > 0) {
 					var amount = Math.min(loan.balance, loan.minPayment);
-					var interest = loan.balance * (loan.periodRate / 100);
+					var interest = toMoney(loan.balance * (loan.periodRate / 100));
+					var principal = toMoney(amount - interest);
 					
-					loan.balance -= amount;
-					loan.interest += toMoney(interest);
-					extra -= amount;
+					loan.balance = toMoney(loan.balance - principal);
+					loan.interest = toMoney(loan.interest + interest);
+					extra = toMoney(extra - amount);
 					
 					loan.schedule.push({
-						amount: amount,
+						amount: toMoney(amount),
 						interest: toMoney(interest),
-						principal: toMoney(amount - interest),
-						balance: loan.balance
+						principal: toMoney(principal),
+						balance: toMoney(loan.balance)
 					});
 				}
 			});
 			
 			// Allow a strategy to not use the snowball
 			if(!strategies[strategy].noExtra) {
+				// Keep track of how much extra we used
+				extraUsed = extra;
+				
 				// Handle extra money
 				$.each(loans, function(i, loan) {
 					if(loan.balance > 0) {
@@ -216,9 +221,9 @@
 						
 						var pos = loan.schedule.length - 1;
 						
-						loan.schedule[pos].amount += amount;
-						loan.schedule[pos].principal += amount;
-						loan.schedule[pos].balance = loan.balance;
+						loan.schedule[pos].amount = toMoney(loan.schedule[pos].amount + amount);
+						loan.schedule[pos].principal = toMoney(loan.schedule[pos].principal + amount);
+						loan.schedule[pos].balance = toMoney(loan.balance);
 						
 						// Check if all the extra money is spent
 						if(extra <= 0) {
@@ -230,14 +235,21 @@
 			
 			// Determine if all the loans have been repaid
 			hasBalance = false;
+			isInterestOnly = true;
 			
 			$.each(loans, function(i, loan) {
 				if(loan.balance > 0) {
 					hasBalance = true;
 					
-					return false;
+					// As long as there is at least one loan that it is not interest only we are not stuck
+					isInterestOnly = isInterestOnly && loan.schedule[loan.schedule.length - 1].principal == 0;
 				}
 			});
+			
+			// If there are only interest-only loans increment the threshold
+			if(isInterestOnly && extraUsed == 0) {
+				interestOnlyCount++;
+			}
 		}
 		
 		if(updatedOn != lastUpdatedOn) {
@@ -594,7 +606,7 @@
 		// Find the lowest minimum interest
 		$('li', containers.strategies).each(function() {
 			var ele = $(this);
-			var interest = parseFloat(ele.data('interest'));
+			var interest = toMoney(ele.data('interest'));
 			
 			if(interest < minInterest) {
 				minInterest = interest;
