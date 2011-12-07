@@ -1,9 +1,10 @@
 (function($, goog){
 	$.yeti = {
 		allowLocalSave: true,
+		animationDuration: 380,
 		currency: '$',
 		interestOnlyThreshold: 1,
-		slideDuration: 380,
+		pauseDuration: 155,
 		strategyOrder: [
 			'interestHighLow',
 			'interestLowHigh',
@@ -143,7 +144,7 @@
 			loans: loans,
 			principal: toMoney(stats.principal),
 			strategy: strategy
-		})	.appendTo($('ul', containers.strategies));
+		}).appendTo($('ul', containers.strategies));
 		
 		listing.on('click', function() {
 			showStrategy.apply(this, [strategy, loans, stats, payment]);
@@ -162,7 +163,7 @@
 			minPayment: minPayment || 0
 		});
 		
-		loan.hide().appendTo(containers.loans).slideDown($.yeti.slideDuration, function() {
+		loan.hide().appendTo(containers.loans).slideDown($.yeti.animationDuration, function() {
 			$('input.delete', loan).click(function(){
 				removeLoan(loan);
 			});
@@ -276,12 +277,6 @@
 		lastUpdatedOn = new Date();
 		var updatedOn = lastUpdatedOn;
 		
-		// Clear any previous calculations
-		$('ul', containers.strategies).empty();
-		$('.details', containers.strategies).empty();
-		containers.strategies.hide();
-		containers.details.hide();
-		
 		// Check for valid loan data
 		var isValid = true;
 		var totalPeriodInterest = 0.0;
@@ -355,37 +350,54 @@
 		
 		// If the there is not enough repayment, calculate it
 		if(payment < totalPeriodInterest || payment < totalMinPayment) {
-			if(payment == 0) {
-				payment = toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment * 1.25));
-				
-				$('input[name="payment"]', containers.payments).val(payment);
-			} else if(payment < totalMinPayment) {
-				if(!hasFocus) {
-					setMessage(paymentContainer, 'Needs a repayment amount large enough to cover the minimum payment: ' + toCurrency(totalMinPayment));
-				}
-				
-				return;
-			} else {
-				if(!hasFocus) {
+			if(hasFocus) {
+				if(payment < totalMinPayment) {
+					setMessage(paymentContainer, 'Needs a repayment amount large enough to cover the minimum payments: ' + toCurrency(totalMinPayment));
+				} else if(payment < totalPaymentInterest) {
 					setMessage(paymentContainer, 'Needs a repayment amount large enough to cover the interest: ' + toCurrency(totalPeriodInterest));
 				}
 				
 				return;
 			}
+			
+			if(payment == 0) {
+				payment = toMoney(Math.max(totalPeriodInterest * 1.25, totalMinPayment * 1.25));
+			} else if(payment < totalMinPayment) {
+				payment = toMoney(totalMinPayment);
+			} else if(payment < totalPaymentInterest) {
+				payment = toMoney(totalPaymentInterest);
+			}
+			
+			// Automatically update the payment amount
+			$('input[name="payment"]', containers.payments).val(payment);
 		}
 		
 		removeError(paymentContainer);
 		
-		// Only continue if all loans and payment values are valid
-		if(!loans.length || !isValid) {
-			return;
-		}
-		
-		// Show the strategies
-		containers.strategies.show();
-		
-		// Update the schedule
-		updateSchedules(loans, payment, updatedOn);
+		// Pause before updating schedules in case the user is still typing
+		$.wait($.yeti.pauseDuration).then(function() {
+			// Only update if nothing has changed since the pause started
+			if(updatedOn != lastUpdatedOn) {
+				return;
+			}
+			
+			// Clear any previous calculations
+			$('ul', containers.strategies).empty();
+			$('.details', containers.strategies).empty();
+			containers.strategies.hide();
+			containers.details.hide();
+			
+			// Only continue if all loans and payment values are valid
+			if(!loans.length || !isValid) {
+				return;
+			}
+			
+			// Show the strategies
+			containers.strategies.show();
+			
+			// Update the schedule
+			updateSchedules(loans, payment, updatedOn);
+		});
 	}
 	
 	function loadContainers() {
@@ -454,7 +466,7 @@
 		
 		var error = element.data('error');
 		
-		error.slideUp($.yeti.slideDuration, function(){
+		error.slideUp($.yeti.animationDuration, function(){
 			element.removeClass('error');
 			element.removeData('error');
 			
@@ -463,7 +475,7 @@
 	}
 	
 	function removeLoan(loan) {
-		loan.slideUp($.yeti.slideDuration, function(){
+		loan.slideUp($.yeti.animationDuration, function(){
 			loan.remove();
 			
 			saveData();
@@ -502,7 +514,6 @@
 		
 		// Save the payment
 		localStorage.payment = parseFloat($('input[name="payment"]', containers.payments).val()) || 0.0;
-		
 	}
 	
 	function setMessage(element, value, type) {
