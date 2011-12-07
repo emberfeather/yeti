@@ -1,6 +1,6 @@
 (function($, goog){
 	$.yeti = {
-		allowLocalSave: true,
+		allowLocalSave: localStorage.allowLocalSave || false,
 		animationDuration: 380,
 		currency: '$',
 		interestOnlyThreshold: 1,
@@ -12,6 +12,14 @@
 			'balanceHighLow'
 		],
 		ppy: 12
+	};
+	
+	var labels = {
+		addLoan: '+ Add',
+		localSave: {
+			'true': 'Stop saving information',
+			'false': 'Save information for next time'
+		}
 	};
 	
 	// Load the Google charts
@@ -27,7 +35,6 @@
 		chartDefer.resolve();
 	});
 	
-	var buttons = {};
 	var containers = {};
 	var lastUpdatedOn = new Date();
 	var strategies = {};
@@ -406,6 +413,34 @@
 			.appendTo(containers.content)
 			.on('input change', saveData);
 		
+		containers.addLoan = $.tmpl('button', {
+			grid: 6,
+			value: labels.addLoan
+		}).appendTo(containers.content);
+		
+		$('input', containers.addLoan).click(function() {
+			addLoan(0, 0, 0, function() {
+				// Auto focus on the new loan
+				$('input[type="number"]:first', this).focus();
+			});
+		});
+		
+		containers.localSave = $.tmpl('button', {
+				grid: 6,
+				className: 'localSave',
+				value: labels.localSave[$.yeti.allowLocalSave]
+			})
+			.appendTo(containers.content)
+			.on('click', function() {
+				$.yeti.allowLocalSave = !$.yeti.allowLocalSave;
+				
+				localStorage.allowLocalSave = $.yeti.allowLocalSave;
+				
+				$('input', containers.localSave).val(labels.localSave[$.yeti.allowLocalSave]);
+				
+				saveData();
+			});
+		
 		containers.payments = $.tmpl('payments', {
 				currency: $.yeti.currency,
 				payment: localStorage.payment || 0.00
@@ -421,20 +456,6 @@
 	}
 	
 	function loadData() {
-		// Add an add button for loans
-		containers.addLoan = $.tmpl('button', {
-			value: '+ Add'
-		});
-		
-		containers.addLoan.insertAfter(containers.loans);
-		
-		buttons.addLoan = $('input', containers.addLoan).click(function() {
-			addLoan(0, 0, 0, function() {
-				// Auto focus on the new loan
-				$('input[type="number"]:first', this).focus();
-			});
-		});
-		
 		// Check for previously saved loans
 		if(localStorage.loans) {
 			var loans = JSON.parse(localStorage.loans);
@@ -488,6 +509,9 @@
 	
 	function saveData() {
 		if(!$.yeti.allowLocalSave) {
+			delete localStorage.loans;
+			delete localStorage.payment;
+			
 			return;
 		}
 		
