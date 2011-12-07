@@ -4,6 +4,20 @@
 		animationDuration: 380,
 		currency: '$',
 		interestOnlyThreshold: 1,
+		labels: {
+			addLoan: '+ Add',
+			localSave: {
+				'true': 'Stop saving information',
+				'false': 'Save information for next time'
+			},
+			strategies: {
+				balanceHighLow: 'Highest Balance First',
+				balanceLowHigh: 'Lowest Balance First',
+				interestHighLow: 'Highest Rate First',
+				interestLowHigh: 'Lowest Rate First',
+				minimumPayment: 'Minimum Payment Only'
+			}
+		},
 		pauseDuration: 155,
 		strategyOrder: [
 			'interestHighLow',
@@ -12,14 +26,6 @@
 			'balanceHighLow'
 		],
 		ppy: 12
-	};
-	
-	var labels = {
-		addLoan: '+ Add',
-		localSave: {
-			'true': 'Stop saving information',
-			'false': 'Save information for next time'
-		}
 	};
 	
 	// Load the Google charts
@@ -61,8 +67,6 @@
 		});
 	};
 	
-	strategies.balanceHighLow.label = 'Highest Balance First';
-	
 	// Lowest Balance First
 	strategies.balanceLowHigh = function(loans) {
 		// Sort the loans by the interest rate, descending
@@ -77,8 +81,6 @@
 			return diff;
 		});
 	};
-	
-	strategies.balanceLowHigh.label = 'Lowest Balance First';
 	
 	// Highest Interest First
 	strategies.interestHighLow = function(loans) {
@@ -95,8 +97,6 @@
 		});
 	};
 	
-	strategies.interestHighLow.label = 'Highest Rate First';
-	
 	// Lowest Interest First
 	strategies.interestLowHigh = function(loans) {
 		// Sort the loans by the interest rate, descending
@@ -112,14 +112,11 @@
 		});
 	};
 	
-	strategies.interestLowHigh.label = 'Lowest Rate First';
-	
 	// Minimum Payment Only
 	strategies.minimumPayment = function(loans) {
 		return loans;
 	};
 	
-	strategies.minimumPayment.label = 'Minimum Payment Only';
 	strategies.minimumPayment.noExtra = true;
 	
 	$(function(){
@@ -147,7 +144,7 @@
 		
 		var listing = $.tmpl((stats.isInterestOnly ? 'strategyInfinity' : 'strategy'), {
 			interest: toMoney(stats.interest),
-			label: strategies[strategy].label,
+			label: $.yeti.labels.strategies[strategy],
 			loans: loans,
 			principal: toMoney(stats.principal),
 			strategy: strategy
@@ -415,7 +412,7 @@
 		
 		containers.addLoan = $.tmpl('button', {
 			grid: 6,
-			value: labels.addLoan
+			value: $.yeti.labels.addLoan
 		}).appendTo(containers.content);
 		
 		$('input', containers.addLoan).click(function() {
@@ -428,7 +425,7 @@
 		containers.localSave = $.tmpl('button', {
 				grid: 6,
 				className: 'localSave',
-				value: labels.localSave[$.yeti.allowLocalSave]
+				value: $.yeti.labels.localSave[$.yeti.allowLocalSave]
 			})
 			.appendTo(containers.content)
 			.on('click', function() {
@@ -436,7 +433,7 @@
 				
 				localStorage.allowLocalSave = $.yeti.allowLocalSave;
 				
-				$('input', containers.localSave).val(labels.localSave[$.yeti.allowLocalSave]);
+				$('input', containers.localSave).val($.yeti.labels.localSave[$.yeti.allowLocalSave]);
 				
 				saveData();
 			});
@@ -579,7 +576,7 @@
 		// Change the header text
 		var header = $('h2', containers.details);
 		
-		header.text(strategies[strategy].label);
+		header.text($.yeti.labels.strategies[strategy]);
 		
 		// Check for 'best' solution
 		if(element.hasClass('best')) {
