@@ -37,40 +37,6 @@
 	 * Adding a new strategy is as simple as reordering the loans in the order desired.
 	 */
 	
-	// Highest Interest First
-	strategies.interestHighLow = function(loans) {
-		// Sort the loans by the interest rate, descending
-		return loans.sort(function(a, b) {
-			var diff = b.rate - a.rate;
-			
-			// If they have the same interest rate, want the one with the lowest balance first
-			if(diff === 0) {
-				return a.principal - b.principal;
-			}
-			
-			return diff;
-		});
-	};
-	
-	strategies.interestHighLow.label = 'Highest Rate First';
-	
-	// Lowest Interest First
-	strategies.interestLowHigh = function(loans) {
-		// Sort the loans by the interest rate, descending
-		return loans.sort(function(a, b) {
-			var diff = a.rate - b.rate;
-			
-			// If they have the same interest rate, want the one with the lowest balance first
-			if(diff === 0) {
-				return a.principal - b.principal;
-			}
-			
-			return diff;
-		});
-	};
-	
-	strategies.interestLowHigh.label = 'Lowest Rate First';
-	
 	// Highest Balance First
 	strategies.balanceHighLow = function(loans) {
 		// Sort the loans by the interest rate, descending
@@ -104,6 +70,40 @@
 	};
 	
 	strategies.balanceLowHigh.label = 'Lowest Balance First';
+	
+	// Highest Interest First
+	strategies.interestHighLow = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = b.rate - a.rate;
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return diff;
+		});
+	};
+	
+	strategies.interestHighLow.label = 'Highest Rate First';
+	
+	// Lowest Interest First
+	strategies.interestLowHigh = function(loans) {
+		// Sort the loans by the interest rate, descending
+		return loans.sort(function(a, b) {
+			var diff = a.rate - b.rate;
+			
+			// If they have the same interest rate, want the one with the lowest balance first
+			if(diff === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return diff;
+		});
+	};
+	
+	strategies.interestLowHigh.label = 'Lowest Rate First';
 	
 	$(function(){
 		loadTemplates();
@@ -647,6 +647,16 @@
 					]);
 		});
 	}
+	
+	$.wait = function(time) {
+		var defer = $.Deferred();
+		
+		setTimeout(function() {
+			defer.resolve();
+		}, time);
+		
+		return defer;
+	};
 }(jQuery, google));
 
 // Global so that the templating can use to format data
