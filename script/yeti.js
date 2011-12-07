@@ -105,6 +105,14 @@
 	
 	strategies.interestLowHigh.label = 'Lowest Rate First';
 	
+	// Minimum Payment Only
+	strategies.minimumPayment = function(loans) {
+		return loans;
+	};
+	
+	strategies.minimumPayment.label = 'Minimum Payment Only';
+	strategies.minimumPayment.noExtra = true;
+	
 	$(function(){
 		loadTemplates();
 		loadContainers();
@@ -196,26 +204,29 @@
 				}
 			});
 			
-			// Handle extra money
-			$.each(loans, function(i, loan) {
-				if(loan.balance > 0) {
-					var amount = Math.min(loan.balance, extra);
-					
-					loan.balance -= amount;
-					extra -= amount;
-					
-					var pos = loan.schedule.length - 1;
-					
-					loan.schedule[pos].amount += amount;
-					loan.schedule[pos].principal += amount;
-					loan.schedule[pos].balance = loan.balance;
-					
-					// Check if all the extra money is spent
-					if(extra <= 0) {
-						return false;
+			// Allow a strategy to not use the snowball
+			if(!strategies[strategy].noExtra) {
+				// Handle extra money
+				$.each(loans, function(i, loan) {
+					if(loan.balance > 0) {
+						var amount = Math.min(loan.balance, extra);
+						
+						loan.balance -= amount;
+						extra -= amount;
+						
+						var pos = loan.schedule.length - 1;
+						
+						loan.schedule[pos].amount += amount;
+						loan.schedule[pos].principal += amount;
+						loan.schedule[pos].balance = loan.balance;
+						
+						// Check if all the extra money is spent
+						if(extra <= 0) {
+							return false;
+						}
 					}
-				}
-			});
+				});
+			}
 			
 			// Determine if all the loans have been repaid
 			hasBalance = false;
@@ -646,6 +657,14 @@
 						updatedOn
 					]);
 		});
+		
+		// Trigger the schedule calculation for the minimum payment strategy
+		containers.content.trigger('snowball.pack', [
+			'minimumPayment',
+			loans,
+			payment,
+			updatedOn
+		]);
 	}
 	
 	$.wait = function(time) {
