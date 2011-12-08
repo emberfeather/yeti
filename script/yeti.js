@@ -15,7 +15,9 @@
 				balanceLowHigh: 'Lowest Balance First',
 				interestHighLow: 'Highest Rate First',
 				interestLowHigh: 'Lowest Rate First',
-				minimumPayment: 'Minimum Payment Only'
+				minimumPayment: 'Minimum Payment Only',
+				ratioBalanceMinimumPayment: 'Balance/Payment Ratio',
+				ratioBalanceRate: 'Balance/Rate Ratio'
 			}
 		},
 		pauseDuration: 155,
@@ -23,7 +25,9 @@
 			'interestHighLow',
 			'interestLowHigh',
 			'balanceLowHigh',
-			'balanceHighLow'
+			'balanceHighLow',
+			'ratioBalanceMinimumPayment',
+			'ratioBalanceRate'
 		],
 		ppy: 12
 	};
@@ -109,6 +113,36 @@
 			}
 			
 			return diff;
+		});
+	};
+	
+	// Ratio: Balance to Minimum Payment
+	strategies.ratioBalanceMinimumPayment = function(loans) {
+		// Sort the loans by the balance to minimum payment ratio, ascending
+		return loans.sort(function(a, b) {
+			var ratio = (a.principal / a.minPayment) - (b.principal / b.minPayment);
+			
+			// If they have the same ratio, want the one with the lowest balance first
+			if(ratio === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return ratio;
+		});
+	};
+	
+	// Ratio: Balance to Rate
+	strategies.ratioBalanceRate = function(loans) {
+		// Sort the loans by the balance to rate ratio, ascending
+		return loans.sort(function(a, b) {
+			var ratio = (a.principal / a.rate) - (b.principal / b.rate);
+			
+			// If they have the same ratio, want the one with the lowest balance first
+			if(ratio === 0) {
+				return a.principal - b.principal;
+			}
+			
+			return ratio;
 		});
 	};
 	
