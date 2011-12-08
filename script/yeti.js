@@ -645,7 +645,7 @@
 			
 			// Add the payment numbers
 			for(var i = 0; i < stats.payments; i++) {
-				data.setValue(i, 0, i + '');
+				data.setValue(i, 0, convertMonths(i + 1));
 			}
 			
 			$.each(loans, function(i, loan){
