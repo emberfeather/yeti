@@ -29,6 +29,11 @@
 			
 			<footer>
 				<div class="grid_12">
+					<div class="text-center">
+						<div class="g-plusone" data-size="medium"></div>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a>
+					</div>
+					
 					<p>
 						All numbers shown are for illustration purposes only.
 						If you want <strong><em>real</em></strong> financial advice, see a certified financial planner.
@@ -62,20 +67,23 @@
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		}());
-	</script>
-	
-	<script type="text/javascript">
+		
+		(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		}());
+		
 		var uvOptions = {};
 		(function() {
-			var uv = document.createElement('script');
-			uv.type = 'text/javascript';
-			uv.async = true;
+			var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
 			uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://')
 					+ 'widget.uservoice.com/3A0UAAmbW0w7gyEDcwJRIg.js';
-			var s = document.getElementsByTagName('script')[ 0 ];
-			s.parentNode.insertBefore(uv, s);
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
 		}());
 	</script>
+	
+	<script src="//platform.twitter.com/widgets.js"></script>
 	
 	<!--[if lt IE 8 ]>
 		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
