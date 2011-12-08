@@ -51,6 +51,7 @@
 	<script src="//www.google.com/jsapi"></script>
 	<script src="script/jquery.tmpl.min.js"></script>
 	<script src="script/yeti.js"></script>
+	
 	<script>
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-4270246-5']);
@@ -60,6 +61,19 @@
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		}());
+	</script>
+	
+	<script type="text/javascript">
+		var uvOptions = {};
+		(function() {
+			var uv = document.createElement('script');
+			uv.type = 'text/javascript';
+			uv.async = true;
+			uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://')
+					+ 'widget.uservoice.com/3A0UAAmbW0w7gyEDcwJRIg.js';
+			var s = document.getElementsByTagName('script')[ 0 ];
+			s.parentNode.insertBefore(uv, s);
 		}());
 	</script>
 	
