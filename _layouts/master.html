@@ -32,6 +32,7 @@
 					<div class="text-center">
 						<div class="g-plusone" data-size="medium"></div>
 						<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a>
+						<div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="true" data-action="recommend" data-font="verdana"></div>
 					</div>
 					
 					<p>
@@ -51,6 +52,8 @@
 			</footer>
 		</div>
 	</div>
+	
+	<div id="fb-root"></div>
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 	<script src="//www.google.com/jsapi"></script>
@@ -81,6 +84,14 @@
 					+ 'widget.uservoice.com/3A0UAAmbW0w7gyEDcwJRIg.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
 		}());
+		
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	
 	<script src="//platform.twitter.com/widgets.js"></script>
