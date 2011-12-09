@@ -532,8 +532,17 @@
 				addLoan(value.principal, value.rate, value.minPayment);
 			});
 		} else {
-			// Add sample loan
-			addLoan(5000, 8.5, 50);
+			// Add random sample loan
+			var addRandomLoan = function(minPrincipal, minRate) {
+				minPrincipal = minPrincipal || 2000;
+				minRate = minRate || 5;
+				
+				addLoan(toMoney(Math.random() * 2501 + minPrincipal), toMoney(Math.random() * 15 + minRate));
+			}
+			
+			addRandomLoan();
+			addRandomLoan();
+			addRandomLoan();
 		}
 	}
 	
