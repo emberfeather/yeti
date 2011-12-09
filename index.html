@@ -32,9 +32,9 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="button" type="text/x-jquery-tmpl">
-	<div class="grid_${grid}">
-		<div class="button ${className}">
-			<input type="button" value="${value}" />
+	<div class="grid_{[=grid]}">
+		<div class="button {[=className]}">
+			<input type="button" value="{[=value]}" />
 		</div>
 	</div>
 </script>
@@ -48,17 +48,17 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="message" type="text/x-jquery-tmpl">
-	<div class="${className}">
-		${message}
+	<div class="{[=className]}">
+		{[=message]}
 	</div>
 </script>
 
 <script data-template="loan" type="text/x-jquery-tmpl">
 	<div class="loan corporeal">
 		<div class="float-right ghost"><input type="button" class="delete" value="&#x2718; Remove" /></div>
-		${currency}<input type="number" step="0.01" min="0.01" name="principal" value="${principal}" /> borrowed
-		at <input type="number" step="0.01" min="0" name="rate" value="${rate}" class="small" />% interest
-		with a ${currency}<input type="number" step="0.01" min="0" name="minPayment" value="${minPayment}" /> minimum payment
+		{[=currency]}<input type="number" step="0.01" min="0.01" name="principal" value="{[=principal]}" /> borrowed
+		at <input type="number" step="0.01" min="0" name="rate" value="{[=rate]}" class="small" />% interest
+		with a {[=currency]}<input type="number" step="0.01" min="0" name="minPayment" value="{[=minPayment]}" /> minimum payment
 	</div>
 </script>
 
@@ -70,7 +70,7 @@ title: Start a Snowball Fight!
 <script data-template="payments" type="text/x-jquery-tmpl">
 	<div id="payments" class="grid_12">
 		<div class="payment">
-			${currency}<input type="number" step="0.01" min="0.00" name="payment" value="${payment}" />
+			{[=currency]}<input type="number" step="0.01" min="0.00" name="payment" value="{[=payment]}" />
 			available monthly to pay off debt.
 		</div>
 	</div>
@@ -83,16 +83,16 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="strategy" type="text/x-jquery-tmpl">
-	<li data-strategy="${strategy}" data-interest="${interest}">
-		<span class="interest"><abbr title="Principal &amp; Interest paid">${toCurrency(principal + interest)}</abbr></span>
-		${label}
+	<li data-strategy="{[=strategy]}" data-interest="{[=interest]}">
+		<span class="interest"><abbr title="Principal &amp; Interest paid">{[toCurrency total)]}</abbr></span>
+		{[=label]}
 	</li>
 </script>
 
 <script data-template="strategyInfinity" type="text/x-jquery-tmpl">
-	<li data-strategy="${strategy}">
+	<li data-strategy="{[=strategy]}">
 		<span class="interest"><abbr title="Never repaid">&#8734;</abbr></span>
-		${label}
+		{[=label]}
 	</li>
 </script>
 
@@ -101,9 +101,9 @@ title: Start a Snowball Fight!
 		<ol class="repayOrder"></ol>
 		
 		<p>
-			At <strong>${toCurrency(payment)}</strong> a month it will take <strong>${convertMonths(payments)}</strong>
-			to repay <strong>${toCurrency(principal)}</strong> in debt
-			plus the <strong>${toCurrency(interest)}</strong> paid in interest.
+			At <strong>{[toCurrency payment]}</strong> a month it will take <strong>{[convertMonths payments]}</strong>
+			to repay <strong>{[toCurrency principal]}</strong> in debt
+			plus the <strong>{[toCurrency interest]}</strong> paid in interest.
 		</p>
 		
 		<div class="chart"></div>
@@ -123,5 +123,5 @@ title: Start a Snowball Fight!
 </script>
 
 <script data-template="strategyOrder" type="text/x-jquery-tmpl">
-	<li>${toCurrency(principal)} @ ${rate}%</li>
+	<li>{[toCurrency principal]} @ {[=rate]}%</li>
 </script>

@@ -32,6 +32,18 @@
 		ppy: 12
 	};
 	
+	$.views = $.extend($.views, {
+		allowCode: true,
+		tags: {
+			toCurrency: function(value) {
+				return toCurrency(value);
+			},
+			convertMonths: function(value) {
+				return convertMonths(value);
+			}
+		}
+	});
+	
 	// Load the Google charts
 	var chartDefer = $.Deferred();
 	
@@ -181,13 +193,15 @@
 			}
 		});
 		
-		var listing = $.tmpl((stats.isInterestOnly ? 'strategyInfinity' : 'strategy'), {
+		var listing = $($.render([{
 			interest: toMoney(stats.interest),
 			label: $.yeti.labels.strategies[strategy],
 			loans: loans,
 			principal: toMoney(stats.principal),
-			strategy: strategy
-		}).appendTo($('ul', containers.strategies));
+			strategy: strategy,
+			total: toMoney(stats.principal + stats.interest)
+		}], (stats.isInterestOnly ? 'strategyInfinity' : 'strategy')))
+			.appendTo($('ul', containers.strategies));
 		
 		listing.on('click', function() {
 			showStrategy.apply(this, [strategy, loans, stats, payment]);
@@ -199,12 +213,12 @@
 	function addLoan(principal, rate, minPayment, callback) {
 		callback = callback || $.noop;
 		
-		var loan = $.tmpl('loan', {
+		var loan = $($.render([{
 			currency: $.yeti.currency,
 			principal: principal || 0,
 			rate: rate || 0.0,
 			minPayment: minPayment || 0
-		});
+		}], 'loan'));
 		
 		loan.hide().appendTo(containers.loans).slideDown($.yeti.animationDuration, function() {
 			$('input.delete', loan).click(function(){
@@ -440,19 +454,37 @@
 		});
 	}
 	
+	function convertMonths(value) {
+		var years = parseInt(value / 12);
+		var months = value % 12;
+		
+		var output = '';
+		
+		if(years > 0) {
+			output += ' ' + years + ' year' + (years != 1 ? 's' : '');
+		}
+		
+		if(months > 0) {
+			output += ' ' + months + ' month' + (months != 1 ? 's' : '');
+		}
+		
+		return output;
+	}
+	
 	function loadContainers() {
 		containers.content = $('#content')
 			.on('snowball.pack', calculateStrategy)
 			.on('snowball.packed', addStrategy);
 		
-		containers.loans = $.tmpl('loans')
+		containers.loans = $($.render({}, 'loans'))
 			.appendTo(containers.content)
 			.on('input change', saveData);
 		
-		containers.addLoan = $.tmpl('button', {
+		containers.addLoan = $($.render({
 			grid: 6,
 			value: $.yeti.labels.addLoan
-		}).appendTo(containers.content);
+		}, 'button'))
+			.appendTo(containers.content);
 		
 		$('input', containers.addLoan).click(function() {
 			addLoan(0, 0, 0, function() {
@@ -461,11 +493,11 @@
 			});
 		});
 		
-		containers.localSave = $.tmpl('button', {
-				grid: 6,
-				className: 'localSave',
-				value: $.yeti.labels.localSave[$.yeti.allowLocalSave]
-			})
+		containers.localSave = $($.render([{
+			grid: 6,
+			className: 'localSave',
+			value: $.yeti.labels.localSave[$.yeti.allowLocalSave]
+		}], 'button'))
 			.appendTo(containers.content)
 			.on('click', function() {
 				$.yeti.allowLocalSave = !$.yeti.allowLocalSave;
@@ -477,17 +509,17 @@
 				saveData();
 			});
 		
-		containers.payments = $.tmpl('payments', {
-				currency: $.yeti.currency,
-				payment: localStorage.payment || 0.00
-			})
+		containers.payments = $($.render([{
+			currency: $.yeti.currency,
+			payment: localStorage.payment || 0.00
+		}], 'payments'))
 			.appendTo(containers.content)
 			.on('input change', saveData);
 		
-		containers.strategies = $.tmpl('strategies')
+		containers.strategies = $($.render({}, 'strategies'))
 			.appendTo(containers.content);
 		
-		containers.details = $.tmpl('details')
+		containers.details = $($.render({}, 'details'))
 			.appendTo(containers.content);
 	}
 	
@@ -583,9 +615,10 @@
 		message = element.data(type);
 		
 		if(!message) {
-			message = $.tmpl('message', {
+			message = $($.render([{
 				className: 'message'
-			}).appendTo(element);
+			}], 'message'))
+				.appendTo(element);
 			
 			element.data(type, message);
 			
@@ -624,16 +657,16 @@
 			containers.details.removeClass('best');
 		}
 		
-		var details = $.tmpl((stats.isInterestOnly ? 'strategyDetailInfinity' : 'strategyDetail'), {
+		var details = $($.render([{
 			strategy: strategy,
 			principal: stats.principal,
 			interest: stats.interest,
 			payments: stats.payments,
 			payment: (strategies[strategy].noExtra ? stats.minPayment : payment)
-		});
+		}], (stats.isInterestOnly ? 'strategyDetailInfinity' : 'strategyDetail')));
 		
 		// Add the loan repayment order
-		$.tmpl('strategyOrder', loans).appendTo($('.repayOrder', details));
+		$($.render(loans, 'strategyOrder')).appendTo($('.repayOrder', details));
 		
 		details.appendTo(container);
 		
@@ -695,6 +728,28 @@
 			.addClass('best')
 			.first()
 			.trigger('click');
+	}
+	
+	function toComma(amount) {
+		var value = amount + '';
+		var parts = value.split('.');
+		
+		var whole = parts[0];
+		var part = parts[1] ? '.' + parts[1] : '';
+		
+		var regex = /(\d+)(\d{3})/;
+		
+		while(regex.test(whole)) {
+			whole = whole.replace(regex, '$1' + ',' + '$2');
+		}
+		
+		return whole + part;
+	}
+	
+	function toCurrency(amount) {
+		var value = toComma(parseFloat(amount).toFixed(2));
+		
+		return $.yeti.currency + value;
 	}
 	
 	function toMoney(amount) {
@@ -767,43 +822,3 @@
 		return defer;
 	};
 }(jQuery, google));
-
-// Global so that the templating can use to format data
-function convertMonths(value) {
-	var years = parseInt(value / 12);
-	var months = value % 12;
-	
-	var output = '';
-	
-	if(years > 0) {
-		output += ' ' + years + ' year' + (years != 1 ? 's' : '');
-	}
-	
-	if(months > 0) {
-		output += ' ' + months + ' month' + (months != 1 ? 's' : '');
-	}
-	
-	return output;
-}
-
-function toComma(amount) {
-	var value = amount + '';
-	var parts = value.split('.');
-	
-	var whole = parts[0];
-	var part = parts[1] ? '.' + parts[1] : '';
-	
-	var regex = /(\d+)(\d{3})/;
-	
-	while(regex.test(whole)) {
-		whole = whole.replace(regex, '$1' + ',' + '$2');
-	}
-	
-	return whole + part;
-}
-
-function toCurrency(amount) {
-	var value = toComma(parseFloat(amount).toFixed(2));
-	
-	return $.yeti.currency + value;
-}
