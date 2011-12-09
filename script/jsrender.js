@@ -379,7 +379,7 @@ extend( $, {
 	}
 });
 
-viewsNs.setDelimiters( "{{", "}}" );
+viewsNs.setDelimiters( "{[", "]}" );
 
 //=================
 // compile template
