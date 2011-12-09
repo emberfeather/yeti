@@ -5,10 +5,11 @@
 		currency: '$',
 		interestOnlyThreshold: 1,
 		labels: {
-			addLoan: '+ Add',
+			addLoan: '+ Add Another Debt',
 			localSave: {
-				'true': 'Stop saving information',
-				'false': 'Save information for next time'
+				'true': '✘ Stop saving information...',
+				'false': '✔ Save information for next visit...',
+				title: 'Save the information locally for your next visit?'
 			},
 			strategies: {
 				balanceHighLow: 'Highest Balance First',
@@ -358,9 +359,10 @@
 			var periodRate = (loan.rate / $.yeti.ppy);
 			var periodInterest = toMoney(loan.principal * (periodRate / 100));
 			
-			// If the loan still has the focus and there is a rate set but not a min payment, calculate the min payment
+			// If there is a rate set but not a min payment, calculate the min payment
 			if(!hasFocus && loan.rate > 0 && loan.minPayment == 0) {
-				loan.minPayment = periodInterest;
+				// Added some basic minimum payment calculations
+				loan.minPayment = Math.max(25, periodInterest, toMoney(loan.principal * .01));
 				
 				$('input[name="minPayment"]', ele).val(loan.minPayment);
 			}
@@ -484,30 +486,30 @@
 			grid: 6,
 			value: $.yeti.labels.addLoan
 		}, 'button'))
-			.appendTo(containers.content);
+			.appendTo(containers.content)
+			.append($($.render({
+				title: $.yeti.labels.localSave.title,
+				label: $.yeti.labels.localSave[$.yeti.allowLocalSave]
+			}, 'localSave')));
 		
-		$('input', containers.addLoan).click(function() {
+		$('input', containers.addLoan).on('click', function() {
 			addLoan(0, 0, 0, function() {
 				// Auto focus on the new loan
 				$('input[type="number"]:first', this).focus();
 			});
 		});
 		
-		containers.localSave = $($.render([{
-			grid: 6,
-			className: 'localSave',
-			value: $.yeti.labels.localSave[$.yeti.allowLocalSave]
-		}], 'button'))
-			.appendTo(containers.content)
-			.on('click', function() {
-				$.yeti.allowLocalSave = !$.yeti.allowLocalSave;
-				
-				localStorage.allowLocalSave = $.yeti.allowLocalSave;
-				
-				$('input', containers.localSave).val($.yeti.labels.localSave[$.yeti.allowLocalSave]);
-				
-				saveData();
-			});
+		$('a', containers.addLoan).on('click', function() {
+			$.yeti.allowLocalSave = !$.yeti.allowLocalSave;
+			
+			localStorage.allowLocalSave = $.yeti.allowLocalSave;
+			
+			$('a', containers.addLoan).text($.yeti.labels.localSave[$.yeti.allowLocalSave]);
+			
+			saveData();
+			
+			return false;
+		});
 		
 		containers.payments = $($.render([{
 			currency: $.yeti.currency,
