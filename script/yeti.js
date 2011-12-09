@@ -13,14 +13,14 @@
 			strategies: {
 				balanceHighLow: 'Highest Balance First',
 				balanceLowHigh: 'Lowest Balance First',
-				interestHighLow: 'Highest Rate First',
-				interestLowHigh: 'Lowest Rate First',
+				interestHighLow: 'Highest Interest Rate First',
+				interestLowHigh: 'Lowest Interest Rate First',
 				minimumPayment: 'Minimum Payment Only',
-				ratioBalanceMinimumPayment: 'Balance/Payment Ratio',
-				ratioBalanceRate: 'Balance/Rate Ratio'
+				ratioBalanceMinimumPayment: 'Balance/Minimum Payment Ratio',
+				ratioBalanceRate: 'Balance/Interest Rate Ratio'
 			}
 		},
-		pauseDuration: 155,
+		pauseDuration: 100,
 		strategyOrder: [
 			'interestHighLow',
 			'interestLowHigh',
