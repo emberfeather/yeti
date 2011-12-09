@@ -5,7 +5,7 @@
 		currency: '$',
 		interestOnlyThreshold: 1,
 		labels: {
-			addLoan: '+ Add Another Debt',
+			addLoan: '+ Add another debt',
 			localSave: {
 				'true': '✘ Stop saving information...',
 				'false': '✔ Save information for next visit...',
@@ -484,13 +484,11 @@
 		
 		containers.addLoan = $($.render({
 			grid: 6,
+			label: $.yeti.labels.localSave[$.yeti.allowLocalSave],
+			title: $.yeti.labels.localSave.title,
 			value: $.yeti.labels.addLoan
-		}, 'button'))
-			.appendTo(containers.content)
-			.append($($.render({
-				title: $.yeti.labels.localSave.title,
-				label: $.yeti.labels.localSave[$.yeti.allowLocalSave]
-			}, 'localSave')));
+		}, 'addLoan'))
+			.appendTo(containers.content);
 		
 		$('input', containers.addLoan).on('click', function() {
 			addLoan(0, 0, 0, function() {

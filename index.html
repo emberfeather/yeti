@@ -31,9 +31,12 @@ title: Start a Snowball Fight!
 	</div>
 </script>
 
-<script data-template="button" type="text/x-jquery-tmpl">
+<script data-template="addLoan" type="text/x-jquery-tmpl">
 	<div class="grid_12">
-		<input type="button" value="{[=value]}" />
+		<div class="addLoan">
+			<input type="button" value="{[=value]}" />
+			<a href="#" class="localSave" title="{[=title]}">{[=label]}</a>
+		</div>
 	</div>
 </script>
 
@@ -43,10 +46,6 @@ title: Start a Snowball Fight!
 		
 		<div class="details"></div>
 	</div>
-</script>
-
-<script data-template="localSave" type="text/x-jquery-tmpl">
-	<a href="#" class="localSave" title="{[=title]}">{[=label]}</a>
 </script>
 
 <script data-template="message" type="text/x-jquery-tmpl">
