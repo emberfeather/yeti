@@ -537,7 +537,7 @@
 				minPrincipal = minPrincipal || 2000;
 				minRate = minRate || 5;
 				
-				addLoan(toMoney(Math.random() * 2501 + minPrincipal), toMoney(Math.random() * 15 + minRate));
+				addLoan(toMoney(Math.random() * 5001 + minPrincipal), toMoney(Math.random() * 16 + minRate));
 			}
 			
 			addRandomLoan();
