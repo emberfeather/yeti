@@ -1,0 +1,48 @@
+.container {
+	line-height: 2.25em;
+}
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12,
+.grid_13,
+.grid_14,
+.grid_15,
+.grid_16 {
+	display: block;
+	float: none;
+	margin-left: inherit;
+	margin-right: inherit;
+	width: auto !important;
+}
+
+.no_print {
+	display: none;
+}
+
+.print_only {
+	display: inherit;
+}
+
+input {
+	width: auto;
+	min-width: 2em;
+	border: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	
+	&[type=number]::-webkit-inner-spin-button,
+	&[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}

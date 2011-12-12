@@ -33,7 +33,7 @@ executeApp: true
 </script>
 
 <script data-template="addLoan" type="text/x-jquery-tmpl">
-	<div class="grid_12">
+	<div class="grid_12 no_print">
 		<div class="addLoan">
 			<input type="button" value="{[=value]}" />
 			<a href="#" class="localSave" title="{[=title]}">{[=label]}</a>
@@ -57,7 +57,7 @@ executeApp: true
 
 <script data-template="loan" type="text/x-jquery-tmpl">
 	<div class="loan corporeal">
-		<div class="float-right ghost"><input type="button" class="delete" value="&#x2718; Remove" /></div>
+		<div class="float-right ghost no_print"><input type="button" class="delete" value="&#x2718; Remove" /></div>
 		{[=currency]}<input type="number" step="0.01" min="0.01" name="principal" value="{[=principal]}" /> borrowed
 		at <input type="number" step="0.01" min="0" name="rate" value="{[=rate]}" class="small" />% interest
 		with a {[=currency]}<input type="number" step="0.01" min="0" name="minPayment" value="{[=minPayment]}" /> minimum payment
@@ -80,9 +80,11 @@ executeApp: true
 
 <script data-template="strategies" type="text/x-jquery-tmpl">
 	<div id="strategies" class="grid_5">
+		<h2 class="print_only">Repayment Strategies</h2>
+		
 		<ul></ul>
 		
-		<p>
+		<p class="no_print">
 			<a href="strategies.html">Learn more about these strategies...</a>
 		</p>
 	</div>
