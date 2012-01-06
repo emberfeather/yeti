@@ -585,15 +585,15 @@
 	}
 	
 	function saveData() {
-		if(!$.yeti.allowLocalSave) {
+		// Recheck the loan data to auto calculate any missing data
+		checkStatus();
+		
+		if($.yeti.allowLocalSave) {
 			delete localStorage.loans;
 			delete localStorage.payment;
 			
 			return;
 		}
-		
-		// Recheck the loan data to auto calculate any missing data
-		checkStatus();
 		
 		// Save the loans
 		var loans = [];
