@@ -1,6 +1,6 @@
 (function($, goog){
 	$.yeti = {
-		allowLocalSave: localStorage.allowLocalSave || false,
+		allowLocalSave: localStorage.allowLocalSave == 'true' || false,
 		animationDuration: 380,
 		currency: '$',
 		interestOnlyThreshold: 1,
