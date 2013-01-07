@@ -7,8 +7,8 @@
 		labels: {
 			addLoan: '+ Add another debt',
 			localSave: {
-				'true': '✘ Stop saving information...',
-				'false': '✔ Save information for next visit...',
+				'true': 'Stop saving information?',
+				'false': 'Save information for next visit?',
 				title: 'Save the information locally for your next visit?'
 			},
 			strategies: {
