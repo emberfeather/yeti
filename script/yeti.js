@@ -588,7 +588,7 @@
 		// Recheck the loan data to auto calculate any missing data
 		checkStatus();
 		
-		if($.yeti.allowLocalSave) {
+		if(!$.yeti.allowLocalSave) {
 			delete localStorage.loans;
 			delete localStorage.payment;
 			
