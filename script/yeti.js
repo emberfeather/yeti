@@ -478,6 +478,13 @@
 			.on('snowball.pack', calculateStrategy)
 			.on('snowball.packed', addStrategy);
 		
+		containers.payments = $($.render([{
+			currency: $.yeti.currency,
+			payment: localStorage.payment || 0.00
+		}], 'payments'))
+			.appendTo(containers.content)
+			.on('input change', saveData);
+		
 		containers.loans = $($.render({}, 'loans'))
 			.appendTo(containers.content)
 			.on('input change', saveData);
@@ -508,13 +515,6 @@
 			
 			return false;
 		});
-		
-		containers.payments = $($.render([{
-			currency: $.yeti.currency,
-			payment: localStorage.payment || 0.00
-		}], 'payments'))
-			.appendTo(containers.content)
-			.on('input change', saveData);
 		
 		containers.strategies = $($.render({}, 'strategies'))
 			.appendTo(containers.content);
