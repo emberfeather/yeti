@@ -22,7 +22,4 @@ sitemap:
   enabled: true
 
 preprocessors:
-- kind: sass
-  name: sass
-  sass_dir: /source/sass/
-  out_dir: /dist/css/
+- kind: gulp
