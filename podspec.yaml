@@ -37,4 +37,4 @@ preprocessors:
 deployments:
   prod:
     destination: gcs
-    bucket: ballofsnow.org
+    bucket: start.ballofsnow.org
