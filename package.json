@@ -1,0 +1,21 @@
+{
+  "name": "yeti",
+  "version": "0.0.0",
+  "description": "Snowball debt calculator",
+  "homepage": "http://ballofsnow.org",
+  "author": {
+    "name": "Randy Merrill",
+    "email": "Zoramite@gmail.com",
+    "url": "http://forthedeveloper.com"
+  },
+  "keywords": [
+    "debt",
+    "snowball",
+    "calculator",
+    "amortization",
+    "grow"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "private": true
+}

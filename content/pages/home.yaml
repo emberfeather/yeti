@@ -1,0 +1,9 @@
+$title: Home
+$path: /{root}/
+$order: -1
+description: "Yeti: Debt snowball calculator."
+
+partials:
+- partial: /views/partials/hero.html
+  title: Yeti
+  subtitle: Build a debt snowball and fight back.

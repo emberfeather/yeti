@@ -1,0 +1,28 @@
+grow_version: ">=0.0.60"
+home: /content/pages/home.yaml
+root: ""
+
+localization:
+  default_locale: en
+
+title: "Yeti"
+meta:
+  google_analytics_id: "UA-4270246-5"
+  favicon_path: /source/images/favicon.png
+
+static_dirs:
+- static_dir: /dist/
+  serve_at: "/assets/static/"
+  fingerprinted: true
+- static_dir: /source/images/
+  serve_at: "/assets/static/images/"
+  fingerprinted: true
+
+sitemap:
+  enabled: true
+
+preprocessors:
+- kind: sass
+  name: sass
+  sass_dir: /source/sass/
+  out_dir: /dist/css/
