@@ -1,2 +1,5 @@
 view: /views/base.html
 path: /{root}/{base}/
+
+localization:
+  path: /{locale}/{base}/

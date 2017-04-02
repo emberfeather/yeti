@@ -1,0 +1,12 @@
+#: /views/partials/loan.html:7
+msgid "borrowed"
+msgstr ""
+
+#: /views/partials/loan.html:13
+msgid "interest rate"
+msgstr ""
+
+#: /views/partials/loan.html:20
+msgid "minimum payment"
+msgstr ""
+

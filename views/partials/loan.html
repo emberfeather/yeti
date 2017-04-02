@@ -1,0 +1,24 @@
+<!-- <template id="loan-template"> -->
+  <div class="loan" data-format="{{0 | currency(currency=doc.currency)}}">
+    <div class="loan_item">
+      <span class="currency"></span>
+      <label>
+        <input name="principal" placeholder="{{1000 | decimal}}" />
+        {{_('borrowed')}}
+      </label>
+    </div>
+    <div class="loan_item">
+      <label>
+        <input name="rate" placeholder="{{10 | decimal}}" />%
+        {{_('interest rate')}}
+      </label>
+    </div>
+    <div class="loan_item">
+      <span class="currency"></span>
+      <label>
+        <input name="principal" placeholder="{{100 | decimal}}" />
+        {{_('minimum payment')}}
+      </label>
+    </div>
+  </div>
+<!-- </template> -->

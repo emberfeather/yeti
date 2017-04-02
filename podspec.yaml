@@ -4,6 +4,16 @@ root: ""
 
 localization:
   default_locale: en
+  locales:
+  - ar
+  - cs
+  - de
+  - en
+  - es
+  - fr
+  - it
+  - pt
+  - ru
 
 title: "Yeti"
 meta:
@@ -23,3 +33,8 @@ sitemap:
 
 preprocessors:
 - kind: gulp
+
+deployments:
+  prod:
+    destination: gcs
+    bucket: ballofsnow.org
