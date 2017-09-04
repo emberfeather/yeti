@@ -1,26 +1,36 @@
+@import '../mixins/breakpoints'
 @import '../common/config'
 
+*
+  box-sizing: border-box
+
 body
-  background: $color-bg
-  color: $color-text
+  background: $color-secondary-light
+  color: $color-on-secondary
   font-family: $font-family
   line-height: $line-height
-  padding: 0 $padding / 4
+  margin: 0
+  padding: 0
   -webkit-font-smoothing: antialiased
 
+  +md
+    padding: 0 $pad
+
   a
-    color: $color-1
+    color: $color-secondary-dark
+
+h1, h2, h3, h4, h5, h6
+  color: $color-secondary
 
 .wrapper
-  background-color: $color-white
-  box-shadow: $shadow
-  box-sizing: border-box
-  margin: 0 auto
-  max-width: $contained-width
-  padding: $padding
+  display: flex
+  min-height: 100vh
+  flex-flow: column
+
+.block__main
+  flex-grow: 1
 
 @import '../common/button'
-@import '../common/nav'
 @import '../common/modifiers'
 @import '../../../partials/header/header'
 @import '../../../partials/footer/footer'

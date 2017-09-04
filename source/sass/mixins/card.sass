@@ -1,0 +1,12 @@
+@import 'breakpoints'
+@import '../common/config'
+
+@mixin card
+  background: $color-white
+  color: $color-on-primary
+  padding: $pad
+
+  +md
+    box-shadow: $shadow
+    margin: 0 auto
+    max-width: $contained-width
