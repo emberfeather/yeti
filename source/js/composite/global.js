@@ -1,5 +1,5 @@
-import Footer from '../../../partials/footer/footer';
-import Header from '../../../partials/header/header';
+import FooterPartial from '../../../partials/footer/footer';
+import HeaderPartial from '../../../partials/header/header';
 
-new Header({});
-new Footer({});
+new HeaderPartial({});
+new FooterPartial({});

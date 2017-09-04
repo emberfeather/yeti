@@ -109,4 +109,4 @@ gulp.task('watch-sass', function() {
 
 gulp.task('build', ['compile-js', 'compile-sass']);
 gulp.task('grow-build', ['compile-js', 'compile-sass']);
-gulp.task('default', ['compile-js', 'compile-sass', 'watch-js', 'watch-sass']);
+gulp.task('default', ['watch-js', 'watch-sass']);

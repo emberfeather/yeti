@@ -1,3 +1,3 @@
-import Debt from '../../../partials/debt/debt';
+import DebtPartial from '../../../partials/debt/debt';
 
-new Debt({});
+new DebtPartial({});

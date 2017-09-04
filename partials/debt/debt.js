@@ -1,4 +1,4 @@
-export default class Debt {
+export default class DebtPartial {
   constructor(config) {
     this.config = config || {}
 
