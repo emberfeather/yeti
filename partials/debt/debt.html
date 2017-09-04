@@ -1,23 +1,23 @@
 <!-- <template id="debt-template"> -->
-  <div class="debt" data-currency="{{doc.currency}}" data-format="{{0 | currency(currency=doc.currency)}}">
+  <div class="debt" data-currency="{{doc.currency}}">
     <div class="debt_item">
       <span class="currency"></span>
       <label>
-        <input name="principal" placeholder="{{1000 | decimal}}" />
-        {{_('borrowed')}}
+        <input name="principal" placeholder="{{_('Principal Balance')}}" />
+        {{_('Borrowed')}}
       </label>
     </div>
     <div class="debt_item">
       <label>
-        <input name="rate" placeholder="{{10 | decimal}}" />%
-        {{_('interest rate')}}
+        <input name="rate" placeholder="{{_('Interest Rate')}}" />%
+        {{_('Interest Rate')}}
       </label>
     </div>
     <div class="debt_item">
       <span class="currency"></span>
       <label>
-        <input name="principal" placeholder="{{100 | decimal}}" />
-        {{_('minimum payment')}}
+        <input name="principal" placeholder="{{_('Minimum Payment')}}" />
+        {{_('Minimum Payment')}}
       </label>
     </div>
   </div>
