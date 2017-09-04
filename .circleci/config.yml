@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/grow
+    docker:
+      - image: grow/baseimage:latest
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - grow-cache-{{ .Branch }}-{{ checksum "package.json" }}
+            - grow-cache-{{ .Branch }}
+            - grow-cache
+
+      - run:
+          name: Grow Intall
+          command: grow install
+
+      - save_cache:
+          key: grow-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - extensions
+            - node_modules
+
+      - save_cache:
+          key: grow-cache-{{ .Branch }}
+          paths:
+            - extensions
+            - node_modules
+
+      - save_cache:
+          key: grow-cache
+          paths:
+            - extensions
+            - node_modules
+
+      - run:
+        name: Test Build
+        command: grow build

@@ -1,9 +1,15 @@
-$title: Home
+$title: Yeti
 $path: /
 $order: -1
 description: "Yeti: Debt snowball calculator."
+$localization:
+  path: /{locale}/
+
+composite_files:
+- home
 
 currency: USD
+currency@ru: RUB
 
 partials:
-- partial: /views/partials/loan.html
+- partial: debt

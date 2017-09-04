@@ -1,5 +1,6 @@
 <!-- <template id="loan-template"> -->
   <div class="loan" data-format="{{0 | currency(currency=doc.currency)}}">
+    {{partial.class}}
     <div class="loan_item">
       <span class="currency"></span>
       <label>
@@ -22,3 +23,6 @@
     </div>
   </div>
 <!-- </template> -->
+
+<div class="loans"></div>
+<div class="loans__add">{{_('Add another debt')}}</div>

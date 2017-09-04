@@ -1,8 +1,8 @@
-grow_version: ">=0.0.60"
+grow_version: ">=0.2.5"
 home: /content/pages/home.yaml
-root: ""
 
 localization:
+  path: /{locale}/{base}/
   default_locale: en
   locales:
   - ar
@@ -18,21 +18,24 @@ localization:
 title: "Yeti"
 meta:
   google_analytics_id: "UA-4270246-5"
-  favicon_path: /source/images/favicon.png
+  favicon_path: /static/images/favicon.png
+
+preprocessors:
+- kind: gulp
+  build_task: grow-build
 
 static_dirs:
-- static_dir: /dist/
-  serve_at: "/assets/static/"
+- static_dir: /static/
+  serve_at: /static/
+- static_dir: /dist/css/
+  serve_at: /css/
   fingerprinted: true
-- static_dir: /source/images/
-  serve_at: "/assets/static/images/"
+- static_dir: /dist/js/
+  serve_at: /js/
   fingerprinted: true
 
 sitemap:
   enabled: true
-
-preprocessors:
-- kind: gulp
 
 deployments:
   prod:

@@ -22,7 +22,56 @@
     {% if podspec.meta.favicon_path %}
     <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
     {% endif %}
-    <link rel="stylesheet" href="{{g.static('/dist/css/main.min.css').url.path}}">
+
+    <link href="{{ g.static('/dist/css/composite/global.min.css').url.path }}" rel="stylesheet">
+    {% set compositeCssFiles = [doc.view|replace('.html', '')] %}
+    {% set compositeCssFiles = compositeCssFiles + (doc.composite_files if doc.composite_files else []) %}
+    {% for compositeCssFile in compositeCssFiles %}
+      {% if not compositeCssFile.startswith('/') %}
+        {% set compositeCssFile = '/' ~ compositeCssFile %}
+      {% endif %}
+      {% set viewCssFile = '/dist/css/composite' ~ compositeCssFile ~ '.min.css' %}
+      {% if doc.pod.file_exists(viewCssFile) %}
+        <link href="{{ g.static(viewCssFile).url.path }}" rel="stylesheet">
+      {% endif %}
+    {% endfor %}
+  </head>
+  <body>
+    {% include "/partials/header/header.html" %}
+    <div class="wrapper">
+      {% block main %}
+        {% if doc.partials %}
+          {% for field in doc.partials %}
+            {% if not field.partial %}
+              {% continue %}
+            {% endif %}
+
+            {# Render the partial with the values in {{partial}}. #}
+            {% set partial_filename = field.partial|expand_partial %}
+            {% with partial = field %}
+              {% include partial_filename with context %}
+            {% endwith %}
+          {% endfor %}
+        {% else %}
+          {{doc.html|safe}}
+        {% endif %}
+      {% endblock %}
+    </div>
+    {% include "/partials/footer/footer.html" %}
+
+    <script src="{{ g.static('/dist/js/composite/global.min.js').url.path }}"></script>
+    {% set compositeJsFiles = [doc.view|replace('.html', '')] %}
+    {% set compositeJsFiles = compositeJsFiles + (doc.composite_files if doc.composite_files else []) %}
+    {% for compositeJsFile in compositeJsFiles %}
+      {% if not compositeJsFile.startswith('/') %}
+        {% set compositeJsFile = '/' ~ compositeJsFile %}
+      {% endif %}
+      {% set viewJsFile = '/dist/js/composite' ~ compositeJsFile ~ '.min.js' %}
+      {% if doc.pod.file_exists(viewJsFile) %}
+        <script src="{{ g.static(viewJsFile).url.path }}"></script>
+      {% endif %}
+    {% endfor %}
+
     {% if podspec.meta.google_analytics_id %}
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -33,23 +82,5 @@
         ga('send', 'pageview');
       </script>
     {% endif %}
-  </head>
-  <body>
-    {% include "/views/_header.html" %}
-    <div class="main">
-      {% block main %}
-        {% if doc.partials %}
-          {% for partial in doc.partials %}
-            {% if not partial.partial %}{% continue %}{% endif %}
-            {% include partial.partial with context %}
-          {% endfor %}
-        {% else %}
-          {{doc.html|safe}}
-        {% endif %}
-      {% endblock %}
-    </div>
-    {% include "/views/_footer.html" %}
-
-    <script src="{{ g.static('/dist/js/yeti.min.js').url.path }}"></script
   </body>
 </html>

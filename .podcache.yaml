@@ -1,0 +1,18 @@
+dependencies:
+  /content/pages/home.yaml:
+  - /content/pages/home.yaml
+  - /dist/css/composite/global.min.css
+  - /dist/css/composite/home.min.css
+  - /dist/css/main.min.css
+  - /dist/js/composite/global.min.js
+  - /dist/js/composite/home.min.js
+  - /dist/js/yeti.min.js
+  - /partials/debt/debt.html
+  - /partials/footer/footer.html
+  - /partials/header/header.html
+  - /source/images/favicon.png
+  - /static/images/favicon.png
+  - /views/_footer.html
+  - /views/_header.html
+  - /views/partials/loan.html
+objects: {}
