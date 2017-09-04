@@ -1,27 +1,29 @@
-<!-- <template id="debt-template"> -->
-  <div class="debt" data-currency="{{doc.currency}}">
-    <div class="debt_item">
-      <span class="currency"></span>
-      <label>
-        <input name="principal" placeholder="{{_('Principal Balance')}}" />
-        {{_('Borrowed')}}
-      </label>
+<div class="debt">
+  <template id="debt-template">
+    <div class="debt__item">
+      <div class="debt__input">
+        <span class="currency"></span>
+        <label>
+          {{_('Borrowed')}}
+          <input name="principal" placeholder="{{_('Principal Balance')}}" />
+        </label>
+      </div>
+      <div class="debt__input">
+        <label>
+          {{_('Interest Rate')}}
+          <input name="rate" placeholder="{{_('Interest Rate')}}" />%
+        </label>
+      </div>
+      <div class="debt__input">
+        <span class="currency"></span>
+        <label>
+          {{_('Minimum Payment')}}
+          <input name="principal" placeholder="{{_('Minimum Payment')}}" />
+        </label>
+      </div>
     </div>
-    <div class="debt_item">
-      <label>
-        <input name="rate" placeholder="{{_('Interest Rate')}}" />%
-        {{_('Interest Rate')}}
-      </label>
-    </div>
-    <div class="debt_item">
-      <span class="currency"></span>
-      <label>
-        <input name="principal" placeholder="{{_('Minimum Payment')}}" />
-        {{_('Minimum Payment')}}
-      </label>
-    </div>
-  </div>
-<!-- </template> -->
+  </template>
 
-<div class="debts"></div>
-<div class="debts__add">{{_('Add another debt')}}</div>
+  <div class="debt__list"></div>
+  <div class="debt__add"><a href="#">+ {{_('Add another debt')}}</a></div>
+</div>

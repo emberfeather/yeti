@@ -1,7 +1,16 @@
+@import '../../source/sass/common/config'
 @import '../../source/sass/mixins/card'
 
-.debt
+.debt__item
   +card
+  margin-bottom: $pad
 
-.debts__add
+.debt__input
+  margin: $pad/2 0
+
+.debt__add
   margin: $pad
+
+  a
+    color: $color-primary-dark
+    text-decoration: none
