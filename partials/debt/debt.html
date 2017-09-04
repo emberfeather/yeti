@@ -1,20 +1,20 @@
-<!-- <template id="loan-template"> -->
-  <div class="loan" data-format="{{0 | currency(currency=doc.currency)}}">
+<!-- <template id="debt-template"> -->
+  <div class="debt" data-format="{{0 | currency(currency=doc.currency)}}">
     {{partial.class}}
-    <div class="loan_item">
+    <div class="debt_item">
       <span class="currency"></span>
       <label>
         <input name="principal" placeholder="{{1000 | decimal}}" />
         {{_('borrowed')}}
       </label>
     </div>
-    <div class="loan_item">
+    <div class="debt_item">
       <label>
         <input name="rate" placeholder="{{10 | decimal}}" />%
         {{_('interest rate')}}
       </label>
     </div>
-    <div class="loan_item">
+    <div class="debt_item">
       <span class="currency"></span>
       <label>
         <input name="principal" placeholder="{{100 | decimal}}" />
@@ -24,5 +24,5 @@
   </div>
 <!-- </template> -->
 
-<div class="loans"></div>
-<div class="loans__add">{{_('Add another debt')}}</div>
+<div class="debts"></div>
+<div class="debts__add">{{_('Add another debt')}}</div>
