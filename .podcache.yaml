@@ -1,5 +1,6 @@
 dependencies:
   /content/pages/home.yaml:
+  - /content/partials/footer.yaml
   - /dist/css/composite/global.min.css
   - /dist/css/composite/home.min.css
   - /dist/js/composite/global.min.js
