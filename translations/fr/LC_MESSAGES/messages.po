@@ -10,6 +10,10 @@ msgstr ""
 msgid "Borrowed"
 msgstr ""
 
+#: /content/pages/home.yaml
+msgid "Debt snowball calculator."
+msgstr ""
+
 #: /partials/debt/debt.html:13 /partials/debt/debt.html:14
 msgid "Interest Rate"
 msgstr ""
@@ -28,6 +32,10 @@ msgstr ""
 
 #: /content/partials/footer.yaml
 msgid "Used with permission."
+msgstr ""
+
+#: /content/pages/home.yaml
+msgid "Yeti"
 msgstr ""
 
 #: /content/partials/footer.yaml

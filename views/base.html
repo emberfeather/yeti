@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{doc.locale}}">
+<html lang="{{doc.locale}}"{% if doc.fields.get('$localization') and doc.fields.get('$localization').rtl %} dir="rtl"{% endif %}>
   <head>
     <meta charset="utf-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -36,7 +36,7 @@
       {% endif %}
     {% endfor %}
   </head>
-  <body>
+  <body data-currency="{{doc.currency}}">
     <div class="wrapper">
       {% include "/partials/header/header.html" %}
       <div class="block__main">

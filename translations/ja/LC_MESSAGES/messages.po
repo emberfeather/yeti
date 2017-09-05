@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-05 10:18-0600\n"
+"POT-Creation-Date: 2017-09-05 10:32-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -27,6 +27,10 @@ msgstr "示された数字はすべて例示のためのものです。"
 msgid "Borrowed"
 msgstr "借りたお金"
 
+#: /content/pages/home.yaml
+msgid "Debt snowball calculator."
+msgstr "借金雪玉の計算機。"
+
 #: /partials/debt/debt.html:13 /partials/debt/debt.html:14
 msgid "Interest Rate"
 msgstr "金利"
@@ -46,6 +50,10 @@ msgstr "元本残高"
 #: /content/partials/footer.yaml
 msgid "Used with permission."
 msgstr "許可を得て使用します。"
+
+#: /content/pages/home.yaml
+msgid "Yeti"
+msgstr "イエティ"
 
 #: /content/partials/footer.yaml
 msgid "Yeti powered."
