@@ -1,6 +1,14 @@
 @import '../../source/sass/common/config'
 @import '../../source/sass/mixins/card'
 
+.debt__list
+  +md
+    align-items: flex-start
+    display: flex
+    flex-flow: row
+    flex-wrap: wrap
+    justify-content: space-around
+
 .debt__item
   +card
   margin-bottom: $pad
@@ -9,8 +17,11 @@
   margin: $pad/2 0
 
 .debt__add
+  background: $color-secondary
   margin: $pad
 
   a
-    color: $color-primary-dark
+    color: $color-on-secondary
+    display: block
+    padding: $pad
     text-decoration: none

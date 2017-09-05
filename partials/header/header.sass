@@ -1,8 +1,14 @@
 @import '../../source/sass/common/config'
 
 .header
-  max-width: $contained-width
-  margin: $pad $pad $pad / 2
+  align-items: center
+  display: flex
+  flex-flow: row
+  justify-content: space-between
+  padding: $pad $pad $pad / 2
+
+  h1, h2
+    line-height: 1rem
 
   a
     color: $color-on-secondary

@@ -1,9 +1,14 @@
 @import '../../source/sass/common/config'
 
 .footer
-  background: $color-secondary
   font-size: .9rem
   padding: $pad / 2 $pad
+
+  +md
+    display: flex
+    flex-flow: row
+    flex-wrap: wrap
+    justify-content: space-between
 
   a
     color: $color-on-secondary
