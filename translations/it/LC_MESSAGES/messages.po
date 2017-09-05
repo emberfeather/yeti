@@ -1,9 +1,29 @@
+#: /partials/debt/debt.html:28
+msgid "Add another debt"
+msgstr ""
+
 #: /content/partials/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
 msgstr ""
 
+#: /partials/debt/debt.html:7
+msgid "Borrowed"
+msgstr ""
+
+#: /partials/debt/debt.html:13 /partials/debt/debt.html:14
+msgid "Interest Rate"
+msgstr ""
+
 #: /content/partials/footer.yaml
 msgid "King of the Castle © 2010 David Lanham."
+msgstr ""
+
+#: /partials/debt/debt.html:20 /partials/debt/debt.html:21
+msgid "Minimum Payment"
+msgstr ""
+
+#: /partials/debt/debt.html:8
+msgid "Principal Balance"
 msgstr ""
 
 #: /content/partials/footer.yaml
