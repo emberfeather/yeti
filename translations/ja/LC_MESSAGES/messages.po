@@ -1,36 +1,53 @@
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-09-05 10:18-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
 #: /partials/debt/debt.html:28
 msgid "Add another debt"
-msgstr ""
+msgstr "別の債務を追加する"
 
 #: /content/partials/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
-msgstr ""
+msgstr "示された数字はすべて例示のためのものです。"
 
 #: /partials/debt/debt.html:7
 msgid "Borrowed"
-msgstr ""
+msgstr "借りたお金"
 
 #: /partials/debt/debt.html:13 /partials/debt/debt.html:14
 msgid "Interest Rate"
-msgstr ""
+msgstr "金利"
 
 #: /content/partials/footer.yaml
 msgid "King of the Castle © 2010 David Lanham."
-msgstr ""
+msgstr "城の王©2010デビッド・ランハム"
 
 #: /partials/debt/debt.html:20 /partials/debt/debt.html:21
 msgid "Minimum Payment"
-msgstr ""
+msgstr "最低支払額"
 
 #: /partials/debt/debt.html:8
 msgid "Principal Balance"
-msgstr ""
+msgstr "元本残高"
 
 #: /content/partials/footer.yaml
 msgid "Used with permission."
-msgstr ""
+msgstr "許可を得て使用します。"
 
 #: /content/partials/footer.yaml
 msgid "Yeti powered."
-msgstr ""
+msgstr "イエティパワー。"
 
