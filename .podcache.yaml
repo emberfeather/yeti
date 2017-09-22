@@ -6,7 +6,10 @@ dependencies:
   - /dist/js/composite/global.min.js
   - /dist/js/composite/home.min.js
   - /partials/debt/debt.html
+  - /partials/footer.yaml
   - /partials/footer/footer.html
+  - /partials/footer/footer.yaml
   - /partials/header/header.html
+  - /partials/header/header.yaml
   - /static/images/favicon.png
 objects: {}

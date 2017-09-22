@@ -38,7 +38,7 @@
   </head>
   <body data-currency="{{doc.currency}}">
     <div class="wrapper">
-      {% include "/partials/header/header.html" %}
+      {% include '/partials/header/header.html' %}
       <div class="block__main">
         {% block main %}
           {% if doc.partials %}
@@ -58,7 +58,9 @@
           {% endif %}
         {% endblock %}
       </div>
-      {% include "/partials/footer/footer.html" %}
+      {% with partial = g.yaml('/partials/footer/footer.yaml') %}
+        {% include '/partials/footer/footer.html' with context %}
+      {% endwith %}
     </div>
 
     <script src="{{ g.static('/dist/js/composite/global.min.js').url.path }}"></script>
