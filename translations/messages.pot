@@ -2,8 +2,8 @@
 msgid "Add another debt"
 msgstr ""
 
-#: /content/partials/footer.yaml
-msgid "All numbers shown are for illustration purposes only."
+#: /partials/payment/payment.html:3
+msgid "Available monthly for debt repayment"
 msgstr ""
 
 #: /partials/debt/debt.html:7
@@ -18,27 +18,15 @@ msgstr ""
 msgid "Interest Rate"
 msgstr ""
 
-#: /content/partials/footer.yaml
-msgid "King of the Castle © 2010 David Lanham."
-msgstr ""
-
 #: /partials/debt/debt.html:20 /partials/debt/debt.html:21
 msgid "Minimum Payment"
 msgstr ""
 
-#: /partials/debt/debt.html:8
+#: /partials/debt/debt.html:8 /partials/payment/payment.html:4
 msgid "Principal Balance"
-msgstr ""
-
-#: /content/partials/footer.yaml
-msgid "Used with permission."
 msgstr ""
 
 #: /content/pages/home.yaml
 msgid "Yeti"
-msgstr ""
-
-#: /content/partials/footer.yaml
-msgid "Yeti powered."
 msgstr ""
 

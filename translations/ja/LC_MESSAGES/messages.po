@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-05 10:32-0600\n"
+"POT-Creation-Date: 2017-09-22 18:30-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -19,9 +19,9 @@ msgstr ""
 msgid "Add another debt"
 msgstr "別の債務を追加する"
 
-#: /content/partials/footer.yaml
-msgid "All numbers shown are for illustration purposes only."
-msgstr "示された数字はすべて例示のためのものです。"
+#: /partials/payment/payment.html:3
+msgid "Available monthly for debt repayment"
+msgstr "債務返済のために毎月利用可能"
 
 #: /partials/debt/debt.html:7
 msgid "Borrowed"
@@ -35,27 +35,15 @@ msgstr "借金雪玉の計算機。"
 msgid "Interest Rate"
 msgstr "金利"
 
-#: /content/partials/footer.yaml
-msgid "King of the Castle © 2010 David Lanham."
-msgstr "城の王©2010デビッド・ランハム"
-
 #: /partials/debt/debt.html:20 /partials/debt/debt.html:21
 msgid "Minimum Payment"
 msgstr "最低支払額"
 
-#: /partials/debt/debt.html:8
+#: /partials/debt/debt.html:8 /partials/payment/payment.html:4
 msgid "Principal Balance"
 msgstr "元本残高"
-
-#: /content/partials/footer.yaml
-msgid "Used with permission."
-msgstr "許可を得て使用します。"
 
 #: /content/pages/home.yaml
 msgid "Yeti"
 msgstr "イエティ"
-
-#: /content/partials/footer.yaml
-msgid "Yeti powered."
-msgstr "イエティパワー。"
 

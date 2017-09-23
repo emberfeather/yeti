@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-05 10:32-0600\n"
+"POT-Creation-Date: 2017-09-22 18:30-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -20,9 +20,9 @@ msgstr ""
 msgid "Add another debt"
 msgstr "إضافة ديون أخرى"
 
-#: /content/partials/footer.yaml
-msgid "All numbers shown are for illustration purposes only."
-msgstr "جميع الأرقام المعروضة هي لأغراض التوضيح فقط."
+#: /partials/payment/payment.html:3
+msgid "Available monthly for debt repayment"
+msgstr "متاح شهريا لسداد الديون"
 
 #: /partials/debt/debt.html:7
 msgid "Borrowed"
@@ -36,27 +36,15 @@ msgstr "آلة حاسبة الديون الثلج."
 msgid "Interest Rate"
 msgstr "سعر الفائدة"
 
-#: /content/partials/footer.yaml
-msgid "King of the Castle © 2010 David Lanham."
-msgstr "ملك القلعة © 2010 ديفيد لانهام."
-
 #: /partials/debt/debt.html:20 /partials/debt/debt.html:21
 msgid "Minimum Payment"
 msgstr "الحد الأدنى للدفع"
 
-#: /partials/debt/debt.html:8
+#: /partials/debt/debt.html:8 /partials/payment/payment.html:4
 msgid "Principal Balance"
 msgstr "الرصيد الرئيسي"
-
-#: /content/partials/footer.yaml
-msgid "Used with permission."
-msgstr "تستخدم بإذن."
 
 #: /content/pages/home.yaml
 msgid "Yeti"
 msgstr "اليتي"
-
-#: /content/partials/footer.yaml
-msgid "Yeti powered."
-msgstr "اليتي بالطاقة."
 
