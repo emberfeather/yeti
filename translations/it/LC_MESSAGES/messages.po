@@ -27,7 +27,11 @@ msgstr ""
 msgid "Minimum Payment"
 msgstr ""
 
-#: /partials/debt/debt.html:4 /partials/payment/payment.html:4
+#: /partials/payment/payment.html:4
+msgid "Monthly Payment"
+msgstr ""
+
+#: /partials/debt/debt.html:4
 msgid "Principal Balance"
 msgstr ""
 
