@@ -1,36 +1,49 @@
-#: /partials/debt/debt.html:28
+#: /partials/debt/debt.html:23
 msgid "Add another debt"
+msgstr ""
+
+#: /partials/footer/footer.yaml
+msgid "All numbers shown are for illustration purposes only."
 msgstr ""
 
 #: /partials/payment/payment.html:3
 msgid "Available monthly for debt repayment"
 msgstr ""
 
-#: /partials/debt/debt.html:7
-msgid "Borrowed"
+#: /partials/debt/debt.html:12
+#, python-format
+msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
 msgstr ""
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
 msgstr ""
 
-#: /partials/debt/debt.html:13
-msgid "Interest Rate"
+#: /partials/footer/footer.yaml
+msgid "King of the Castle © 2010 David Lanham."
 msgstr ""
 
-#: /partials/debt/debt.html:20 /partials/debt/debt.html:21
+#: /partials/debt/debt.html:10
 msgid "Minimum Payment"
 msgstr ""
 
-#: /partials/debt/debt.html:8 /partials/payment/payment.html:4
+#: /partials/debt/debt.html:4 /partials/payment/payment.html:4
 msgid "Principal Balance"
 msgstr ""
 
-#: /partials/debt/debt.html:14
+#: /partials/debt/debt.html:7
 msgid "Rate"
+msgstr ""
+
+#: /partials/footer/footer.yaml
+msgid "Used with permission."
 msgstr ""
 
 #: /content/pages/home.yaml
 msgid "Yeti"
+msgstr ""
+
+#: /partials/footer/footer.yaml
+msgid "Yeti powered."
 msgstr ""
 

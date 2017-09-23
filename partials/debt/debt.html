@@ -1,26 +1,21 @@
 <div class="debt">
   <template id="debt-template">
+    {% set input_principal %}
+      <input type="number" name="principal" placeholder="{{_('Principal Balance')}}" step="0.01" />
+    {% endset %}
+    {% set input_rate %}
+      <input type="number" name="rate" placeholder="{{_('Rate')}}" step="0.01" />
+    {% endset %}
+    {% set input_min_payment %}
+      <input type="number" name="min_payment" placeholder="{{_('Minimum Payment')}}" step="0.01" />
+    {% endset %}
+    {% set debt_desc = _('Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment.') %}
+    {% set debt_desc = debt_desc | re_replace('((\d)+[\.,]\d+)', '{\\2}') %}
+    {% set debt_desc = debt_desc | replace('{1}', input_principal) %}
+    {% set debt_desc = debt_desc | replace('{2}', input_rate) %}
+    {% set debt_desc = debt_desc | replace('{3}', input_min_payment) %}
     <div class="debt__item">
-      <div class="debt__input">
-        <span class="currency"></span>
-        <label>
-          {{_('Borrowed')}}
-          <input type="number" name="principal" placeholder="{{_('Principal Balance')}}" step="0.01" />
-        </label>
-      </div>
-      <div class="debt__input">
-        <label>
-          {{_('Interest Rate')}}
-          <input type="number" name="rate" placeholder="{{_('Rate')}}" step="0.01" />%
-        </label>
-      </div>
-      <div class="debt__input">
-        <span class="currency"></span>
-        <label>
-          {{_('Minimum Payment')}}
-          <input type="number" name="min_payment" placeholder="{{_('Minimum Payment')}}" step="0.01" />
-        </label>
-      </div>
+      {{debt_desc}}
     </div>
   </template>
 

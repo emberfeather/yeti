@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-23 08:12-0600\n"
+"POT-Creation-Date: 2017-09-23 11:17-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -16,39 +16,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: /partials/debt/debt.html:28
+#: /partials/debt/debt.html:23
 msgid "Add another debt"
 msgstr "إضافة ديون أخرى"
+
+#: /partials/footer/footer.yaml
+msgid "All numbers shown are for illustration purposes only."
+msgstr "جميع الأرقام المعروضة هي لأغراض التوضيح فقط."
 
 #: /partials/payment/payment.html:3
 msgid "Available monthly for debt repayment"
 msgstr "متاح شهريا لسداد الديون"
 
-#: /partials/debt/debt.html:7
-msgid "Borrowed"
-msgstr "اقترضت، استعارت"
+#: /partials/debt/debt.html:12
+#, python-format
+msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
+msgstr "تم اقتراض 1.11 درهم بنسبة 2.2٪ مع 3.33 درهم الحد الأدنى للدفع."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
 msgstr "آلة حاسبة الديون الثلج."
 
-#: /partials/debt/debt.html:13
-msgid "Interest Rate"
-msgstr "سعر الفائدة"
+#: /partials/footer/footer.yaml
+msgid "King of the Castle © 2010 David Lanham."
+msgstr "ملك القلعة © 2010 ديفيد لانهام."
 
-#: /partials/debt/debt.html:20 /partials/debt/debt.html:21
+#: /partials/debt/debt.html:10
 msgid "Minimum Payment"
 msgstr "الحد الأدنى للدفع"
 
-#: /partials/debt/debt.html:8 /partials/payment/payment.html:4
+#: /partials/debt/debt.html:4 /partials/payment/payment.html:4
 msgid "Principal Balance"
 msgstr "الرصيد الرئيسي"
 
-#: /partials/debt/debt.html:14
+#: /partials/debt/debt.html:7
 msgid "Rate"
 msgstr "معدل"
+
+#: /partials/footer/footer.yaml
+msgid "Used with permission."
+msgstr "تستخدم بإذن."
 
 #: /content/pages/home.yaml
 msgid "Yeti"
 msgstr "اليتي"
+
+#: /partials/footer/footer.yaml
+msgid "Yeti powered."
+msgstr "اليتي بالطاقة."
 

@@ -12,6 +12,8 @@ composite_files:
 - home
 
 currency: USD
+currency@ar: AED
+currency@ja: JPY
 currency@ru: RUB
 
 partials:
