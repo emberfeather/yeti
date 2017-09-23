@@ -11,5 +11,6 @@ dependencies:
   - /partials/footer/footer.yaml
   - /partials/header/header.html
   - /partials/header/header.yaml
+  - /partials/payment/payment.html
   - /static/images/favicon.png
 objects: {}

@@ -16,3 +16,4 @@ currency@ru: RUB
 
 partials:
 - partial: debt
+- partial: payment
