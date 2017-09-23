@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-22 18:30-0600\n"
+"POT-Creation-Date: 2017-09-23 08:12-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -32,7 +32,7 @@ msgstr "اقترضت، استعارت"
 msgid "Debt snowball calculator."
 msgstr "آلة حاسبة الديون الثلج."
 
-#: /partials/debt/debt.html:13 /partials/debt/debt.html:14
+#: /partials/debt/debt.html:13
 msgid "Interest Rate"
 msgstr "سعر الفائدة"
 
@@ -43,6 +43,10 @@ msgstr "الحد الأدنى للدفع"
 #: /partials/debt/debt.html:8 /partials/payment/payment.html:4
 msgid "Principal Balance"
 msgstr "الرصيد الرئيسي"
+
+#: /partials/debt/debt.html:14
+msgid "Rate"
+msgstr "معدل"
 
 #: /content/pages/home.yaml
 msgid "Yeti"

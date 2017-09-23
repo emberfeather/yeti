@@ -14,7 +14,7 @@ msgstr ""
 msgid "Debt snowball calculator."
 msgstr ""
 
-#: /partials/debt/debt.html:13 /partials/debt/debt.html:14
+#: /partials/debt/debt.html:13
 msgid "Interest Rate"
 msgstr ""
 
@@ -24,6 +24,10 @@ msgstr ""
 
 #: /partials/debt/debt.html:8 /partials/payment/payment.html:4
 msgid "Principal Balance"
+msgstr ""
+
+#: /partials/debt/debt.html:14
+msgid "Rate"
 msgstr ""
 
 #: /content/pages/home.yaml
