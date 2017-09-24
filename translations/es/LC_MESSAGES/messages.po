@@ -1,53 +1,70 @@
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-09-24 10:48-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
 #: /partials/debt/debt.html:23
 msgid "Add another debt"
-msgstr ""
+msgstr "Añadir otra deuda"
 
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
-msgstr ""
+msgstr "Todos los números mostrados son sólo con fines ilustrativos."
 
 #: /partials/payment/payment.html:3
 msgid "Available monthly for debt repayment"
-msgstr ""
+msgstr "Disponible mensualmente para el pago de la deuda"
 
 #: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
-msgstr ""
+msgstr "Prestó $ 1.11 a un interés de 2.2 %% con un pago mínimo de $ 3.33."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
-msgstr ""
+msgstr "Calculadora de la bola de nieve de la deuda."
 
 #: /partials/footer/footer.yaml
 msgid "King of the Castle © 2010 David Lanham."
-msgstr ""
+msgstr "Rey del Castillo © 2010 David Lanham."
 
 #: /partials/debt/debt.html:10
 msgid "Minimum Payment"
-msgstr ""
+msgstr "Pago Mínimo"
 
 #: /partials/payment/payment.html:4
 msgid "Monthly Payment"
-msgstr ""
+msgstr "Mensualidad"
 
 #: /partials/debt/debt.html:4
 msgid "Principal Balance"
-msgstr ""
+msgstr "Saldo Principal"
 
 #: /partials/debt/debt.html:7
 msgid "Rate"
-msgstr ""
+msgstr "Precio"
 
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
-msgstr ""
+msgstr "Se utiliza con permiso."
 
 #: /content/pages/home.yaml
 msgid "Yeti"
-msgstr ""
+msgstr "Yeti"
 
 #: /partials/footer/footer.yaml
 msgid "Yeti powered."
-msgstr ""
+msgstr "Yeti alimentado."
 

@@ -1,53 +1,70 @@
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-09-24 10:48-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: it\n"
+"Language-Team: it <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
 #: /partials/debt/debt.html:23
 msgid "Add another debt"
-msgstr ""
+msgstr "Aggiungi un altro debito"
 
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
-msgstr ""
+msgstr "Tutti i numeri indicati sono solo a scopo illustrativo."
 
 #: /partials/payment/payment.html:3
 msgid "Available monthly for debt repayment"
-msgstr ""
+msgstr "Disponibili mensilmente per il rimborso del debito"
 
 #: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
-msgstr ""
+msgstr "Finanziato € 1,11 al 2,2 %% interessi con un pagamento minimo di € 3,33."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
-msgstr ""
+msgstr "Calcolatore di snowball di debito."
 
 #: /partials/footer/footer.yaml
 msgid "King of the Castle © 2010 David Lanham."
-msgstr ""
+msgstr "Re del Castello © 2010 David Lanham."
 
 #: /partials/debt/debt.html:10
 msgid "Minimum Payment"
-msgstr ""
+msgstr "Pagamento Minimo"
 
 #: /partials/payment/payment.html:4
 msgid "Monthly Payment"
-msgstr ""
+msgstr "Pagamento Mensile"
 
 #: /partials/debt/debt.html:4
 msgid "Principal Balance"
-msgstr ""
+msgstr "Bilancio Principale"
 
 #: /partials/debt/debt.html:7
 msgid "Rate"
-msgstr ""
+msgstr "Prezzo"
 
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
-msgstr ""
+msgstr "Usato con autorizzazione."
 
 #: /content/pages/home.yaml
 msgid "Yeti"
-msgstr ""
+msgstr "Yeti"
 
 #: /partials/footer/footer.yaml
 msgid "Yeti powered."
-msgstr ""
+msgstr "Yeti alimentato."
 

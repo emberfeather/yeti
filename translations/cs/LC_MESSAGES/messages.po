@@ -1,53 +1,70 @@
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-09-24 10:48-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: cs\n"
+"Language-Team: cs <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
 #: /partials/debt/debt.html:23
 msgid "Add another debt"
-msgstr ""
+msgstr "Přidat další dluh"
 
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
-msgstr ""
+msgstr "Všechna uvedená čísla jsou pouze ilustrační."
 
 #: /partials/payment/payment.html:3
 msgid "Available monthly for debt repayment"
-msgstr ""
+msgstr "K dispozici měsíčně pro splácení dluhu"
 
 #: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
-msgstr ""
+msgstr "Vypůjčeno 1,11 Kč za 2,2 %% s minimem 3,33 Kč."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
-msgstr ""
+msgstr "Dluhová kalkulačka."
 
 #: /partials/footer/footer.yaml
 msgid "King of the Castle © 2010 David Lanham."
-msgstr ""
+msgstr "Král hradu © 2010 David Lanham."
 
 #: /partials/debt/debt.html:10
 msgid "Minimum Payment"
-msgstr ""
+msgstr "Minimální Platba"
 
 #: /partials/payment/payment.html:4
 msgid "Monthly Payment"
-msgstr ""
+msgstr "Měsíční Platba"
 
 #: /partials/debt/debt.html:4
 msgid "Principal Balance"
-msgstr ""
+msgstr "Hlavní Bilance"
 
 #: /partials/debt/debt.html:7
 msgid "Rate"
-msgstr ""
+msgstr "Zdanit"
 
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
-msgstr ""
+msgstr "Používá se s povolením."
 
 #: /content/pages/home.yaml
 msgid "Yeti"
-msgstr ""
+msgstr "Yeti"
 
 #: /partials/footer/footer.yaml
 msgid "Yeti powered."
-msgstr ""
+msgstr "Yeti poháněl."
 
