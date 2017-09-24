@@ -1,5 +1,7 @@
 # Yeti
 
+![Circle CI](https://circleci.com/gh/emberfeather/yeti.png)
+
 Simple snowball debt calculator for illustrating faster debt repayment.
 
 This project is an exercise in the following:
