@@ -9,10 +9,13 @@
 
 .debt__item
   +card
-  margin: 0 $pad $pad $pad
+  display: flex
+  flex-flow: row
   flex-grow: 1
+  margin: 0 $pad $pad $pad
 
 .debt__input
+  flex-grow: 1
   margin: $pad/2 0
 
   input[name="principal"]
@@ -33,3 +36,12 @@
     display: block
     padding: $pad
     text-decoration: none
+
+.debt__remove
+  i
+    color: transparentize($color-on-secondary, .5)
+    cursor: pointer
+    transition: background-color $speed-slow ease-in-out
+
+    &:hover
+      color: $color-on-secondary

@@ -22,6 +22,7 @@
     {% if podspec.meta.favicon_path %}
     <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
     {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Convergence|Montez" rel="stylesheet">
     <link href="{{ g.static('/dist/css/composite/global.min.css').url.path }}" rel="stylesheet">
     {% set compositeCssFiles = [doc.view|replace('.html', '')] %}

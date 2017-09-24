@@ -18,6 +18,20 @@ export default class DebtPartial {
     }
 
     const currentDebt = document.importNode(this.elTemplateDebt.content, true)
+    new DebtItem(currentDebt.querySelector('.debt__item'))
     this.elDebtList.appendChild(currentDebt)
+  }
+}
+
+class DebtItem {
+  constructor(el) {
+    this.elContainer = el
+
+    this.elRemove = this.elContainer.querySelector('.debt__remove')
+    this.elRemove.addEventListener('click', this.removeDebt.bind(this))
+  }
+
+  removeDebt() {
+    this.elContainer.remove();
   }
 }
