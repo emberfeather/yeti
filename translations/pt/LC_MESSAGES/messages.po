@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-24 10:35-0600\n"
+"POT-Creation-Date: 2017-09-24 12:27-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt\n"
@@ -30,7 +30,7 @@ msgstr "Disponível mensalmente para o reembolso da dívida"
 #: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
-msgstr "Emprestado US $ 1,11 a 2,2% de juros com pagamento mínimo de US $ 3,33."
+msgstr "Emprestado US $ 1,11 a 2,2%% de juros com pagamento mínimo de US $ 3,33."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
