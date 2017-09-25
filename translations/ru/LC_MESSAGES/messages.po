@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-24 12:27-0600\n"
+"POT-Creation-Date: 2017-09-24 18:41-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: /partials/debt/debt.html:23
+#: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "Добавить еще один долг"
 
@@ -28,10 +28,18 @@ msgstr "Все номера показаны только для иллюстр�
 msgid "Available monthly for debt repayment"
 msgstr "Доступен ежемесячно для погашения долга"
 
-#: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
 msgstr "Заемный 1,11₽ с 2,2%% до 3,33₽ минимальный платеж."
+
+#: /partials/debt/debt.html:12
+#, python-format
+msgid ""
+"Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
+"<span>$3.33<span> minimum payment."
+msgstr ""
+"Заемный <span>1,11₽</span> с <span>2,2%%</span> до <span>3,33₽</span> "
+"минимальный платеж."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."

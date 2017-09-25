@@ -9,7 +9,7 @@
     {% set input_min_payment %}
       <input type="number" name="min_payment" placeholder="{{_('Minimum Payment')}}" step="0.01" />
     {% endset %}
-    {% set debt_input = _('Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment.') %}
+    {% set debt_input = _('Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a <span>$3.33<span> minimum payment.') %}
     {% set debt_input = debt_input | re_replace('((\d)+[\.,]\d+)', '{\\2}') %}
     {% set debt_input = debt_input | replace('{1}', input_principal) %}
     {% set debt_input = debt_input | replace('{2}', input_rate) %}

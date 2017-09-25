@@ -1,4 +1,4 @@
-#: /partials/debt/debt.html:23
+#: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr ""
 
@@ -12,7 +12,9 @@ msgstr ""
 
 #: /partials/debt/debt.html:12
 #, python-format
-msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
+msgid ""
+"Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
+"<span>$3.33<span> minimum payment."
 msgstr ""
 
 #: /content/pages/home.yaml

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-09-24 10:48-0600\n"
+"POT-Creation-Date: 2017-09-24 18:41-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: /partials/debt/debt.html:23
+#: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "Fügen Sie eine andere Schuld"
 
@@ -27,10 +27,18 @@ msgstr "Alle angezeigten Zahlen dienen lediglich der Veranschaulichung."
 msgid "Available monthly for debt repayment"
 msgstr "Erhältlich monatlich für Schuldenrückzahlung"
 
-#: /partials/debt/debt.html:12
 #, python-format
 msgid "Borrowed $1.11 at 2.2%% interest with a $3.33 minimum payment."
 msgstr "Ausgeliehene € 1,11 bei 2,2%% Zinsen mit einer € 3,33 Mindestzahlung."
+
+#: /partials/debt/debt.html:12
+#, python-format
+msgid ""
+"Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
+"<span>$3.33<span> minimum payment."
+msgstr ""
+"Ausgeliehene <span>€1,11</span> bei <span>2,2%%</span> Zinsen mit einer "
+"<span>€3,33</span> Mindestzahlung."
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
