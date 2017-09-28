@@ -14,7 +14,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
-"<span>$3.33<span> minimum payment."
+"<span>$3.33</span> minimum payment."
 msgstr ""
 
 #: /content/pages/home.yaml
