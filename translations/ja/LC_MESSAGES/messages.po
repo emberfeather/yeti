@@ -1,3 +1,7 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "債務返済のための毎月の可能返済額<span>1.11円</span>。"
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "別の債務を追加する"
@@ -6,16 +10,12 @@ msgstr "別の債務を追加する"
 msgid "All numbers shown are for illustration purposes only."
 msgstr "示された数字はすべて例示のためのものです。"
 
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
-msgstr "債務返済のための毎月の可能返済額"
-
 #: /partials/debt/debt.html:12
 #, python-format
 msgid ""
 "Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
 "<span>$3.33</span> minimum payment."
-msgstr "<span>2.2％</span>の利子で1.11借り、最低支払金額は3.33円。"
+msgstr "<span>2.2％</span>の利子で1.11借り、最低支払金額は<span>3.33円</span>。"
 
 #: /content/pages/home.yaml
 msgid "Debt snowball calculator."
@@ -29,7 +29,7 @@ msgstr "城の王©2010デビッド・ランハム。"
 msgid "Minimum Payment"
 msgstr "最低支払額"
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr "毎月の支払額"
 

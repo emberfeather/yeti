@@ -1,13 +1,13 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr ""
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr ""
 
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
-msgstr ""
-
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
 msgstr ""
 
 #: /partials/debt/debt.html:12
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Minimum Payment"
 msgstr ""
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr ""
 

@@ -1,3 +1,7 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "<span>$1.11</span> disponible mensualmente para el pago de la deuda."
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "Añadir otra deuda"
@@ -5,10 +9,6 @@ msgstr "Añadir otra deuda"
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
 msgstr "Todos los números mostrados son sólo con fines ilustrativos."
-
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
-msgstr "Disponible mensualmente para el pago de la deuda"
 
 #: /partials/debt/debt.html:12
 #, python-format
@@ -31,7 +31,7 @@ msgstr "Rey del Castillo © 2010 David Lanham."
 msgid "Minimum Payment"
 msgstr "Pago Mínimo"
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr "Mensualidad"
 

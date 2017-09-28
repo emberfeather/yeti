@@ -1,3 +1,7 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "1.11 درهم متوفر شهريا لتسديد الديون."
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "إضافة ديون أخرى"
@@ -5,10 +9,6 @@ msgstr "إضافة ديون أخرى"
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
 msgstr "جميع الأرقام المعروضة هي لأغراض التوضيح فقط."
-
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
-msgstr "متاح شهريا لسداد الديون"
 
 #: /partials/debt/debt.html:12
 #, python-format
@@ -29,7 +29,7 @@ msgstr "ملك القلعة © 2010 ديفيد لانهام."
 msgid "Minimum Payment"
 msgstr "الحد الأدنى للدفع"
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr "الدفع الشهري"
 

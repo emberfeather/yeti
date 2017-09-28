@@ -1,3 +1,9 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr ""
+"<span>1,11 €</span> disponible mensuellement pour le remboursement de la "
+"dette."
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "Ajouter une autre dette"
@@ -5,10 +11,6 @@ msgstr "Ajouter une autre dette"
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
 msgstr "Tous les chiffres affichés sont à des fins d'illustration uniquement."
-
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
-msgstr "Disponible mensuellement pour le remboursement de la dette"
 
 #: /partials/debt/debt.html:12
 #, python-format
@@ -31,7 +33,7 @@ msgstr "Le Roi du Château © 2010 David Lanham."
 msgid "Minimum Payment"
 msgstr "Paiement minimum"
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr "Paiement mensuel"
 

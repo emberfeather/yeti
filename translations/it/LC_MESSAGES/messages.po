@@ -1,3 +1,7 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "<span>1.11 €</span> disponibile mensile per il rimborso del debito."
+
 #: /partials/debt/debt.html:24
 msgid "Add another debt"
 msgstr "Aggiungi un altro debito"
@@ -5,10 +9,6 @@ msgstr "Aggiungi un altro debito"
 #: /partials/footer/footer.yaml
 msgid "All numbers shown are for illustration purposes only."
 msgstr "Tutti i numeri indicati sono solo a scopo illustrativo."
-
-#: /partials/payment/payment.html:3
-msgid "Available monthly for debt repayment"
-msgstr "Disponibili mensilmente per il rimborso del debito"
 
 #: /partials/debt/debt.html:12
 #, python-format
@@ -31,7 +31,7 @@ msgstr "Re del Castello © 2010 David Lanham."
 msgid "Minimum Payment"
 msgstr "Pagamento Minimo"
 
-#: /partials/payment/payment.html:4
+#: /partials/payment/payment.html:3
 msgid "Monthly Payment"
 msgstr "Pagamento Mensile"
 
