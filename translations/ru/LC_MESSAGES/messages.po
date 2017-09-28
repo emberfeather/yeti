@@ -27,22 +27,6 @@ msgstr "Калькулятор долгового снегопада."
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "Король замка © 2010 Дэвид Ланхам."
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "Минимальный платеж"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "Ежемесячно оплата"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "Основной баланс"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "процент"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "Используется с разрешения."

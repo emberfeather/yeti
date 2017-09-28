@@ -27,22 +27,6 @@ msgstr "Calculadora de bolas de neve da dívida."
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "Rei do Castelo © 2010 David Lanham."
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "Pagamento minimo"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "Pagamento mensal"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "Saldo Principal"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "Imposto"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "Usado com permissão."

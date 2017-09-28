@@ -27,22 +27,6 @@ msgstr "Calcolatore di snowball di debito."
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "Re del Castello © 2010 David Lanham."
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "Pagamento Minimo"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "Pagamento Mensile"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "Bilancio Principale"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "Prezzo"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "Usato con autorizzazione."

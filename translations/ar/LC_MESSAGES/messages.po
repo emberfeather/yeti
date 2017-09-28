@@ -25,22 +25,6 @@ msgstr "آلة حاسبة الديون الثلج."
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "ملك القلعة © 2010 ديفيد لانهام."
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "الحد الأدنى للدفع"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "الدفع الشهري"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "الرصيد الرئيسي"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "معدل"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "تستخدم بإذن."

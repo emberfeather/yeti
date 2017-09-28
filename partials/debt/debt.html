@@ -1,13 +1,13 @@
 <div class="debt">
   <template id="debt-template">
     {% set input_principal %}
-      <input type="number" name="principal" placeholder="{{_('Principal Balance')}}" step="0.01" />
+      <input type="number" name="principal" step="0.01" />
     {% endset %}
     {% set input_rate %}
-      <input type="number" name="rate" placeholder="{{_('Rate')}}" step="0.01" />
+      <input type="number" name="rate" step="0.01" />
     {% endset %}
     {% set input_min_payment %}
-      <input type="number" name="min_payment" placeholder="{{_('Minimum Payment')}}" step="0.01" />
+      <input type="number" name="min_payment" step="0.01" />
     {% endset %}
     {% set debt_input = _('Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a <span>$3.33</span> minimum payment.') %}
     {% set debt_input = debt_input | re_replace('((\d)+[\.,]\d+)', '{\\2}') %}

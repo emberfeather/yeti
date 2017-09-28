@@ -1,6 +1,16 @@
 @import '../../source/sass/common/config'
 @import '../../source/sass/mixins/card'
 
+.debt
+  input[name="principal"]
+    width: 6em
+
+  input[name="rate"]
+    width: 3.5em
+
+  input[name="min_payment"]
+    width: 6em
+
 .debt__list
   +md
     align-items: stretch
@@ -17,15 +27,6 @@
 .debt__input
   flex-grow: 1
   margin: $pad/2 0
-
-  input[name="principal"]
-    width: 12em
-
-  input[name="rate"]
-    width: 5em
-
-  input[name="min_payment"]
-    width: 12em
 
   span
     white-space: nowrap

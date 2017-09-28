@@ -25,22 +25,6 @@ msgstr ""
 msgid "King of the Castle © 2010 David Lanham."
 msgstr ""
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr ""
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr ""
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr ""
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr ""
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr ""

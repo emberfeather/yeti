@@ -25,22 +25,6 @@ msgstr "雪だるま式借金の計算機。"
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "城の王©2010デビッド・ランハム。"
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "最低支払額"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "毎月の支払額"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "元本残高"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "率"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "許可を得て使用します。"

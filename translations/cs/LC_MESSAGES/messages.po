@@ -27,22 +27,6 @@ msgstr "Dluhová kalkulačka."
 msgid "King of the Castle © 2010 David Lanham."
 msgstr "Král hradu © 2010 David Lanham."
 
-#: /partials/debt/debt.html:10
-msgid "Minimum Payment"
-msgstr "Minimální Platba"
-
-#: /partials/payment/payment.html:3
-msgid "Monthly Payment"
-msgstr "Měsíční Platba"
-
-#: /partials/debt/debt.html:4
-msgid "Principal Balance"
-msgstr "Hlavní Bilance"
-
-#: /partials/debt/debt.html:7
-msgid "Rate"
-msgstr "Zdanit"
-
 #: /partials/footer/footer.yaml
 msgid "Used with permission."
 msgstr "Používá se s povolením."
