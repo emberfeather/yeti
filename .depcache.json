@@ -1,0 +1,14 @@
+{
+  "/content/pages/home.yaml": [
+    "/dist/css/composite/global.min.css",
+    "/dist/css/composite/home.min.css",
+    "/dist/js/composite/global.min.js",
+    "/dist/js/composite/home.min.js",
+    "/partials/debt/debt.html",
+    "/partials/footer/footer.html",
+    "/partials/footer/footer.yaml",
+    "/partials/header/header.html",
+    "/partials/payment/payment.html",
+    "/static/images/favicon.png"
+  ]
+}
