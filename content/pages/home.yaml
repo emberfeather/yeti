@@ -1,6 +1,5 @@
 $title@: Yeti
 $path: /
-$order: -1
 description@: "Debt snowball calculator."
 sub_title@: "Debt snowball calculator."
 $localization:

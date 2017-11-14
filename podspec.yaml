@@ -43,6 +43,11 @@ deployments:
   prod:
     destination: gcs
     bucket: start.ballofsnow.org
+    env:
+      name: prod
+      host: ballofsnow.org
+      scheme: https
+      port: 443
 
 translators:
   project_title: Yeti Translations
