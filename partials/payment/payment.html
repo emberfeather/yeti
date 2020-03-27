@@ -1,9 +1,0 @@
-<div class="payment">
-  {% set input_repayment %}
-    <input type="number" name="repayment" step="0.01" />
-  {% endset %}
-  {% set repayment_input = _('<span>$1.11</span> available monthly for debt repayment.') %}
-  {% set repayment_input = repayment_input | re_replace('((\d)+[\.,]\d+)', '{\\2}') %}
-  {% set repayment_input = repayment_input | replace('{1}', input_repayment) %}
-  {{repayment_input}}
-</div>

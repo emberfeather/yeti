@@ -1,5 +1,6 @@
 {
   "name": "yeti",
+  "private": true,
   "version": "0.0.0",
   "description": "Snowball debt calculator",
   "homepage": "http://ballofsnow.org",
@@ -12,21 +13,27 @@
     "debt",
     "snowball",
     "calculator",
-    "amortization",
-    "grow"
+    "amortization"
   ],
   "dependencies": {
-    "babel-loader": "^7.0.0",
-    "babili-webpack-plugin": "^0.1.2",
-    "deep-extend": "^0.5.0",
-    "fs-readdir-recursive": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-rename": "~1.2.2",
-    "gulp-sass": "^3.1.0",
-    "webpack": "3.5.5",
-    "webpack-stream": "4.0.0"
+    "fs-readdir-recursive": "^1.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "node-sass": "^4.13.1",
+    "preact": "^10.3.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "toastify-js": "^1.7.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-stream": "^5.2.1"
   },
   "devDependencies": {},
-  "private": true
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp"
+  }
 }

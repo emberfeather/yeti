@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     {% if podspec.meta.google_site_verification %}
-    <meta name="google-site-verification" content="{{podspec.meta.google_site_verification}}">
+      <meta name="google-site-verification" content="{{podspec.meta.google_site_verification}}">
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, height=device-height">
     <title>{% if doc.title %}{{doc.title}} – {% endif %}{{podspec.title}}</title>
@@ -16,11 +16,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{doc.url}}">
     {% if doc.description %}
-    <meta name="description" content="{{doc.description}}">
-    <meta property="og:description" content="{{doc.description}}">
+      <meta name="description" content="{{doc.description}}">
+      <meta property="og:description" content="{{doc.description}}">
     {% endif %}
     {% if podspec.meta.favicon_path %}
-    <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
+      <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
     {% endif %}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Convergence|Montez" rel="stylesheet">
