@@ -1,0 +1,77 @@
+.input
+  +border-control
+  border-radius: $border-radius-1
+  color: inherit
+  margin: 0 $pad/4
+  padding: $pad/8
+  transition: all $speed-fast ease-in-out
+
+  &--inline
+    background-color: transparent
+    font-family: inherit
+    font-size: inherit
+    text-align: center
+    border-bottom: $border-size solid $input-border-color
+
+    &:focus
+      border: $border-size solid transparent
+      border-bottom: $border-size solid $input-border-color-focus
+
+    &:hover
+      border: $border-size solid transparent
+      border-bottom: $border-size solid $input-border-color-hover
+
+      &:focus
+        border: $border-size solid transparent
+        border-bottom: $border-size solid $input-border-color-focus
+
+  &--currency
+    margin-left: 0
+    width: $pad*5.5
+
+  &--rate
+    margin-right: 0
+    width: $pad*4.5
+
+.input__currency
+  &::after,
+  &::before
+    font-size: $font-size * .8
+    opacity: .8
+
+  .locale_country_US &,
+  .locale_country_CA &,
+  .locale_country_MX &
+    &::before
+      content: ' $'
+
+  .locale_country_DE &
+    &::before
+      content: ' €'
+
+  .locale_country_GB &
+    &::before
+      content: ' £'
+
+  .locale_country_CN &,
+  .locale_country_JP &
+    &::before
+      content: ' ￥'
+
+  .locale_country_PL &
+    &::before
+      content: ' zł'
+
+  .locale_country_RU &
+    &::before
+      content: ' руб'
+
+  .locale_country_SE &
+    &::before
+      content: ' kr'
+
+.input__rate
+  &::after
+    content: '% '
+    font-size: $font-size * .8
+    opacity: .8
