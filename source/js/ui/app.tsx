@@ -19,7 +19,9 @@ export interface AppProps {
 
 export interface AppState {
   debts: YetiDebt[]
+  doLocalSave: boolean
   locale: string
+  payment: number
 }
 
 
@@ -27,11 +29,14 @@ export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
 
+    // TODO: Load in debt information from local storage.
+    const debts: YetiDebt[] = [YetiDebt.randomDebt()]
+
     this.state = {
-      debts: [
-        YetiDebt.randomDebt(),
-      ],
+      debts: debts,
+      doLocalSave: localStorage.getItem('yeti.save') == 'true',
       locale: navigator.language,
+      payment: App.minimumPaymentForAllDebts(debts),
     } as AppState
   }
 
@@ -40,20 +45,103 @@ export default class App extends Component<AppProps, AppState> {
     return matches[1] || locale
   }
 
+  static findDebtByUid(debts: YetiDebt[], uid: string): YetiDebt {
+    for (const debt of debts) {
+      if (debt.uid == uid) {
+        return debt
+      }
+    }
+  }
+
+  static minimumPaymentForAllDebts(debts: YetiDebt[]): number {
+    let minimumPayment = 0
+
+    // Add all the minimum payments.
+    for (const debt of debts) {
+      minimumPayment += debt.minimumPayment
+    }
+
+    return minimumPayment
+  }
+
   handleAddDebt(_evt: any) {
     const debts = this.state.debts
     debts.push(YetiDebt.randomDebt())
     this.setState({
       debts: debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(debts)),
+    })
+  }
+
+  handleBorrowedInput(evt: any) {
+    const target = findParentByClassname(evt.target, 'yeti__debt')
+    const uid = target.dataset.debtUid
+    const value = parseFloat(evt.target.value)
+    const debt = App.findDebtByUid(this.state.debts, uid)
+    debt.borrowed = isNaN(value) ? 0 : value
+
+    // Trigger a refresh of the state.
+    this.setState({
+      debts: this.state.debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
+    })
+  }
+
+  handleLocalSaveToggle(_evt: any) {
+    this.setState({
+      doLocalSave: !this.state.doLocalSave
+    })
+  }
+
+  handleMinimumPaymentInput(evt: any) {
+    const target = findParentByClassname(evt.target, 'yeti__debt')
+    const uid = target.dataset.debtUid
+    const value = parseFloat(evt.target.value)
+    const debt = App.findDebtByUid(this.state.debts, uid)
+    debt.minimumPayment = isNaN(value) ? 0 : value
+
+    // Trigger a refresh of the state.
+    this.setState({
+      debts: this.state.debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
+    })
+  }
+
+  handlePaymentInput(evt: any) {
+    const value = parseFloat(evt.target.value)
+
+    this.setState({
+      payment: Math.max(
+        value, App.minimumPaymentForAllDebts(this.state.debts))
+    })
+  }
+
+  handleRateInput(evt: any) {
+    const target = findParentByClassname(evt.target, 'yeti__debt')
+    const uid = target.dataset.debtUid
+    const value = parseFloat(evt.target.value)
+    const debt = App.findDebtByUid(this.state.debts, uid)
+    debt.rate = isNaN(value) ? 0 : value
+
+    // Trigger a refresh of the state.
+    this.setState({
+      debts: this.state.debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
     })
   }
 
   handleRemoveDebt(evt: any) {
     const target = findParentByClassname(evt.target, 'yeti__debt')
     const uid = target.dataset.debtUid
-    const debts = this.state.debts
+    const debts = this.state.debts.filter((debt) => debt.uid !== uid)
     this.setState({
-      debts: debts.filter((debt) => debt.uid !== uid),
+      debts: debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(debts)),
     })
   }
 
@@ -69,9 +157,16 @@ export default class App extends Component<AppProps, AppState> {
         <Debts
           debts={state.debts}
           handleAddDebt={this.handleAddDebt.bind(this)}
-          handleRemoveDebt={this.handleRemoveDebt.bind(this)} />
-        <Save />
-        <Payment />
+          handleRemoveDebt={this.handleRemoveDebt.bind(this)}
+          handleBorrowedInput={this.handleBorrowedInput.bind(this)}
+          handleRateInput={this.handleRateInput.bind(this)}
+          handleMinimumPaymentInput={this.handleMinimumPaymentInput.bind(this)} />
+        <Payment
+          payment={state.payment}
+          handlePaymentInput={this.handlePaymentInput.bind(this)} />
+        <Save
+          doLocalSave={state.doLocalSave}
+          handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
         <PlanSuggested />
         <PlanPayoffTimeline />
         <PlanAccelerate />

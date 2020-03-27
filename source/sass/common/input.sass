@@ -75,3 +75,35 @@
     content: '% '
     font-size: $font-size * .8
     opacity: .8
+
+.input__toggle
+  align-items: center
+  cursor: pointer
+  display: flex
+  flex-flow: row
+
+  & > :first-child
+    margin-right: $pad/2
+
+.toggle
+  +border-control
+  background-color: $color-primary-dark
+  border-radius: calc(#{$pad/2} + #{$border-size})
+  display: grid
+  grid-template-columns: 0fr 1fr 1fr
+  height: calc(#{$pad} + #{$border-size * 3})
+  padding: $border-size
+  transition: all $speed-fast ease-in-out
+  width: calc(#{$pad*2} + #{$border-size * 2})
+
+  &::after
+    background-color: $color-primary-light
+    border-radius: 50%
+    content: ''
+    grid-column: 2
+    transition: all $speed-fast ease-in-out
+
+  &--checked
+    grid-template-columns: 1fr 1fr 0fr
+    &::after
+      background-color: $color-secondary

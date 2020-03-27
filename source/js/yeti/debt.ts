@@ -14,6 +14,15 @@ export default class YetiDebt {
     this.uid = generateUUID()
   }
 
+  static calcMinimumPayment(borrowed: number, rate: number, balanceRate: number = .01): number {
+    // Minimum payment is interest + 1% of balance.
+    return this.fixed(borrowed * (rate / 100 / 12) + borrowed * balanceRate)
+  }
+
+  static fixed(value: number): number {
+    return parseFloat(value.toFixed(2))
+  }
+
   static randomDebt() {
     const borrowed = randomIntRange(500, 20000)
     const rate = randomIntRange(300, 2100)/100
@@ -22,21 +31,21 @@ export default class YetiDebt {
     return new this(borrowed, rate, minimumPayment)
   }
 
-  static calcMinimumPayment(borrowed: number, rate: number, balanceRate: number = .01): number {
-    // Minimum payment is interest + 1% of balance.
-    return borrowed * (rate / 100 / 12) + borrowed * balanceRate
-  }
-
   get borrowed():number {
     return this._borrowed
   }
 
-  get rate():number {
-    return this._rate
+  get interestOnlyPayment() {
+    return YetiDebt.calcMinimumPayment(
+      this.borrowed, this.rate, 0)
   }
 
   get minimumPayment():number {
     return this._minimumPayment
+  }
+
+  get rate():number {
+    return this._rate
   }
 
   set borrowed(value) {
@@ -45,17 +54,6 @@ export default class YetiDebt {
     }
 
     this._borrowed = value
-
-    // Auto-correct the minimum payment.
-    this.minimumPayment = this.minimumPayment
-  }
-
-  set rate(value) {
-    if (value < 0) {
-      throw 'Rate amount cannot be negative.'
-    }
-
-    this._rate = value
 
     // Auto-correct the minimum payment.
     this.minimumPayment = this.minimumPayment
@@ -73,6 +71,17 @@ export default class YetiDebt {
     value = Math.max(calculatedMinimumPayment, value)
 
     this._minimumPayment = value
+  }
+
+  set rate(value) {
+    if (value < 0) {
+      throw 'Rate amount cannot be negative.'
+    }
+
+    this._rate = value
+
+    // Auto-correct the minimum payment.
+    this.minimumPayment = this.minimumPayment
   }
 
   validate(): string[] {

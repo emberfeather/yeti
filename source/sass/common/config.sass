@@ -42,14 +42,18 @@ $border-size: 2px
   border: $border-size solid transparent
 
   &:focus
-    outline: none
     border-color: $input-border-color-focus
+    outline: none
 
     .is-keyboard &
       outline: default
 
   &:hover
     border-color: $input-border-color-hover
+    outline: none
+
+    .is-keyboard &
+      outline: default
 
     &:focus
       border-color: $input-border-color-focus

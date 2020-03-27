@@ -2,6 +2,8 @@ import { h, Component } from 'preact'
 
 
 export interface PaymentProps {
+  handlePaymentInput: any
+  payment: number
 }
 
 
@@ -16,10 +18,14 @@ export default class Payment extends Component<PaymentProps, PaymentState> {
     this.state = {} as PaymentState
   }
 
-  render(props: PaymentProps, state: PaymentState) {
+  render(props: PaymentProps, _state: PaymentState) {
     return (
       <div class="yeti__payment card">
-        payment!
+        <p>
+          Each month
+          <span class="input__currency"><input type="number" step="0.01" value={props.payment.toFixed(2)} onInput={props.handlePaymentInput} class="input input--inline input--currency" /></span>
+          is available to pay off all debts.
+        </p>
       </div>
     )
   }

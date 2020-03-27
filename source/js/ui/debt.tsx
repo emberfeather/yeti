@@ -4,6 +4,9 @@ import YetiDebt from '../yeti/debt'
 
 export interface DebtProps {
   debt?: YetiDebt
+  handleBorrowedInput: any
+  handleMinimumPaymentInput: any
+  handleRateInput: any
   handleRemoveDebt: any
 }
 
@@ -24,11 +27,12 @@ export default class Debt extends Component<DebtProps, DebtState> {
       <div class="yeti__debt card" data-debt-uid={props.debt.uid}>
         <div class="actions__wrapper">
           <p>
-            Borrowed <span class="input__currency"><input type="number" step="0.01" value={props.debt.borrowed.toFixed(2)} class="input input--inline input--currency" /></span>
+            Borrowed
+            <span class="input__currency"><input type="number" min="0" step="0.01" value={props.debt.borrowed} onChange={props.handleBorrowedInput} class="input input--inline input--currency" /></span>
             at
-            <span class="input__rate"><input type="number" step="0.001" value={props.debt.rate.toFixed(3)} class="input input--inline input--rate" /></span>
+            <span class="input__rate"><input type="number" min="0" step="0.001" value={props.debt.rate} onChange={props.handleRateInput} class="input input--inline input--rate" /></span>
             interest with a
-            <span class="input__currency"><input type="number" step="0.01" value={props.debt.minimumPayment.toFixed(2)} class="input input--inline input--currency" /></span>
+            <span class="input__currency"><input type="number" min="0" step="0.01" value={props.debt.minimumPayment} onChange={props.handleMinimumPaymentInput} class="input input--inline input--currency" /></span>
             minimum monthly payment.
           </p>
           <div class="actions">
