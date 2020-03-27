@@ -23,6 +23,10 @@ export default class YetiDebt {
     return parseFloat(value.toFixed(2))
   }
 
+  static fromExport(debtInfo: any): YetiDebt {
+    return new this(debtInfo.borrowed, debtInfo.rate, debtInfo.minimumPayment)
+  }
+
   static randomDebt() {
     const borrowed = randomIntRange(500, 20000)
     const rate = randomIntRange(300, 2100)/100
@@ -82,6 +86,14 @@ export default class YetiDebt {
 
     // Auto-correct the minimum payment.
     this.minimumPayment = this.minimumPayment
+  }
+
+  export(): any {
+    return {
+      borrowed: this.borrowed,
+      minimumPayment: this.minimumPayment,
+      rate: this.rate,
+    }
   }
 
   validate(): string[] {

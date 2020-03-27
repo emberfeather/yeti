@@ -29,12 +29,26 @@ export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
 
-    // TODO: Load in debt information from local storage.
-    const debts: YetiDebt[] = [YetiDebt.randomDebt()]
+    const doLocalSave = localStorage.getItem('yeti.save') == 'true'
+
+    let debts: YetiDebt[] = []
+    if (doLocalSave) {
+      const debtInfos: any[] = JSON.parse(
+        localStorage.getItem('yeti.debts') || '[]')
+      for (const debtInfo of debtInfos) {
+        debts.push(YetiDebt.fromExport(debtInfo))
+      }
+    } else {
+      debts = [
+        YetiDebt.randomDebt(),
+        YetiDebt.randomDebt(),
+        YetiDebt.randomDebt(),
+      ]
+    }
 
     this.state = {
       debts: debts,
-      doLocalSave: localStorage.getItem('yeti.save') == 'true',
+      doLocalSave: doLocalSave,
       locale: navigator.language,
       payment: App.minimumPaymentForAllDebts(debts),
     } as AppState
@@ -67,11 +81,7 @@ export default class App extends Component<AppProps, AppState> {
   handleAddDebt(_evt: any) {
     const debts = this.state.debts
     debts.push(YetiDebt.randomDebt())
-    this.setState({
-      debts: debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(debts)),
-    })
+    this.updateDebts(debts)
   }
 
   handleBorrowedInput(evt: any) {
@@ -79,20 +89,20 @@ export default class App extends Component<AppProps, AppState> {
     const uid = target.dataset.debtUid
     const value = parseFloat(evt.target.value)
     const debt = App.findDebtByUid(this.state.debts, uid)
-    debt.borrowed = isNaN(value) ? 0 : value
+    debt.borrowed = Number.isNaN(value) ? 0 : value
 
     // Trigger a refresh of the state.
-    this.setState({
-      debts: this.state.debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
-    })
+    this.updateDebts(this.state.debts)
   }
 
   handleLocalSaveToggle(_evt: any) {
+    const doLocalSave = !this.state.doLocalSave
     this.setState({
-      doLocalSave: !this.state.doLocalSave
+      doLocalSave: doLocalSave
     })
+
+    localStorage.setItem('yeti.save', String(doLocalSave))
+    this.storeDebts(this.state.debts, doLocalSave)
   }
 
   handleMinimumPaymentInput(evt: any) {
@@ -100,14 +110,10 @@ export default class App extends Component<AppProps, AppState> {
     const uid = target.dataset.debtUid
     const value = parseFloat(evt.target.value)
     const debt = App.findDebtByUid(this.state.debts, uid)
-    debt.minimumPayment = isNaN(value) ? 0 : value
+    debt.minimumPayment = Number.isNaN(value) ? 0 : value
 
     // Trigger a refresh of the state.
-    this.setState({
-      debts: this.state.debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
-    })
+    this.updateDebts(this.state.debts)
   }
 
   handlePaymentInput(evt: any) {
@@ -124,25 +130,17 @@ export default class App extends Component<AppProps, AppState> {
     const uid = target.dataset.debtUid
     const value = parseFloat(evt.target.value)
     const debt = App.findDebtByUid(this.state.debts, uid)
-    debt.rate = isNaN(value) ? 0 : value
+    debt.rate = Number.isNaN(value) ? 0 : value
 
     // Trigger a refresh of the state.
-    this.setState({
-      debts: this.state.debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(this.state.debts)),
-    })
+    this.updateDebts(this.state.debts)
   }
 
   handleRemoveDebt(evt: any) {
     const target = findParentByClassname(evt.target, 'yeti__debt')
     const uid = target.dataset.debtUid
     const debts = this.state.debts.filter((debt) => debt.uid !== uid)
-    this.setState({
-      debts: debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(debts)),
-    })
+    this.updateDebts(debts)
   }
 
   render(props: AppProps, state: AppState) {
@@ -175,5 +173,25 @@ export default class App extends Component<AppProps, AppState> {
         <PlanDetail />
       </div>
     )
+  }
+
+  storeDebts(debts: YetiDebt[], force: boolean = false) {
+    if (this.state.doLocalSave || force) {
+      const exportedDebts = []
+      for (const debt of debts) {
+        exportedDebts.push(debt.export())
+      }
+      localStorage.setItem('yeti.debts', JSON.stringify(exportedDebts))
+      console.log(exportedDebts)
+    }
+  }
+
+  updateDebts(debts: YetiDebt[]) {
+    this.storeDebts(debts)
+    this.setState({
+      debts: debts,
+      payment: Math.max(
+        this.state.payment, App.minimumPaymentForAllDebts(debts)),
+    })
   }
 }
