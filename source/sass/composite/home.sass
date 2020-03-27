@@ -1,0 +1,28 @@
+@import '../mixins/breakpoints'
+@import '../common/config'
+
+.yeti__plan__grid
+  display: grid
+  grid-template-columns: 1fr 1fr
+
+  &--sticky
+    position: sticky
+
+  &--three
+    grid-template-columns: 1fr 1fr 1fr
+
+.yeti__plan__grid__cell
+  align-items: center
+  border-right: $border-size solid $color-back
+  display: flex
+  flex-flow: column-reverse
+  font-weight: 700
+
+  &:last-child
+    border-right: none
+
+.yeti__plan__grid__label
+  font-size: $font-size * .8
+
+.yeti__plan__grid__value
+  font-size: $font-size * 1.25
