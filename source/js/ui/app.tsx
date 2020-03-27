@@ -169,8 +169,8 @@ export default class App extends Component<AppProps, AppState> {
         <PlanPayoffTimeline />
         <PlanAccelerate />
         <PlanInterestChart />
-        <PlanPicker />
         <PlanDetail />
+        <PlanPicker />
       </div>
     )
   }

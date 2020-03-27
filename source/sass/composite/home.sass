@@ -4,6 +4,7 @@
 .yeti__plan__grid
   display: grid
   grid-template-columns: 1fr 1fr
+  margin: $pad 0
 
   &--sticky
     position: sticky
@@ -26,3 +27,49 @@
 
 .yeti__plan__grid__value
   font-size: $font-size * 1.25
+
+.yeti__flex
+  display: flex
+  flex-flow: column
+
+  +md
+    flex-flow: row
+
+    &--center
+      align-items: center
+
+.yeti__flex__item
+  +md
+    flex-shrink: 0
+    margin-right: $pad
+
+    .yeti__flex--two &
+      flex-basis: 50%
+
+    .yeti__flex--three &
+      flex-basis: 33%
+
+      &--two
+        flex-basis: 66%
+
+    .yeti__flex--four &
+      flex-basis: 25%
+
+
+    &:last-child
+      flex-shrink: 1
+      flex-grow: 1
+      margin-right: 0
+
+.yeti__grid
+  display: grid
+  grid-template-columns: 1fr
+  grid-column-gap: $pad
+  grid-row-gap: $pad
+
+  +md
+    &--two
+      grid-template-columns: 1fr 1fr
+
+    &--three
+      grid-template-columns: 1fr 1fr 1fr
