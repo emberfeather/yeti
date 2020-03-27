@@ -42,6 +42,15 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
             </p>
           </div>
           <div>
+            <h3>Balance/Minimum Payment Ratio</h3>
+            <p>
+              Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.
+            </p>
+            <p>
+              This is a preferred strategy as it can be <strong>mentally and emotionally easier</strong> than the Highest Interest Rate strategy and usually quicker than the Lowest Balance strategy.
+            </p>
+          </div>
+          <div>
             <h3>Lowest Interest Rate</h3>
             <p>
               This is calculated as a <strong>counter-point to the Highest Interest Rate strategy</strong> to show how much of a difference the order of repayment makes.
@@ -51,15 +60,6 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
             <h3>Highest Balance</h3>
             <p>
               This is calculated as a <strong>counter-point to the Lowest Balance strategy</strong> to show how much of a difference the order of repayment makes.
-            </p>
-          </div>
-          <div>
-            <h3>Balance/Minimum Payment Ratio</h3>
-            <p>
-              Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.
-            </p>
-            <p>
-              This is a preferred strategy as it can be <strong>mentally and emotionally easier</strong> than the Highest Interest Rate strategy and usually quicker than the Lowest Balance strategy.
             </p>
           </div>
           <div>
