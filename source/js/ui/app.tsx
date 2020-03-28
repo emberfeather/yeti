@@ -1,7 +1,8 @@
 import { h, Component } from 'preact'
 import { IntlProvider } from 'preact-i18n'
 import YetiDebt from '../yeti/debt'
-import { BaseYetiStrategy, strategies } from '../yeti/strategy'
+import StrategyGroup from '../yeti/strategyGroup'
+import { strategies } from '../yeti/strategy'
 import AutoLang from './lang_auto'
 import Debts from './debts'
 import LangSwitch from './lang_switch'
@@ -15,6 +16,7 @@ import PlanSuggested from './plan_suggested'
 import Save from './save'
 
 import {
+  BASE_STRATEGY,
   COUNTRY_TO_CURRENCY,
   DEFAULT_COUNTRY,
   DEFAULT_LANG,
@@ -35,7 +37,7 @@ export interface AppState {
   lang: string
   locale: string
   payment: number
-  strategy: BaseYetiStrategy
+  strategyGroup: StrategyGroup
   strategyKey: string
 }
 
@@ -79,7 +81,7 @@ export default class App extends Component<AppProps, AppState> {
       lang: lang,
       locale: locale,
       payment: payment,
-      strategy: new strategies.highestRate(debts, payment),
+      strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, debts, payment),
       strategyKey: 'highestRate'
     } as AppState
   }
@@ -164,8 +166,8 @@ export default class App extends Component<AppProps, AppState> {
 
       this.setState({
         payment: newPayment,
-        strategy: new strategies.highestRate(this.state.debts, newPayment),
-        })
+        strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, this.state.debts, newPayment),
+      })
     }, 1000)
   }
 
@@ -213,11 +215,11 @@ export default class App extends Component<AppProps, AppState> {
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
           </div>
-          <PlanSuggested strategy={state.strategy} currency={state.currency} locale={state.locale} />
+          <PlanSuggested strategy={state.strategyGroup.strategies[state.strategyKey]} currency={state.currency} locale={state.locale} />
           <PlanPayoffTimeline />
           <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />
-          <PlanDetail strategy={state.strategy} currency={state.currency} locale={state.locale} />
+          <PlanDetail strategy={state.strategyGroup.strategies[state.strategyKey]} currency={state.currency} locale={state.locale} />
           <PlanPicker currency={state.currency} locale={state.locale} />
           <LangSwitch lang={state.lang} />
         </div>
@@ -241,7 +243,7 @@ export default class App extends Component<AppProps, AppState> {
       debts: debts,
       payment: Math.max(
         this.state.payment, App.minimumPaymentForAllDebts(debts)),
-      strategy: new strategies[this.state.strategyKey](debts, this.state.payment),
+      strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, debts, this.state.payment),
     })
   }
 }

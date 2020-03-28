@@ -1,4 +1,5 @@
 export const AVAILABLE_LANGS = ['ar', 'en', 'es']
+export const BASE_STRATEGY = 'minimumPayment'
 export const DEFAULT_COUNTRY = 'US'
 export const DEFAULT_LANG = 'en'
 export const COUNTRY_TO_CURRENCY = {
