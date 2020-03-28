@@ -38,6 +38,7 @@
 		"highest_interest": {
 			"title": "أعلى اهتمام أولاً",
 			"description": "من خلال سداد القروض ذات أعلى سعر فائدة ، ينتهي بك الأمر في النهاية بدفع <strong>فائدة أقل في المجموع</strong>.",
+			"explanation": "تضخيم ديونك لتسديد <strong>أعلى فائدة أولاً</strong> سينفق <strong>{{amount}} فائدة أقل</strong>.",
 			"evaluation": "سيؤدي ذلك إلى <strong>توفير أكبر قدر من المال</strong> ، ولكن قد يكون <strong>الأكثر صعوبة من الناحية العقلية والعاطفية</strong> ليتم تنفيذه نظرًا لأنه يستغرق وقتًا أطول حتى يشعر بأنه له أي تأثير."
 		},
 		"lowest_balance": {
@@ -53,7 +54,6 @@
 	},
   "repayment": {
 		"accelerate": "أضف <strong>{{extra}}</strong> المزيد كل شهر واحفظ <strong>{{saved}}</strong> إضافية في الفائدة.",
-		"explanation": "تضخيم ديونك لسداد <strong>{{method}}</strong> ستنفق <strong>{{amount}} أقل في الفائدة</strong>.",
     "order": "أمر السداد",
 		"overview": {
 			"additional": "إنفاق إضافي",
@@ -62,7 +62,11 @@
 		},
     "plans": {
       "comparison": "مقارنة خطة السداد"
-    }
+    },
+		"total": {
+			"spent": "إجمال الصرف",
+			"time": "الوقت الكلي"
+		}
   },
   "save": {
     "label": "احفظ لوقت لاحق",

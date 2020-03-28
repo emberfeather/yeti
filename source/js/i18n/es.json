@@ -38,6 +38,7 @@
 		"highest_interest": {
 			"title": "mayor interés primero",
 			"description": "Al pagar los préstamos con la tasa de interés más alta primero termina pagando <strong>menos intereses en total</strong>.",
+			"explanation": "Snowballing sus deudas para pagar el <strong>interés más alto primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
 			"evaluation": "Esto <strong>ahorrará la mayor cantidad de dinero</strong>, pero puede ser el <strong>más desafiante mental y emocionalmente</strong>, ya que generalmente lleva más tiempo sentir que tiene algún efecto."
 		},
 		"lowest_balance": {
@@ -53,7 +54,6 @@
 	},
   "repayment": {
 		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
-		"explanation": "Alcanzar sus deudas para pagar la <strong>{{method}}</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
     "order": "Orden de reembolso",
 		"overview": {
 			"additional": "Gastado adicional",
@@ -62,7 +62,11 @@
 		},
     "plans": {
       "comparison": "Comparación del plan de pago"
-    }
+    },
+		"total": {
+			"spent": "Total gastado",
+			"time": "Tiempo total"
+		}
   },
   "save": {
     "label": "Guardar para más adelante",

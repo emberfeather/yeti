@@ -54,7 +54,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
           </div>
           <div class="yeti__flex__item">
             <p>
-              <MarkupText id="repayment.explanation" fields={fields} />
+              <MarkupText id="plans.highest_interest.explanation" fields={fields} />
             </p>
           </div>
         </div>
