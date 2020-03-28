@@ -53,6 +53,7 @@
 		}
 	},
   "repayment": {
+		"abbrevation": "{{amount}} @ {{rate}}%",
 		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
     "order": "Orden de reembolso",
 		"overview": {
@@ -71,5 +72,21 @@
   "save": {
     "label": "Guardar para más adelante",
     "help": "Almacena la información de la deuda y el pago <strong>localmente</strong> para su próxima visita."
-  }
+  },
+	"time": {
+		"months": {
+			"none": "Ningún cambio",
+			"one": "{{months}} mes",
+			"many": "{{months}} meses"
+		},
+		"years": {
+			"none": "Ningún cambio",
+			"one": "{{months}} año",
+			"many": "{{months}} años"
+		},
+		"years_months": {
+			"singular": "1 año {{months}} mes",
+			"plural": "{{years}} años {{months}} meses"
+		}
+	}
 }

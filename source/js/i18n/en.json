@@ -58,6 +58,7 @@
 		}
 	},
   "repayment": {
+		"abbrevation": "{{amount}} @ {{rate}}%",
 		"accelerate": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest.",
     "order": "Repayment order",
 		"overview": {

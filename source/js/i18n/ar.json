@@ -53,6 +53,7 @@
 		}
 	},
   "repayment": {
+		"abbrevation": "{{amount}} @ {{rate}}٪",
 		"accelerate": "أضف <strong>{{extra}}</strong> المزيد كل شهر واحفظ <strong>{{saved}}</strong> إضافية في الفائدة.",
     "order": "أمر السداد",
 		"overview": {

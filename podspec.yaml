@@ -7,10 +7,10 @@ localization:
   locales:
   - ar
   # - cs
-  - de
+  # - de
   - en
   - es
-  - fr
+  # - fr
   # - it
   # - ja
   # - pt
