@@ -6,7 +6,10 @@
     "remove": "Remove debt"
   },
   "repayment": {
-    "order": "Repayment order"
+    "order": "Repayment order",
+    "plans": {
+      "comparison": "Repayment plan comparison"
+    }
   },
 	"plans": {
     "balance_payment_ratio": {

@@ -20,6 +20,7 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
   render(props: PlanPickerProps, state: PlanPickerState) {
     return (
       <div class="yeti__plan_picker card">
+        <h2><Text id="repayment.plans.comparison" /></h2>
         <div class="yeti__grid yeti__grid--three">
           <div>
             <h3><Text id="plans.highest_interest.title" /></h3>

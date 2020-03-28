@@ -6,7 +6,10 @@
     "remove": "Eliminar deuda"
   },
   "repayment": {
-    "order": "Orden de reembolso"
+    "order": "Orden de reembolso",
+    "plans": {
+      "comparison": "Comparación del plan de pago"
+    }
   },
 	"plans": {
     "balance_payment_ratio": {

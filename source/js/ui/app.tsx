@@ -191,7 +191,6 @@ export default class App extends Component<AppProps, AppState> {
         exportedDebts.push(debt.export())
       }
       localStorage.setItem('yeti.debts', JSON.stringify(exportedDebts))
-      console.log(exportedDebts)
     }
   }
 
