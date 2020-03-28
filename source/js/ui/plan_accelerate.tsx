@@ -33,6 +33,11 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
       <div class="yeti__plan_accelerate card">
         <div class="yeti__flex yeti__flex--two yeti__flex--center">
           <div class="yeti__flex__item">
+            <p>
+              <MarkupText id="repayment.accelerate" fields={fields} />
+            </p>
+          </div>
+          <div class="yeti__flex__item">
             <div class="yeti__plan__grid yeti__plan__grid--three">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -55,15 +60,10 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
                   <Text id="repayment.overview.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  -2 months
+                  <Text id="time.months" plural={-2} fields={{ months: -2 }} />
                 </div>
               </div>
             </div>
-          </div>
-          <div class="yeti__flex__item">
-            <p>
-              <MarkupText id="repayment.accelerate" fields={fields} />
-            </p>
           </div>
         </div>
       </div>

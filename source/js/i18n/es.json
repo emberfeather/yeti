@@ -14,8 +14,9 @@
 	"lang": {
 		"switch": "Estás viendo esta página en {{origin}}. Cambiar a {{destination}}.",
 		"languages": {
-			"en": "inglés",
-			"es": "español"
+			"ar": "Arábica",
+			"en": "Inglés",
+			"es": "Español"
 		}
 	},
 	"plans": {

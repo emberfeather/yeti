@@ -19,8 +19,15 @@
   flex-flow: column-reverse
   font-weight: 700
 
+  [dir="rtl"] &
+    border-right: none
+    border-left: $border-size solid $color-back
+
   &:last-child
     border-right: none
+
+    [dir="rtl"] &
+      border-left: none
 
 .yeti__plan__grid__label
   font-size: $font-size * .8
@@ -36,8 +43,14 @@
     flex-flow: row
     flex-wrap: wrap
 
+    [dir="rtl"] &
+      flex-flow: row-reverse
+
   +md
     flex-flow: row
+
+    [dir="rtl"] &
+      flex-flow: row-reverse
 
     &--center
       align-items: center
@@ -54,6 +67,13 @@
 
   &:last-child
     flex-grow: 1
+
+    [dir="rtl"] &
+      flex-grow: 0
+
+  [dir="rtl"] &
+    &:first-child
+      flex-grow: 1
 
   +md
     flex-shrink: 0

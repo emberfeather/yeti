@@ -14,6 +14,7 @@
 	"lang": {
 		"switch": "You are viewing this page in {{origin}}. Switch to {{destination}}.",
 		"languages": {
+			"ar": "Arabic",
 			"en": "English",
 			"es": "Spanish"
 		}
@@ -55,7 +56,7 @@
 		"explanation": "Snowballing your debts to pay off the <strong>{{method}}</strong> will spend <strong>{{amount}} less in interest</strong>.",
     "order": "Repayment order",
 		"overview": {
-			"additional": "Additional",
+			"additional": "Additional spent",
 			"interest": "Interest Paid",
 			"time": "Over time"
 		},
@@ -66,5 +67,21 @@
   "save": {
     "label": "Save for later",
     "help": "Stores the debt and repayment information <strong>locally</strong> for your next visit."
-  }
+  },
+	"time": {
+		"months": {
+			"none": "No change",
+			"one": "{{months}} month",
+			"many": "{{months}} months"
+		},
+		"years": {
+			"none": "No change",
+			"one": "{{months}} year",
+			"many": "{{months}} years"
+		},
+		"years_months": {
+			"singular": "1 year {{months}} month",
+			"plural": "{{years}} year {{months}} month"
+		}
+	}
 }

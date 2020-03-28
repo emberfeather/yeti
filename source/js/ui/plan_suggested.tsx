@@ -47,7 +47,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
                   <Text id="repayment.overview.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  -4 months
+                  <Text id="time.months" plural={-4} fields={{ months: -4 }} />
                 </div>
               </div>
             </div>
