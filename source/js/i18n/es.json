@@ -3,11 +3,41 @@
   "subTitle": "Calculadora de bola de nieve de deuda",
   "debt": {
     "add": "Agregar deuda",
-    "remove": "Agregar deuda"
+    "remove": "Eliminar deuda"
+  },
+  "repayment": {
+    "order": "Orden de reembolso"
   },
 	"plans": {
-		"highest_interest_first": {
-			"title": "mayor interés primero"
+    "balance_payment_ratio": {
+      "title": "saldo al cociente mínimo de pago",
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "Intenta encontrar deudas que serán <strong>fáciles de pagar</strong> y <strong>se agregarán rápidamente a tu bola de nieve</strong>."
+    },
+    "balance_rate_ratio": {
+      "title": "saldo a tasa de interés",
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "Intenta encontrar deudas que serán <strong>fáciles de pagar</strong> y <strong>se agregarán rápidamente a tu bola de nieve</strong>."
+    },
+    "highest_balance": {
+      "title": "mayor saldo primero",
+      "description": "Pague primero el saldo más alto.",
+      "evaluation": "Esto se calcula como un <strong>contrapunto a la estrategia de Saldo más bajo</strong> para mostrar cuánta diferencia hace el orden de reembolso."
+    },
+		"highest_interest": {
+			"title": "mayor interés primero",
+			"description": "Al pagar los préstamos con la tasa de interés más alta primero termina pagando <strong>menos intereses en total</strong>.",
+			"evaluation": "Esto <strong>ahorrará la mayor cantidad de dinero</strong>, pero puede ser el <strong>más desafiante mental y emocionalmente</strong>, ya que generalmente lleva más tiempo sentir que tiene algún efecto."
+		},
+		"lowest_balance": {
+			"title": "saldo más bajo primero",
+			"description": "Al pagar los préstamos con el saldo más bajo primero, puede <strong>aumentar su bola de nieve rápidamente</strong>.",
+			"evaluation": "Esta es una de las estrategias promocionadas con mayor frecuencia y, a menudo, es <strong>más fácil de ejecutar mental y emocionalmente</strong> ya que puede generar impulso rápidamente y sentirse bien con el progreso que realiza."
+		},
+		"lowest_rate": {
+			"title": "tasa de interés más baja primero",
+			"description": "Pague primero la tasa de interés más baja.",
+			"evaluation": "Esto se calcula como un <strong>contrapunto a la estrategia de Tasa de interés más alta</strong> para mostrar cuánta diferencia hace el orden de reembolso."
 		}
 	}
 }
