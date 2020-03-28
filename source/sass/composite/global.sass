@@ -6,6 +6,10 @@
 
 body
   background: $color-back
+  background-image: url('/static/images/bottom.png')
+  background-position: bottom center
+  background-repeat: no-repeat
+  background-size: 120% auto
   color: $color-on-back
   font-family: $font-family
   font-size: $font-size
@@ -15,6 +19,7 @@ body
   -webkit-font-smoothing: antialiased
 
   +md
+    background-size: constrain
     padding: 0 $pad
 
 a
@@ -40,6 +45,7 @@ h1
   margin: 0 auto
   min-height: 100vh
   max-width: $contained-width
+  padding-bottom: 45vw
 
 .material-icons
   font-size: $font-size
