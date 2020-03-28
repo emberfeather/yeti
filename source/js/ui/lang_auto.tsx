@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { IntlProvider, MarkupText } from 'preact-i18n'
+import { MarkupText } from 'preact-i18n'
 // TODO: Get scoped provider to work.
 // import { IntlProvider, MarkupText } from 'preact-i18n'
 

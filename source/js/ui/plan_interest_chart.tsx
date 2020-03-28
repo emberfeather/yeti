@@ -17,6 +17,9 @@ export default class PlanInterestChart extends Component<PlanInterestChartProps,
   }
 
   render(props: PlanInterestChartProps, state: PlanInterestChartState) {
+    // Ignore for now until we have a chart to show.
+    return ''
+
     return (
       <div class="yeti__plan_interest_chart card">
         plan interest chart!

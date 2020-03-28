@@ -13,7 +13,11 @@ import PlanPicker from './plan_picker'
 import PlanSuggested from './plan_suggested'
 import Save from './save'
 
-import { DEFAULT_LANG } from '../config'
+import {
+  COUNTRY_TO_CURRENCY,
+  DEFAULT_COUNTRY,
+  DEFAULT_LANG,
+} from '../config'
 import { definitions } from '../i18n/i18n'
 import { findParentByClassname } from '../utility/dom'
 
@@ -23,6 +27,7 @@ export interface AppProps {
 
 
 export interface AppState {
+  currency: string
   debts: YetiDebt[]
   definition: any
   doLocalSave: boolean
@@ -54,13 +59,16 @@ export default class App extends Component<AppProps, AppState> {
     }
 
     const lang:string = document.documentElement.lang
+    const locale:string = navigator.language
+    const currency:string = App.currencyForLocale(locale)
 
     this.state = {
+      currency: currency,
       debts: debts,
       definition: definitions[lang] || definitions[DEFAULT_LANG],
       doLocalSave: doLocalSave,
       lang: lang,
-      locale: navigator.language,
+      locale: locale,
       payment: App.minimumPaymentForAllDebts(debts),
     } as AppState
   }
@@ -68,6 +76,11 @@ export default class App extends Component<AppProps, AppState> {
   static countryForLocale(locale: string): string {
     const matches = locale.match(/\-([a-z]{2,3})$/i)
     return matches[1] || locale
+  }
+
+  static currencyForLocale(locale: string): string {
+    const country = App.countryForLocale(locale)
+    return COUNTRY_TO_CURRENCY[country] || COUNTRY_TO_CURRENCY[DEFAULT_COUNTRY]
   }
 
   static findDebtByUid(debts: YetiDebt[], uid: string): YetiDebt {
@@ -182,7 +195,7 @@ export default class App extends Component<AppProps, AppState> {
           </div>
           <PlanSuggested />
           <PlanPayoffTimeline />
-          <PlanAccelerate />
+          <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />
           <PlanDetail />
           <PlanPicker />

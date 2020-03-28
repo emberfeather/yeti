@@ -1,7 +1,10 @@
 {
 	"title": "Yeti",
   "subTitle": "Calculadora de bola de nieve de deuda",
-  "debt": {
+	"accelerate": {
+    "description": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses."
+  },
+	"debt": {
     "add": "Agregar deuda",
     "remove": "Eliminar deuda"
   },

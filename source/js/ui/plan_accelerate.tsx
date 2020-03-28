@@ -1,7 +1,10 @@
 import { h, Component } from 'preact'
+import { MarkupText } from 'preact-i18n'
 
 
 export interface PlanAccelerateProps {
+  currency: string
+  locale: string
 }
 
 
@@ -17,6 +20,15 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
   }
 
   render(props: PlanAccelerateProps, state: PlanAccelerateState) {
+    const currencyFormat = new Intl.NumberFormat(props.locale, {
+      style: 'currency',
+      currency: props.currency,
+    })
+    const fields = {
+      extra: `${currencyFormat.format(40)}`,
+      saved: `${currencyFormat.format(400)}`,
+    }
+
     return (
       <div class="yeti__plan_accelerate card">
         <div class="yeti__flex yeti__flex--two yeti__flex--center">
@@ -50,9 +62,7 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
           </div>
           <div class="yeti__flex__item">
             <p>
-              Add <strong>$40 more each month</strong> to paying off debts and
-              save an <strong>additional $xx.xx</strong> in interest and
-              use <strong>2 months less time</strong>.
+              <MarkupText id="accelerate.description" fields={fields} />
             </p>
           </div>
         </div>
