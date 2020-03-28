@@ -29,6 +29,28 @@ jobs:
         name: Deploy to Prod
         command: if [ "$CIRCLE_BRANCH" == "master" ] && [ "$CIRCLE_PULL_REQUEST" == "" ] ; then grow deploy --noconfirm prod ; fi
 
+    - persist_to_workspace:
+        root: ~/grow
+        paths:
+        - build
+
+  snapshot:
+    working_directory: ~/grow
+    docker:
+    - image: circleci/node:lts-browsers
+    steps:
+    - attach_workspace:
+        at: ~/grow
     - run:
         name: Percy Snapshots
         command: npx percy snapshot build/
+
+workflows:
+  version: 2
+
+  test:
+    jobs:
+    - build
+    - snapshot:
+        requires:
+        - build
