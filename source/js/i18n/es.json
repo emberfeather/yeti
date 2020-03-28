@@ -5,12 +5,19 @@
     "add": "Agregar deuda",
     "remove": "Eliminar deuda"
   },
-  "repayment": {
-    "order": "Orden de reembolso",
-    "plans": {
-      "comparison": "Comparación del plan de pago"
-    }
+  "fields": {
+    "borrowed": "Monto prestado",
+    "minimumPayment": "Pago mínimo",
+    "payment": "Mensualidad",
+    "rate": "Tasa de interés"
   },
+	"lang": {
+		"switch": "Estás viendo esta página en {{origin}}. Cambiar a {{destination}}.",
+		"languages": {
+			"en": "inglés",
+			"es": "español"
+		}
+	},
 	"plans": {
     "balance_payment_ratio": {
       "title": "saldo al cociente mínimo de pago",
@@ -42,5 +49,15 @@
 			"description": "Pague primero la tasa de interés más baja.",
 			"evaluation": "Esto se calcula como un <strong>contrapunto a la estrategia de Tasa de interés más alta</strong> para mostrar cuánta diferencia hace el orden de reembolso."
 		}
-	}
+	},
+  "repayment": {
+    "order": "Orden de reembolso",
+    "plans": {
+      "comparison": "Comparación del plan de pago"
+    }
+  },
+  "save": {
+    "label": "Guardar para más adelante",
+    "help": "Almacena la información de la deuda y el pago <strong>localmente</strong> para su próxima visita."
+  }
 }

@@ -1,7 +1,9 @@
 import { h, Component } from 'preact'
 import { IntlProvider } from 'preact-i18n'
 import YetiDebt from '../yeti/debt'
+import AutoLang from './lang_auto'
 import Debts from './debts'
+import LangSwitch from './lang_switch'
 import Payment from './payment'
 import PlanAccelerate from './plan_accelerate'
 import PlanDetail from './plan_detail'
@@ -11,11 +13,9 @@ import PlanPicker from './plan_picker'
 import PlanSuggested from './plan_suggested'
 import Save from './save'
 
+import { DEFAULT_LANG } from '../config'
 import { definitions } from '../i18n/i18n'
 import { findParentByClassname } from '../utility/dom'
-
-
-const DEFAULT_DEFINITION = 'en'
 
 
 export interface AppProps {
@@ -26,6 +26,7 @@ export interface AppState {
   debts: YetiDebt[]
   definition: any
   doLocalSave: boolean
+  lang: string
   locale: string
   payment: number
 }
@@ -52,10 +53,13 @@ export default class App extends Component<AppProps, AppState> {
       ]
     }
 
+    const lang:string = document.documentElement.lang
+
     this.state = {
       debts: debts,
-      definition: definitions[DEFAULT_DEFINITION],
+      definition: definitions[lang] || definitions[DEFAULT_LANG],
       doLocalSave: doLocalSave,
+      lang: lang,
       locale: navigator.language,
       payment: App.minimumPaymentForAllDebts(debts),
     } as AppState
@@ -160,6 +164,7 @@ export default class App extends Component<AppProps, AppState> {
     return (
       <IntlProvider definition={state.definition}>
         <div class={classes}>
+          <AutoLang lang={state.lang} locale={state.locale} />
           <Debts
             debts={state.debts}
             handleAddDebt={this.handleAddDebt.bind(this)}
@@ -179,6 +184,7 @@ export default class App extends Component<AppProps, AppState> {
           <PlanInterestChart />
           <PlanDetail />
           <PlanPicker />
+          <LangSwitch lang={state.lang} />
         </div>
       </IntlProvider>
     )

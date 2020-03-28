@@ -5,12 +5,19 @@
     "add": "Add debt",
     "remove": "Remove debt"
   },
-  "repayment": {
-    "order": "Repayment order",
-    "plans": {
-      "comparison": "Repayment plan comparison"
-    }
+  "fields": {
+    "borrowed": "Borrowed amount",
+    "minimumPayment": "Minimum payment",
+    "payment": "Monthly payment",
+    "rate": "Interest rate"
   },
+	"lang": {
+		"switch": "You are viewing this page in {{origin}}. Switch to {{destination}}",
+		"languages": {
+			"en": "English",
+			"es": "Spanish"
+		}
+	},
 	"plans": {
     "balance_payment_ratio": {
       "title": "balance to minimum payment ratio",
@@ -42,5 +49,15 @@
 			"description": "Pay off the lowest interest rate first.",
 			"evaluation": "This is calculated as a <strong>counter-point to the Highest Interest Rate strategy</strong> to show how much of a difference the order of repayment makes."
 		}
-	}
+	},
+  "repayment": {
+    "order": "Repayment order",
+    "plans": {
+      "comparison": "Repayment plan comparison"
+    }
+  },
+  "save": {
+    "label": "Save for later",
+    "help": "Stores the debt and repayment information <strong>locally</strong> for your next visit."
+  }
 }

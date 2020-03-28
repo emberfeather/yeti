@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { Text, MarkupText } from 'preact-i18n'
 
 
 export interface SaveProps {
@@ -33,10 +34,10 @@ export default class Save extends Component<SaveProps, SaveState> {
       <div class="yeti__save card">
         <div class="input__toggle" onClick={props.handleLocalSaveToggle}>
           <div class={toggleClasses}></div>
-          Save for later.
+          <Text id="save.label" />
         </div>
         <div class="yeti__help">
-          Stores the debt and repayment information locally for your next visit.
+          <MarkupText id="save.help" />
         </div>
       </div>
     )
