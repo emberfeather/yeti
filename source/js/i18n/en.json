@@ -6,10 +6,22 @@
     "remove": "Remove debt"
   },
   "fields": {
-    "borrowed": "Borrowed amount",
-    "minimumPayment": "Minimum payment",
-    "payment": "Monthly payment",
-    "rate": "Interest rate"
+    "borrowed": {
+			"help": "Amount of debt borrowed.",
+			"label": "Borrowed amount"
+		},
+    "minimumPayment": {
+			"help": "Minimum monthly payment required by debt holder.",
+			"label": "Minimum payment"
+		},
+    "payment":{
+			"help": "Total amount available each month to pay off debt.",
+			"label": "Monthly payment"
+		},
+    "rate":{
+			"help": "Annual interest rate for the debt.",
+			"label": "Interest rate"
+		}
   },
 	"lang": {
 		"switch": "You are viewing this page in {{origin}}. Switch to {{destination}}.",

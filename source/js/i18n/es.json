@@ -6,10 +6,22 @@
     "remove": "Eliminar deuda"
   },
   "fields": {
-    "borrowed": "Monto prestado",
-    "minimumPayment": "Pago mínimo",
-    "payment": "Mensualidad",
-    "rate": "Tasa de interés"
+    "borrowed": {
+			"help": "Monto de la deuda prestada.",
+			"label": "Monto prestado"
+		},
+    "minimumPayment": {
+			"help": "Pago mensual mínimo requerido por el titular de la deuda.",
+			"label": "Pago mínimo"
+		},
+    "payment":{
+			"help": "Cantidad total disponible cada mes para pagar la deuda.",
+			"label": "Mensualidad"
+		},
+    "rate":{
+			"help": "Tasa de interés anual de la deuda.",
+			"label": "Tasa de interés"
+		}
   },
 	"lang": {
 		"switch": "Estás viendo esta página en {{origin}}. Cambiar a {{destination}}.",

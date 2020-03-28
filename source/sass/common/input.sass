@@ -1,15 +1,23 @@
+.field
+  margin: $pad/2 0
+
+.field__input
+  margin: $pad/2 0
+
+.field__help
+  font-size: $font-size * .8
+
 .input
   +border-control
+  background-color: transparent
   border-radius: $border-radius-1
   color: inherit
-  margin: 0 $pad/4
+  font-family: inherit
+  font-size: inherit
   padding: $pad/8
   transition: all $speed-fast ease-in-out
 
   &--inline
-    background-color: transparent
-    font-family: inherit
-    font-size: inherit
     text-align: center
     border-bottom: $border-size solid $input-border-color
 
@@ -25,12 +33,10 @@
         border: $border-size solid transparent
         border-bottom: $border-size solid $input-border-color-focus
 
-  &--currency
-    margin-left: 0
+  .input__currency &
     width: $pad*5.5
 
-  &--rate
-    margin-right: 0
+  .input__rate &
     width: $pad*4.5
 
 .input__currency
@@ -45,13 +51,45 @@
     &::before
       content: ' $'
 
-  .locale_country_DE &
+  .locale_country_AT &,
+  .locale_country_BE &,
+  .locale_country_ES &,
+  .locale_country_FR &,
+  .locale_country_IE &,
+  .locale_country_IT &,
+  .locale_country_LU &,
+  .locale_country_MC &,
+  .locale_country_PT &
     &::before
       content: ' €'
+
+  .locale_country_AE &
+    &::before
+      content: 'د.إ'
+
+  .locale_country_BR &
+    &::before
+      content: ' R$'
+
+  .locale_country_CZ &
+    &::before
+      content: ' Kč'
+
+  .locale_country_MA &
+    &::before
+      content: '.د.م'
 
   .locale_country_GB &
     &::before
       content: ' £'
+
+  .locale_country_IN &
+    &::before
+      content: ' ₹'
+
+  .locale_country_LI &
+    &::before
+      content: ' CHF'
 
   .locale_country_CN &,
   .locale_country_JP &
@@ -62,13 +100,25 @@
     &::before
       content: ' zł'
 
+  .locale_country_PE &
+    &::before
+      content: ' S/.'
+
+  .locale_country_PH &
+    &::before
+      content: ' ₱'
+
   .locale_country_RU &
     &::before
-      content: ' руб'
+      content: ' ₽'
 
   .locale_country_SE &
     &::before
       content: ' kr'
+
+  .locale_country_ZA &
+    &::before
+      content: ' R'
 
 .input__rate
   &::after

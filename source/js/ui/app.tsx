@@ -197,7 +197,7 @@ export default class App extends Component<AppProps, AppState> {
           <PlanPayoffTimeline />
           <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />
-          <PlanDetail />
+          <PlanDetail currency={state.currency} locale={state.locale} />
           <PlanPicker currency={state.currency} locale={state.locale} />
           <LangSwitch lang={state.lang} />
         </div>

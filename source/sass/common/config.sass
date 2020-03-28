@@ -39,7 +39,10 @@ $border-radius-3: 9px
 $border-size: 2px
 
 =border-control
-  border: $border-size solid transparent
+  border: $border-size solid $input-border-color
+
+  &--subtle
+    border-color: transparent
 
   &:focus
     border-color: $input-border-color-focus

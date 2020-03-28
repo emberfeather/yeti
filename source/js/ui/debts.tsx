@@ -43,7 +43,7 @@ export default class Debts extends Component<DebtsProps, DebtsState> {
         {!showAdd
           ? ''
           : <div class="yeti__flex">
-              <button class="button--full" onClick={props.handleAddDebt}>Add Debt</button>
+              <button class="button button--full" onClick={props.handleAddDebt}>Add Debt</button>
             </div>}
       </div>
     )
