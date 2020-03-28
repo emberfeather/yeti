@@ -1,3 +1,4 @@
 version: 1
 snapshot:
   widths: [412, 1280]
+  enable-javascript: true
