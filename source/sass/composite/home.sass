@@ -52,6 +52,9 @@
     &:last-child
       margin-right: 0
 
+  &:last-child
+    flex-grow: 1
+
   +md
     flex-shrink: 0
     margin-right: $pad
@@ -77,8 +80,8 @@
 .yeti__grid
   display: grid
   grid-template-columns: 1fr
-  grid-column-gap: $pad
-  grid-row-gap: $pad
+  grid-column-gap: $pad/2
+  grid-row-gap: $pad/2
 
   +md
     &--two
