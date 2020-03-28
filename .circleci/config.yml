@@ -31,4 +31,4 @@ jobs:
 
     - run:
         name: Percy Snapshots
-        command: npx percy snapshot --enable_javascript build/
+        command: npx percy snapshot build/ --enable_javascript
