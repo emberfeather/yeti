@@ -1,10 +1,12 @@
 import { h, Component } from 'preact'
 import { Text, MarkupText } from 'preact-i18n'
+import { BaseYetiStrategy } from '../yeti/strategy'
 
 
 export interface PlanSuggestedProps {
   currency: string
   locale: string
+  strategy: BaseYetiStrategy
 }
 
 
@@ -26,7 +28,6 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
     })
     const fields = {
       amount: `${currencyFormat.format(40)}`,
-      method: 'highest interest first',
     }
 
     return (
@@ -54,7 +55,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
           </div>
           <div class="yeti__flex__item">
             <p>
-              <MarkupText id="plans.highest_interest.explanation" fields={fields} />
+              <MarkupText id={`plans.${props.strategy.key}.explanation`} fields={fields} />
             </p>
           </div>
         </div>

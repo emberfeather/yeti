@@ -30,7 +30,7 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
         <h2><Text id="repayment.plans.comparison" /></h2>
         <div class="yeti__grid yeti__grid--three">
           <div>
-            <h3><Text id="plans.highest_interest.title" /></h3>
+            <h3><Text id="plans.highestRate.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -49,11 +49,11 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.highest_interest.description" /></p>
-            <p><MarkupText id="plans.highest_interest.evaluation" /></p>
+            <p><MarkupText id="plans.highestRate.description" /></p>
+            <p><MarkupText id="plans.highestRate.evaluation" /></p>
           </div>
           <div>
-            <h3><Text id="plans.lowest_balance.title" /></h3>
+            <h3><Text id="plans.lowestBalance.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -72,11 +72,11 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.lowest_balance.description" /></p>
-            <p><MarkupText id="plans.lowest_balance.evaluation" /></p>
+            <p><MarkupText id="plans.lowestBalance.description" /></p>
+            <p><MarkupText id="plans.lowestBalance.evaluation" /></p>
           </div>
           <div>
-            <h3><Text id="plans.balance_payment_ratio.title" /></h3>
+            <h3><Text id="plans.balancePaymentRatio.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -95,11 +95,11 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.balance_payment_ratio.description" /></p>
-            <p><MarkupText id="plans.balance_payment_ratio.evaluation" /></p>
+            <p><MarkupText id="plans.balancePaymentRatio.description" /></p>
+            <p><MarkupText id="plans.balancePaymentRatio.evaluation" /></p>
           </div>
           <div>
-            <h3><Text id="plans.lowest_rate.title" /></h3>
+            <h3><Text id="plans.lowestRate.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -118,11 +118,11 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.lowest_rate.description" /></p>
-            <p><MarkupText id="plans.lowest_rate.evaluation" /></p>
+            <p><MarkupText id="plans.lowestRate.description" /></p>
+            <p><MarkupText id="plans.lowestRate.evaluation" /></p>
           </div>
           <div>
-            <h3><Text id="plans.highest_balance.title" /></h3>
+            <h3><Text id="plans.highestBalance.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -141,11 +141,11 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.highest_balance.description" /></p>
-            <p><MarkupText id="plans.highest_balance.evaluation" /></p>
+            <p><MarkupText id="plans.highestBalance.description" /></p>
+            <p><MarkupText id="plans.highestBalance.evaluation" /></p>
           </div>
           <div>
-            <h3><Text id="plans.balance_rate_ratio.title" /></h3>
+            <h3><Text id="plans.balanceRateRatio.title" /></h3>
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
@@ -164,8 +164,8 @@ export default class PlanPicker extends Component<PlanPickerProps, PlanPickerSta
                 </div>
               </div>
             </div>
-            <p><MarkupText id="plans.balance_rate_ratio.description" /></p>
-            <p><MarkupText id="plans.balance_rate_ratio.evaluation" /></p>
+            <p><MarkupText id="plans.balanceRateRatio.description" /></p>
+            <p><MarkupText id="plans.balanceRateRatio.evaluation" /></p>
           </div>
         </div>
       </div>

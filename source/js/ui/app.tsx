@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import { IntlProvider } from 'preact-i18n'
 import YetiDebt from '../yeti/debt'
+import { BaseYetiStrategy, strategies } from '../yeti/strategy'
 import AutoLang from './lang_auto'
 import Debts from './debts'
 import LangSwitch from './lang_switch'
@@ -34,12 +35,19 @@ export interface AppState {
   lang: string
   locale: string
   payment: number
+  strategy: BaseYetiStrategy
+  strategyKey: string
 }
 
 
 export default class App extends Component<AppProps, AppState> {
+  timeouts: any
+
   constructor(props: AppProps) {
     super(props)
+
+    // Use for deferring update operations.
+    this.timeouts = {}
 
     const doLocalSave = localStorage.getItem('yeti.save') == 'true'
 
@@ -61,6 +69,7 @@ export default class App extends Component<AppProps, AppState> {
     const lang:string = document.documentElement.lang
     const locale:string = navigator.language
     const currency:string = App.currencyForLocale(locale)
+    const payment = App.minimumPaymentForAllDebts(debts)
 
     this.state = {
       currency: currency,
@@ -69,7 +78,9 @@ export default class App extends Component<AppProps, AppState> {
       doLocalSave: doLocalSave,
       lang: lang,
       locale: locale,
-      payment: App.minimumPaymentForAllDebts(debts),
+      payment: payment,
+      strategy: new strategies.highestRate(debts, payment),
+      strategyKey: 'highestRate'
     } as AppState
   }
 
@@ -141,12 +152,21 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   handlePaymentInput(evt: any) {
-    const value = parseFloat(evt.target.value)
+    if (this.timeouts.payment) {
+      clearTimeout(this.timeouts.payment)
+    }
 
-    this.setState({
-      payment: Math.max(
+    // Delay the update to prevent messing up what people are trying to type.
+    this.timeouts.payment = setTimeout(() => {
+      const value = parseFloat(evt.target.value)
+      const newPayment = Math.max(
         value, App.minimumPaymentForAllDebts(this.state.debts))
-    })
+
+      this.setState({
+        payment: newPayment,
+        strategy: new strategies.highestRate(this.state.debts, newPayment),
+        })
+    }, 1000)
   }
 
   handleRateInput(evt: any) {
@@ -193,11 +213,11 @@ export default class App extends Component<AppProps, AppState> {
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
           </div>
-          <PlanSuggested currency={state.currency} locale={state.locale} />
+          <PlanSuggested strategy={state.strategy} currency={state.currency} locale={state.locale} />
           <PlanPayoffTimeline />
           <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />
-          <PlanDetail currency={state.currency} locale={state.locale} />
+          <PlanDetail strategy={state.strategy} currency={state.currency} locale={state.locale} />
           <PlanPicker currency={state.currency} locale={state.locale} />
           <LangSwitch lang={state.lang} />
         </div>
@@ -221,6 +241,7 @@ export default class App extends Component<AppProps, AppState> {
       debts: debts,
       payment: Math.max(
         this.state.payment, App.minimumPaymentForAllDebts(debts)),
+      strategy: new strategies[this.state.strategyKey](debts, this.state.payment),
     })
   }
 }
