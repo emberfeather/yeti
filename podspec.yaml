@@ -5,7 +5,7 @@ localization:
   path: /{locale}/{base}/
   default_locale: en
   locales:
-  # - ar
+  - ar
   # - cs
   - de
   - en

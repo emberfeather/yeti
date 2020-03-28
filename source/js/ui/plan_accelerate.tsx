@@ -62,7 +62,7 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
           </div>
           <div class="yeti__flex__item">
             <p>
-              <MarkupText id="accelerate.description" fields={fields} />
+              <MarkupText id="repayment.accelerate" fields={fields} />
             </p>
           </div>
         </div>

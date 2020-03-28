@@ -1,9 +1,6 @@
 {
 	"title": "Yeti",
   "subTitle": "Calculadora de bola de nieve de deuda",
-	"accelerate": {
-    "description": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses."
-  },
 	"debt": {
     "add": "Agregar deuda",
     "remove": "Eliminar deuda"
@@ -54,6 +51,8 @@
 		}
 	},
   "repayment": {
+		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
+		"explanation": "Alcanzar sus deudas para pagar la <strong>{{method}}</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
     "order": "Orden de reembolso",
     "plans": {
       "comparison": "Comparación del plan de pago"

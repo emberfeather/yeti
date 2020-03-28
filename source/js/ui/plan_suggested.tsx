@@ -1,7 +1,10 @@
 import { h, Component } from 'preact'
+import { MarkupText } from 'preact-i18n'
 
 
 export interface PlanSuggestedProps {
+  currency: string
+  locale: string
 }
 
 
@@ -17,6 +20,15 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
   }
 
   render(props: PlanSuggestedProps, state: PlanSuggestedState) {
+    const currencyFormat = new Intl.NumberFormat(props.locale, {
+      style: 'currency',
+      currency: props.currency,
+    })
+    const fields = {
+      amount: `${currencyFormat.format(40)}`,
+      method: 'highest interest first',
+    }
+
     return (
       <div class="yeti__plan_suggested card">
         <div class="yeti__flex yeti__flex--two yeti__flex--center">
@@ -42,10 +54,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
           </div>
           <div class="yeti__flex__item">
             <p>
-              Snowballing your debts to pay off <strong>the highest interest debt
-              first</strong> will spend <strong>$xxx.xx less in interest</strong> and
-              pay off all debts <strong>4 months faster</strong> than paying only
-              minimum payments.
+              <MarkupText id="repayment.explanation" fields={fields} />
             </p>
           </div>
         </div>

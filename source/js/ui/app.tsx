@@ -193,7 +193,7 @@ export default class App extends Component<AppProps, AppState> {
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
           </div>
-          <PlanSuggested />
+          <PlanSuggested currency={state.currency} locale={state.locale} />
           <PlanPayoffTimeline />
           <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />

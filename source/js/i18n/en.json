@@ -1,9 +1,6 @@
 {
 	"title": "Yeti",
   "subTitle": "Debt snowball calculator",
-  "accelerate": {
-    "description": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest."
-  },
   "debt": {
     "add": "Add debt",
     "remove": "Remove debt"
@@ -54,6 +51,8 @@
 		}
 	},
   "repayment": {
+		"accelerate": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest.",
+		"explanation": "Snowballing your debts to pay off the highest interest debt first will spend <strong>{{amount}} less in interest</strong>.",
     "order": "Repayment order",
     "plans": {
       "comparison": "Repayment plan comparison"
