@@ -45,9 +45,10 @@
     font-size: $font-size * .8
     opacity: .8
 
-  .locale_country_US &,
   .locale_country_CA &,
-  .locale_country_MX &
+  .locale_country_MX &,
+  .locale_country_NZ &,
+  .locale_country_US &
     &::before
       content: ' $'
 
@@ -71,13 +72,14 @@
     &::before
       content: ' R$'
 
+  .locale_country_CN &,
+  .locale_country_JP &
+    &::before
+      content: ' ￥'
+
   .locale_country_CZ &
     &::before
       content: ' Kč'
-
-  .locale_country_MA &
-    &::before
-      content: '.د.م'
 
   .locale_country_GB &
     &::before
@@ -91,10 +93,9 @@
     &::before
       content: ' CHF'
 
-  .locale_country_CN &,
-  .locale_country_JP &
+  .locale_country_MA &
     &::before
-      content: ' ￥'
+      content: '.د.م'
 
   .locale_country_PL &
     &::before
