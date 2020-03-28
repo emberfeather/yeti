@@ -54,6 +54,11 @@
 		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
 		"explanation": "Alcanzar sus deudas para pagar la <strong>{{method}}</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
     "order": "Orden de reembolso",
+		"overview": {
+			"additional": "Gastado adicional",
+			"interest": "Pago interesado",
+			"time": "Tiempo extraordinario"
+		},
     "plans": {
       "comparison": "Comparación del plan de pago"
     }

@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { MarkupText } from 'preact-i18n'
+import { Text, MarkupText } from 'preact-i18n'
 
 
 export interface PlanAccelerateProps {
@@ -36,23 +36,23 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
             <div class="yeti__plan__grid yeti__plan__grid--three">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  Additional
+                  <Text id="repayment.overview.additional" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  +$xx.xx
+                  {currencyFormat.format(100)}
                 </div>
               </div>
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  Interest
+                  <Text id="repayment.overview.interest" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  -$xxx.xx
+                  {currencyFormat.format(-100)}
                 </div>
               </div>
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  Time
+                  <Text id="repayment.overview.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
                   -2 months

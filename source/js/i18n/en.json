@@ -52,8 +52,13 @@
 	},
   "repayment": {
 		"accelerate": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest.",
-		"explanation": "Snowballing your debts to pay off the highest interest debt first will spend <strong>{{amount}} less in interest</strong>.",
+		"explanation": "Snowballing your debts to pay off the <strong>{{method}}</strong> will spend <strong>{{amount}} less in interest</strong>.",
     "order": "Repayment order",
+		"overview": {
+			"additional": "Additional",
+			"interest": "Interest Paid",
+			"time": "Over time"
+		},
     "plans": {
       "comparison": "Repayment plan comparison"
     }

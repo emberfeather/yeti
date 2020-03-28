@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { MarkupText } from 'preact-i18n'
+import { Text, MarkupText } from 'preact-i18n'
 
 
 export interface PlanSuggestedProps {
@@ -36,15 +36,15 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
             <div class="yeti__plan__grid">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  Interest
+                  <Text id="repayment.overview.interest" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  -$xxx.xx
+                  {currencyFormat.format(-298)}
                 </div>
               </div>
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  Time
+                  <Text id="repayment.overview.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
                   -4 months
