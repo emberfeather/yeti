@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { Text } from 'preact-i18n'
 
 
 export interface PlanDetailProps {
@@ -19,7 +20,7 @@ export default class PlanDetail extends Component<PlanDetailProps, PlanDetailSta
   render(props: PlanDetailProps, state: PlanDetailState) {
     return (
       <div class="yeti__plan_detail card">
-        <h2>Highest Interest First</h2>
+        <h2><Text id="plans.highest_interest_first.title">Highest Interest First</Text></h2>
         <div class="yeti__flex yeti__flex--three">
           <div class="yeti__flex__item">
             <p>Payoff order:</p>

@@ -1,0 +1,13 @@
+{
+	"title": "Yeti",
+  "subTitle": "Calculadora de bola de nieve de deuda",
+  "debt": {
+    "add": "Agregar deuda",
+    "remove": "Agregar deuda"
+  },
+	"plans": {
+		"highest_interest_first": {
+			"title": "mayor interés primero"
+		}
+	}
+}

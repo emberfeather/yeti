@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { IntlProvider } from 'preact-i18n'
 import YetiDebt from '../yeti/debt'
 import Debts from './debts'
 import Payment from './payment'
@@ -10,7 +11,11 @@ import PlanPicker from './plan_picker'
 import PlanSuggested from './plan_suggested'
 import Save from './save'
 
+import { definitions } from '../i18n/i18n'
 import { findParentByClassname } from '../utility/dom'
+
+
+const DEFAULT_DEFINITION = 'en'
 
 
 export interface AppProps {
@@ -19,6 +24,7 @@ export interface AppProps {
 
 export interface AppState {
   debts: YetiDebt[]
+  definition: any
   doLocalSave: boolean
   locale: string
   payment: number
@@ -48,6 +54,7 @@ export default class App extends Component<AppProps, AppState> {
 
     this.state = {
       debts: debts,
+      definition: definitions[DEFAULT_DEFINITION],
       doLocalSave: doLocalSave,
       locale: navigator.language,
       payment: App.minimumPaymentForAllDebts(debts),
@@ -151,27 +158,29 @@ export default class App extends Component<AppProps, AppState> {
     ].join(' ')
 
     return (
-      <div class={classes}>
-        <Debts
-          debts={state.debts}
-          handleAddDebt={this.handleAddDebt.bind(this)}
-          handleRemoveDebt={this.handleRemoveDebt.bind(this)}
-          handleBorrowedInput={this.handleBorrowedInput.bind(this)}
-          handleRateInput={this.handleRateInput.bind(this)}
-          handleMinimumPaymentInput={this.handleMinimumPaymentInput.bind(this)} />
-        <Payment
-          payment={state.payment}
-          handlePaymentInput={this.handlePaymentInput.bind(this)} />
-        <Save
-          doLocalSave={state.doLocalSave}
-          handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
-        <PlanSuggested />
-        <PlanPayoffTimeline />
-        <PlanAccelerate />
-        <PlanInterestChart />
-        <PlanDetail />
-        <PlanPicker />
-      </div>
+      <IntlProvider definition={state.definition}>
+        <div class={classes}>
+          <Debts
+            debts={state.debts}
+            handleAddDebt={this.handleAddDebt.bind(this)}
+            handleRemoveDebt={this.handleRemoveDebt.bind(this)}
+            handleBorrowedInput={this.handleBorrowedInput.bind(this)}
+            handleRateInput={this.handleRateInput.bind(this)}
+            handleMinimumPaymentInput={this.handleMinimumPaymentInput.bind(this)} />
+          <Payment
+            payment={state.payment}
+            handlePaymentInput={this.handlePaymentInput.bind(this)} />
+          <Save
+            doLocalSave={state.doLocalSave}
+            handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
+          <PlanSuggested />
+          <PlanPayoffTimeline />
+          <PlanAccelerate />
+          <PlanInterestChart />
+          <PlanDetail />
+          <PlanPicker />
+        </div>
+      </IntlProvider>
     )
   }
 

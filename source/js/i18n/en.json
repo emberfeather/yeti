@@ -1,0 +1,13 @@
+{
+	"title": "Yeti",
+  "subTitle": "Debt snowball calculator",
+  "debt": {
+    "add": "Add debt",
+    "remove": "Remove debt"
+  },
+	"plans": {
+		"highest_interest_first": {
+			"title": "highest interest first"
+		}
+	}
+}

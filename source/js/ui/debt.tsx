@@ -36,7 +36,7 @@ export default class Debt extends Component<DebtProps, DebtState> {
             minimum monthly payment.
           </p>
           <div class="actions">
-            <button title="Remove" onClick={props.handleRemoveDebt}>X</button>
+            <button title="Remove debt" onClick={props.handleRemoveDebt}>X</button>
           </div>
         </div>
       </div>
