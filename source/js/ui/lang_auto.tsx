@@ -5,8 +5,7 @@ import { MarkupText } from 'preact-i18n'
 
 
 import { AVAILABLE_LANGS, DEFAULT_LANG } from '../config'
-// TODO: Get scoped provider to work.
-// import { definitions } from '../i18n/i18n'
+import { definitions } from '../i18n/i18n'
 import { findParentByClassname } from '../utility/dom'
 
 
@@ -45,21 +44,32 @@ export default class AutoLang extends Component<AutoLangProps, AutoLangState> {
       return ''
     }
 
-    // TODO: Get the language name from the translations.
+    const browserDefinition = definitions[browserLang]
     const fields = {
-      'origin': props.lang,
-      'destination': browserLang,
+      'origin': browserDefinition.lang.languages[props.lang],
+      'destination': browserDefinition.lang.languages[browserLang],
     }
 
     // TODO: Get scoped provider to work.
-    // <IntlProvider scope="auto" definition={definitions[browserLang]}>
-    //   <MarkupText id="lang.switch" fields={fields} />
-    // </IntlProvider>
+    // return (
+    //   <div class="yeti__lang card">
+    //     <div class="yeti__lang__switch" data-lang={browserLang} onClick={this.handleAutoLangSwitch}>
+    //       <IntlProvider scope="auto" definition={definitions[browserLang]}>
+    //         <MarkupText id="lang.switch" fields={fields} />
+    //       </IntlProvider>
+    //     </div>
+    //   </div>
+    // )
+
+    // TODO: Remove when scoped provider works.
+    let switchText = browserDefinition.lang.switch
+    switchText = switchText.replace('{{origin}}', fields.origin)
+    switchText = switchText.replace('{{destination}}', fields.destination)
 
     return (
       <div class="yeti__lang card">
         <div class="yeti__lang__switch" data-lang={browserLang} onClick={this.handleAutoLangSwitch}>
-          <MarkupText id="lang.switch" fields={fields} />
+          {switchText}
         </div>
       </div>
     )
