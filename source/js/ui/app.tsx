@@ -172,12 +172,14 @@ export default class App extends Component<AppProps, AppState> {
             handleBorrowedInput={this.handleBorrowedInput.bind(this)}
             handleRateInput={this.handleRateInput.bind(this)}
             handleMinimumPaymentInput={this.handleMinimumPaymentInput.bind(this)} />
-          <Payment
-            payment={state.payment}
-            handlePaymentInput={this.handlePaymentInput.bind(this)} />
-          <Save
-            doLocalSave={state.doLocalSave}
-            handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
+          <div class="yeti__grid yeti__grid--two">
+            <Payment
+              payment={state.payment}
+              handlePaymentInput={this.handlePaymentInput.bind(this)} />
+            <Save
+              doLocalSave={state.doLocalSave}
+              handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
+          </div>
           <PlanSuggested />
           <PlanPayoffTimeline />
           <PlanAccelerate />

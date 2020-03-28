@@ -29,14 +29,16 @@ export default class Debts extends Component<DebtsProps, DebtsState> {
 
     return (
       <div class="yeti__debts">
-        {props.debts.map(debt => (
-          <Debt
-            debt={debt}
-            handleBorrowedInput={props.handleBorrowedInput}
-            handleMinimumPaymentInput={props.handleMinimumPaymentInput}
-            handleRateInput={props.handleRateInput}
-            handleRemoveDebt={props.handleRemoveDebt} />
-        ))}
+        <div class="yeti__grid yeti__grid--three">
+          {props.debts.map(debt => (
+            <Debt
+              debt={debt}
+              handleBorrowedInput={props.handleBorrowedInput}
+              handleMinimumPaymentInput={props.handleMinimumPaymentInput}
+              handleRateInput={props.handleRateInput}
+              handleRemoveDebt={props.handleRemoveDebt} />
+          ))}
+        </div>
 
         {!showAdd ? '' :
           <div class="card card--actions">

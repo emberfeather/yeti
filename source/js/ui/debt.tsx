@@ -24,7 +24,7 @@ export default class Debt extends Component<DebtProps, DebtState> {
 
   render(props: DebtProps, _state: DebtState) {
     return (
-      <div class="yeti__debt card" data-debt-uid={props.debt.uid}>
+      <div class="yeti__debt card card--flush" data-debt-uid={props.debt.uid}>
         <div class="actions__wrapper">
           <p>
             Borrowed

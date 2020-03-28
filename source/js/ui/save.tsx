@@ -31,7 +31,7 @@ export default class Save extends Component<SaveProps, SaveState> {
     const toggleClasses = toggleClassList.join(' ')
 
     return (
-      <div class="yeti__save card">
+      <div class="yeti__save card card--flush">
         <div class="input__toggle" onClick={props.handleLocalSaveToggle}>
           <div class={toggleClasses}></div>
           <Text id="save.label" />

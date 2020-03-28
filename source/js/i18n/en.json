@@ -12,7 +12,7 @@
     "rate": "Interest rate"
   },
 	"lang": {
-		"switch": "You are viewing this page in {{origin}}. Switch to {{destination}}",
+		"switch": "You are viewing this page in {{origin}}. Switch to {{destination}}.",
 		"languages": {
 			"en": "English",
 			"es": "Spanish"

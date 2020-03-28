@@ -1,7 +1,12 @@
 import { h, Component } from 'preact'
-import { MarkupText } from 'preact-i18n'
+import { IntlProvider, MarkupText } from 'preact-i18n'
+// TODO: Get scoped provider to work.
+// import { IntlProvider, MarkupText } from 'preact-i18n'
+
 
 import { AVAILABLE_LANGS, DEFAULT_LANG } from '../config'
+// TODO: Get scoped provider to work.
+// import { definitions } from '../i18n/i18n'
 import { findParentByClassname } from '../utility/dom'
 
 
@@ -45,6 +50,11 @@ export default class AutoLang extends Component<AutoLangProps, AutoLangState> {
       'origin': props.lang,
       'destination': browserLang,
     }
+
+    // TODO: Get scoped provider to work.
+    // <IntlProvider scope="auto" definition={definitions[browserLang]}>
+    //   <MarkupText id="lang.switch" fields={fields} />
+    // </IntlProvider>
 
     return (
       <div class="yeti__lang card">

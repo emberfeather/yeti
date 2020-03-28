@@ -20,7 +20,7 @@ export default class Payment extends Component<PaymentProps, PaymentState> {
 
   render(props: PaymentProps, _state: PaymentState) {
     return (
-      <div class="yeti__payment card">
+      <div class="yeti__payment card card--flush">
         <p>
           Each month
           <span class="input__currency"><input type="number" step="0.01" value={props.payment.toFixed(2)} onInput={props.handlePaymentInput} class="input input--inline input--currency" /></span>
