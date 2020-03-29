@@ -7,6 +7,7 @@
       <meta name="google-site-verification" content="{{podspec.meta.google_site_verification}}">
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, height=device-height">
+
     <title>{% if doc.title %}{{doc.title}} – {% endif %}{{podspec.title}}</title>
     {% if podspec.meta.image %}
       <meta property="og:image" content="{{g.static(podspec.meta.image).url.path}}">
@@ -19,9 +20,16 @@
       <meta name="description" content="{{doc.description}}">
       <meta property="og:description" content="{{doc.description}}">
     {% endif %}
+
+    <link rel="alternate" href="{{doc.get_serving_path_base()}}" hreflang="{{doc.default_locale}}" />
+    {% set localizationPaths = doc.get_serving_paths_localized() %}
+    {% for key in localizationPaths %}
+      <link rel="alternate" href="{{localizationPaths[key]}}" hreflang="{{key}}" />
+    {% endfor %}
     {% if podspec.meta.favicon_path %}
       <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
     {% endif %}
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Convergence|Montez" rel="stylesheet">
     <link href="{{ g.static('/dist/css/composite/global.min.css').url.path }}" rel="stylesheet">
@@ -37,7 +45,7 @@
       {% endif %}
     {% endfor %}
   </head>
-  <body data-currency="{{doc.currency}}">
+  <body>
     <div class="wrapper">
       {% include '/partials/header/header.html' %}
       <div class="block__main">

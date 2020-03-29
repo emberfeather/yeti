@@ -1,2 +1,7 @@
 view: /views/base.html
 path: /{base}/
+
+localization:
+  path: /{locale}/
+  rtl: false
+  rtl@ar: true
