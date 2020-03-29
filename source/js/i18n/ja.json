@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "借金を追加",
+    "remove": "借金を取り除く"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "借入額。",
+      "label": "借入額"
+    },
+    "minimumPayment": {
+      "help": "債務者が必要とする最低月額支払い。",
+      "label": "最低支払額"
+    },
+    "payment": {
+      "help": "借金を返済するために毎月利用可能な合計金額。",
+      "label": "毎月の支払額"
+    },
+    "rate": {
+      "help": "負債の年利。",
+      "label": "金利"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "アラビア語",
+      "de": "ドイツ人",
+      "en": "英語",
+      "es": "スペイン語",
+      "fr": "フランス語",
+      "it": "イタリアの",
+      "ja": "日本人",
+      "pt": "ポルトガル",
+      "ru": "ロシア"
+    },
+    "switch": " {{origin}}でこのページを表示しています。 {{destination}}に切り替えます。"
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": " <strong>簡単に返済できる</strong> 借金を見つけようとすると、 <strong>雪だるま式に増える</strong>。",
+      "evaluation": "これは、最高金利戦略よりも <strong>精神的および感情的に簡単</strong> であり、通常、最低残高戦略よりも速いため、推奨される戦略です。",
+      "explanation": "借金をスノーボーリングして、 <strong>最低残高から最低支払いまでを最初に</strong> 払い戻すと、 <strong>{{amount}} 関心が減ります</strong>。",
+      "title": "最小支払比率のバランス"
+    },
+    "balanceRateRatio": {
+      "description": " <strong>簡単に返済できる</strong> 借金を見つけようとすると、 <strong>雪だるま式に増える</strong>。",
+      "evaluation": "これは、最高金利戦略よりも <strong>精神的および感情的に簡単</strong> であり、最低残高戦略よりも迅速である可能性があるため、推奨される戦略です。",
+      "explanation": "借金をスノーボーリングして <strong>金利と最低残高のバランスを最初に取り戻そう</strong> とすると、 <strong>{{amount}} 少ない利息</strong>が使われます。",
+      "title": "金利比率のバランス"
+    },
+    "highestBalance": {
+      "description": "最も高い残高を最初に支払います。",
+      "evaluation": "これは、 <strong>最低残高戦略の対抗点</strong> として計算され、返済の順序がどの程度の違いをもたらすかを示します。",
+      "explanation": "借金をスノーボーリングして、最初に <strong>最高の残高を完済</strong> させると、関心が <strong>{{amount}} 少なくなります</strong>。",
+      "title": "最初に最高のバランス"
+    },
+    "highestRate": {
+      "description": "最も高い金利のローンを最初に返済すると、最終的には合計で <strong>少ない利息</strong>を支払うことになります。",
+      "evaluation": "",
+      "explanation": "借金をスノーボーリングして <strong>最も高い金利を先に返済すること</strong> は、 <strong>{{amount}} 少ない金利を費やすことになります</strong>。",
+      "title": "最も高い関心を最初に"
+    },
+    "lowestBalance": {
+      "description": "残高が最も少ないローンを最初に完済することで、 <strong>雪玉をすばやく増やす</strong>ことができます。",
+      "evaluation": "これは最も一般的に推進されている戦略の1つであり、勢いをすばやく構築し、進歩について気持ちよく感じることができるため、多くの場合、 <strong>精神的および感情的に実行するのが簡単</strong> です。",
+      "explanation": "最初に <strong>最低残高を完済するために借金をスノーボーリング</strong> すると、関心が <strong>{{amount}} 少なくなります</strong>。",
+      "title": "最初に最低残高"
+    },
+    "lowestRate": {
+      "description": "最初に最低金利を支払います。",
+      "evaluation": "これは、 <strong>最高金利戦略の対抗点</strong> として計算され、返済の順序がどの程度の違いをもたらすかを示します。",
+      "explanation": "最初に <strong>最低金利を返済するために借金をスノーボーリングすると、</strong> 関心が <strong>{{amount}} 少なくなります</strong>。",
+      "title": "最初に最低金利"
+    },
+    "minimumPayment": {
+      "description": "最低支払いのみを支払います。",
+      "evaluation": "これはあなたの借金を早く返済することの反論です。",
+      "explanation": "毎月必要な最低限の支払いのみを支払います。",
+      "title": "最低支払いのみ"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "毎月",
+      "description": "毎月さらに <strong>{{extra}}</strong> を追加し、関心のある追加の <strong>{{saved}}</strong> を節約します。",
+      "interest": "支払われる利子が少ない",
+      "time": "迅速な返済"
+    },
+    "order": "返済注文",
+    "other": {
+      "title": "その他の戦略"
+    },
+    "over": "<strong>{{extra}}</strong> は借金のスノーボーリングに利用できます。",
+    "overview": {
+      "interest": "支払われる利子が少ない",
+      "time": "迅速な返済"
+    },
+    "plans": {
+      "comparison": "返済計画の比較",
+      "descriptions": "返済計画の説明"
+    },
+    "total": {
+      "spent": "費やした合計",
+      "time": "合計時間"
+    }
+  },
+  "save": {
+    "help": "次の訪問のために、借金と返済の情報をローカルに <strong>に保存します</strong> 。",
+    "label": "後で見るように保存"
+  },
+  "subTitle": "借金雪玉計算機",
+  "time": {
+    "months": {
+      "many": "{{months}} か月",
+      "none": "変化なし",
+      "one": "{{months}} か月"
+    }
+  },
+  "title": "イエティ"
+}

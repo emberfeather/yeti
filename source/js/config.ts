@@ -1,4 +1,4 @@
-export const AVAILABLE_LANGS = ['ar', 'en', 'es']
+export const AVAILABLE_LANGS = ['ar', 'de', 'en', 'es', 'fr', 'it', 'ja', 'pt', 'ru']
 export const BASE_STRATEGY = 'minimumPayment'
 export const DEFAULT_COUNTRY = 'US'
 export const DEFAULT_LANG = 'en'

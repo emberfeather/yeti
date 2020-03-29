@@ -6,15 +6,14 @@ localization:
   default_locale: en
   locales:
   - ar
-  # - cs
-  # - de
+  - de
   - en
   - es
-  # - fr
-  # - it
-  # - ja
-  # - pt
-  # - ru
+  - fr
+  - it
+  - ja
+  - pt
+  - ru
 
 title: "Yeti"
 meta:

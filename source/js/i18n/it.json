@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Aggiungi debito",
+    "remove": "Rimuovi il debito"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Importo del debito preso in prestito.",
+      "label": "Importo preso in prestito"
+    },
+    "minimumPayment": {
+      "help": "Pagamento mensile minimo richiesto dal detentore del debito.",
+      "label": "Pagamento minimo"
+    },
+    "payment": {
+      "help": "Importo totale disponibile ogni mese per pagare il debito.",
+      "label": "Pagamento mensile"
+    },
+    "rate": {
+      "help": "Tasso di interesse annuale per il debito.",
+      "label": "Tasso d'interesse"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "arabo",
+      "de": "Tedesco",
+      "en": "Inglese",
+      "es": "Spagnolo",
+      "fr": "Francese",
+      "it": "Italiano",
+      "ja": "giapponese",
+      "pt": "portoghese",
+      "ru": "russo"
+    },
+    "switch": "Stai visualizzando questa pagina in {{origin}}. Passa a {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "I tentativi di trovare debiti che saranno <strong>facili da pagare</strong> e <strong>si aggiungeranno rapidamente alla tua palla di neve</strong>.",
+      "evaluation": "Questa è una strategia preferita in quanto può essere <strong>mentalmente ed emotivamente più facile</strong> rispetto alla strategia con il tasso di interesse più elevato e di solito più veloce della strategia con il saldo più basso.",
+      "explanation": "Innalzando i tuoi debiti per pagare il saldo più basso <strong>al minimo pagamento</strong> spenderanno <strong>{{amount}} meno in interessi</strong>.",
+      "title": "saldo al rapporto di pagamento minimo"
+    },
+    "balanceRateRatio": {
+      "description": "I tentativi di trovare debiti che saranno <strong>facili da pagare</strong> e <strong>si aggiungeranno rapidamente alla tua palla di neve</strong>.",
+      "evaluation": "Questa è una strategia preferita in quanto potrebbe essere <strong>mentalmente ed emotivamente più facile</strong> della strategia per il tasso di interesse più elevato e più rapida della strategia per il saldo più basso.",
+      "explanation": "Innalzando i tuoi debiti per pagare prima il saldo più basso <strong>al tasso di interesse</strong> spenderai <strong>{{amount}} meno in interessi</strong>.",
+      "title": "rapporto tra saldo e tasso di interesse"
+    },
+    "highestBalance": {
+      "description": "Paga prima il saldo più alto.",
+      "evaluation": "Questo viene calcolato come <strong>contrappunto alla strategia del saldo più basso</strong> per mostrare quanta differenza fa l'ordine di rimborso.",
+      "explanation": "Innalzando i tuoi debiti per pagare prima il saldo <strong>più alto</strong> spenderai <strong>{{amount}} meno in interessi</strong>.",
+      "title": "prima il saldo più elevato"
+    },
+    "highestRate": {
+      "description": "Pagando prima i prestiti con il tasso di interesse più alto, si finisce per pagare <strong>in meno di interessi in totale</strong>.",
+      "evaluation": "Questo <strong>farà risparmiare la maggior parte del denaro</strong>, ma potrebbe essere il <strong>il</strong> più impegnativo mentalmente ed emotivamente da eseguire dal momento che di solito ci vuole più tempo a sentire che sta avendo alcun effetto.",
+      "explanation": "Innalzando i tuoi debiti per pagare prima <strong>l'interesse più elevato</strong> spenderai <strong>{{amount}} meno in interessi</strong>.",
+      "title": "il più alto interesse per primo"
+    },
+    "lowestBalance": {
+      "description": "Pagando prima i prestiti con il saldo più basso puoi <strong>aumentare rapidamente la tua palla di neve</strong>.",
+      "evaluation": "Questa è una delle strategie più comunemente promosse e spesso <strong>è più facile da eseguire mentalmente ed emotivamente da eseguire</strong> poiché sei in grado di sviluppare rapidamente lo slancio e sentirti bene con i progressi che fai.",
+      "explanation": "Innalzando i tuoi debiti per pagare prima il saldo <strong>più basso</strong> spenderai <strong>{{amount}} meno in interessi</strong>.",
+      "title": "prima il saldo più basso"
+    },
+    "lowestRate": {
+      "description": "Paga prima il tasso di interesse più basso.",
+      "evaluation": "Questo è calcolato come <strong>contrappunto alla strategia del tasso di interesse più elevato</strong> per mostrare quanta differenza fa l'ordine di rimborso.",
+      "explanation": "Innalzando i tuoi debiti per pagare prima il <strong>tasso di interesse più basso</strong> spenderai <strong>{{amount}} meno in interessi</strong>.",
+      "title": "il tasso di interesse più basso per primo"
+    },
+    "minimumPayment": {
+      "description": "Paga solo il pagamento minimo.",
+      "evaluation": "Questa è l'antitesi di ripagare il debito velocemente.",
+      "explanation": "Pagando solo il pagamento minimo richiesto ogni mese.",
+      "title": "solo pagamento minimo"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "Più mensile",
+      "description": "Aggiungi <strong>{{extra}}</strong> ogni mese e risparmia un ulteriore <strong>{{saved}}</strong> per interesse.",
+      "interest": "Meno interessi pagati",
+      "time": "Rimborso più rapido"
+    },
+    "order": "Ordine di rimborso",
+    "other": {
+      "title": "Altre strategie"
+    },
+    "over": "<strong>{{extra}}</strong> disponibile per lo snowballing del debito.",
+    "overview": {
+      "interest": "Meno interessi pagati",
+      "time": "Rimborso più rapido"
+    },
+    "plans": {
+      "comparison": "Confronto del piano di rimborso",
+      "descriptions": "Descrizioni del piano di rimborso"
+    },
+    "total": {
+      "spent": "Spesa totale",
+      "time": "Tempo totale"
+    }
+  },
+  "save": {
+    "help": "Memorizza le informazioni sul debito e sul rimborso <strong>localmente</strong> per la tua prossima visita.",
+    "label": "Salva per dopo"
+  },
+  "subTitle": "Calcolatore della palla di neve di debito",
+  "time": {
+    "months": {
+      "many": "{{months}} mesi",
+      "none": "Nessun cambiamento",
+      "one": "{{months}} mese"
+    }
+  },
+  "title": "Yeti"
+}

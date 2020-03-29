@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Schulden hinzufügen",
+    "remove": "Schulden entfernen"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Höhe der geliehenen Schulden.",
+      "label": "Geliehener Betrag"
+    },
+    "minimumPayment": {
+      "help": "Vom Schuldner geforderte monatliche Mindestzahlung.",
+      "label": "Mindestzahlung"
+    },
+    "payment": {
+      "help": "Monatlich verfügbarer Gesamtbetrag zur Tilgung von Schulden.",
+      "label": "Monatliche Bezahlung"
+    },
+    "rate": {
+      "help": "Jährlicher Zinssatz für die Schulden.",
+      "label": "Zinssatz"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "Arabisch",
+      "de": "Deutsche",
+      "en": "Englisch",
+      "es": "Spanisch",
+      "fr": "Französisch",
+      "it": "Italienisch",
+      "ja": "Japanisch",
+      "pt": "Portugiesisch",
+      "ru": "Russisch"
+    },
+    "switch": "Sie sehen diese Seite in {{origin}}. Wechseln Sie zu {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "Versuche, Schulden zu finden, die <strong>leicht abzuzahlen sind</strong> und <strong>, tragen schnell zu Ihrem Schneeball</strong>bei.",
+      "evaluation": "",
+      "explanation": "Wenn Sie Ihre Schulden in die Höhe treiben, um den <strong>niedrigsten Saldo bis zur minimalen Zahlung zuerst abzuzahlen</strong> , werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "Saldo zu Mindestzahlungsverhältnis"
+    },
+    "balanceRateRatio": {
+      "description": "Versuche, Schulden zu finden, die <strong>leicht abzuzahlen sind</strong> und <strong>, tragen schnell zu Ihrem Schneeball</strong>bei.",
+      "evaluation": "",
+      "explanation": "Wenn Sie Ihre Schulden in die Höhe treiben, um den <strong>niedrigsten Saldo zum Zinssatz zuerst abzuzahlen</strong> , werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "Gleichgewicht zu Zinsverhältnis"
+    },
+    "highestBalance": {
+      "description": "Zahlen Sie zuerst das höchste Guthaben aus.",
+      "evaluation": "Dies wird als <strong>Kontrapunkt zur Strategie des niedrigsten Kontostands</strong> berechnet, um zu zeigen, welchen Unterschied die Reihenfolge der Rückzahlung macht.",
+      "explanation": "Wenn Sie Ihre Schulden in den Schneeball legen, um den <strong>höchsten Saldo zuerst abzuzahlen</strong> , werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "höchste Balance zuerst"
+    },
+    "highestRate": {
+      "description": "Wenn Sie die Kredite mit dem höchsten Zinssatz zuerst zurückzahlen, zahlen Sie am Ende <strong>weniger Zinsen insgesamt</strong>.",
+      "evaluation": "Dies spart <strong>das meiste Geld</strong>, ist jedoch möglicherweise die <strong>mental und emotional am schwierigsten auszuführende</strong> , da es normalerweise länger dauert, bis Sie das Gefühl haben, dass es einen Effekt hat.",
+      "explanation": "Wenn Sie Ihre Schulden in die Höhe treiben, um die <strong>höchsten Zinsen zuerst abzuzahlen</strong> , werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "höchstes Interesse zuerst"
+    },
+    "lowestBalance": {
+      "description": "Indem Sie zuerst Kredite mit dem niedrigsten Guthaben zurückzahlen, können Sie <strong>Ihren Schneeball schnell erhöhen</strong>.",
+      "evaluation": "Dies ist eine der am häufigsten beworbenen Strategien und oft ist es <strong>mental und emotional einfacher,</strong> auszuführen, da Sie in der Lage sind, schnell Schwung aufzubauen und sich über Ihre Fortschritte gut zu fühlen.",
+      "explanation": "Wenn Sie Ihre Schulden in die Höhe treiben, um zuerst den <strong>niedrigsten Saldo</strong> abzuzahlen, werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "niedrigster Saldo zuerst"
+    },
+    "lowestRate": {
+      "description": "Zahlen Sie zuerst den niedrigsten Zinssatz aus.",
+      "evaluation": "Dies wird als <strong>Kontrapunkt zur Strategie mit dem höchsten Zinssatz</strong> berechnet, um zu zeigen, welchen Unterschied die Reihenfolge der Rückzahlung macht.",
+      "explanation": "Wenn Sie Ihre Schulden in den Schneeball legen, um zuerst den <strong>niedrigsten Zinssatz</strong> abzuzahlen, werden <strong>{{amount}} weniger Zinsen</strong>ausgegeben.",
+      "title": "niedrigster Zinssatz zuerst"
+    },
+    "minimumPayment": {
+      "description": "Zahlen Sie nur die Mindestzahlung aus.",
+      "evaluation": "Dies ist die Anti-These, Ihre Schulden schnell abzuzahlen.",
+      "explanation": "Zahlen Sie nur die monatliche Mindestzahlung aus.",
+      "title": "Nur Mindestzahlung"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "Mehr monatlich",
+      "description": "Fügen Sie jeden Monat <strong>{{extra}}</strong> mehr hinzu und speichern Sie weitere <strong>{{saved}}</strong> im Interesse.",
+      "interest": "Weniger Zinsen gezahlt",
+      "time": "Schnellere Rückzahlung"
+    },
+    "order": "Rückzahlungsauftrag",
+    "other": {
+      "title": "Andere Strategien"
+    },
+    "over": "<strong>{{extra}}</strong> verfügbar für Schulden-Schneeball.",
+    "overview": {
+      "interest": "Weniger Zinsen gezahlt",
+      "time": "Schnellere Rückzahlung"
+    },
+    "plans": {
+      "comparison": "Vergleich des Rückzahlungsplans",
+      "descriptions": "Beschreibungen des Rückzahlungsplans"
+    },
+    "total": {
+      "spent": "Gesamtausgaben",
+      "time": "Gesamtzeit"
+    }
+  },
+  "save": {
+    "help": "Speichert die Schulden- und Rückzahlungsinformationen <strong>lokal</strong> für Ihren nächsten Besuch.",
+    "label": "Für später speichern"
+  },
+  "subTitle": "Schulden Schneeball Rechner",
+  "time": {
+    "months": {
+      "many": "{{months}} Monate",
+      "none": "Keine Änderung",
+      "one": "{{months}} Monat"
+    }
+  },
+  "title": "Yeti"
+}

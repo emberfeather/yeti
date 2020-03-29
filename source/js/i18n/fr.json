@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Ajouter une dette",
+    "remove": "Retirer la dette"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Montant de la dette empruntée.",
+      "label": "Montant emprunté"
+    },
+    "minimumPayment": {
+      "help": "Paiement mensuel minimum requis par le titulaire de la dette.",
+      "label": "Paiement minimum"
+    },
+    "payment": {
+      "help": "Montant total disponible chaque mois pour rembourser la dette.",
+      "label": "Paiement mensuel"
+    },
+    "rate": {
+      "help": "Taux d'intérêt annuel pour la dette.",
+      "label": "Taux d'interet"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "Arabe",
+      "de": "Allemand",
+      "en": "Anglais",
+      "es": "Espanol",
+      "fr": "français",
+      "it": "Italien",
+      "ja": "japonais",
+      "pt": "Portugais",
+      "ru": "russe"
+    },
+    "switch": "Vous consultez cette page en {{origin}}. Passez à {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "Les tentatives de trouver des dettes qui seront <strong>faciles à rembourser</strong> et <strong>s'ajoutent rapidement à votre boule de neige</strong>.",
+      "evaluation": "Il s'agit d'une stratégie préférée car elle peut être <strong>mentalement et émotionnellement plus facile</strong> que la stratégie du taux d'intérêt le plus élevé et généralement plus rapide que la stratégie du solde le plus bas.",
+      "explanation": "Faire boule de neige sur vos dettes pour rembourser le <strong>solde le plus bas au paiement minimum en premier</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "solde au ratio de paiement minimum"
+    },
+    "balanceRateRatio": {
+      "description": "Les tentatives de trouver des dettes qui seront <strong>faciles à rembourser</strong> et <strong>s'ajoutent rapidement à votre boule de neige</strong>.",
+      "evaluation": "Il s'agit d'une stratégie préférée, car si elle peut être <strong>mentalement et émotionnellement plus facile</strong> que la stratégie du taux d'intérêt le plus élevé et plus rapide que la stratégie du solde le plus bas.",
+      "explanation": "Faire boule de neige sur vos dettes pour rembourser d'abord le <strong>solde le plus bas au taux d'intérêt</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "rapport solde / taux d'intérêt"
+    },
+    "highestBalance": {
+      "description": "Payez d'abord le solde le plus élevé.",
+      "evaluation": "Ceci est calculé comme un <strong>contre-point à la stratégie de solde le plus bas</strong> pour montrer la différence de l'ordre de remboursement.",
+      "explanation": "Faire boule de neige sur vos dettes pour rembourser le <strong>solde le plus élevé en premier</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "équilibre le plus élevé en premier"
+    },
+    "highestRate": {
+      "description": "En remboursant d'abord les prêts au taux d'intérêt le plus élevé, vous finissez par payer <strong>moins d'intérêts au total</strong>.",
+      "evaluation": "Cela permettra <strong>d'économiser le plus d'argent</strong>, mais peut être le <strong>défi mental et émotionnel</strong> le plus difficile à exécuter, car il faut généralement plus de temps pour avoir l'impression d'avoir un effet.",
+      "explanation": "Faire boule de neige sur vos dettes pour rembourser le <strong>intérêt le plus élevé en premier</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "intérêt le plus élevé en premier"
+    },
+    "lowestBalance": {
+      "description": "En remboursant d'abord les prêts dont le solde est le plus bas, vous pouvez <strong>augmenter rapidement votre boule de neige</strong>.",
+      "evaluation": "Il s'agit de l'une des stratégies les plus couramment promues et est souvent <strong>plus facile à exécuter mentalement et émotionnellement</strong> car vous êtes en mesure de créer rapidement un élan et de vous sentir bien dans les progrès que vous faites.",
+      "explanation": "Faire bouillir vos dettes pour rembourser le <strong>solde le plus bas en premier</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "solde le plus bas en premier"
+    },
+    "lowestRate": {
+      "description": "Payez d'abord le taux d'intérêt le plus bas.",
+      "evaluation": "Ceci est calculé comme un <strong>contre-point à la stratégie de taux d'intérêt le plus élevé</strong> pour montrer la différence de l'ordre de remboursement.",
+      "explanation": "Faire boule de neige sur vos dettes pour rembourser le <strong>taux d'intérêt le plus bas en premier</strong> dépensera <strong>{{amount}} moins en intérêts</strong>.",
+      "title": "taux d'intérêt le plus bas en premier"
+    },
+    "minimumPayment": {
+      "description": "Payez uniquement le paiement minimum.",
+      "evaluation": "C'est l'antithèse de rembourser rapidement votre dette.",
+      "explanation": "Payant uniquement le paiement minimum requis chaque mois.",
+      "title": "paiement minimum seulement"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "Plus mensuel",
+      "description": "Ajoutez <strong>{{extra}}</strong> de plus chaque mois et économisez <strong>{{saved}}</strong> supplémentaires en intérêts.",
+      "interest": "Moins d'intérêts payés",
+      "time": "Remboursement plus rapide"
+    },
+    "order": "Ordonnance de remboursement",
+    "other": {
+      "title": "Autres stratégies"
+    },
+    "over": "<strong>{{extra}}</strong> disponible pour faire boule de neige sur la dette.",
+    "overview": {
+      "interest": "Moins d'intérêts payés",
+      "time": "Remboursement plus rapide"
+    },
+    "plans": {
+      "comparison": "Comparaison des plans de remboursement",
+      "descriptions": "Description des plans de remboursement"
+    },
+    "total": {
+      "spent": "Total dépensé",
+      "time": "Temps total"
+    }
+  },
+  "save": {
+    "help": "Stocke la dette et les informations de remboursement <strong>localement</strong> pour votre prochaine visite.",
+    "label": "Garder pour plus tard"
+  },
+  "subTitle": "Calculateur de dette de boule de neige",
+  "time": {
+    "months": {
+      "many": "{{months}} mois",
+      "none": "Pas de changement",
+      "one": "{{months}} mois"
+    }
+  },
+  "title": "Yeti"
+}
