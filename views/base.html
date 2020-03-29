@@ -21,6 +21,8 @@
       <meta property="og:description" content="{{doc.description}}">
     {% endif %}
 
+    <meta name="mobile-web-app-capable" content="yes">
+
     <link rel="alternate" href="{{doc.get_serving_path_base()}}" hreflang="{{doc.default_locale}}" />
     {% set localizationPaths = doc.get_serving_paths_localized() %}
     {% for key in localizationPaths %}
