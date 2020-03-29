@@ -21,6 +21,7 @@ meta:
   description: Debt snowball calculator
   google_analytics_id: "UA-4270246-5"
   favicon_path: /static/images/favicon.ico
+  image: /static/images/share.png
 
 preprocessors:
 - kind: gulp
