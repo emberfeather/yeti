@@ -58,7 +58,7 @@ jobs:
 
     - run:
         name: Prod Build
-        command: grow deploy prod
+        command: grow deploy prod -f
 
     - persist_to_workspace:
         root: ~/grow
@@ -112,7 +112,7 @@ workflows:
             only: master
     - deploy:
         requires:
-        - build
+        - build_deploy
         filters:
           branches:
             only: master
