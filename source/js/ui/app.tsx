@@ -137,10 +137,15 @@ export default class App extends Component<AppProps, AppState> {
     const uid = target.dataset.debtUid
     const value = parseFloat(evt.target.value)
     const debt = App.findDebtByUid(this.state.debts, uid)
-    debt.borrowed = Number.isNaN(value) ? 0 : value
 
-    // Trigger a refresh of the state.
-    this.updateDebts(this.state.debts)
+    try {
+      debt.borrowed = Number.isNaN(value) ? 0 : value
+
+      // Trigger a refresh of the state.
+      this.updateDebts(this.state.debts)
+    } catch {
+      // Pass.
+    }
   }
 
   handleLocalSaveToggle(_evt: any) {
@@ -158,10 +163,14 @@ export default class App extends Component<AppProps, AppState> {
     const uid = target.dataset.debtUid
     const value = parseFloat(evt.target.value)
     const debt = App.findDebtByUid(this.state.debts, uid)
-    debt.minimumPayment = Number.isNaN(value) ? 0 : value
+    try {
+      debt.minimumPayment = Number.isNaN(value) ? 0 : value
 
-    // Trigger a refresh of the state.
-    this.updateDebts(this.state.debts)
+      // Trigger a refresh of the state.
+      this.updateDebts(this.state.debts)
+    } catch {
+      // Pass.
+    }
   }
 
   handlePaymentInput(evt: any) {

@@ -23,14 +23,15 @@
 
     <meta name="mobile-web-app-capable" content="yes">
 
+    {% if podspec.meta.favicon_path %}
+    <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
+    {% endif %}
+
     <link rel="alternate" href="{{doc.get_serving_path_base()}}" hreflang="{{doc.default_locale}}" />
     {% set localizationPaths = doc.get_serving_paths_localized() %}
     {% for key in localizationPaths %}
       <link rel="alternate" href="{{localizationPaths[key]}}" hreflang="{{key}}" />
     {% endfor %}
-    {% if podspec.meta.favicon_path %}
-      <link rel="shortcut icon" href="{{g.static(podspec.meta.favicon_path).url.path}}">
-    {% endif %}
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Convergence|Montez" rel="stylesheet">
