@@ -75,8 +75,8 @@
     "order": "Repayment order",
     "over": "<strong>{{extra}}</strong> available for debt snowballing.",
 		"overview": {
-			"additional": "Additional spent",
-			"interest": "Interest Paid",
+			"additional": "More monthly",
+			"interest": "Less interest paid",
 			"time": "Faster repayment"
 		},
     "plans": {

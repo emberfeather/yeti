@@ -233,7 +233,11 @@ export default class App extends Component<AppProps, AppState> {
           </div>
           <PlanSuggested strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
           <PlanPayoffTimeline />
-          <PlanAccelerate currency={state.currency} locale={state.locale} />
+          <PlanAccelerate
+            strategyKey={state.strategyKey}
+            strategyGroup={state.strategyGroup}
+            currency={state.currency}
+            locale={state.locale} />
           <PlanInterestChart />
           <PlanDetail strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
           <PlanPicker strategyGroup={state.strategyGroup} currency={state.currency} locale={state.locale} />

@@ -20,6 +20,10 @@ export default class StrategyGroup {
     }
   }
 
+  accelerate(strategyKey: string, extra: number) {
+    return new this.strategyClasses[strategyKey](this.debts, this.payment + extra)
+  }
+
   compare(strategyKey: string) {
     return new YetiStrategyComparison(
       this.strategies[this.baseStrategyKey],
