@@ -1,0 +1,37 @@
+{
+  "ext-google-cloud-images": {
+    "can_reset": false,
+    "separate_file": false,
+    "values": {
+      "https://gci.grow.io:/ball-of-snow-assets/images/bottom.png:metadata": {
+        "content_type": "image/png",
+        "created": 1585491449.0,
+        "etag": "314b48e6ca1d8930fffd653392ee0552",
+        "image_metadata": {
+          "height": 1125,
+          "width": 1800
+        },
+        "metadata": {
+          "cache-control": "private, max-age=0"
+        },
+        "size": 1623532,
+        "url": "https://lh3.googleusercontent.com/ZBiWUzWP3lqrIWTQKBc0NLezBe-bAS9LNuupJa40ho8lO_oPeQdUhiYRrwjAcack8z3qC9iRocIpsKlCGcE"
+      },
+      "https://gci.grow.io:/ball-of-snow-assets/images/share.png:metadata": {
+        "content_type": "image/png",
+        "created": 1585491447.0,
+        "etag": "cd53b9c37905728898e0095f75199d05",
+        "image_metadata": {
+          "height": 630,
+          "width": 1200
+        },
+        "metadata": {
+          "cache-control": "private, max-age=0"
+        },
+        "size": 614499,
+        "url": "https://lh3.googleusercontent.com/mDgDrGubOYb46IMzHi1IHZFnO8E8OKPlT92a0I5RWHOrLOIIXmxnil1DTR57oMZUt0Ue9kJcdmH7_GyZOY9B"
+      }
+    },
+    "write_to_file": true
+  }
+}

@@ -10,7 +10,7 @@
 
     <title>{% if doc.title %}{{doc.title}} – {% endif %}{{podspec.title}}</title>
     {% if podspec.meta.image %}
-      <meta property="og:image" content="{{g.static(podspec.meta.image).url.path}}">
+      <meta property="og:image" content="{{google_image(podspec.meta.image).url(['rw', 's0'])}}">
     {% endif %}
     <meta property="og:title" content="{% if doc.title %}{{doc.title}} – {% endif %}{{podspec.title}}">
     <meta property="og:site_name" content="{{podspec.title}}">

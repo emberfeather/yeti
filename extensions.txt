@@ -1,0 +1,1 @@
+git+git://github.com/grow/grow-ext-google-cloud-images@6ae31ad3396c348e000830136c1a2bcc846cc6d1

@@ -2,6 +2,7 @@
 .grow/
 dist
 build
+extensions
 node_modules
 bower_components
 **.mo
