@@ -26,7 +26,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
       style: 'currency',
       currency: props.currency,
     })
-    const interestSaved = currencyFormat.format(props.strategyComparison.interest)
+    const interestSaved = currencyFormat.format(Math.abs(props.strategyComparison.interest))
     const fields = {
       amount: interestSaved,
     }

@@ -66,13 +66,17 @@
 	},
   "repayment": {
 		"abbrevation": "{{amount}} @ {{rate}}٪",
-		"accelerate": "أضف <strong>{{extra}}</strong> المزيد كل شهر واحفظ <strong>{{saved}}</strong> إضافية في الفائدة.",
+		"accelerate": {
+			"additional": "أكثر شهريا",
+			"description": "أضف <strong>{{extra}}</strong> المزيد كل شهر واحفظ <strong>{{saved}}</strong> إضافية في الفائدة.",
+			"interest": "دفع فائدة أقل",
+			"time": "سداد أسرع"
+		},
     "order": "أمر السداد",
     "over": "يتوفر <strong>{{extra}}</strong> للتضخم في الديون.",
 		"overview": {
-			"additional": "إنفاق إضافي",
-			"interest": "الفائدة المدفوعة",
-			"time": "سداد أسرع"
+      "interest": "الفائدة المدفوعة",
+      "time": "سداد أسرع"
 		},
     "plans": {
       "comparison": "مقارنة خطة السداد"

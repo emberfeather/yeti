@@ -66,13 +66,17 @@
 	},
   "repayment": {
 		"abbrevation": "{{amount}} @ {{rate}}%",
-		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
+		"accelerate": {
+			"additional": "Más mensual",
+			"description": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
+			"interest": "Menos intereses pagados",
+			"time": "Pago más rápido"
+		},
     "order": "Orden de reembolso",
     "over": "<strong>{{extra}}</strong> disponible para bola de nieve de deuda.",
 		"overview": {
-			"additional": "Gastado adicional",
-			"interest": "Pago interesado",
-			"time": "Pago más rápido"
+      "interest": "Pago interesado",
+      "time": "Pago más rápido"
 		},
     "plans": {
       "comparison": "Comparación del plan de pago"

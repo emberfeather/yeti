@@ -29,7 +29,12 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
       currency: props.currency,
     })
 
-    const accelerateExtra = 25
+    // 10% increase in payment.
+    let accelerateExtra = props.strategyGroup.payment * .1
+
+    // Round to the nearest 5.
+    accelerateExtra = Math.round(accelerateExtra / 5) * 5
+
     const strategy = props.strategyGroup.strategies[props.strategyKey]
     const acceleratedStrategy = props.strategyGroup.accelerate(props.strategyKey, accelerateExtra)
     const strategyComparison = new YetiStrategyComparison(strategy, acceleratedStrategy)
@@ -43,14 +48,14 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
         <div class="yeti__flex yeti__flex--two yeti__flex--center">
           <div class="yeti__flex__item">
             <p>
-              <MarkupText id="repayment.accelerate" fields={fields} />
+              <MarkupText id="repayment.accelerate.description" fields={fields} />
             </p>
           </div>
           <div class="yeti__flex__item">
             <div class="yeti__plan__grid yeti__plan__grid--three">
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  <Text id="repayment.overview.additional" />
+                  <Text id="repayment.accelerate.additional" />
                 </div>
                 <div class="yeti__plan__grid__value">
                   {currencyFormat.format(accelerateExtra)}
@@ -58,7 +63,7 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
               </div>
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  <Text id="repayment.overview.interest" />
+                  <Text id="repayment.accelerate.interest" />
                 </div>
                 <div class="yeti__plan__grid__value">
                   {currencyFormat.format(Math.abs(strategyComparison.interest))}
@@ -66,7 +71,7 @@ export default class PlanAccelerate extends Component<PlanAccelerateProps, PlanA
               </div>
               <div class="yeti__plan__grid__cell">
                 <div class="yeti__plan__grid__label">
-                  <Text id="repayment.overview.time" />
+                  <Text id="repayment.accelerate.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
                   <Text id="time.months" plural={strategyComparison.months} fields={{ months: strategyComparison.months * -1 }} />
