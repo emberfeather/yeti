@@ -90,15 +90,6 @@
 			"none": "لا تغيير",
 			"one": "شهر واحد",
 			"many": "{{months}} شهر"
-		},
-		"years": {
-			"none": "لا تغيير",
-			"one": "سنة واحدة",
-			"many": "{{years}} سنة"
-		},
-		"years_months": {
-			"singular": "عام واحد {{months}} شهر",
-			"plural": "{{years}} سنة {{months}} شهر"
 		}
 	}
 }

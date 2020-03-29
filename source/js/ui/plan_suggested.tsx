@@ -1,12 +1,12 @@
 import { h, Component } from 'preact'
 import { Text, MarkupText } from 'preact-i18n'
-import { BaseYetiStrategy } from '../yeti/strategy'
+import YetiStrategyComparison from '../yeti/strategyComparison'
 
 
 export interface PlanSuggestedProps {
   currency: string
   locale: string
-  strategy: BaseYetiStrategy
+  strategyComparison: YetiStrategyComparison
 }
 
 
@@ -26,8 +26,9 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
       style: 'currency',
       currency: props.currency,
     })
+    const interestSaved = currencyFormat.format(props.strategyComparison.interest)
     const fields = {
-      amount: `${currencyFormat.format(40)}`,
+      amount: interestSaved,
     }
 
     return (
@@ -40,7 +41,7 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
                   <Text id="repayment.overview.interest" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  {currencyFormat.format(-298)}
+                  {interestSaved}
                 </div>
               </div>
               <div class="yeti__plan__grid__cell">
@@ -48,14 +49,17 @@ export default class PlanSuggested extends Component<PlanSuggestedProps, PlanSug
                   <Text id="repayment.overview.time" />
                 </div>
                 <div class="yeti__plan__grid__value">
-                  <Text id="time.months" plural={-4} fields={{ months: -4 }} />
+                  <Text
+                      id="time.months"
+                      plural={props.strategyComparison.months}
+                      fields={{ months: props.strategyComparison.months }} />
                 </div>
               </div>
             </div>
           </div>
           <div class="yeti__flex__item">
             <p>
-              <MarkupText id={`plans.${props.strategy.key}.explanation`} fields={fields} />
+              <MarkupText id={`plans.${props.strategyComparison.strategy.key}.explanation`} fields={fields} />
             </p>
           </div>
         </div>

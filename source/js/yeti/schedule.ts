@@ -13,8 +13,28 @@ export default class YetiSchedule {
     this.balance = this.debt.borrowed
   }
 
+  get interest(): number {
+    let interest = 0
+    for (const payment of this.payments) {
+      interest += payment.interest
+    }
+    return toMoney(interest)
+  }
+
   get isPaidOff(): boolean {
     return this.balance <= 0.01
+  }
+
+  get months(): number {
+    return this.payments.length
+  }
+
+  get principal(): number {
+    let principal = 0
+    for (const payment of this.payments) {
+      principal += payment.principal
+    }
+    return toMoney(principal)
   }
 
   payment(extraPayment: number): number {

@@ -1,4 +1,5 @@
 import YetiDebt from './debt'
+import YetiStrategyComparison from './strategyComparison'
 
 export default class StrategyGroup {
   baseStrategyKey: string
@@ -17,5 +18,11 @@ export default class StrategyGroup {
     for (const key of Object.keys(this.strategyClasses)) {
       this.strategies[key] = new this.strategyClasses[key](this.debts, this.payment)
     }
+  }
+
+  compare(strategyKey: string) {
+    return new YetiStrategyComparison(
+      this.strategies[this.baseStrategyKey],
+      this.strategies[strategyKey])
   }
 }

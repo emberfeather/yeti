@@ -1,12 +1,12 @@
 import { h, Component } from 'preact'
 import { Text, MarkupText } from 'preact-i18n'
-import { BaseYetiStrategy } from '../yeti/strategy'
+import YetiStrategyComparison from '../yeti/strategyComparison'
 
 
 export interface PlanDetailProps {
   currency: string
   locale: string
-  strategy: BaseYetiStrategy
+  strategyComparison: YetiStrategyComparison
 }
 
 
@@ -24,19 +24,19 @@ export default class PlanDetail extends Component<PlanDetailProps, PlanDetailSta
   render(props: PlanDetailProps, state: PlanDetailState) {
     return (
       <div class="yeti__plan_detail card">
-        <h2><Text id={`plans.${props.strategy.key}.title`} /></h2>
+        <h2><Text id={`plans.${props.strategyComparison.strategy.key}.title`} /></h2>
         <div class="yeti__flex yeti__flex--three">
           <div class="yeti__flex__item">
             <p><Text id="repayment.order" /></p>
             <ol>
-              {props.strategy.debts.map(debt => (
+              {props.strategyComparison.strategy.debts.map(debt => (
                 <li><RepaymentDetail amount={debt.borrowed} rate={debt.rate} currency={props.currency} locale={props.locale} /></li>
               ))}
             </ol>
           </div>
           <div class="yeti__flex__item">
-            <p><MarkupText id={`plans.${props.strategy.key}.description`} /></p>
-            <p><MarkupText id={`plans.${props.strategy.key}.evaluation`} /></p>
+            <p><MarkupText id={`plans.${props.strategyComparison.strategy.key}.description`} /></p>
+            <p><MarkupText id={`plans.${props.strategyComparison.strategy.key}.evaluation`} /></p>
           </div>
         </div>
       </div>

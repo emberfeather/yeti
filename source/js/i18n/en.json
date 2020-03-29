@@ -95,15 +95,6 @@
 			"none": "No change",
 			"one": "{{months}} month",
 			"many": "{{months}} months"
-		},
-		"years": {
-			"none": "No change",
-			"one": "{{months}} year",
-			"many": "{{months}} years"
-		},
-		"years_months": {
-			"singular": "1 year {{months}} month",
-			"plural": "{{years}} year {{months}} month"
 		}
 	}
 }

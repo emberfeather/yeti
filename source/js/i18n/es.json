@@ -90,15 +90,6 @@
 			"none": "Ningún cambio",
 			"one": "{{months}} mes",
 			"many": "{{months}} meses"
-		},
-		"years": {
-			"none": "Ningún cambio",
-			"one": "{{months}} año",
-			"many": "{{months}} años"
-		},
-		"years_months": {
-			"singular": "1 año {{months}} mes",
-			"plural": "{{years}} años {{months}} meses"
 		}
 	}
 }

@@ -20,8 +20,40 @@ export class BaseYetiStrategy {
     this.runStrategy()
   }
 
+  get interest(): number {
+    let interest = 0
+    for (const schedule of this.schedules) {
+      interest += schedule.interest
+    }
+    return toMoney(interest)
+  }
+
+  get months(): number {
+    let maxMonths = 0
+    for (const schedule of this.schedules) {
+      maxMonths = Math.max(maxMonths, schedule.months)
+    }
+    return maxMonths
+  }
+
+  get principal(): number {
+    let principal = 0
+    for (const schedule of this.schedules) {
+      principal += schedule.principal
+    }
+    return toMoney(principal)
+  }
+
+  get total(): number {
+    return toMoney(this.principal + this.interest)
+  }
+
+  extraPayment(extra: number) {
+    return extra
+  }
+
   runStrategy() {
-    let remainingPayment = 0
+    let remainingExtra = 0
     let tripWire = 0
     let isAllPaidOff = false
 
@@ -36,7 +68,7 @@ export class BaseYetiStrategy {
         minimumPayments += schedule.debt.minimumPayment
       }
 
-      remainingPayment = toMoney(this.payment - minimumPayments)
+      remainingExtra = this.extraPayment(toMoney(this.payment - minimumPayments))
       isAllPaidOff = true
 
       for (const schedule of this.schedules) {
@@ -44,7 +76,7 @@ export class BaseYetiStrategy {
           continue
         }
 
-        remainingPayment = schedule.payment(remainingPayment)
+        remainingExtra = schedule.payment(remainingExtra)
 
         if (!schedule.isPaidOff) {
           isAllPaidOff = false
@@ -63,6 +95,11 @@ export class MinimumPaymentYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebt[], payment: number) {
     super(debts, payment)
     this.key = 'minimumPayment'
+  }
+
+  // Minimum payment does not use extra funds.
+  extraPayment(_extra: number) {
+    return 0
   }
 }
 

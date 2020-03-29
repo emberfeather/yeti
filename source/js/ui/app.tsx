@@ -71,7 +71,7 @@ export default class App extends Component<AppProps, AppState> {
     const lang:string = document.documentElement.lang
     const locale:string = navigator.language
     const currency:string = App.currencyForLocale(locale)
-    const payment = App.minimumPaymentForAllDebts(debts)
+    const payment = App.adjustMinimumPaymentForAllDebts(debts)
 
     this.state = {
       currency: currency,
@@ -84,6 +84,17 @@ export default class App extends Component<AppProps, AppState> {
       strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, debts, payment),
       strategyKey: 'highestRate'
     } as AppState
+  }
+
+  static adjustMinimumPaymentForAllDebts(debts: YetiDebt[], minimumPayment: number = 0): number {
+    const minPayments = App.minimumPaymentForAllDebts(debts)
+
+    // Add a bit of a buffer to the minimum payment to allow for snowballing.
+    if (minimumPayment < minPayments) {
+        minimumPayment = minPayments * 1.25
+    }
+
+    return minimumPayment
   }
 
   static countryForLocale(locale: string): string {
@@ -160,13 +171,13 @@ export default class App extends Component<AppProps, AppState> {
 
     // Delay the update to prevent messing up what people are trying to type.
     this.timeouts.payment = setTimeout(() => {
-      const value = parseFloat(evt.target.value)
-      const newPayment = Math.max(
-        value, App.minimumPaymentForAllDebts(this.state.debts))
+      let value = parseFloat(evt.target.value)
+      value = Number.isNaN(value) ? 0 : value
+      value = App.adjustMinimumPaymentForAllDebts(this.state.debts, value)
 
       this.setState({
-        payment: newPayment,
-        strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, this.state.debts, newPayment),
+        payment: value,
+        strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, this.state.debts, value),
       })
     }, 1000)
   }
@@ -196,6 +207,8 @@ export default class App extends Component<AppProps, AppState> {
       `locale_country_${App.countryForLocale(state.locale)}`,
     ].join(' ')
 
+    const strategyComparison = state.strategyGroup.compare(state.strategyKey)
+
     return (
       <IntlProvider definition={state.definition}>
         <div class={classes}>
@@ -215,12 +228,12 @@ export default class App extends Component<AppProps, AppState> {
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
           </div>
-          <PlanSuggested strategy={state.strategyGroup.strategies[state.strategyKey]} currency={state.currency} locale={state.locale} />
+          <PlanSuggested strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
           <PlanPayoffTimeline />
           <PlanAccelerate currency={state.currency} locale={state.locale} />
           <PlanInterestChart />
-          <PlanDetail strategy={state.strategyGroup.strategies[state.strategyKey]} currency={state.currency} locale={state.locale} />
-          <PlanPicker currency={state.currency} locale={state.locale} />
+          <PlanDetail strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
+          <PlanPicker strategyGroup={state.strategyGroup} currency={state.currency} locale={state.locale} />
           <LangSwitch lang={state.lang} />
         </div>
       </IntlProvider>
@@ -241,8 +254,7 @@ export default class App extends Component<AppProps, AppState> {
     this.storeDebts(debts)
     this.setState({
       debts: debts,
-      payment: Math.max(
-        this.state.payment, App.minimumPaymentForAllDebts(debts)),
+      payment: App.adjustMinimumPaymentForAllDebts(debts, this.state.payment),
       strategyGroup: new StrategyGroup(strategies, BASE_STRATEGY, debts, this.state.payment),
     })
   }
