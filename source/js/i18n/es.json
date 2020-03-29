@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Agregar deuda",
+    "remove": "Eliminar deuda"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Monto de la deuda prestada.",
+      "label": "Monto prestado"
+    },
+    "minimumPayment": {
+      "help": "Pago mensual mínimo requerido por el titular de la deuda.",
+      "label": "Pago mínimo"
+    },
+    "payment": {
+      "help": "Cantidad total disponible cada mes para pagar la deuda.",
+      "label": "Mensualidad"
+    },
+    "rate": {
+      "help": "Tasa de interés anual de la deuda.",
+      "label": "Tasa de interés"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "Arábica",
+      "de": "alemán",
+      "en": "Inglés",
+      "es": "Español",
+      "fr": "francés",
+      "it": "italiano",
+      "ja": "japonés",
+      "pt": "portugués",
+      "ru": "ruso"
+    },
+    "switch": "Estás viendo esta página en {{origin}}. Cambiar a {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "Intenta encontrar deudas que serán <strong>fáciles de pagar</strong> y <strong>se agregarán rápidamente a tu bola de nieve</strong>.",
+      "explanation": "Snowballing sus deudas para pagar el <strong>saldo más bajo hasta el pago mínimo primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "saldo al cociente mínimo de pago"
+    },
+    "balanceRateRatio": {
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "Intenta encontrar deudas que serán <strong>fáciles de pagar</strong> y <strong>se agregarán rápidamente a tu bola de nieve</strong>.",
+      "explanation": "Snowballing sus deudas para pagar el <strong>saldo más bajo a la tasa de interés primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "saldo a tasa de interés"
+    },
+    "highestBalance": {
+      "description": "Pague primero el saldo más alto.",
+      "evaluation": "Esto se calcula como un <strong>contrapunto a la estrategia de Saldo más bajo</strong> para mostrar cuánta diferencia hace el orden de reembolso.",
+      "explanation": "Snowballing sus deudas para pagar el <strong>saldo más alto primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "mayor saldo primero"
+    },
+    "highestRate": {
+      "description": "Al pagar los préstamos con la tasa de interés más alta primero termina pagando <strong>menos intereses en total</strong>.",
+      "evaluation": "Esto <strong>ahorrará la mayor cantidad de dinero</strong>, pero puede ser el <strong>más desafiante mental y emocionalmente</strong>, ya que generalmente lleva más tiempo sentir que tiene algún efecto.",
+      "explanation": "Snowballing sus deudas para pagar el <strong>interés más alto primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "mayor interés primero"
+    },
+    "lowestBalance": {
+      "description": "Al pagar los préstamos con el saldo más bajo primero, puede <strong>aumentar su bola de nieve rápidamente</strong>.",
+      "evaluation": "Esta es una de las estrategias promocionadas con mayor frecuencia y, a menudo, es <strong>más fácil de ejecutar mental y emocionalmente</strong> ya que puede generar impulso rápidamente y sentirse bien con el progreso que realiza.",
+      "explanation": "Snowballing sus deudas para pagar el <strong>saldo más bajo primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "saldo más bajo primero"
+    },
+    "lowestRate": {
+      "description": "Pague primero la tasa de interés más baja.",
+      "evaluation": "Esto se calcula como un <strong>contrapunto a la estrategia de Tasa de interés más alta</strong> para mostrar cuánta diferencia hace el orden de reembolso.",
+      "explanation": "Snowballing sus deudas para pagar la tasa de interés más baja <strong>primero</strong> gastará <strong>{{amount}} menos en intereses</strong>.",
+      "title": "tasa de interés más baja primero"
+    },
+    "minimumPayment": {
+      "description": "Pague solo el pago mínimo.",
+      "evaluation": "Esta es la antítesis de pagar su deuda rápidamente.",
+      "explanation": "Solo se paga el pago mínimo requerido cada mes.",
+      "title": "pago mínimo solamente"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "Más mensual",
+      "description": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
+      "interest": "Menos intereses pagados",
+      "time": "Pago más rápido"
+    },
+    "order": "Orden de reembolso",
+    "other": {
+      "title": "Otras estrategias"
+    },
+    "over": "<strong>{{extra}}</strong> disponible para bola de nieve de deuda.",
+    "overview": {
+      "interest": "Pago interesado",
+      "time": "Pago más rápido"
+    },
+    "plans": {
+      "comparison": "Comparación del plan de pago",
+      "descriptions": "Descripciones del plan de pago"
+    },
+    "total": {
+      "spent": "Total gastado",
+      "time": "Tiempo total"
+    }
+  },
+  "save": {
+    "help": "Almacena la información de la deuda y el pago <strong>localmente</strong> para su próxima visita.",
+    "label": "Guardar para más adelante"
+  },
+  "subTitle": "Calculadora de bola de nieve de deuda",
+  "time": {
+    "months": {
+      "many": "{{months}} meses",
+      "none": "Ningún cambio",
+      "one": "{{months}} mes"
+    }
+  },
+  "title": "Yeti"
+}

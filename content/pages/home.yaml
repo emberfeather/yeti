@@ -1,0 +1,16 @@
+$title@: Yeti
+$path: /
+description@: "Debt snowball calculator."
+sub_title@: "Debt snowball calculator."
+$localization:
+  path: /{locale}/
+  rtl: false
+  rtl@ar: true
+
+composite_files:
+- home
+
+currency: USD
+
+partials:
+- partial: app

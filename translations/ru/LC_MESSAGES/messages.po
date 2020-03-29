@@ -1,0 +1,41 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "<span>1.11₽</span>, доступный ежемесячно для погашения долга."
+
+#: /partials/debt/debt.html:24
+msgid "Add another debt"
+msgstr "Добавить еще один долг"
+
+#: /partials/footer/footer.yaml
+msgid "All numbers shown are for illustration purposes only."
+msgstr "Все номера показаны только для иллюстрации."
+
+#: /partials/debt/debt.html:12
+#, python-format
+msgid ""
+"Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
+"<span>$3.33</span> minimum payment."
+msgstr ""
+"Заемный <span>1,11₽</span> с <span>2,2%%</span> до <span>3,33₽</span> "
+"минимальный платеж."
+
+#: /content/pages/home.yaml
+msgid "Debt snowball calculator."
+msgstr "Калькулятор долгового снегопада."
+
+#: /partials/footer/footer.yaml
+msgid "King of the Castle © 2010 David Lanham."
+msgstr "Король замка © 2010 Дэвид Ланхам."
+
+#: /partials/footer/footer.yaml
+msgid "Used with permission."
+msgstr "Используется с разрешения."
+
+#: /content/pages/home.yaml
+msgid "Yeti"
+msgstr "Йети"
+
+#: /partials/footer/footer.yaml
+msgid "Yeti powered."
+msgstr "Работает на Йети."
+

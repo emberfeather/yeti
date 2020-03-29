@@ -1,2 +1,7 @@
-_site
-*.sublime-workspace
+.DS_Store
+.grow/
+dist
+build
+node_modules
+bower_components
+**.mo

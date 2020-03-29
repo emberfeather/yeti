@@ -1,0 +1,164 @@
+.field
+  margin: $pad/2 0
+
+.field__input
+  margin: $pad/2 0
+
+.field__aside
+  font-size: $font-size * .8
+  margin: 0 $pad/2
+
+.field__help
+  font-size: $font-size * .8
+
+.input
+  +border-control
+  background-color: transparent
+  border-radius: $border-radius-1
+  color: inherit
+  font-family: inherit
+  font-size: inherit
+  padding: $pad/8
+  transition: all $speed-fast ease-in-out
+
+  &--inline
+    text-align: center
+    border-bottom: $border-size solid $input-border-color
+
+    &:focus
+      border: $border-size solid transparent
+      border-bottom: $border-size solid $input-border-color-focus
+
+    &:hover
+      border: $border-size solid transparent
+      border-bottom: $border-size solid $input-border-color-hover
+
+      &:focus
+        border: $border-size solid transparent
+        border-bottom: $border-size solid $input-border-color-focus
+
+  .input__currency &
+    width: $pad*5.5
+
+  .input__rate &
+    width: $pad*4.5
+
+.input__currency
+  &::after,
+  &::before
+    font-size: $font-size * .8
+    opacity: .8
+
+  .locale_country_CA &,
+  .locale_country_MX &,
+  .locale_country_NZ &,
+  .locale_country_US &
+    &::before
+      content: ' $'
+
+  .locale_country_AT &,
+  .locale_country_BE &,
+  .locale_country_ES &,
+  .locale_country_FR &,
+  .locale_country_IE &,
+  .locale_country_IT &,
+  .locale_country_LU &,
+  .locale_country_MC &,
+  .locale_country_PT &
+    &::before
+      content: ' €'
+
+  .locale_country_AE &
+    &::before
+      content: 'د.إ'
+
+  .locale_country_BR &
+    &::before
+      content: ' R$'
+
+  .locale_country_CN &,
+  .locale_country_JP &
+    &::before
+      content: ' ￥'
+
+  .locale_country_CZ &
+    &::before
+      content: ' Kč'
+
+  .locale_country_GB &
+    &::before
+      content: ' £'
+
+  .locale_country_IN &
+    &::before
+      content: ' ₹'
+
+  .locale_country_LI &
+    &::before
+      content: ' CHF'
+
+  .locale_country_MA &
+    &::before
+      content: '.د.م'
+
+  .locale_country_PL &
+    &::before
+      content: ' zł'
+
+  .locale_country_PE &
+    &::before
+      content: ' S/.'
+
+  .locale_country_PH &
+    &::before
+      content: ' ₱'
+
+  .locale_country_RU &
+    &::before
+      content: ' ₽'
+
+  .locale_country_SE &
+    &::before
+      content: ' kr'
+
+  .locale_country_ZA &
+    &::before
+      content: ' R'
+
+.input__rate
+  &::after
+    content: '% '
+    font-size: $font-size * .8
+    opacity: .8
+
+.input__toggle
+  align-items: center
+  cursor: pointer
+  display: flex
+  flex-flow: row
+
+  & > :first-child
+    margin-right: $pad/2
+
+.toggle
+  +border-control
+  background-color: $color-primary-dark
+  border-radius: calc(#{$pad/2} + #{$border-size})
+  display: grid
+  grid-template-columns: 0fr 1fr 1fr
+  height: calc(#{$pad} + #{$border-size * 3})
+  padding: $border-size
+  transition: all $speed-fast ease-in-out
+  width: calc(#{$pad*2} + #{$border-size * 2})
+
+  &::after
+    background-color: $color-primary-light
+    border-radius: 50%
+    content: ''
+    grid-column: 2
+    transition: all $speed-fast ease-in-out
+
+  &--checked
+    grid-template-columns: 1fr 1fr 0fr
+    &::after
+      background-color: $color-secondary

@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Add debt",
+    "remove": "Remove debt"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Amount of debt borrowed.",
+      "label": "Borrowed amount"
+    },
+    "minimumPayment": {
+      "help": "Minimum monthly payment required by debt holder.",
+      "label": "Minimum payment"
+    },
+    "payment": {
+      "help": "Total amount available each month to pay off debt.",
+      "label": "Monthly payment"
+    },
+    "rate": {
+      "help": "Annual interest rate for the debt.",
+      "label": "Interest rate"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "Arabic",
+      "de": "German",
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French",
+      "it": "Italian",
+      "ja": "Japanese",
+      "pt": "Portuguese",
+      "ru": "Russian"
+    },
+    "switch": "You are viewing this page in {{origin}}. Switch to {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "This is a preferred strategy as it can be <strong>mentally and emotionally easier</strong> than the Highest Interest Rate strategy and usually quicker than the Lowest Balance strategy.",
+      "explanation": "Snowballing your debts to pay off the <strong>lowest balance to minimimum payment first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "balance to minimum payment ratio"
+    },
+    "balanceRateRatio": {
+      "description": "Attempts to find debts that will be <strong>easy to pay off</strong> and <strong>add quickly to your snowball</strong>.",
+      "evaluation": "This is a preferred strategy as if can be <strong>mentally and emotionally easier</strong> than the Highest Interest Rate strategy and quicker than the Lowest Balance strategy.",
+      "explanation": "Snowballing your debts to pay off the <strong>lowest balance to interest rate first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "balance to interest rate ratio"
+    },
+    "highestBalance": {
+      "description": "Pay off the highest balance first.",
+      "evaluation": "This is calculated as a <strong>counter-point to the Lowest Balance strategy</strong> to show how much of a difference the order of repayment makes.",
+      "explanation": "Snowballing your debts to pay off the <strong>highest balance first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "highest balance first"
+    },
+    "highestRate": {
+      "description": "By paying off the loans with the highest interest rate first you end up paying <strong>less in interest in total</strong>.",
+      "evaluation": "This will <strong>save the most money</strong>, but may be the <strong>most mentally and emotionally challenging</strong> to execute since it usually takes longer to feel like it is having any effect.",
+      "explanation": "Snowballing your debts to pay off the <strong>highest interest first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "highest interest first"
+    },
+    "lowestBalance": {
+      "description": "By paying off loans with the lowest balance first you can <strong>increase your snowball quickly</strong>.",
+      "evaluation": "This is one of the most commonly promoted strategies and often is <strong>easier mentally and emotionally to execute</strong> since you are able to build momentum quickly and feel good about the progress you make.",
+      "explanation": "Snowballing your debts to pay off the <strong>lowest balance first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "lowest balance first"
+    },
+    "lowestRate": {
+      "description": "Pay off the lowest interest rate first.",
+      "evaluation": "This is calculated as a <strong>counter-point to the Highest Interest Rate strategy</strong> to show how much of a difference the order of repayment makes.",
+      "explanation": "Snowballing your debts to pay off the <strong>lowest interest rate first</strong> will spend <strong>{{amount}} less in interest</strong>.",
+      "title": "lowest interest rate first"
+    },
+    "minimumPayment": {
+      "description": "Pay off the minimum payment only.",
+      "evaluation": "This is the anti-thesis of paying off your debt fast.",
+      "explanation": "Only paying off the minimum payment required each month.",
+      "title": "minimum payment only"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "More monthly",
+      "description": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest.",
+      "interest": "Less interest paid",
+      "time": "Faster repayment"
+    },
+    "order": "Repayment order",
+    "other": {
+      "title": "Other strategies"
+    },
+    "over": "<strong>{{extra}}</strong> available for debt snowballing.",
+    "overview": {
+      "interest": "Less interest paid",
+      "time": "Faster repayment"
+    },
+    "plans": {
+      "comparison": "Repayment plan comparison",
+      "descriptions": "Repayment plan descriptions"
+    },
+    "total": {
+      "spent": "Total spent",
+      "time": "Total time"
+    }
+  },
+  "save": {
+    "help": "Stores the debt and repayment information <strong>locally</strong> for your next visit.",
+    "label": "Save for later"
+  },
+  "subTitle": "Debt snowball calculator",
+  "time": {
+    "months": {
+      "many": "{{months}} months",
+      "none": "No change",
+      "one": "{{months}} month"
+    }
+  },
+  "title": "Yeti"
+}

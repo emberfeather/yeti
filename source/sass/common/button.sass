@@ -1,0 +1,39 @@
+.button
+  +border-control
+  background-color: $color-primary-light
+  border-radius: $border-radius-2
+  color: $color-on-primary-light
+  display: inline-block
+  padding: $pad / 3 $pad / 2
+  text-decoration: none
+  transition: all $speed-fast ease-in-out
+
+  &:hover
+    box-shadow: $shadow-1
+
+  &--primary
+    background-color: $color-secondary
+    color: $color-on-secondary
+    font-weight: 700
+
+  &--secondary
+    background-color: $color-primary-dark
+    border: none
+    color: $color-on-primary-dark
+    font-weight: 700
+    padding: $pad / 2
+    text-transform: capitalize
+
+  &--full
+    background-color: $color-primary-dark
+    border: none
+    color: $color-on-primary-dark
+    display: block
+    flex-grow: 1
+    font-weight: 700
+    padding: $pad $pad/2
+    margin: $pad $pad/2
+    text-align: center
+
+  .button__list &
+    margin: $pad/2

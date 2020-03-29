@@ -1,0 +1,55 @@
+grow_version: ">=0.2.5"
+home: /content/pages/home.yaml
+
+localization:
+  path: /{locale}/{base}/
+  default_locale: en
+  locales:
+  - ar
+  - de
+  - en
+  - es
+  - fr
+  - it
+  - ja
+  - pt
+  - ru
+
+title: "Yeti"
+meta:
+  description: Debt snowball calculator
+  google_analytics_id: "UA-4270246-5"
+  favicon_path: /static/images/favicon.ico
+  image: /static/images/share.png
+
+preprocessors:
+- kind: gulp
+  build_task: grow-build
+
+static_dirs:
+- static_dir: /static/
+  serve_at: /static/
+- static_dir: /dist/css/
+  serve_at: /css/
+  fingerprinted: true
+- static_dir: /dist/js/
+  serve_at: /js/
+  fingerprinted: true
+
+sitemap:
+  enabled: true
+
+deployments:
+  prod:
+    destination: gcs
+    bucket: start.ballofsnow.org
+    env:
+      name: prod
+      host: ballofsnow.org
+      scheme: https
+      port: 443
+
+translators:
+  project_title: Yeti Translations
+  services:
+  - service: google_sheets

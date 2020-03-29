@@ -1,0 +1,39 @@
+#: /partials/payment/payment.html:5
+msgid "<span>$1.11</span> available monthly for debt repayment."
+msgstr "1.11 درهم متوفر شهريا لتسديد الديون."
+
+#: /partials/debt/debt.html:24
+msgid "Add another debt"
+msgstr "إضافة ديون أخرى"
+
+#: /partials/footer/footer.yaml
+msgid "All numbers shown are for illustration purposes only."
+msgstr "جميع الأرقام المعروضة هي لأغراض التوضيح فقط."
+
+#: /partials/debt/debt.html:12
+#, python-format
+msgid ""
+"Borrowed <span>$1.11</span> at <span>2.2%%</span> interest with a "
+"<span>$3.33</span> minimum payment."
+msgstr "تم اقتراض 1.11 درهم بنسبة <span>2.2٪</span> مع 3.33 درهم الحد الأدنى للدفع."
+
+#: /content/pages/home.yaml
+msgid "Debt snowball calculator."
+msgstr "آلة حاسبة الديون الثلج."
+
+#: /partials/footer/footer.yaml
+msgid "King of the Castle © 2010 David Lanham."
+msgstr "ملك القلعة © 2010 ديفيد لانهام."
+
+#: /partials/footer/footer.yaml
+msgid "Used with permission."
+msgstr "تستخدم بإذن."
+
+#: /content/pages/home.yaml
+msgid "Yeti"
+msgstr "اليتي"
+
+#: /partials/footer/footer.yaml
+msgid "Yeti powered."
+msgstr "اليتي بالطاقة."
+

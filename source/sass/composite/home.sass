@@ -1,0 +1,152 @@
+@import '../mixins/breakpoints'
+@import '../common/config'
+
+.yeti__plan__grid
+  display: grid
+  grid-template-columns: 1fr 1fr
+  margin: $pad 0
+
+  &--sticky
+    position: sticky
+
+  &--three
+    grid-template-columns: 1fr 1fr 1fr
+
+.yeti__plan__grid__cell
+  align-items: center
+  border-right: $border-size solid $color-back
+  display: flex
+  flex-flow: column-reverse
+  font-weight: 700
+
+  [dir="rtl"] &
+    border-right: none
+    border-left: $border-size solid $color-back
+
+  &:last-child
+    border-right: none
+
+    [dir="rtl"] &
+      border-left: none
+
+.yeti__plan__grid__label
+  font-size: $font-size * .8
+
+.yeti__plan__grid__value
+  font-size: $font-size * 1.25
+
+.yeti__flex
+  display: flex
+  flex-flow: column
+
+  &--row
+    flex-flow: row
+    flex-wrap: wrap
+
+    [dir="rtl"] &
+      flex-flow: row-reverse
+
+  +md
+    flex-flow: row
+
+    [dir="rtl"] &
+      flex-flow: row-reverse
+
+    &--center
+      align-items: center
+
+.yeti__flex__item
+  .yeti__flex--row &
+    margin: 0 $pad/2
+
+    &:first-child
+      margin-left: 0
+
+    &:last-child
+      margin-right: 0
+
+  &:last-child
+    flex-grow: 1
+
+    [dir="rtl"] &
+      flex-grow: 0
+
+  [dir="rtl"] &
+    &:first-child
+      flex-grow: 1
+
+  +md
+    flex-shrink: 0
+    margin-right: $pad
+
+    .yeti__flex--two &
+      flex-basis: 50%
+
+    .yeti__flex--three &
+      flex-basis: 33%
+
+      &--two
+        flex-basis: 66%
+
+    .yeti__flex--four &
+      flex-basis: 25%
+
+
+    &:last-child
+      flex-shrink: 1
+      flex-grow: 1
+      margin-right: 0
+
+.yeti__grid
+  display: grid
+  grid-template-columns: 1fr
+  grid-column-gap: $pad/2
+  grid-row-gap: $pad/2
+
+  +md
+    &--two
+      grid-template-columns: 1fr 1fr
+
+    &--three
+      grid-template-columns: 1fr 1fr 1fr
+
+.yeti__comparison__grid
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-column-gap: $pad/2
+  grid-row-gap: $pad/2
+
+  +md
+    grid-template-columns: 2fr 1fr 1fr
+
+.yeti__comparison__grid__title
+  display: none
+  font-weight: 700
+  text-transform: capitalize
+
+  +md
+    display: inherit
+
+.yeti__comparison__grid__label
+  text-transform: capitalize
+  font-weight: 700
+  grid-column: 1 / span 2
+
+  +md
+    grid-column: 1 / span 1
+
+.yeti__comparison__grid__cell
+  padding: 0 $pad/2
+
+.yeti__comparison__title
+  font-weight: 700
+
+  +md
+    display: none
+
+.yeti__lang__switch
+  cursor: pointer
+
+.yeti__lang__chooser__lang
+  &--selected
+    font-weight: bold

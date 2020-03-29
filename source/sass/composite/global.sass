@@ -1,0 +1,71 @@
+@import '../mixins/breakpoints'
+@import '../common/config'
+
+*
+  box-sizing: border-box
+
+body
+  background: $color-back
+  background-attachment: fixed
+  background-image: url('/static/images/bottom.png')
+  background-position: bottom center
+  background-repeat: no-repeat
+  background-size: 120% auto
+  color: $color-on-back
+  font-family: $font-family
+  font-size: $font-size
+  line-height: $line-height
+  margin: 0
+  padding: 0
+  -webkit-font-smoothing: antialiased
+
+  +percy
+    background-attachment: inherit
+    background-image: none
+
+  +md
+    background-size: constrain
+    padding: 0 $pad
+
+a
+  color: $color-secondary-dark
+  text-decoration-style: dotted
+
+  &:hover
+    text-decoration-style: solid
+
+p
+  margin: $pad/2
+
+h1, h2, h3, h4, h5, h6
+  margin: .5rem
+  text-transform: capitalize
+
+h1
+  font-family: $font-family-alt
+
+.wrapper
+  display: flex
+  flex-flow: column
+  margin: 0 auto
+  min-height: 100vh
+  max-width: $contained-width
+  padding-bottom: 45vw
+
+.material-icons
+  font-size: $font-size
+
+.block__main
+  flex-grow: 1
+
+.yeti__help
+  font-size: $font-size * .8
+  opacity: .8
+
+@import '../common/actions'
+@import '../common/button'
+@import '../common/card'
+@import '../common/input'
+@import '../common/modifiers'
+@import '../../../partials/header/header'
+@import '../../../partials/footer/footer'

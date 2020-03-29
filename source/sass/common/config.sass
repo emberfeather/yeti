@@ -1,0 +1,73 @@
+$color-primary: #a1bfbf
+$color-primary-light: #d2f2f2
+$color-primary-dark: #728f8f
+$color-on-primary: #000000
+$color-on-primary-light: #000000
+$color-on-primary-dark: #000000
+$color-secondary: #ef9c2f
+$color-secondary-light: #ffcd60
+$color-secondary-dark: #b76e00
+$color-on-secondary: #000000
+$color-on-secondary-light: #000000
+$color-on-secondary-dark: #000000
+
+$color-back: lighten($color-primary, .8)
+$color-on-back: #000000
+
+$pad: 1em
+
+$contained-width: 900px
+
+$shadow: 0 1px 1.5px rgba(0,0,0,.12),0 1px 1px rgba(0,0,0,.24)
+
+$font-family: 'Convergence', sans-serif
+$font-family-alt: 'Montez', cursive
+$font-size: 16px
+$line-height: 1.6
+
+$speed-normal: 300ms
+$speed-fast: 100ms
+$speed-slow: 500ms
+
+$input-border-color: $color-secondary-light
+$input-border-color-hover: $color-secondary
+$input-border-color-focus: $color-secondary-dark
+
+$border-radius-1: 3px
+$border-radius-2: 6px
+$border-radius-3: 9px
+$border-size: 2px
+
+=border-control
+  border: $border-size solid $input-border-color
+
+  &--subtle
+    border-color: transparent
+
+  &:focus
+    border-color: $input-border-color-focus
+    outline: none
+
+    .is-keyboard &
+      outline: default
+
+  &:hover
+    border-color: $input-border-color-hover
+    outline: none
+
+    .is-keyboard &
+      outline: default
+
+    &:focus
+      border-color: $input-border-color-focus
+
+// Shadows
+$shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+$shadow-2: 0 3px 6px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+$shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+$shadow-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+$shadow-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
+
+=percy
+  @media only percy
+    @content

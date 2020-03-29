@@ -1,0 +1,15 @@
+# Files.
+.depcache.json
+gulpfile.js
+package.json
+podspec.yaml
+yarn.lock
+
+# Directories.
+content/
+dist/
+node_modules/
+partials/
+source/
+translations/
+views/

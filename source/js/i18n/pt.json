@@ -1,0 +1,121 @@
+{
+  "debt": {
+    "add": "Adicionar dívida",
+    "remove": "Remover dívidas"
+  },
+  "fields": {
+    "borrowed": {
+      "help": "Montante da dívida emprestada.",
+      "label": "Montante emprestado"
+    },
+    "minimumPayment": {
+      "help": "Pagamento mensal mínimo exigido pelo detentor da dívida.",
+      "label": "Pagamento minimo"
+    },
+    "payment": {
+      "help": "Montante total disponível a cada mês para quitar dívidas.",
+      "label": "Pagamento mensal"
+    },
+    "rate": {
+      "help": "Taxa de juros anual da dívida.",
+      "label": "Taxa de juro"
+    }
+  },
+  "lang": {
+    "languages": {
+      "ar": "árabe",
+      "de": "alemão",
+      "en": "Inglês",
+      "es": "espanhol",
+      "fr": "francês",
+      "it": "italiano",
+      "ja": "japonês",
+      "pt": "português",
+      "ru": "russo"
+    },
+    "switch": "Você está vendo esta página em {{origin}}. Mude para {{destination}}."
+  },
+  "plans": {
+    "balancePaymentRatio": {
+      "description": "Tentativas de encontrar dívidas que serão <strong>fáceis de pagar</strong> e <strong>serão adicionadas rapidamente à sua bola de neve</strong>.",
+      "evaluation": "Essa é uma estratégia preferida, pois pode ser <strong>mental e emocionalmente mais fácil</strong> do que a estratégia de Maior Taxa de Juros e geralmente mais rápida que a estratégia de Menor Saldo.",
+      "explanation": "Encerrar suas dívidas para pagar o <strong>saldo mais baixo até o pagamento mínimo primeiro</strong> gastará <strong>{{amount}} menos em juros</strong>.",
+      "title": "saldo para relação de pagamento mínima"
+    },
+    "balanceRateRatio": {
+      "description": "Tentativas de encontrar dívidas que serão <strong>fáceis de pagar</strong> e <strong>serão adicionadas rapidamente à sua bola de neve</strong>.",
+      "evaluation": "Essa é uma estratégia preferida, como se pudesse ser <strong>mental e emocionalmente mais fácil</strong> do que a estratégia de Maior Taxa de Juros e mais rápida que a estratégia de Menor Saldo.",
+      "explanation": "Encerrar suas dívidas para pagar o <strong>saldo mais baixo da taxa de juros primeiro</strong> gastará <strong>{{amount}} menos em juros</strong>.",
+      "title": "relação saldo / taxa de juros"
+    },
+    "highestBalance": {
+      "description": "Pague primeiro o saldo mais alto.",
+      "evaluation": "Isso é calculado como um contraponto <strong>à estratégia de Saldo mais baixo</strong> para mostrar quanta diferença faz a ordem de pagamento.",
+      "explanation": "Encerrar suas dívidas para pagar o <strong>primeiro saldo mais alto</strong> gastará <strong>{{amount}} menos em juros</strong>.",
+      "title": "maior saldo primeiro"
+    },
+    "highestRate": {
+      "description": "Ao pagar os empréstimos com a maior taxa de juros, você acaba pagando <strong>menos juros no total</strong>.",
+      "evaluation": "Isso <strong>economiza mais dinheiro</strong>, mas pode ser o <strong>mais desafiador mental e emocionalmente</strong> para executar, pois geralmente leva mais tempo para sentir que está causando algum efeito.",
+      "explanation": "Encerrar suas dívidas para pagar os <strong>juros mais altos primeiro</strong> gastará <strong>{{amount}} a menos em juros</strong>.",
+      "title": "maior interesse primeiro"
+    },
+    "lowestBalance": {
+      "description": "Ao pagar empréstimos com o saldo mais baixo primeiro, você pode <strong>aumentar rapidamente sua bola de neve</strong>.",
+      "evaluation": "Essa é uma das estratégias mais comumente promovidas e geralmente é <strong>mental e emocionalmente mais fácil de executar</strong> , pois você é capaz de ganhar impulso rapidamente e se sentir bem com o progresso que faz.",
+      "explanation": "Encerrar suas dívidas para pagar o <strong>saldo mais baixo primeiro</strong> gastará <strong>{{amount}} menos em juros</strong>.",
+      "title": "menor saldo primeiro"
+    },
+    "lowestRate": {
+      "description": "Pague primeiro a menor taxa de juros.",
+      "evaluation": "Isso é calculado como um contraponto <strong>à estratégia de Maior Taxa de Juros</strong> para mostrar quanta diferença faz a ordem de pagamento.",
+      "explanation": "Encerrar suas dívidas para pagar a <strong>menor taxa de juros primeiro</strong> gastará <strong>{{amount}} menos em juros</strong>.",
+      "title": "menor taxa de juros primeiro"
+    },
+    "minimumPayment": {
+      "description": "Pague apenas o pagamento mínimo.",
+      "evaluation": "Esta é a antítese de quitar sua dívida rapidamente.",
+      "explanation": "Pagando apenas o pagamento mínimo exigido a cada mês.",
+      "title": "pagamento mínimo somente"
+    }
+  },
+  "repayment": {
+    "abbrevation": "{{amount}} @ {{rate}}%",
+    "accelerate": {
+      "additional": "Mais mensalmente",
+      "description": "Adicione <strong>{{extra}}</strong> mais a cada mês e economize <strong>{{saved}}</strong> adicionais em juros.",
+      "interest": "Menos juros pagos",
+      "time": "Reembolso mais rápido"
+    },
+    "order": "Ordem de reembolso",
+    "other": {
+      "title": "Outras estratégias"
+    },
+    "over": "<strong>{{extra}}</strong> disponível para bola de neve por dívida.",
+    "overview": {
+      "interest": "Menos juros pagos",
+      "time": "Reembolso mais rápido"
+    },
+    "plans": {
+      "comparison": "Comparação do plano de reembolso",
+      "descriptions": "Descrições do plano de reembolso"
+    },
+    "total": {
+      "spent": "Total gasto",
+      "time": "Tempo total"
+    }
+  },
+  "save": {
+    "help": "Armazena as informações de dívida e pagamento <strong>localmente</strong> para sua próxima visita.",
+    "label": "Guardar para depois"
+  },
+  "subTitle": "Calculadora da bola de neve da dívida",
+  "time": {
+    "months": {
+      "many": "{{months}} meses",
+      "none": "Nenhuma mudança",
+      "one": "{{months}} mês"
+    }
+  },
+  "title": "Yeti"
+}
