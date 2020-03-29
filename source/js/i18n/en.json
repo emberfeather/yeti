@@ -67,6 +67,12 @@
 			"description": "Pay off the lowest interest rate first.",
 			"explanation": "Snowballing your debts to pay off the <strong>lowest interest rate first</strong> will spend <strong>{{amount}} less in interest</strong>.",
 			"evaluation": "This is calculated as a <strong>counter-point to the Highest Interest Rate strategy</strong> to show how much of a difference the order of repayment makes."
+		},
+		"minimumPayment": {
+			"title": "minimum payment only",
+			"description": "Pay off the minimum payment only.",
+			"explanation": "Only paying off the minimum payment required each month.",
+			"evaluation": "This is the anti-thesis of paying off your debt fast."
 		}
 	},
   "repayment": {
@@ -78,13 +84,17 @@
 			"time": "Faster repayment"
 		},
     "order": "Repayment order",
+    "other": {
+			"title": "Other strategies"
+		},
     "over": "<strong>{{extra}}</strong> available for debt snowballing.",
 		"overview": {
 			"interest": "Less interest paid",
 			"time": "Faster repayment"
 		},
     "plans": {
-      "comparison": "Repayment plan comparison"
+      "comparison": "Repayment plan comparison",
+      "descriptions": "Repayment plan descriptions"
     },
 		"total": {
 			"spent": "Total spent",

@@ -8,10 +8,11 @@ import Debts from './debts'
 import LangSwitch from './lang_switch'
 import Payment from './payment'
 import PlanAccelerate from './plan_accelerate'
+import PlanComparison from './plan_comparison'
 import PlanDetail from './plan_detail'
+import PlanDescription from './plan_description'
 import PlanInterestChart from './plan_interest_chart'
 import PlanPayoffTimeline from './plan_payoff_timeline'
-import PlanPicker from './plan_picker'
 import PlanSuggested from './plan_suggested'
 import Save from './save'
 
@@ -200,6 +201,14 @@ export default class App extends Component<AppProps, AppState> {
     this.updateDebts(debts)
   }
 
+  handleSwitchStrategy(evt: any) {
+    const target = findParentByClassname(evt.target, 'yeti__strategy')
+    const strategyKey = target.dataset.strategyKey
+    this.setState({
+      strategyKey: strategyKey,
+    })
+  }
+
   render(props: AppProps, state: AppState) {
     const classes: string = [
       'yeti',
@@ -231,7 +240,11 @@ export default class App extends Component<AppProps, AppState> {
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
           </div>
-          <PlanSuggested strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
+          <PlanDetail
+            currency={state.currency}
+            handleSwitchStrategy={this.handleSwitchStrategy.bind(this)}
+            locale={state.locale}
+            strategyComparison={strategyComparison} />
           <PlanPayoffTimeline />
           <PlanAccelerate
             strategyKey={state.strategyKey}
@@ -239,8 +252,8 @@ export default class App extends Component<AppProps, AppState> {
             currency={state.currency}
             locale={state.locale} />
           <PlanInterestChart />
-          <PlanDetail strategyComparison={strategyComparison} currency={state.currency} locale={state.locale} />
-          <PlanPicker strategyGroup={state.strategyGroup} currency={state.currency} locale={state.locale} />
+          <PlanComparison strategyGroup={state.strategyGroup} currency={state.currency} locale={state.locale} />
+          <PlanDescription />
           <LangSwitch lang={state.lang} />
         </div>
       </IntlProvider>

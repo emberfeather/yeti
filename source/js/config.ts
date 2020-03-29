@@ -68,3 +68,10 @@ export const COUNTRY_TO_CURRENCY = {
   'ZA': 'ZAR',
   'ZW': 'ZWL',
 }
+export const STRATEGIES_ALL = [
+  'minimumPayment',
+  'highestRate', 'lowestBalance', 'balancePaymentRatio',
+  'lowestRate', 'highestBalance' ,'balanceRateRatio']
+export const STRATEGIES_SUGGESTED = [
+  'highestRate', 'lowestBalance', 'balancePaymentRatio',
+  'lowestRate', 'highestBalance' ,'balanceRateRatio']
