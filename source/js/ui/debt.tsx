@@ -44,7 +44,7 @@ export default class Debt extends Component<DebtProps, DebtState> {
                 <label for={`rate_${props.debt.uid}`}><Text id="fields.rate.label" /></label>
               </div>
               <div class="field__input">
-                <span class="input__rate"><input id={`rate_${props.debt.uid}`} type="number" min="0" step="0.001" value={props.debt.rate} onChange={props.handleRateInput} class="input" /></span>
+                <span class="input__rate"><input id={`rate_${props.debt.uid}`} type="number" min="0" max="100" step="0.001" value={props.debt.rate} onChange={props.handleRateInput} class="input" /></span>
               </div>
               <div class="field__help">
                 <Text id="fields.rate.help" />

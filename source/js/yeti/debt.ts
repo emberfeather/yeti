@@ -82,6 +82,10 @@ export default class YetiDebt {
       throw 'Rate amount cannot be negative.'
     }
 
+    if (value > 100) {
+      throw 'Rate amount cannot exceed 100.'
+    }
+
     this._rate = value
 
     // Auto-correct the minimum payment.
