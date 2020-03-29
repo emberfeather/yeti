@@ -37,14 +37,18 @@ export default class LangSwitch extends Component<LangSwitchProps, LangSwitchSta
       return ''
     }
 
+    const otherLangs = AVAILABLE_LANGS.filter(lang => lang != props.lang)
+
     return (
       <div class="yeti__lang__chooser card">
-        <div class="yeti__lang__chooser__langs yeti__flex yeti__flex--row">
-          {AVAILABLE_LANGS.map(lang => (
+        <div class="button__list">
+          {otherLangs.map(lang => (
             <Fragment key={lang}>
-              <div class={`yeti__lang__chooser__lang yeti__flex__item ${props.lang == lang ? 'yeti__lang__chooser__lang--selected' : ''}`}>
-                <a href={`/${lang == DEFAULT_LANG ? '' : `${lang}/`}`}><Text id={`lang.languages.${lang}`} /></a>
-              </div>
+              <button
+                  class="button button--secondary yeti__lang__switch" data-lang={lang}
+                  onClick={this.handleLangSwitch.bind(this)}>
+                <Text id={`lang.languages.${lang}`} />
+              </button>
             </Fragment>
           ))}
         </div>
