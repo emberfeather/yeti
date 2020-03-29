@@ -41,8 +41,8 @@ sitemap:
 
 deployments:
   prod:
-    destination: gcs
-    bucket: start.ballofsnow.org
+    destination: local
+    out_dir: build
     env:
       name: prod
       host: ballofsnow.org

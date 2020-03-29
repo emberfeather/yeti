@@ -35,6 +35,41 @@ jobs:
         - go.mod
         - main.go
 
+  build_deploy:
+    working_directory: ~/grow
+    docker:
+    - image: grow/base:py3
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - &cache-key grow-cache-{{ .Branch }}-{{ checksum "package.json" }}
+
+    - run:
+        name: Grow Intall
+        command: grow install
+
+    - save_cache:
+        key: *cache-key
+        paths:
+          - extensions
+          - node_modules
+
+    - run:
+        name: Prod Build
+        command: grow deploy prod
+
+    - persist_to_workspace:
+        root: ~/grow
+        paths:
+        - build
+        - .gcloudignore
+        - .percy.yml
+        - app.yaml
+        - go.mod
+        - main.go
+
   deploy:
     working_directory: ~/grow
     docker:
@@ -71,6 +106,10 @@ workflows:
     - snapshot:
         requires:
         - build
+    - build_deploy:
+        filters:
+          branches:
+            only: master
     - deploy:
         requires:
         - build
