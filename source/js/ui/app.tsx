@@ -13,7 +13,6 @@ import PlanDetail from './plan_detail'
 import PlanDescription from './plan_description'
 import PlanInterestChart from './plan_interest_chart'
 import PlanPayoffTimeline from './plan_payoff_timeline'
-import PlanSuggested from './plan_suggested'
 import Save from './save'
 
 import {
