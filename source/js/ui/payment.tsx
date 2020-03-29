@@ -1,9 +1,12 @@
 import { h, Component } from 'preact'
-import { Text } from 'preact-i18n'
+import { Text, MarkupText } from 'preact-i18n'
 
 
 export interface PaymentProps {
+  currency: string
   handlePaymentInput: any
+  locale: string
+  minimumPayment: number
   payment: number
 }
 
@@ -20,6 +23,14 @@ export default class Payment extends Component<PaymentProps, PaymentState> {
   }
 
   render(props: PaymentProps, _state: PaymentState) {
+    const currencyFormat = new Intl.NumberFormat(props.locale, {
+      style: 'currency',
+      currency: props.currency,
+    })
+    const fields = {
+      extra: `${currencyFormat.format(props.payment - props.minimumPayment)}`,
+    }
+
     return (
       <div class="yeti__payment card card--flush">
         <div class="fields">
@@ -29,6 +40,7 @@ export default class Payment extends Component<PaymentProps, PaymentState> {
             </div>
             <div class="field__input">
               <span class="input__currency"><input id="payment" type="number" min="0" step="0.01" value={props.payment.toFixed(2)} onInput={props.handlePaymentInput} class="input" /></span>
+              <span class="field__aside"><MarkupText id="repayment.over" fields={fields} /></span>
             </div>
             <div class="field__help">
               <Text id="fields.payment.help" />

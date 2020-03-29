@@ -68,10 +68,11 @@
 		"abbrevation": "{{amount}} @ {{rate}}%",
 		"accelerate": "Agregue <strong>{{extra}}</strong> más cada mes y ahorre <strong>{{saved}}</strong> adicionales en intereses.",
     "order": "Orden de reembolso",
+    "over": "<strong>{{extra}}</strong> disponible para bola de nieve de deuda.",
 		"overview": {
 			"additional": "Gastado adicional",
 			"interest": "Pago interesado",
-			"time": "Tiempo extraordinario"
+			"time": "Pago más rápido"
 		},
     "plans": {
       "comparison": "Comparación del plan de pago"

@@ -73,10 +73,11 @@
 		"abbrevation": "{{amount}} @ {{rate}}%",
 		"accelerate": "Add <strong>{{extra}}</strong> more each month and save an additional <strong>{{saved}}</strong> in interest.",
     "order": "Repayment order",
+    "over": "<strong>{{extra}}</strong> available for debt snowballing.",
 		"overview": {
 			"additional": "Additional spent",
 			"interest": "Interest Paid",
-			"time": "Over time"
+			"time": "Faster repayment"
 		},
     "plans": {
       "comparison": "Repayment plan comparison"

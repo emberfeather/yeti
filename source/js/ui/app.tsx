@@ -222,8 +222,11 @@ export default class App extends Component<AppProps, AppState> {
             handleMinimumPaymentInput={this.handleMinimumPaymentInput.bind(this)} />
           <div class="yeti__grid yeti__grid--two">
             <Payment
-              payment={state.payment}
-              handlePaymentInput={this.handlePaymentInput.bind(this)} />
+              currency={state.currency}
+              handlePaymentInput={this.handlePaymentInput.bind(this)}
+              locale={state.locale}
+              minimumPayment={App.minimumPaymentForAllDebts(state.debts)}
+              payment={state.payment} />
             <Save
               doLocalSave={state.doLocalSave}
               handleLocalSaveToggle={this.handleLocalSaveToggle.bind(this)} />
