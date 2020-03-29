@@ -20,4 +20,8 @@ export default class YetiStrategyComparison {
   get principal(): number {
     return this.strategy.principal - this.baseStrategy.principal
   }
+
+  get total(): number {
+    return this.strategy.total - this.baseStrategy.total
+  }
 }
