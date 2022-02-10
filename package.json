@@ -23,7 +23,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "percy": "^0.26.0",
     "preact": "^10.3.3",
     "preact-i18n": "^2.0.0-preactx.2",
