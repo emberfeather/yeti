@@ -1,0 +1,23 @@
+{
+  "name": "yeti-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "yarn@4.15.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "test": "turbo run test",
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.1.0",
+    "oxlint": "^0.13.0",
+    "turbo": "^2.0.4",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "include-component-in-tag": true,
+  "packages": {
+    "apps/web": {
+      "release-type": "node",
+      "package-name": "@yeti/web"
+    },
+    "packages/snowball": {
+      "release-type": "node",
+      "package-name": "@yeti/snowball"
+    }
+  }
+}

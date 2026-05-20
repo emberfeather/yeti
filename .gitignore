@@ -1,0 +1,59 @@
+# Dependency directories
+node_modules/
+.pnp
+.pnp.js
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Turbo / Build outputs / compiler cache
+.turbo/
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Firebase
+.firebase/
+firebase-debug.log
+ui-debug.log
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs/Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+.nyc_output/
