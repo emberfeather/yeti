@@ -7,6 +7,7 @@
 ## Features
 
 - **Amortization Engine**: Accurately computes monthly interest accrual, principal reduction, and payoff durations.
+- **Complex Payment Budgets**: Supports static budgets, custom functions, or dynamic generators (e.g., annual bonuses, cost-of-living raises).
 - **7 Built-in Payoff Strategies**:
   - **Debt Avalanche** (`highestRate`): Mathematically optimal; minimizes total interest paid.
   - **Debt Snowball** (`lowestBalance`): Optimizes for psychological momentum by clearing small balances first.
@@ -61,6 +62,7 @@ graph TD
 * **`YetiDebt`**: Represents a single debt obligation. It encapsulates properties like the current outstanding balance (`borrowed`), annual interest rate percentage (`rate`), and required minimum payment. Its setter properties automatically prevent negative values and validate that the minimum payment is sufficient to cover the accrued monthly interest.
 * **`YetiPayment`**: A simple structure representing the division of a single monthly payment into `principal` and `interest`.
 * **`YetiSchedule`**: Tracks the month-by-month state of an active debt during the simulation. It handles monthly interest calculations and accepts extra payments, returning any rollover funds (overpayments) when the debt is fully cleared.
+* **`YetiPaymentGenerator`**: Allows dynamic monthly payment budgets, supporting complex scenarios like annual bonuses (`RepeatingPaymentGenerator`) or salary raises (`GrowingPaymentGenerator`).
 
 ### 2. Payoff Strategies
 Strategies inherit from `BaseYetiStrategy` and orchestrate the prioritization and payment process:
@@ -150,6 +152,31 @@ console.log(`New Payoff Duration: ${acceleratedAvalanche.months} months`);
 console.log(`New Total Interest: $${acceleratedAvalanche.interest}`);
 ```
 
+### 3. Using Complex Payment Generators
+Instead of a static monthly budget, you can pass a generator to simulate complex financial scenarios like annual bonuses or cost-of-living raises.
+
+```typescript
+import { YetiDebt, HighestRateYetiStrategy, GrowingPaymentGenerator, RepeatingPaymentGenerator } from "@yeti/snowball";
+
+const debts = [
+  new YetiDebt(10000, 10.0, 150, "Student Loan")
+];
+
+// Example 1: Simulate a cost-of-living raise (e.g., a 3% raise added to your $500 payment every 12 months)
+const growingBudget = new GrowingPaymentGenerator(
+  500,    // Initial payment
+  0,      // Flat increase amount
+  0.03,   // Percentage increase (3%)
+  12      // Interval (every 12 months)
+);
+const raiseStrategy = new HighestRateYetiStrategy(debts, growingBudget);
+
+// Example 2: Simulate an annual bonus (e.g., $500 monthly, but $1500 on the 12th month)
+const repeatingPayments = Array(11).fill(500).concat([1500]);
+const bonusBudget = new RepeatingPaymentGenerator(repeatingPayments);
+const bonusStrategy = new HighestRateYetiStrategy(debts, bonusBudget);
+```
+
 ---
 
 ## API Reference
@@ -202,3 +229,11 @@ Utility for managing and comparing multiple strategies concurrently.
 #### Methods
 - `compare(strategyKey: string): YetiStrategyComparison`: Compares target strategy with the configured base strategy.
 - `accelerate(strategyKey: string, extra: number): BaseYetiStrategy`: Re-runs a strategy with an increased monthly budget (adds `extra` budget).
+
+---
+
+### Payment Generators
+Provide dynamic variations to the monthly payment budget across simulation months.
+
+- `RepeatingPaymentGenerator(payments: number[])`: Cycles through a set array of payment amounts.
+- `GrowingPaymentGenerator(initialPayment: number, increaseAmount?: number, increaseRate?: number, interval?: number)`: Scales the payment budget at set intervals by a flat amount or percentage.
