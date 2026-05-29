@@ -15,9 +15,9 @@
     "dev": "turbo run dev"
   },
   "devDependencies": {
-    "oxfmt": "^0.1.0",
-    "oxlint": "^0.13.0",
+    "oxfmt": "^0.52.0",
+    "oxlint": "^1.67.0",
     "turbo": "^2.9.16",
-    "typescript": "^5.4.5"
+    "typescript": "^6.0.3"
   }
 }
