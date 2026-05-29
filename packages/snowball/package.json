@@ -1,12 +1,12 @@
 {
   "name": "@yeti/snowball",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",

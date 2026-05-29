@@ -6,7 +6,7 @@
  * @returns A random integer between min and max.
  */
 export function randomIntRange(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
@@ -16,5 +16,5 @@ export function randomIntRange(min: number, max: number) {
  * @returns The rounded number with at most 2 decimal places.
  */
 export function toMoney(amount: number): number {
-  return parseFloat(amount.toFixed(2))
+  return parseFloat(amount.toFixed(2));
 }

@@ -1,20 +1,20 @@
-import { YetiDebtInfo } from "./debt"
-import { YetiSchedule, YetiScheduleInfo } from "./schedule"
-import { toMoney } from "./utility/numbers"
-import { YetiPaymentBudget, getPaymentForMonth } from "./paymentGenerator"
+import { YetiDebtInfo } from "./debt";
+import { YetiSchedule, YetiScheduleInfo } from "./schedule";
+import { toMoney } from "./utility/numbers";
+import { YetiPaymentBudget, getPaymentForMonth } from "./paymentGenerator";
 
 /**
  * Interface describing the structure of a debt payoff simulation strategy.
  */
 export interface YetiStrategyInfo {
   /** The unique key identifying this strategy (e.g. "lowestBalance", "highestRate"). */
-  key: string
+  key: string;
   /** The list of debts evaluated by this strategy. */
-  debts: YetiDebtInfo[]
+  debts: YetiDebtInfo[];
   /** The total monthly payment budget allocated for all debts. */
-  payment: YetiPaymentBudget
+  payment: YetiPaymentBudget;
   /** The generated payment schedules for each debt. */
-  schedules: YetiScheduleInfo[]
+  schedules: YetiScheduleInfo[];
 }
 
 /**
@@ -23,13 +23,13 @@ export interface YetiStrategyInfo {
  */
 export class BaseYetiStrategy implements YetiStrategyInfo {
   /** The list of debts, sorted according to the strategy's sorting criteria. */
-  debts: YetiDebtInfo[]
+  debts: YetiDebtInfo[];
   /** The unique key of the strategy. */
-  key: string = "unknown"
+  key: string = "unknown";
   /** The total monthly budget (minimum payments + extra payment capacity). */
-  payment: YetiPaymentBudget
+  payment: YetiPaymentBudget;
   /** Amortization schedules for each debt. */
-  schedules: YetiScheduleInfo[]
+  schedules: YetiScheduleInfo[];
 
   /**
    * Constructs and runs the strategy simulation.
@@ -38,55 +38,55 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
    * @param payment - Total monthly payment budget.
    */
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    this.debts = debts.sort(this.sortDebts)
-    this.payment = payment
-    this.schedules = []
+    this.debts = debts.sort(this.sortDebts);
+    this.payment = payment;
+    this.schedules = [];
 
     for (const debt of this.debts) {
-      this.schedules.push(new YetiSchedule(debt))
+      this.schedules.push(new YetiSchedule(debt));
     }
 
-    this.runStrategy()
+    this.runStrategy();
   }
 
   /**
    * Returns the cumulative interest paid across all schedules.
    */
   get interest(): number {
-    let interest = 0
+    let interest = 0;
     for (const schedule of this.schedules) {
-      interest += schedule.interest
+      interest += schedule.interest;
     }
-    return toMoney(interest)
+    return toMoney(interest);
   }
 
   /**
    * Returns the maximum duration (in months) required to pay off all debts.
    */
   get months(): number {
-    let maxMonths = 0
+    let maxMonths = 0;
     for (const schedule of this.schedules) {
-      maxMonths = Math.max(maxMonths, schedule.months)
+      maxMonths = Math.max(maxMonths, schedule.months);
     }
-    return maxMonths
+    return maxMonths;
   }
 
   /**
    * Returns the cumulative principal paid across all schedules.
    */
   get principal(): number {
-    let principal = 0
+    let principal = 0;
     for (const schedule of this.schedules) {
-      principal += schedule.principal
+      principal += schedule.principal;
     }
-    return toMoney(principal)
+    return toMoney(principal);
   }
 
   /**
    * Returns the total cost of repayment (principal + interest).
    */
   get total(): number {
-    return toMoney(this.principal + this.interest)
+    return toMoney(this.principal + this.interest);
   }
 
   /**
@@ -97,7 +97,7 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
    * @returns The extra payment amount to allocate.
    */
   extraPayment(extra: number) {
-    return extra
+    return extra;
   }
 
   /**
@@ -111,36 +111,34 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
    * 4. The simulation ends when all debts are paid off or when the safety threshold (1,000 months) is hit.
    */
   runStrategy() {
-    let remainingExtra = 0
-    let tripWire = 0
-    let isAllPaidOff = false
+    let remainingExtra = 0;
+    let tripWire = 0;
+    let isAllPaidOff = false;
 
     while (!isAllPaidOff && tripWire++ < 1000) {
-      let minimumPayments = 0
+      let minimumPayments = 0;
 
       for (const schedule of this.schedules) {
         if (schedule.isPaidOff) {
-          continue
+          continue;
         }
 
-        minimumPayments += schedule.debt.minimumPayment
+        minimumPayments += schedule.debt.minimumPayment;
       }
 
-      const monthlyPayment = getPaymentForMonth(this.payment, tripWire)
-      remainingExtra = this.extraPayment(
-        toMoney(monthlyPayment - minimumPayments),
-      )
-      isAllPaidOff = true
+      const monthlyPayment = getPaymentForMonth(this.payment, tripWire);
+      remainingExtra = this.extraPayment(toMoney(monthlyPayment - minimumPayments));
+      isAllPaidOff = true;
 
       for (const schedule of this.schedules) {
         if (schedule.isPaidOff) {
-          continue
+          continue;
         }
 
-        remainingExtra = schedule.payment(remainingExtra)
+        remainingExtra = schedule.payment(remainingExtra);
 
         if (!schedule.isPaidOff) {
-          isAllPaidOff = false
+          isAllPaidOff = false;
         }
       }
     }
@@ -156,7 +154,7 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
    */
   sortDebts(_firstDebt: YetiDebtInfo, _secondDebt: YetiDebtInfo): number {
     // Default to no sort.
-    return 0
+    return 0;
   }
 }
 
@@ -168,15 +166,15 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
  */
 export class MinimumPaymentYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "minimumPayment"
+    super(debts, payment);
+    this.key = "minimumPayment";
   }
 
   /**
    * Minimum payment strategy does not utilize extra funds.
    */
   extraPayment(_extra: number) {
-    return 0
+    return 0;
   }
 }
 
@@ -188,21 +186,21 @@ export class MinimumPaymentYetiStrategy extends BaseYetiStrategy {
  */
 export class BalancePaymentRatioYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "balancePaymentRatio"
+    super(debts, payment);
+    this.key = "balancePaymentRatio";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
     const ratio =
       firstDebt.borrowed / firstDebt.minimumPayment -
-      secondDebt.borrowed / secondDebt.minimumPayment
+      secondDebt.borrowed / secondDebt.minimumPayment;
 
     // If they have the same ratio, want the one with the lowest balance first
     if (ratio === 0) {
-      return firstDebt.borrowed - secondDebt.borrowed
+      return firstDebt.borrowed - secondDebt.borrowed;
     }
 
-    return ratio
+    return ratio;
   }
 }
 
@@ -214,21 +212,19 @@ export class BalancePaymentRatioYetiStrategy extends BaseYetiStrategy {
  */
 export class BalanceRateRatioYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "balanceRateRatio"
+    super(debts, payment);
+    this.key = "balanceRateRatio";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
-    const ratio =
-      firstDebt.borrowed / firstDebt.rate -
-      secondDebt.borrowed / secondDebt.rate
+    const ratio = firstDebt.borrowed / firstDebt.rate - secondDebt.borrowed / secondDebt.rate;
 
     // If they have the same ratio, want the one with the lowest balance first
     if (ratio === 0) {
-      return firstDebt.borrowed - secondDebt.borrowed
+      return firstDebt.borrowed - secondDebt.borrowed;
     }
 
-    return ratio
+    return ratio;
   }
 }
 
@@ -240,19 +236,19 @@ export class BalanceRateRatioYetiStrategy extends BaseYetiStrategy {
  */
 export class HighestBalanceYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "highestBalance"
+    super(debts, payment);
+    this.key = "highestBalance";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
-    const diff = secondDebt.borrowed - firstDebt.borrowed
+    const diff = secondDebt.borrowed - firstDebt.borrowed;
 
     // If they have the same interest rate, want the one with the lowest balance first
     if (diff === 0) {
-      return secondDebt.rate - firstDebt.rate
+      return secondDebt.rate - firstDebt.rate;
     }
 
-    return diff
+    return diff;
   }
 }
 
@@ -265,19 +261,19 @@ export class HighestBalanceYetiStrategy extends BaseYetiStrategy {
  */
 export class HighestRateYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "highestRate"
+    super(debts, payment);
+    this.key = "highestRate";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
-    const diff = secondDebt.rate - firstDebt.rate
+    const diff = secondDebt.rate - firstDebt.rate;
 
     // If they have the same interest rate, want the one with the lowest balance first
     if (diff === 0) {
-      return firstDebt.borrowed - secondDebt.borrowed
+      return firstDebt.borrowed - secondDebt.borrowed;
     }
 
-    return diff
+    return diff;
   }
 }
 
@@ -290,19 +286,19 @@ export class HighestRateYetiStrategy extends BaseYetiStrategy {
  */
 export class LowestBalanceYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "lowestBalance"
+    super(debts, payment);
+    this.key = "lowestBalance";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
-    var diff = firstDebt.borrowed - secondDebt.borrowed
+    var diff = firstDebt.borrowed - secondDebt.borrowed;
 
     // If they have the same interest rate, want the one with the lowest rate first
     if (diff === 0) {
-      return secondDebt.rate - firstDebt.rate
+      return secondDebt.rate - firstDebt.rate;
     }
 
-    return diff
+    return diff;
   }
 }
 
@@ -314,19 +310,19 @@ export class LowestBalanceYetiStrategy extends BaseYetiStrategy {
  */
 export class LowestRateYetiStrategy extends BaseYetiStrategy {
   constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
-    super(debts, payment)
-    this.key = "lowestRate"
+    super(debts, payment);
+    this.key = "lowestRate";
   }
 
   sortDebts(firstDebt: YetiDebtInfo, secondDebt: YetiDebtInfo): number {
-    const diff = firstDebt.rate - secondDebt.rate
+    const diff = firstDebt.rate - secondDebt.rate;
 
     // If they have the same interest rate, want the one with the lowest balance first
     if (diff === 0) {
-      return firstDebt.borrowed - secondDebt.borrowed
+      return firstDebt.borrowed - secondDebt.borrowed;
     }
 
-    return diff
+    return diff;
   }
 }
 
@@ -348,4 +344,4 @@ export const strategies = {
   lowestBalance: LowestBalanceYetiStrategy,
   /** Simulation prioritizing lowest rate first. */
   lowestRate: LowestRateYetiStrategy,
-}
+};

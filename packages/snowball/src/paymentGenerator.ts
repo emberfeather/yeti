@@ -1,4 +1,4 @@
-import { toMoney } from "./utility/numbers"
+import { toMoney } from "./utility/numbers";
 
 export type PaymentFunction = (month: number) => number;
 
@@ -6,13 +6,10 @@ export interface YetiPaymentGenerator {
   /**
    * Generates the payment amount for the current step (month).
    */
-  getPayment: PaymentFunction
+  getPayment: PaymentFunction;
 }
 
-export type YetiPaymentBudget =
-  | number
-  | YetiPaymentGenerator
-  | PaymentFunction
+export type YetiPaymentBudget = number | YetiPaymentGenerator | PaymentFunction;
 
 /**
  * Helper to extract the monthly payment from a YetiPaymentBudget.
@@ -21,27 +18,20 @@ export type YetiPaymentBudget =
  * @param month - The 1-based index of the current month.
  * @returns The payment amount for the month.
  */
-export function getPaymentForMonth(
-  payment: YetiPaymentBudget,
-  month: number,
-): number {
+export function getPaymentForMonth(payment: YetiPaymentBudget, month: number): number {
   if (typeof payment === "number") {
-    return payment
+    return payment;
   }
 
   if (typeof payment === "function") {
-    return payment(month)
+    return payment(month);
   }
 
-  if (
-    payment &&
-    typeof payment === "object" &&
-    typeof payment.getPayment === "function"
-  ) {
-    return payment.getPayment(month)
+  if (payment && typeof payment === "object" && typeof payment.getPayment === "function") {
+    return payment.getPayment(month);
   }
 
-  throw new Error("Invalid payment budget type")
+  throw new Error("Invalid payment budget type");
 }
 
 /**
@@ -51,29 +41,22 @@ export function getPaymentForMonth(
  * @param extra - The extra amount to add.
  * @returns A new YetiPaymentBudget that includes the extra amount.
  */
-export function addExtraPayment(
-  payment: YetiPaymentBudget,
-  extra: number,
-): YetiPaymentBudget {
+export function addExtraPayment(payment: YetiPaymentBudget, extra: number): YetiPaymentBudget {
   if (typeof payment === "number") {
-    return payment + extra
+    return payment + extra;
   }
 
   if (typeof payment === "function") {
-    return (month: number) => payment(month) + extra
+    return (month: number) => payment(month) + extra;
   }
 
-  if (
-    payment &&
-    typeof payment === "object" &&
-    typeof payment.getPayment === "function"
-  ) {
+  if (payment && typeof payment === "object" && typeof payment.getPayment === "function") {
     return {
       getPayment: (month: number) => payment.getPayment(month) + extra,
-    }
+    };
   }
 
-  throw new Error("Invalid payment budget type")
+  throw new Error("Invalid payment budget type");
 }
 
 /**
@@ -83,13 +66,13 @@ export function addExtraPayment(
 export class RepeatingPaymentGenerator implements YetiPaymentGenerator {
   constructor(public payments: number[]) {
     if (!payments || payments.length === 0) {
-      throw new Error("Payments array must contain at least one payment amount.")
+      throw new Error("Payments array must contain at least one payment amount.");
     }
   }
 
   getPayment(month: number): number {
-    const index = (month - 1) % this.payments.length
-    return this.payments[index]
+    const index = (month - 1) % this.payments.length;
+    return this.payments[index];
   }
 }
 
@@ -105,22 +88,22 @@ export class GrowingPaymentGenerator implements YetiPaymentGenerator {
     public interval: number = 12,
   ) {
     if (initialPayment < 0) {
-      throw new Error("Initial payment cannot be negative.")
+      throw new Error("Initial payment cannot be negative.");
     }
     if (interval <= 0) {
-      throw new Error("Interval must be greater than 0.")
+      throw new Error("Interval must be greater than 0.");
     }
   }
 
   getPayment(month: number): number {
-    const periods = Math.floor((month - 1) / this.interval)
-    let payment = this.initialPayment
+    const periods = Math.floor((month - 1) / this.interval);
+    let payment = this.initialPayment;
 
     if (this.increaseRate > 0) {
-      payment = payment * Math.pow(1 + this.increaseRate, periods)
+      payment = payment * Math.pow(1 + this.increaseRate, periods);
     }
 
-    payment += this.increaseAmount * periods
-    return toMoney(payment)
+    payment += this.increaseAmount * periods;
+    return toMoney(payment);
   }
 }

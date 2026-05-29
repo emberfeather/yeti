@@ -1,4 +1,4 @@
-import { BaseYetiStrategy } from "./strategy"
+import { BaseYetiStrategy } from "./strategy";
 
 /**
  * Interface representing the comparison metrics between a base strategy and a target strategy.
@@ -7,17 +7,17 @@ import { BaseYetiStrategy } from "./strategy"
  */
 export interface YetiStrategyComparisonInfo {
   /** The base strategy used for comparison (e.g. minimum payment or snowball). */
-  baseStrategy: BaseYetiStrategy
+  baseStrategy: BaseYetiStrategy;
   /** The target strategy being evaluated. */
-  strategy: BaseYetiStrategy
+  strategy: BaseYetiStrategy;
   /** Interest difference (target interest - base interest). Negative means interest saved. */
-  interest: number
+  interest: number;
   /** Duration difference in months. Negative means time saved. */
-  months: number
+  months: number;
   /** Principal difference. Typically 0 unless the simulation failed to pay off in time. */
-  principal: number
+  principal: number;
   /** Total cost difference (target total - base total). Negative means total money saved. */
-  total: number
+  total: number;
 }
 
 /**
@@ -26,9 +26,9 @@ export interface YetiStrategyComparisonInfo {
  */
 export class YetiStrategyComparison implements YetiStrategyComparisonInfo {
   /** The baseline strategy instance. */
-  baseStrategy: BaseYetiStrategy
+  baseStrategy: BaseYetiStrategy;
   /** The target strategy instance. */
-  strategy: BaseYetiStrategy
+  strategy: BaseYetiStrategy;
 
   /**
    * Constructs a new comparison helper between two strategies.
@@ -37,35 +37,35 @@ export class YetiStrategyComparison implements YetiStrategyComparisonInfo {
    * @param strategy - The strategy to compare against the baseline.
    */
   constructor(baseStrategy: BaseYetiStrategy, strategy: BaseYetiStrategy) {
-    this.baseStrategy = baseStrategy
-    this.strategy = strategy
+    this.baseStrategy = baseStrategy;
+    this.strategy = strategy;
   }
 
   /**
    * Difference in cumulative interest paid (target - base).
    */
   get interest(): number {
-    return this.strategy.interest - this.baseStrategy.interest
+    return this.strategy.interest - this.baseStrategy.interest;
   }
 
   /**
    * Difference in total months to pay off (target - base).
    */
   get months(): number {
-    return this.strategy.months - this.baseStrategy.months
+    return this.strategy.months - this.baseStrategy.months;
   }
 
   /**
    * Difference in principal paid (target - base).
    */
   get principal(): number {
-    return this.strategy.principal - this.baseStrategy.principal
+    return this.strategy.principal - this.baseStrategy.principal;
   }
 
   /**
    * Difference in total cost paid (target - base).
    */
   get total(): number {
-    return this.strategy.total - this.baseStrategy.total
+    return this.strategy.total - this.baseStrategy.total;
   }
 }

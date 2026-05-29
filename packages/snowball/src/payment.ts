@@ -4,9 +4,9 @@
  */
 export interface YetiPaymentInfo {
   /** The amount of the payment applied to the principal balance. */
-  principal: number
+  principal: number;
   /** The amount of the payment applied to the accrued interest. */
-  interest: number
+  interest: number;
 }
 
 /**
@@ -14,8 +14,8 @@ export interface YetiPaymentInfo {
  * Enforces non-negative values for both interest and principal payments.
  */
 export class YetiPayment implements YetiPaymentInfo {
-  private _principal: number = 0
-  private _interest: number = 0
+  private _principal: number = 0;
+  private _interest: number = 0;
 
   /**
    * Constructs a new YetiPayment record.
@@ -25,15 +25,15 @@ export class YetiPayment implements YetiPaymentInfo {
    * @throws If either principal or interest is negative.
    */
   constructor(principal: number, interest: number) {
-    this.principal = principal
-    this.interest = interest
+    this.principal = principal;
+    this.interest = interest;
   }
 
   /**
    * Gets the principal portion of the payment.
    */
   get principal(): number {
-    return this._principal
+    return this._principal;
   }
 
   /**
@@ -44,16 +44,16 @@ export class YetiPayment implements YetiPaymentInfo {
    */
   set principal(value: number) {
     if (value < 0) {
-      throw "Principal amount cannot be negative."
+      throw "Principal amount cannot be negative.";
     }
-    this._principal = value
+    this._principal = value;
   }
 
   /**
    * Gets the interest portion of the payment.
    */
   get interest(): number {
-    return this._interest
+    return this._interest;
   }
 
   /**
@@ -64,8 +64,8 @@ export class YetiPayment implements YetiPaymentInfo {
    */
   set interest(value: number) {
     if (value < 0) {
-      throw "Interest amount cannot be negative."
+      throw "Interest amount cannot be negative.";
     }
-    this._interest = value
+    this._interest = value;
   }
 }

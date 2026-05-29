@@ -59,26 +59,31 @@ graph TD
 ```
 
 ### 1. Core Models
-* **`YetiDebt`**: Represents a single debt obligation. It encapsulates properties like the current outstanding balance (`borrowed`), annual interest rate percentage (`rate`), and required minimum payment. Its setter properties automatically prevent negative values and validate that the minimum payment is sufficient to cover the accrued monthly interest.
-* **`YetiPayment`**: A simple structure representing the division of a single monthly payment into `principal` and `interest`.
-* **`YetiSchedule`**: Tracks the month-by-month state of an active debt during the simulation. It handles monthly interest calculations and accepts extra payments, returning any rollover funds (overpayments) when the debt is fully cleared.
-* **`YetiPaymentGenerator`**: Allows dynamic monthly payment budgets, supporting complex scenarios like annual bonuses (`RepeatingPaymentGenerator`) or salary raises (`GrowingPaymentGenerator`).
+
+- **`YetiDebt`**: Represents a single debt obligation. It encapsulates properties like the current outstanding balance (`borrowed`), annual interest rate percentage (`rate`), and required minimum payment. Its setter properties automatically prevent negative values and validate that the minimum payment is sufficient to cover the accrued monthly interest.
+- **`YetiPayment`**: A simple structure representing the division of a single monthly payment into `principal` and `interest`.
+- **`YetiSchedule`**: Tracks the month-by-month state of an active debt during the simulation. It handles monthly interest calculations and accepts extra payments, returning any rollover funds (overpayments) when the debt is fully cleared.
+- **`YetiPaymentGenerator`**: Allows dynamic monthly payment budgets, supporting complex scenarios like annual bonuses (`RepeatingPaymentGenerator`) or salary raises (`GrowingPaymentGenerator`).
 
 ### 2. Payoff Strategies
+
 Strategies inherit from `BaseYetiStrategy` and orchestrate the prioritization and payment process:
-* **Sorting Phase**: Prior to simulation, debts are sorted using the strategy's specific criteria (e.g. rate descending for Avalanche, balance ascending for Snowball).
-* **Payment Loop**: Month-by-month, the engine calculates the sum of all minimum payments. It subtracts this sum from the user's total monthly budget to determine the available extra cash.
-* **Rollover Distribution**: The extra cash is applied to the highest-priority unpaid debt. If that debt is paid off, the remaining funds roll over to the next prioritized debt in the same month.
+
+- **Sorting Phase**: Prior to simulation, debts are sorted using the strategy's specific criteria (e.g. rate descending for Avalanche, balance ascending for Snowball).
+- **Payment Loop**: Month-by-month, the engine calculates the sum of all minimum payments. It subtracts this sum from the user's total monthly budget to determine the available extra cash.
+- **Rollover Distribution**: The extra cash is applied to the highest-priority unpaid debt. If that debt is paid off, the remaining funds roll over to the next prioritized debt in the same month.
 
 ### 3. Comparison & Grouping
-* **`YetiStrategyComparison`**: Calculates the mathematical difference between a base strategy and a target strategy, exposing savings in total interest paid and months to pay off.
-* **`StrategyGroup`**: Runs all strategies in parallel against the same debt portfolio, facilitating quick side-by-side comparison and testing extra payment configurations.
+
+- **`YetiStrategyComparison`**: Calculates the mathematical difference between a base strategy and a target strategy, exposing savings in total interest paid and months to pay off.
+- **`StrategyGroup`**: Runs all strategies in parallel against the same debt portfolio, facilitating quick side-by-side comparison and testing extra payment configurations.
 
 ---
 
 ## Quickstart Guide
 
 ### 1. Simulating a Single Strategy
+
 Here is how to set up a portfolio of debts and simulate the **Debt Avalanche** strategy:
 
 ```typescript
@@ -88,11 +93,11 @@ import { YetiDebt, HighestRateYetiStrategy } from "@yeti/snowball";
 const debts = [
   new YetiDebt(5000, 18.9, 150, "Credit Card A"), // balance, rate (%), minPayment, unique identifier
   new YetiDebt(12000, 4.5, 250, "Car Loan"),
-  new YetiDebt(1500, 12.0, 50, "Store Card")
+  new YetiDebt(1500, 12.0, 50, "Store Card"),
 ];
 
 // 2. Define your total monthly payment budget (must be >= sum of minimum payments)
-const monthlyBudget = 600; 
+const monthlyBudget = 600;
 
 // 3. Execute the Avalanche Strategy (Highest Rate First)
 const avalanche = new HighestRateYetiStrategy(debts, monthlyBudget);
@@ -112,6 +117,7 @@ for (const schedule of avalanche.schedules) {
 ```
 
 ### 2. Comparing Strategies side-by-side using `StrategyGroup`
+
 Using `StrategyGroup` simplifies comparing multiple strategies and evaluating how extra monthly payments (acceleration) impact the payoff timeline.
 
 ```typescript
@@ -120,17 +126,17 @@ import { StrategyGroup, strategies, YetiDebt } from "@yeti/snowball";
 const debts = [
   new YetiDebt(5000, 18.9, 150, "Credit Card A"),
   new YetiDebt(12000, 4.5, 250, "Car Loan"),
-  new YetiDebt(1500, 12.0, 50, "Store Card")
+  new YetiDebt(1500, 12.0, 50, "Store Card"),
 ];
 
 const baselineBudget = 450; // Total minimum payment sum is $450
 
 // 1. Run all strategies in parallel using StrategyGroup
 const group = new StrategyGroup(
-  strategies,            // Registry of strategies to evaluate
-  "minimumPayment",      // Key of the base strategy for comparisons
+  strategies, // Registry of strategies to evaluate
+  "minimumPayment", // Key of the base strategy for comparisons
   debts,
-  baselineBudget
+  baselineBudget,
 );
 
 // 2. Compare Snowball vs. Minimum Payments
@@ -153,21 +159,25 @@ console.log(`New Total Interest: $${acceleratedAvalanche.interest}`);
 ```
 
 ### 3. Using Complex Payment Generators
+
 Instead of a static monthly budget, you can pass a generator to simulate complex financial scenarios like annual bonuses or cost-of-living raises.
 
 ```typescript
-import { YetiDebt, HighestRateYetiStrategy, GrowingPaymentGenerator, RepeatingPaymentGenerator } from "@yeti/snowball";
+import {
+  YetiDebt,
+  HighestRateYetiStrategy,
+  GrowingPaymentGenerator,
+  RepeatingPaymentGenerator,
+} from "@yeti/snowball";
 
-const debts = [
-  new YetiDebt(10000, 10.0, 150, "Student Loan")
-];
+const debts = [new YetiDebt(10000, 10.0, 150, "Student Loan")];
 
 // Example 1: Simulate a cost-of-living raise (e.g., a 3% raise added to your $500 payment every 12 months)
 const growingBudget = new GrowingPaymentGenerator(
-  500,    // Initial payment
-  0,      // Flat increase amount
-  0.03,   // Percentage increase (3%)
-  12      // Interval (every 12 months)
+  500, // Initial payment
+  0, // Flat increase amount
+  0.03, // Percentage increase (3%)
+  12, // Interval (every 12 months)
 );
 const raiseStrategy = new HighestRateYetiStrategy(debts, growingBudget);
 
@@ -182,19 +192,23 @@ const bonusStrategy = new HighestRateYetiStrategy(debts, bonusBudget);
 ## API Reference
 
 ### `YetiDebt`
+
 Data structure representing a single debt account.
 
 #### Constructor
+
 `constructor(borrowed: number, rate: number, minimumPayment: number, uid?: string)`
 
 #### Properties
+
 - `borrowed`: Current balance. Throws error if set to negative.
 - `rate`: Annual interest rate (0 to 100). Throws error if out of bounds.
 - `minimumPayment`: Monthly minimum. Setters enforce that it is at least interest-only.
 - `uid`: Unique identifier (auto-generates UUID if not provided).
-- `interestOnlyPayment` *(readonly)*: The minimum payment required to cover interest only.
+- `interestOnlyPayment` _(readonly)_: The minimum payment required to cover interest only.
 
 #### Static Methods
+
 - `calcMinimumPayment(borrowed: number, rate: number, balanceRate?: number)`: Calculates minimum payment.
 - `randomDebt()`: Generates a random valid debt.
 - `fromExport(exportedData: any)`: Reconstructs a `YetiDebt` instance from plain JSON.
@@ -202,21 +216,25 @@ Data structure representing a single debt account.
 ---
 
 ### `BaseYetiStrategy`
+
 The foundation class for simulating debt repayment schedules. All specific strategy classes inherit from `BaseYetiStrategy`.
 
 #### Properties
-- `months` *(readonly)*: Total months until all debts are paid off.
-- `interest` *(readonly)*: Total interest paid across all debts.
-- `principal` *(readonly)*: Total principal paid.
-- `total` *(readonly)*: Combined total cost (principal + interest).
+
+- `months` _(readonly)_: Total months until all debts are paid off.
+- `interest` _(readonly)_: Total interest paid across all debts.
+- `principal` _(readonly)_: Total principal paid.
+- `total` _(readonly)_: Combined total cost (principal + interest).
 - `schedules`: Array of `YetiScheduleInfo` containing detailed monthly payment traces.
 
 ---
 
 ### `YetiStrategyComparison`
+
 Calculates delta metrics between a baseline strategy and a target strategy.
 
 #### Properties
+
 - `interest`: Target interest minus base interest.
 - `months`: Target months minus base months.
 - `total`: Target total cost minus base total cost.
@@ -224,15 +242,18 @@ Calculates delta metrics between a baseline strategy and a target strategy.
 ---
 
 ### `StrategyGroup`
+
 Utility for managing and comparing multiple strategies concurrently.
 
 #### Methods
+
 - `compare(strategyKey: string): YetiStrategyComparison`: Compares target strategy with the configured base strategy.
 - `accelerate(strategyKey: string, extra: number): BaseYetiStrategy`: Re-runs a strategy with an increased monthly budget (adds `extra` budget).
 
 ---
 
 ### Payment Generators
+
 Provide dynamic variations to the monthly payment budget across simulation months.
 
 - `RepeatingPaymentGenerator(payments: number[])`: Cycles through a set array of payment amounts.

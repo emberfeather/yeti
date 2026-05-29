@@ -1,17 +1,17 @@
-import { YetiDebtInfo } from "./debt"
-import { YetiStrategyComparison } from "./strategyComparison"
-import { YetiPaymentBudget, addExtraPayment } from "./paymentGenerator"
+import { YetiDebtInfo } from "./debt";
+import { YetiStrategyComparison } from "./strategyComparison";
+import { YetiPaymentBudget, addExtraPayment } from "./paymentGenerator";
 
 /**
  * Interface representing a group of debt strategies evaluated together.
  */
 export interface StrategyGroupInfo {
   /** The list of debts evaluated by all strategies in the group. */
-  debts: YetiDebtInfo[]
+  debts: YetiDebtInfo[];
   /** The baseline monthly payment budget allocated for the strategies. */
-  payment: YetiPaymentBudget
+  payment: YetiPaymentBudget;
   /** The list of strategy identifiers or keys evaluated in this group. */
-  strategies: string[]
+  strategies: string[];
 }
 
 /**
@@ -23,15 +23,15 @@ export interface StrategyGroupInfo {
  */
 export class StrategyGroup implements StrategyGroupInfo {
   /** The key of the baseline strategy used for comparison (e.g. "minimumPayment"). */
-  baseStrategyKey: string
+  baseStrategyKey: string;
   /** The list of debts evaluated by all strategies. */
-  debts: YetiDebtInfo[]
+  debts: YetiDebtInfo[];
   /** Dictionary mapping strategy keys to their corresponding constructor classes. */
-  strategyClasses: any
+  strategyClasses: any;
   /** Dictionary mapping strategy keys to their simulated strategy instances. */
-  strategies: any
+  strategies: any;
   /** The baseline total monthly payment budget. */
-  payment: YetiPaymentBudget
+  payment: YetiPaymentBudget;
 
   /**
    * Constructs a new StrategyGroup and automatically runs all provided strategies.
@@ -47,17 +47,14 @@ export class StrategyGroup implements StrategyGroupInfo {
     debts: YetiDebtInfo[],
     payment: YetiPaymentBudget,
   ) {
-    this.strategyClasses = strategyClasses
-    this.baseStrategyKey = baseStrategyKey
-    this.debts = debts
-    this.payment = payment
-    this.strategies = {}
+    this.strategyClasses = strategyClasses;
+    this.baseStrategyKey = baseStrategyKey;
+    this.debts = debts;
+    this.payment = payment;
+    this.strategies = {};
 
     for (const key of Object.keys(this.strategyClasses)) {
-      this.strategies[key] = new this.strategyClasses[key](
-        this.debts,
-        this.payment,
-      )
+      this.strategies[key] = new this.strategyClasses[key](this.debts, this.payment);
     }
   }
 
@@ -69,10 +66,7 @@ export class StrategyGroup implements StrategyGroupInfo {
    * @returns A new strategy instance representing the accelerated simulation.
    */
   accelerate(strategyKey: string, extra: number) {
-    return new this.strategyClasses[strategyKey](
-      this.debts,
-      addExtraPayment(this.payment, extra),
-    )
+    return new this.strategyClasses[strategyKey](this.debts, addExtraPayment(this.payment, extra));
   }
 
   /**
@@ -85,6 +79,6 @@ export class StrategyGroup implements StrategyGroupInfo {
     return new YetiStrategyComparison(
       this.strategies[this.baseStrategyKey],
       this.strategies[strategyKey],
-    )
+    );
   }
 }

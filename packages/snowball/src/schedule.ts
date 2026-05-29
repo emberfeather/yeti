@@ -1,32 +1,32 @@
-import type { YetiDebtInfo } from "./debt"
-import { YetiPayment, YetiPaymentInfo } from "./payment"
-import { toMoney } from "./utility/numbers"
+import type { YetiDebtInfo } from "./debt";
+import { YetiPayment, YetiPaymentInfo } from "./payment";
+import { toMoney } from "./utility/numbers";
 
 /**
  * Interface representing the schedule state of a single debt during amortization.
  */
 export interface YetiScheduleInfo {
   /** The configuration metadata of the debt being amortized. */
-  debt: YetiDebtInfo
+  debt: YetiDebtInfo;
   /** The remaining balance of the debt. */
-  balance: number
+  balance: number;
   /** Historical list of payments made toward the debt. */
-  payments: YetiPaymentInfo[]
+  payments: YetiPaymentInfo[];
   /**
    * Applies a monthly payment to the debt, updating the schedule state.
    *
    * @param extraPayment - Additional funds allocated beyond the minimum payment.
    * @returns Any excess payment amount (rollover) if the debt is paid off.
    */
-  payment: (extraPayment: number) => number
+  payment: (extraPayment: number) => number;
   /** The sum of all principal payments made so far. */
-  principal: number
+  principal: number;
   /** The sum of all interest payments made so far. */
-  interest: number
+  interest: number;
   /** The total number of months the debt has been active/paying. */
-  months: number
+  months: number;
   /** Flag showing if the debt has been fully paid off. */
-  isPaidOff: boolean
+  isPaidOff: boolean;
 }
 
 /**
@@ -35,11 +35,11 @@ export interface YetiScheduleInfo {
  */
 export class YetiSchedule implements YetiScheduleInfo {
   /** The remaining outstanding balance of the debt. */
-  balance: number
+  balance: number;
   /** The core details of the debt contract. */
-  debt: YetiDebtInfo
+  debt: YetiDebtInfo;
   /** The history of monthly payment breakdowns. */
-  payments: YetiPaymentInfo[]
+  payments: YetiPaymentInfo[];
 
   /**
    * Constructs a new YetiSchedule tracker for a debt.
@@ -47,21 +47,21 @@ export class YetiSchedule implements YetiScheduleInfo {
    * @param debt - The debt metadata info.
    */
   constructor(debt: YetiDebtInfo) {
-    this.debt = debt
-    this.payments = []
+    this.debt = debt;
+    this.payments = [];
 
-    this.balance = this.debt.borrowed
+    this.balance = this.debt.borrowed;
   }
 
   /**
    * Returns the cumulative interest paid over all payment periods, rounded to 2 decimal places.
    */
   get interest(): number {
-    let interest = 0
+    let interest = 0;
     for (const payment of this.payments) {
-      interest += payment.interest
+      interest += payment.interest;
     }
-    return toMoney(interest)
+    return toMoney(interest);
   }
 
   /**
@@ -69,25 +69,25 @@ export class YetiSchedule implements YetiScheduleInfo {
    * A debt is considered paid off if the outstanding balance is <= 0.01 (penny threshold).
    */
   get isPaidOff(): boolean {
-    return this.balance <= 0.01
+    return this.balance <= 0.01;
   }
 
   /**
    * Returns the number of payment periods (months) in the schedule.
    */
   get months(): number {
-    return this.payments.length
+    return this.payments.length;
   }
 
   /**
    * Returns the cumulative principal paid over all payment periods, rounded to 2 decimal places.
    */
   get principal(): number {
-    let principal = 0
+    let principal = 0;
     for (const payment of this.payments) {
-      principal += payment.principal
+      principal += payment.principal;
     }
-    return toMoney(principal)
+    return toMoney(principal);
   }
 
   /**
@@ -100,21 +100,21 @@ export class YetiSchedule implements YetiScheduleInfo {
    * @returns The amount of rollover cash (overpayment) to pass to other debts.
    */
   payment(extraPayment: number): number {
-    const totalPayment = this.debt.minimumPayment + extraPayment
-    const interest = toMoney(this.balance * (this.debt.rate / 100 / 12))
-    let principal = toMoney(totalPayment - interest)
-    this.balance = toMoney(this.balance - principal)
+    const totalPayment = this.debt.minimumPayment + extraPayment;
+    const interest = toMoney(this.balance * (this.debt.rate / 100 / 12));
+    let principal = toMoney(totalPayment - interest);
+    this.balance = toMoney(this.balance - principal);
 
     // Check if there was extra paid and pass it along.
     if (this.balance < 0) {
-      const extra = toMoney(this.balance * -1)
-      principal = toMoney(principal - extra)
-      this.balance = 0
-      this.payments.push(new YetiPayment(principal, interest))
-      return extra
+      const extra = toMoney(this.balance * -1);
+      principal = toMoney(principal - extra);
+      this.balance = 0;
+      this.payments.push(new YetiPayment(principal, interest));
+      return extra;
     }
 
-    this.payments.push(new YetiPayment(principal, interest))
-    return 0
+    this.payments.push(new YetiPayment(principal, interest));
+    return 0;
   }
 }
