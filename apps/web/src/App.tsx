@@ -1,6 +1,21 @@
 import { useState, useMemo } from "react"
-import { calculateSnowball } from "@yeti/snowball"
-import type { Debt } from "@yeti/snowball"
+export interface Debt {
+  id: string
+  name: string
+  balance: number
+  interestRate: number
+  minimumPayment: number
+}
+
+function calculateSnowball(debts: Debt[], extraPayment: number): any {
+  console.log("TODO: implement calculateSnowball with strategy group", debts, extraPayment)
+  return {
+    payoffDate: "TBD",
+    totalMonthsToPayoff: 0,
+    totalInterestPaid: "0",
+    timeline: []
+  }
+}
 import "./App.css"
 
 const INITIAL_DEBTS: Debt[] = [

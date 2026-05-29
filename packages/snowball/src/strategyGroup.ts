@@ -1,5 +1,6 @@
 import { YetiDebtInfo } from "./debt"
 import { YetiStrategyComparison } from "./strategyComparison"
+import { YetiPaymentBudget, addExtraPayment } from "./paymentGenerator"
 
 /**
  * Interface representing a group of debt strategies evaluated together.
@@ -8,7 +9,7 @@ export interface StrategyGroupInfo {
   /** The list of debts evaluated by all strategies in the group. */
   debts: YetiDebtInfo[]
   /** The baseline monthly payment budget allocated for the strategies. */
-  payment: number
+  payment: YetiPaymentBudget
   /** The list of strategy identifiers or keys evaluated in this group. */
   strategies: string[]
 }
@@ -30,7 +31,7 @@ export class StrategyGroup implements StrategyGroupInfo {
   /** Dictionary mapping strategy keys to their simulated strategy instances. */
   strategies: any
   /** The baseline total monthly payment budget. */
-  payment: number
+  payment: YetiPaymentBudget
 
   /**
    * Constructs a new StrategyGroup and automatically runs all provided strategies.
@@ -44,7 +45,7 @@ export class StrategyGroup implements StrategyGroupInfo {
     strategyClasses: any,
     baseStrategyKey: string,
     debts: YetiDebtInfo[],
-    payment: number,
+    payment: YetiPaymentBudget,
   ) {
     this.strategyClasses = strategyClasses
     this.baseStrategyKey = baseStrategyKey
@@ -70,7 +71,7 @@ export class StrategyGroup implements StrategyGroupInfo {
   accelerate(strategyKey: string, extra: number) {
     return new this.strategyClasses[strategyKey](
       this.debts,
-      this.payment + extra,
+      addExtraPayment(this.payment, extra),
     )
   }
 

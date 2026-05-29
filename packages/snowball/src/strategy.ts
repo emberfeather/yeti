@@ -1,6 +1,7 @@
 import { YetiDebtInfo } from "./debt"
 import { YetiSchedule, YetiScheduleInfo } from "./schedule"
 import { toMoney } from "./utility/numbers"
+import { YetiPaymentBudget, getPaymentForMonth } from "./paymentGenerator"
 
 /**
  * Interface describing the structure of a debt payoff simulation strategy.
@@ -11,7 +12,7 @@ export interface YetiStrategyInfo {
   /** The list of debts evaluated by this strategy. */
   debts: YetiDebtInfo[]
   /** The total monthly payment budget allocated for all debts. */
-  payment: number
+  payment: YetiPaymentBudget
   /** The generated payment schedules for each debt. */
   schedules: YetiScheduleInfo[]
 }
@@ -26,7 +27,7 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
   /** The unique key of the strategy. */
   key: string = "unknown"
   /** The total monthly budget (minimum payments + extra payment capacity). */
-  payment: number
+  payment: YetiPaymentBudget
   /** Amortization schedules for each debt. */
   schedules: YetiScheduleInfo[]
 
@@ -36,7 +37,7 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
    * @param debts - List of debts to simulate.
    * @param payment - Total monthly payment budget.
    */
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     this.debts = debts.sort(this.sortDebts)
     this.payment = payment
     this.schedules = []
@@ -125,8 +126,9 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
         minimumPayments += schedule.debt.minimumPayment
       }
 
+      const monthlyPayment = getPaymentForMonth(this.payment, tripWire)
       remainingExtra = this.extraPayment(
-        toMoney(this.payment - minimumPayments),
+        toMoney(monthlyPayment - minimumPayments),
       )
       isAllPaidOff = true
 
@@ -165,7 +167,7 @@ export class BaseYetiStrategy implements YetiStrategyInfo {
  * Excess monthly budget is ignored.
  */
 export class MinimumPaymentYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "minimumPayment"
   }
@@ -185,7 +187,7 @@ export class MinimumPaymentYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: lowest balance first.
  */
 export class BalancePaymentRatioYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "balancePaymentRatio"
   }
@@ -211,7 +213,7 @@ export class BalancePaymentRatioYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: lowest balance first.
  */
 export class BalanceRateRatioYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "balanceRateRatio"
   }
@@ -237,7 +239,7 @@ export class BalanceRateRatioYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: highest interest rate first.
  */
 export class HighestBalanceYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "highestBalance"
   }
@@ -262,7 +264,7 @@ export class HighestBalanceYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: lowest balance first.
  */
 export class HighestRateYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "highestRate"
   }
@@ -287,7 +289,7 @@ export class HighestRateYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: highest interest rate first.
  */
 export class LowestBalanceYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "lowestBalance"
   }
@@ -311,7 +313,7 @@ export class LowestBalanceYetiStrategy extends BaseYetiStrategy {
  * Tie-breaker: lowest balance first.
  */
 export class LowestRateYetiStrategy extends BaseYetiStrategy {
-  constructor(debts: YetiDebtInfo[], payment: number) {
+  constructor(debts: YetiDebtInfo[], payment: YetiPaymentBudget) {
     super(debts, payment)
     this.key = "lowestRate"
   }
