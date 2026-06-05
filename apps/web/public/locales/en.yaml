@@ -1,0 +1,31 @@
+config:
+  locale: en-US
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: USD
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Yeti Snowball Debt Calculator
+    subtitle: Accelerate your debt payoff by targeting the smallest balances first and rolling over payments.
+  root:
+    header: Yeti snowball debt calculator
+  not_found:
+    header: 404 Not found
+    description: You are looking for something that does exist.
+  debt:
+    interest: The debt {debtName} has an interest rate of {interestRate, percent}.
+  balance: Your balance is {amount, currency}.
+  saved_text: Saved {amount, currency}
+  welcome: Welcome to Yeti, {name}!

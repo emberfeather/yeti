@@ -1,105 +1,6 @@
-import { LitElement, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { LowestBalanceYetiStrategy, YetiDebt } from "@yeti/snowball";
-import "./App.css";
-
-export interface Debt {
-  id: string;
-  name: string;
-  balance: number;
-  interestRate: number;
-  minimumPayment: number;
-}
-
-interface TimelineMonth {
-  monthIndex: number;
-  monthName: string;
-  year: number;
-  totalPaid: string;
-  totalInterestCharged: string;
-  totalRemainingBalance: string;
-}
-
-interface SnowballResult {
-  payoffDate: string;
-  totalMonthsToPayoff: number;
-  totalInterestPaid: string;
-  timeline: TimelineMonth[];
-}
-
-function calculateSnowball(debts: Debt[], extraPayment: number): SnowballResult {
-  if (debts.length === 0) {
-    return {
-      payoffDate: "N/A",
-      totalMonthsToPayoff: 0,
-      totalInterestPaid: "0",
-      timeline: [],
-    };
-  }
-
-  // 1. Convert to YetiDebt
-  const yetiDebts = debts.map(
-    (d) => new YetiDebt(d.balance, d.interestRate, d.minimumPayment, d.id),
-  );
-
-  // 2. Sum the minimum payments
-  const totalMinPayment = debts.reduce((sum, d) => sum + d.minimumPayment, 0);
-  const totalBudget = totalMinPayment + extraPayment;
-
-  // 3. Run LowestBalanceYetiStrategy (Snowball)
-  const strategy = new LowestBalanceYetiStrategy(yetiDebts, totalBudget);
-
-  // 4. Generate the timeline month-by-month
-  const maxMonths = strategy.months;
-  const timeline: TimelineMonth[] = [];
-  const currentDate = new Date();
-
-  // Track the remaining balance for each debt schedule
-  const currentBalances = strategy.schedules.map((s) => s.debt.borrowed);
-
-  for (let m = 1; m <= maxMonths; m++) {
-    let totalPaid = 0;
-    let totalInterestCharged = 0;
-    let totalRemainingBalance = 0;
-
-    strategy.schedules.forEach((schedule, index) => {
-      if (m <= schedule.payments.length) {
-        const payment = schedule.payments[m - 1];
-        totalPaid += payment.principal + payment.interest;
-        totalInterestCharged += payment.interest;
-        currentBalances[index] = Math.max(0, currentBalances[index] - payment.principal);
-      }
-      totalRemainingBalance += currentBalances[index];
-    });
-
-    const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + m - 1, 1);
-    const monthName = targetDate.toLocaleString("default", { month: "long" });
-    const year = targetDate.getFullYear();
-
-    timeline.push({
-      monthIndex: m,
-      monthName,
-      year,
-      totalPaid: totalPaid.toFixed(2),
-      totalInterestCharged: totalInterestCharged.toFixed(2),
-      totalRemainingBalance: totalRemainingBalance.toFixed(2),
-    });
-  }
-
-  let payoffDate = "TBD";
-  if (maxMonths > 0) {
-    const targetDate = new Date();
-    targetDate.setMonth(targetDate.getMonth() + maxMonths - 1);
-    payoffDate = targetDate.toLocaleString("default", { month: "long", year: "numeric" });
-  }
-
-  return {
-    payoffDate,
-    totalMonthsToPayoff: maxMonths,
-    totalInterestPaid: strategy.interest.toFixed(2),
-    timeline,
-  };
-}
+import { calculateSnowball, type Debt } from "./calculator";
 
 const INITIAL_DEBTS: Debt[] = [
   {
@@ -125,8 +26,8 @@ const INITIAL_DEBTS: Debt[] = [
   },
 ];
 
-@customElement("yeti-app")
-export class YetiApp extends LitElement {
+@customElement("yeti-app-ai")
+export class YetiAppAi extends LitElement {
   @state() private debts: Debt[] = INITIAL_DEBTS;
   @state() private extraPayment: number = 300;
 
@@ -137,10 +38,461 @@ export class YetiApp extends LitElement {
   @state() private newMinPay: string = "";
   @state() private formError: string = "";
 
-  // Render in Light DOM to reuse App.css and index.css without Shadow DOM encapsulations
-  override createRenderRoot() {
-    return this;
-  }
+  static styles = [
+    css`
+      /* Modern Glassmorphic Design System */
+      .app-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        box-sizing: border-box;
+        text-align: left;
+      }
+
+      .app-header {
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .header-badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        background: var(--accent-bg);
+        border: 1px solid var(--accent-border);
+        padding: 6px 16px;
+        border-radius: 100px;
+        margin-bottom: 16px;
+      }
+
+      .app-header h1 {
+        font-size: 44px;
+        font-weight: 800;
+        line-height: 1.1;
+        margin: 0 0 12px 0;
+        letter-spacing: -1.2px;
+        background: linear-gradient(135deg, var(--text-h), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* App Grid Layout */
+      .app-grid {
+        display: grid;
+        grid-template-columns: 380px 1fr;
+        gap: 32px;
+        align-items: start;
+      }
+
+      @media (max-width: 960px) {
+        .app-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Panel Styles */
+      .panel {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .panel-section {
+        margin-bottom: 32px;
+      }
+
+      .panel-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .panel-section h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        color: var(--text-h);
+      }
+
+      /* Card Styles */
+      .card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+      }
+
+      .card:last-child {
+        margin-bottom: 0;
+      }
+
+      .card h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 16px;
+        color: var(--text-h);
+      }
+
+      /* Form & Inputs */
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text-h);
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .input-wrapper input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 16px;
+        background: var(--bg);
+        color: var(--text-h);
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+      }
+
+      .input-wrapper input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-bg);
+      }
+
+      .input-wrapper.prefix input {
+        padding-left: 32px;
+      }
+
+      .input-prefix {
+        position: absolute;
+        left: 12px;
+        color: var(--text);
+        font-size: 16px;
+        user-select: none;
+      }
+
+      .input-wrapper.suffix input {
+        padding-right: 32px;
+      }
+
+      .input-suffix {
+        position: absolute;
+        right: 12px;
+        color: var(--text);
+        font-size: 16px;
+        user-select: none;
+      }
+
+      .input-help {
+        font-size: 12px;
+        color: var(--text);
+        margin-top: 6px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .add-debt-form input[type="text"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 16px;
+        background: var(--bg);
+        color: var(--text-h);
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .add-debt-form input[type="text"]:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-bg);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px var(--accent-bg);
+        opacity: 0.9;
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      /* Dashboard Cards */
+      .results-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dashboard-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      @media (max-width: 600px) {
+        .dashboard-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .metric-card {
+        padding: 24px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .metric-card.highlight {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, var(--bg), var(--accent-bg));
+      }
+
+      .metric-card h3 {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 12px 0;
+        color: var(--text);
+      }
+
+      .metric-value {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-h);
+        line-height: 1.2;
+      }
+
+      .metric-sub {
+        font-size: 13px;
+        margin: 8px 0 0 0;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .saving-pill {
+        font-size: 11px;
+        font-weight: 700;
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+        padding: 2px 6px;
+        border-radius: 100px;
+      }
+
+      .saving-text {
+        color: #10b981;
+        font-weight: 600;
+      }
+
+      /* Active Debts List */
+      .empty-state {
+        text-align: center;
+        padding: 32px 0;
+        color: var(--text);
+        font-size: 15px;
+      }
+
+      .debts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .debt-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: rgba(244, 243, 236, 0.2);
+        transition: all 0.2s;
+      }
+
+      .debt-item:hover {
+        border-color: var(--accent-border);
+        background: var(--accent-bg);
+      }
+
+      .debt-info h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        color: var(--text-h);
+      }
+
+      .debt-meta {
+        font-size: 13px;
+        color: var(--text);
+        display: flex;
+        gap: 16px;
+      }
+
+      .debt-value {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .balance-badge {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-h);
+        background: var(--border);
+        padding: 4px 12px;
+        border-radius: 100px;
+      }
+
+      .btn-remove {
+        background: transparent;
+        border: none;
+        color: var(--text);
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 50%;
+        transition: all 0.2s;
+        line-height: 1;
+      }
+
+      .btn-remove:hover {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      /* Error Messages */
+      .error-message {
+        font-size: 14px;
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+
+      /* Timeline / Table styles */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .timeline-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        text-align: left;
+      }
+
+      .timeline-table th {
+        background: rgba(244, 243, 236, 0.4);
+        color: var(--text-h);
+        font-weight: 600;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .timeline-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text);
+      }
+
+      .timeline-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .timeline-table tr:hover td {
+        background: rgba(244, 243, 236, 0.2);
+        color: var(--text-h);
+      }
+
+      .interest-col {
+        color: #ef4444 !important;
+      }
+
+      .balance-col {
+        font-weight: 600;
+        color: var(--text-h) !important;
+      }
+
+      .table-dots {
+        text-align: center;
+        font-style: italic;
+        color: var(--text);
+        background: rgba(244, 243, 236, 0.1);
+      }
+
+      .table-dots td {
+        text-align: center;
+        padding: 16px;
+      }
+    `,
+  ];
 
   private handleAddDebt(e: Event) {
     e.preventDefault();
@@ -203,7 +555,6 @@ export class YetiApp extends LitElement {
     return html`
       <div class="app-container">
         <header class="app-header">
-          <div class="header-badge">Yeti Financial Tools</div>
           <h1>Debt Snowball Calculator</h1>
           <p class="subtitle">
             Accelerate your debt payoff by targeting the smallest balances first and rolling over
@@ -448,6 +799,6 @@ export class YetiApp extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "yeti-app": YetiApp;
+    "yeti-app-ai": YetiAppAi;
   }
 }

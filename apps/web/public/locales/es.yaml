@@ -1,0 +1,31 @@
+config:
+  locale: es-ES
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: EUR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Calculadora de Deudas Yeti Snowball
+    subtitle: Acelere el pago de sus deudas enfocándose primero en los saldos más pequeños y acumulando los pagos.
+  root:
+    header: Calculadora de deudas yeti snowball
+  not_found:
+    header: 404 No encontrado
+    description: Estás buscando algo que sí existe.
+  debt:
+    interest: La deuda {debtName} tiene una tasa de interés del {interestRate, percent}.
+  balance: Su saldo es {amount, currency}.
+  saved_text: Ahorrado {amount, currency}
+  welcome: ¡Bienvenido a Yeti, {name}!
