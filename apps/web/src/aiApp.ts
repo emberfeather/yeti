@@ -212,6 +212,57 @@ export class YetiAppAi extends LitElement {
         font-weight: 600;
       }
 
+      /* Encouragement Nudge Box */
+      .nudge-box {
+        margin-top: 14px;
+        padding: 10px 12px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px dashed rgba(16, 185, 129, 0.4);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .nudge-box:hover {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: #10b981;
+        transform: translateY(-1px);
+      }
+
+      .nudge-text {
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--text-h);
+      }
+
+      .nudge-green {
+        color: #10b981;
+        font-weight: 700;
+      }
+
+      .nudge-btn {
+        font-size: 11px;
+        font-weight: 700;
+        background: #10b981;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        padding: 4px 8px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.15s ease-in-out;
+        font-family: inherit;
+      }
+
+      .nudge-btn:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+
       /* Strategy Display Card */
       .strategy-header-row {
         display: flex;
@@ -945,6 +996,24 @@ export class YetiAppAi extends LitElement {
       baselineResult.totalMonthsToPayoff - activeResult.totalMonthsToPayoff,
     );
 
+    // Calculate 20% payment bump rounded to nearest $5 (minimum $5 bump)
+    const bumpRaw = this.extraPayment > 0 ? this.extraPayment * 0.2 : 50;
+    const bumpAmount = Math.max(5, Math.round(bumpRaw / 5) * 5);
+    const proposedPayment = this.extraPayment + bumpAmount;
+    const proposedResult = calculateSchedule(
+      this.debts,
+      proposedPayment,
+      this.currentStrategyKey,
+    );
+    const extraInterestSaved = Math.max(
+      0,
+      parseFloat(activeResult.totalInterestPaid) - parseFloat(proposedResult.totalInterestPaid),
+    );
+    const extraMonthsSaved = Math.max(
+      0,
+      activeResult.totalMonthsToPayoff - proposedResult.totalMonthsToPayoff,
+    );
+
     const comparisonItems = compareAllStrategies(this.debts, this.extraPayment, baselineResult);
     if (
       comparisonItems.length > 0 &&
@@ -1114,25 +1183,58 @@ export class YetiAppAi extends LitElement {
               <section class="controls-grid">
                 <!-- Additional Snowball Budget Input -->
                 <div class="card metric-card">
-                  <h3>Additional Monthly Payment</h3>
-                  <div class="metric-input-wrapper">
-                    <span class="metric-prefix">$</span>
-                    <input
-                      id="extra-payment"
-                      class="metric-input"
-                      type="number"
-                      min="0"
-                      step="25"
-                      .value="${String(this.extraPayment)}"
-                      @input="${(e: Event) => {
-                        const val = parseFloat((e.target as HTMLInputElement).value);
-                        this.extraPayment = Math.max(0, val || 0);
-                      }}"
-                      placeholder="0.00"
-                      aria-label="Additional Monthly Payment"
-                    />
+                  <div>
+                    <h3>Additional Monthly Payment</h3>
+                    <div class="metric-input-wrapper">
+                      <span class="metric-prefix">$</span>
+                      <input
+                        id="extra-payment"
+                        class="metric-input"
+                        type="number"
+                        min="0"
+                        step="25"
+                        .value="${String(this.extraPayment)}"
+                        @input="${(e: Event) => {
+                          const val = parseFloat((e.target as HTMLInputElement).value);
+                          this.extraPayment = Math.max(0, val || 0);
+                        }}"
+                        placeholder="0.00"
+                        aria-label="Additional Monthly Payment"
+                      />
+                    </div>
+                    <p class="metric-sub">Extra rollover added each month</p>
                   </div>
-                  <p class="metric-sub">Extra rollover added each month</p>
+
+                  ${extraInterestSaved > 0 || extraMonthsSaved > 0
+                    ? html`
+                        <div
+                          class="nudge-box"
+                          @click="${() => (this.extraPayment = proposedPayment)}"
+                          title="Click to increase payment by $${bumpAmount}/mo"
+                        >
+                          <div class="nudge-text">
+                            Save an extra
+                            <span class="nudge-green"
+                              >$${Math.round(extraInterestSaved).toLocaleString()}</span
+                            >
+                            in interest by increasing the payment by
+                            <strong>$${bumpAmount}</strong>${extraMonthsSaved > 0
+                              ? ` (and finish ${extraMonthsSaved} mo sooner)`
+                              : ""}.
+                          </div>
+                          <button
+                            type="button"
+                            class="nudge-btn"
+                            @click="${(e: Event) => {
+                              e.stopPropagation();
+                              this.extraPayment = proposedPayment;
+                            }}"
+                          >
+                            +$${bumpAmount}
+                          </button>
+                        </div>
+                      `
+                    : ""}
                 </div>
 
                 <!-- Current Payoff Strategy Display & Switch Button -->
