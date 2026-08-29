@@ -14,13 +14,16 @@ import {
 } from "@littoral/literally/localization/localization";
 import { provide } from "@lit/context";
 import { css, html, type PropertyValues } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 
 /**
  * Yeti app.
  */
 @customElement("yeti-app")
 export class YetiApp extends ERApp {
+  @property({ type: String, attribute: "router-mode" })
+  routerMode: "hash" | "path" = "path";
+
   private localizationManager = new LocalizationManager();
 
   @provide({ context: localizationContext })
