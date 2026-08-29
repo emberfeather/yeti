@@ -1340,12 +1340,12 @@ export class YetiAppAi extends LitElement {
                             id="debt-rate"
                             type="number"
                             min="0"
-                            step="0.1"
+                            step="0.01"
                             .value="${this.newRate}"
                             @input="${(e: Event) => {
                               this.newRate = (e.target as HTMLInputElement).value;
                             }}"
-                            placeholder="0.0"
+                            placeholder="0.00"
                             required
                           />
                           <span class="input-suffix">%</span>
