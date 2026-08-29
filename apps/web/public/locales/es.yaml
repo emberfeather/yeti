@@ -28,7 +28,7 @@ strings:
     title: Deudas ({count, integer})
     add: "+ Añadir una Deuda"
     close_form: "✕ Cerrar Formulario"
-    empty: "No hay deudas añadidas todavía. ¡Haz clic en \"+ Añadir una Deuda\" para comenzar!"
+    empty: 'No hay deudas añadidas todavía. ¡Haz clic en "+ Añadir una Deuda" para comenzar!'
     storage_save_label: Guardar datos en este dispositivo
     storage_privacy_note: Guardado de forma privada en el almacenamiento local de tu navegador — nunca se envía a ningún servidor.
     form:

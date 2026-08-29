@@ -28,7 +28,7 @@ strings:
     title: Zobowiązania ({count, integer})
     add: "+ Dodaj Zobowiązanie"
     close_form: "✕ Zamknij Formularz"
-    empty: "Brak dodanych zobowiązań. Kliknij powyżej \"+ Dodaj Zobowiązanie\", aby rozpocząć!"
+    empty: 'Brak dodanych zobowiązań. Kliknij powyżej "+ Dodaj Zobowiązanie", aby rozpocząć!'
     storage_save_label: Zapisz dane na tym urządzeniu
     storage_privacy_note: Przechowywane prywatnie w pamięci lokalnej przeglądarki — nigdy nie wysyłane na żaden serwer.
     form:

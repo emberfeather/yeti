@@ -28,7 +28,7 @@ strings:
     title: Dettes ({count, integer})
     add: "+ Ajouter une Dette"
     close_form: "✕ Fermer le Formulaire"
-    empty: "Aucune dette ajoutée pour le moment. Cliquez sur \"+ Ajouter une Dette\" ci-dessus pour commencer !"
+    empty: 'Aucune dette ajoutée pour le moment. Cliquez sur "+ Ajouter une Dette" ci-dessus pour commencer !'
     storage_save_label: Enregistrer les données sur cet appareil
     storage_privacy_note: Stocké de manière privée dans le stockage local de votre navigateur — jamais envoyé à un serveur.
     form:

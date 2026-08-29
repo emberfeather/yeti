@@ -28,7 +28,7 @@ strings:
     title: Skulder ({count, integer})
     add: "+ Lägg till Skuld"
     close_form: "✕ Stäng Formulär"
-    empty: "Inga skulder tillagda än. Klicka på \"+ Lägg till Skuld\" ovan för att komma igång!"
+    empty: 'Inga skulder tillagda än. Klicka på "+ Lägg till Skuld" ovan för att komma igång!'
     storage_save_label: Spara data på denna enhet
     storage_privacy_note: Lagras privat i din webbläsares lokala lagring — skickas aldrig till någon server.
     form:

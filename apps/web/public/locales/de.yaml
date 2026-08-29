@@ -28,7 +28,7 @@ strings:
     title: Schulden ({count, integer})
     add: "+ Schuld Hinzufügen"
     close_form: "✕ Formular Schließen"
-    empty: "Noch keine Schulden eingetragen. Klicken Sie oben auf \"+ Schuld Hinzufügen\", um zu beginnen!"
+    empty: 'Noch keine Schulden eingetragen. Klicken Sie oben auf "+ Schuld Hinzufügen", um zu beginnen!'
     storage_save_label: Daten auf diesem Gerät speichern
     storage_privacy_note: Lokal und privat im Speicher Ihres Browsers gesichert — wird niemals an einen Server übertragen.
     form:

@@ -28,7 +28,7 @@ strings:
     title: 借入 ({count, integer}件)
     add: "+ 借入を追加"
     close_form: "✕ フォームを閉じる"
-    empty: "まだ借入が登録されていません。上の「+ 借入を追加」から入力してください。"
+    empty: 'まだ借入が登録されていません。上の「+ 借入を追加」から入力してください。'
     storage_save_label: この端末にデータを保存
     storage_privacy_note: ブラウザのローカルストレージに安全に保存されます。サーバーへ送信されることはありません。
     form:

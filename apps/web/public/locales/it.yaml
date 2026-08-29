@@ -28,7 +28,7 @@ strings:
     title: Debiti ({count, integer})
     add: "+ Aggiungi un Debito"
     close_form: "✕ Chiudi Modulo"
-    empty: "Nessun debito aggiunto. Clicca su \"+ Aggiungi un Debito\" per iniziare!"
+    empty: 'Nessun debito aggiunto. Clicca su "+ Aggiungi un Debito" per iniziare!'
     storage_save_label: Salva dati su questo dispositivo
     storage_privacy_note: Archiviato privatamente nella memoria locale del browser: mai inviato a un server.
     form:

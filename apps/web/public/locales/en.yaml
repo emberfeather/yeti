@@ -28,7 +28,7 @@ strings:
     title: Debts ({count, integer})
     add: "+ Add a Debt"
     close_form: "✕ Close Form"
-    empty: "No debts added yet. Click \"+ Add a Debt\" above to get started!"
+    empty: 'No debts added yet. Click "+ Add a Debt" above to get started!'
     storage_save_label: Save data on this device
     storage_privacy_note: Stored privately in your browser's local storage — never sent to a server.
     form:

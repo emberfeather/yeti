@@ -12,7 +12,8 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "test": "turbo run test",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "deploy": "turbo run build && npx -y firebase-tools@latest deploy --only hosting"
   },
   "devDependencies": {
     "oxfmt": "^0.52.0",

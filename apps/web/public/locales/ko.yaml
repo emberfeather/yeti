@@ -28,7 +28,7 @@ strings:
     title: 부채 ({count, integer}건)
     add: "+ 부채 추가"
     close_form: "✕ 폼 닫기"
-    empty: "아직 등록된 부채가 없습니다. 위의 \"+ 부채 추가\"를 눌러 시작하세요!"
+    empty: '아직 등록된 부채가 없습니다. 위의 "+ 부채 추가"를 눌러 시작하세요!'
     storage_save_label: 이 기기에 데이터 저장
     storage_privacy_note: 브라우저 로컬 저장소에 안전하게 보관되며 서버로 전송되지 않습니다.
     form:
