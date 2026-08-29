@@ -29,6 +29,8 @@ strings:
     add: "+ 添加债务"
     close_form: "✕ 关闭表单"
     empty: "暂无债务记录。点击上方 \"+ 添加债务\" 开始规划！"
+    storage_save_label: 在此设备上保存数据
+    storage_privacy_note: 数据仅私密保存在您浏览器的本地存储中，绝不会发送到任何服务器。
     form:
       name_label: 债务名称
       name_placeholder: "例如：信用卡"

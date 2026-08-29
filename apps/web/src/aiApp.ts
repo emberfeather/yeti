@@ -11,6 +11,7 @@ import {
   type Debt,
   type StrategyKey,
 } from "./calculator";
+import { loadStoredState, saveStoredState } from "./storage";
 import { CHART_PALETTE } from "./components/chart/chartTheme";
 import "./components/chart/yeti-debt-payoff-chart";
 
@@ -70,6 +71,7 @@ export class YetiAppAi extends LitElement {
   @state()
   private localization?: Localization;
 
+  @state() private saveLocally: boolean = false;
   @state() private debts: Debt[] = INITIAL_DEBTS;
   @state() private extraPayment: number = 300;
   @state() private currentStrategyKey: StrategyKey = "lowestBalance";
@@ -85,6 +87,32 @@ export class YetiAppAi extends LitElement {
   @state() private newRate: string = "";
   @state() private newMinPay: string = "";
   @state() private formError: string = "";
+
+  constructor() {
+    super();
+    const stored = loadStoredState();
+    if (stored) {
+      this.saveLocally = stored.saveLocally;
+      if (stored.debts && stored.debts.length > 0) {
+        this.debts = stored.debts;
+      }
+      if (typeof stored.extraPayment === "number") {
+        this.extraPayment = stored.extraPayment;
+      }
+      if (stored.currentStrategyKey) {
+        this.currentStrategyKey = stored.currentStrategyKey;
+      }
+    }
+  }
+
+  private syncStorage() {
+    saveStoredState({
+      saveLocally: this.saveLocally,
+      debts: this.debts,
+      extraPayment: this.extraPayment,
+      currentStrategyKey: this.currentStrategyKey,
+    });
+  }
 
   static styles = [
     css`
@@ -353,6 +381,50 @@ export class YetiAppAi extends LitElement {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .header-title-group {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .storage-toggle-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        user-select: none;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text);
+        background: rgba(244, 243, 236, 0.5);
+        padding: 4px 10px;
+        border-radius: 9999px;
+        border: 1px solid var(--border);
+        transition: all 0.2s ease;
+      }
+
+      .storage-toggle-label:hover {
+        border-color: var(--accent);
+        color: var(--text-h);
+      }
+
+      .storage-checkbox {
+        accent-color: var(--accent);
+        cursor: pointer;
+        margin: 0;
+        width: 14px;
+        height: 14px;
+      }
+
+      .storage-toggle-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
       }
 
       /* Buttons */
@@ -1138,10 +1210,12 @@ export class YetiAppAi extends LitElement {
     this.newMinPay = "";
     this.formError = "";
     this.isAddingDebt = false;
+    this.syncStorage();
   }
 
   private handleRemoveDebt(id: string) {
     this.debts = this.debts.filter((d) => d.id !== id);
+    this.syncStorage();
   }
 
   override render() {
@@ -1211,7 +1285,23 @@ export class YetiAppAi extends LitElement {
         <!-- 2. Active Debts Section with Embedded Add Debt Form -->
         <section class="card list-card">
           <div class="card-header-actions">
-            <h2>${this.t("debts.title", { count: this.debts.length })}</h2>
+            <div class="header-title-group">
+              <h2>${this.t("debts.title", { count: this.debts.length })}</h2>
+              <label class="storage-toggle-label" title="${this.t("debts.storage_privacy_note")}">
+                <input
+                  type="checkbox"
+                  class="storage-checkbox"
+                  .checked="${this.saveLocally}"
+                  @change="${(e: Event) => {
+                    this.saveLocally = (e.target as HTMLInputElement).checked;
+                    this.syncStorage();
+                  }}"
+                />
+                <span class="storage-toggle-text">
+                  <span aria-hidden="true">💾</span> ${this.t("debts.storage_save_label")}
+                </span>
+              </label>
+            </div>
             <button
               class="btn btn-action-pill"
               @click="${() => {
@@ -1384,6 +1474,7 @@ export class YetiAppAi extends LitElement {
                         @input="${(e: Event) => {
                           const val = parseFloat((e.target as HTMLInputElement).value);
                           this.extraPayment = Math.max(0, val || 0);
+                          this.syncStorage();
                         }}"
                         placeholder="0.00"
                         aria-label="${this.t("controls.extra_payment_title")}"
@@ -1396,7 +1487,10 @@ export class YetiAppAi extends LitElement {
                     ? html`
                         <div
                           class="nudge-box"
-                          @click="${() => (this.extraPayment = proposedPayment)}"
+                          @click="${() => {
+                            this.extraPayment = proposedPayment;
+                            this.syncStorage();
+                          }}"
                           title="${this.t("controls.nudge_boost", {
                             interest: Math.round(extraInterestSaved),
                             bump: bumpAmount,
@@ -1416,6 +1510,7 @@ export class YetiAppAi extends LitElement {
                             @click="${(e: Event) => {
                               e.stopPropagation();
                               this.extraPayment = proposedPayment;
+                              this.syncStorage();
                             }}"
                           >
                             ${this.t("controls.nudge_button", { bump: bumpAmount })}
@@ -1481,6 +1576,7 @@ export class YetiAppAi extends LitElement {
                         class="strategy-option-card ${isSelected ? "selected" : ""}"
                         @click="${() => {
                           this.currentStrategyKey = item.key;
+                          this.syncStorage();
                         }}"
                       >
                         <div class="option-top">
@@ -1538,6 +1634,7 @@ export class YetiAppAi extends LitElement {
                             @click="${(e: Event) => {
                               e.stopPropagation();
                               this.currentStrategyKey = item.key;
+                              this.syncStorage();
                             }}"
                           >
                             ${isSelected

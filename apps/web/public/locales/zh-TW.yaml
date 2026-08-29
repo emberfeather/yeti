@@ -29,6 +29,8 @@ strings:
     add: "+ 新增債務"
     close_form: "✕ 關閉表單"
     empty: "尚未新增任何債務。點擊上方 \"+ 新增債務\" 開始規劃！"
+    storage_save_label: 在此裝置上儲存資料
+    storage_privacy_note: 資料僅私密保存在您瀏覽器的本機儲存中，絕不會傳送至任何伺服器。
     form:
       name_label: 債務名稱
       name_placeholder: "例如：信用卡"

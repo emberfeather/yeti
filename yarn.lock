@@ -748,6 +748,7 @@ __metadata:
     chart.js: "npm:^4.5.1"
     lit: "npm:^3.3.3"
     vite: "npm:^8.2.2"
+    vitest: "npm:^4.1.11"
   languageName: unknown
   linkType: soft
 
