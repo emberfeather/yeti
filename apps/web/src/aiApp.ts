@@ -15,30 +15,6 @@ import { loadStoredState, saveStoredState } from "./storage";
 import { CHART_PALETTE } from "./components/chart/chartTheme";
 import "./components/chart/yeti-debt-payoff-chart";
 
-const INITIAL_DEBTS: Debt[] = [
-  {
-    id: "1",
-    name: "Credit Card A",
-    balance: 5000,
-    interestRate: 18.9,
-    minimumPayment: 150,
-  },
-  {
-    id: "2",
-    name: "Student Loan",
-    balance: 15000,
-    interestRate: 4.5,
-    minimumPayment: 200,
-  },
-  {
-    id: "3",
-    name: "Car Loan",
-    balance: 8000,
-    interestRate: 6.0,
-    minimumPayment: 250,
-  },
-];
-
 interface LocaleOption {
   code: string;
   name: string;
@@ -72,7 +48,7 @@ export class YetiAppAi extends LitElement {
   private localization?: Localization;
 
   @state() private saveLocally: boolean = false;
-  @state() private debts: Debt[] = INITIAL_DEBTS;
+  @state() private debts: Debt[] = [];
   @state() private extraPayment: number = 300;
   @state() private currentStrategyKey: StrategyKey = "lowestBalance";
 
@@ -93,7 +69,7 @@ export class YetiAppAi extends LitElement {
     const stored = loadStoredState();
     if (stored) {
       this.saveLocally = stored.saveLocally;
-      if (stored.debts && stored.debts.length > 0) {
+      if (stored.debts && Array.isArray(stored.debts)) {
         this.debts = stored.debts;
       }
       if (typeof stored.extraPayment === "number") {
