@@ -49,8 +49,6 @@ export class YetiApp extends ERApp {
     // Root page & localized routes.
     this.routeTrie.add("/", mainRoute);
     this.routeTrie.add("/intl/{locale}", mainRoute);
-    this.routeTrie.add("/ai", mainRoute);
-    this.routeTrie.add("/intl/{locale}/ai", mainRoute);
 
     // 404.
     this.routeTrie.add(
