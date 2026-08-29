@@ -45,7 +45,10 @@ export function getThemeTokens() {
 /**
  * Generates a minimal, modern Chart.js options preset.
  */
-export function getMinimalChartOptions(overrides: ChartOptions<any> = {}): ChartOptions<any> {
+export function getMinimalChartOptions(
+  overrides: ChartOptions<any> = {},
+  formatCurrency?: (val: number) => string,
+): ChartOptions<any> {
   const tokens = getThemeTokens();
 
   const baseOptions: ChartOptions<any> = {
@@ -64,7 +67,7 @@ export function getMinimalChartOptions(overrides: ChartOptions<any> = {}): Chart
       intersect: false,
     },
     animation: {
-      duration: 750,
+      duration: 500,
       easing: "easeOutQuart",
     },
     plugins: {
@@ -97,6 +100,9 @@ export function getMinimalChartOptions(overrides: ChartOptions<any> = {}): Chart
             const label = context.dataset.label || "";
             const val = context.parsed.y;
             if (val !== null && val !== undefined) {
+              if (formatCurrency) {
+                return ` ${label}: ${formatCurrency(val)}`;
+              }
               return ` ${label}: $${val.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
@@ -143,6 +149,9 @@ export function getMinimalChartOptions(overrides: ChartOptions<any> = {}): Chart
           maxTicksLimit: 6,
           callback: function (value: string | number) {
             const num = Number(value);
+            if (formatCurrency) {
+              return formatCurrency(num);
+            }
             if (num >= 1000) {
               return `$${(num / 1000).toFixed(num % 1000 === 0 ? 0 : 1)}k`;
             }

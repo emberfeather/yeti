@@ -17,15 +17,123 @@ config:
 
 strings:
   app:
-    title: Yeti Snowball Debt Calculator
-    subtitle: Accelerate your debt payoff by targeting the smallest balances first and rolling over payments.
-  root:
-    header: Yeti snowball debt calculator
-  not_found:
-    header: 404 Not found
-    description: You are looking for something that does exist.
-  debt:
-    interest: The debt {debtName} has an interest rate of {interestRate, percent}.
-  balance: Your balance is {amount, currency}.
-  saved_text: Saved {amount, currency}
-  welcome: Welcome to Yeti, {name}!
+    title: Debt Snowball Calculator
+    subtitle: Accelerate your debt payoff by targeting specific balances and rolling over payments.
+
+  debts:
+    title: Active Debts ({count})
+    add: "+ Add a Debt"
+    close_form: "✕ Close Form"
+    empty: "No debts added yet. Click \"+ Add a Debt\" above to get started!"
+    form:
+      name_label: Debt Name
+      name_placeholder: "e.g. Visa Card"
+      balance_label: Balance
+      rate_label: Rate
+      min_payment_label: Min Payment
+      cancel: Cancel
+      save: Save Debt
+      error_required: Please fill in all fields.
+      error_balance: Balance must be a positive number.
+      error_rate: Interest rate must be 0 or greater.
+      error_min_pay: Minimum payment must be a positive number.
+    item:
+      rate: "Rate: {rate}%"
+      min_pay: "Min Pay: {amount, currency}"
+      remove_aria: "Remove {name}"
+
+  controls:
+    extra_payment_title: Additional Monthly Payment
+    extra_payment_sub: Extra rollover added each month
+    nudge_boost: "Save an extra {interest, currency} in interest by increasing the payment by {bump, currency}{soonerText}."
+    nudge_sooner: " (and finish {months} mo sooner)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Payoff Strategy
+    switch_strategy: "⇄ Switch Strategy"
+    close_comparison: "✕ Close"
+
+  comparison:
+    title: Compare All Payoff Strategies
+    intro: "Select a strategy below to simulate its impact across your repayment plan:"
+    active_badge: Active
+    who_benefits: "Who it benefits:"
+    payoff_time_label: Payoff Time
+    payoff_time_val: "{months} mos"
+    payoff_time_saved: "-{months} mos"
+    interest_saved_label: Interest Saved
+    total_interest_sub: "{amount, currency} total interest"
+    btn_active: "✓ Active Strategy"
+    btn_select: Select Strategy
+
+  results:
+    payoff_date_title: Payoff Date
+    total_months: "{months} months total"
+    months_saved: "-{months} months"
+    interest_saved_title: Interest Saved
+    total_interest_paid: "{amount, currency} total interest paid"
+
+  sequence:
+    title: Payoff Sequence & Rollovers ({strategyName})
+    intro: "Follow this step-by-step sequence. Once each debt is cleared, its full monthly payment rolls over into the next target."
+    balance: "Balance: {balance, currency}"
+    rate: "Rate: {rate}%"
+    base_min: "Base Min: {amount, currency}/mo"
+    estimated_payoff_label: Estimated Payoff
+    month_sub: "Month {month}"
+    snowball_payment_label: Snowballed Payment
+    snowball_per_month: "{amount, currency}/mo"
+    extra_added: "+{amount, currency} extra added"
+    rolled_over: "+{amount, currency} rolled over"
+
+  schedule:
+    title: Monthly Payoff Schedule ({strategyName})
+    show_first_24: Show First 24 Months
+    show_all: "Show All ({months} Months)"
+    collapse: "Collapse Schedule ↑"
+    show_entire: "Show Entire Schedule ({months} months) ↓"
+    showing_first_24: "Showing first 24 of {total} months."
+    showing_all: "Showing all {total} months of payoff schedule."
+    col_month: Month
+    col_total_paid: Total Paid
+    col_interest_paid: Interest Paid
+    col_remaining_balance: Remaining Balance
+
+  disclaimer:
+    text: "This tool is designed strictly for illustrative and educational purposes and does not constitute financial, legal, investment, or tax advice. Actual payoff timelines and interest accruals may vary depending on individual creditor calculations, compounding frequencies, introductory promotional rate expirations, and unexpected fees. Consult a qualified financial advisor for guidance tailored to your specific financial situation."
+
+  strategies:
+    lowestBalance:
+      name: Debt Snowball
+      tagline: Lowest balance first
+      description: "By paying off loans with the lowest balance first you can increase your snowball quickly."
+      bestFor: "Easier mentally and emotionally to execute since you are able to build momentum quickly and feel good about the progress you make."
+    highestRate:
+      name: Debt Avalanche
+      tagline: Highest interest rate first
+      description: "By paying off the loans with the highest interest rate first you end up paying less in interest in total."
+      bestFor: "Saves the most money, but may be more mentally and emotionally challenging since it usually takes longer to feel like it is having an effect."
+    balancePaymentRatio:
+      name: Cash Flow Optimizer
+      tagline: Lowest balance-to-payment ratio
+      description: "Targets debts that unlock the largest monthly minimum payment relief relative to balance size."
+      bestFor: "Rapidly freeing up monthly cash flow and breathing room."
+    balanceRateRatio:
+      name: Balance-to-Rate Blend
+      tagline: Balanced ratio approach
+      description: "A hybrid methodology balancing outstanding debt balance against interest rate severity."
+      bestFor: "A balanced compromise between payoff speed and interest optimization."
+    highestBalance:
+      name: Highest Balance First
+      tagline: Largest balances first
+      description: "Tackles the single largest debt balance first to eliminate the heaviest principal burden."
+      bestFor: "Borrowers who want to conquer their biggest loan hurdle first."
+    lowestRate:
+      name: Lowest Rate First
+      tagline: Lowest interest rate first
+      description: "Focuses on lowest interest rate debts before shifting to higher rates."
+      bestFor: "Specific tax or rate-sequencing preferences."
+    minimumPayment:
+      name: Minimum Payments Only
+      tagline: No extra rollover budget
+      description: "Simulates paying only minimum monthly payments with zero payment rollovers."
+      bestFor: "Baseline benchmark comparison."

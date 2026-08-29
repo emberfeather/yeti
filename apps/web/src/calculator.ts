@@ -70,23 +70,28 @@ export const STRATEGY_DEFINITIONS: Record<StrategyKey, StrategyMeta> = {
     name: "Debt Snowball",
     shortName: "Snowball",
     tagline: "Lowest balance first",
-    description: "Prioritizes paying off accounts with the smallest balances first, rolling over freed-up cash for fast momentum.",
-    bestFor: "Quick psychological wins and staying motivated.",
+    description:
+      "By paying off loans with the lowest balance first you can increase your snowball quickly.",
+    bestFor:
+      "Easier mentally and emotionally to execute since you are able to build momentum quickly and feel good about the progress you make.",
   },
   highestRate: {
     key: "highestRate",
     name: "Debt Avalanche",
     shortName: "Avalanche",
     tagline: "Highest interest rate first",
-    description: "Prioritizes debts with the highest annual interest rate first to minimize lifetime interest accrual.",
-    bestFor: "Saving the maximum amount of money on interest charges.",
+    description:
+      "By paying off the loans with the highest interest rate first you end up paying less in interest in total.",
+    bestFor:
+      "Saves the most money, but may be more mentally and emotionally challenging since it usually takes longer to feel like it is having an effect.",
   },
   balancePaymentRatio: {
     key: "balancePaymentRatio",
     name: "Cash Flow Optimizer",
     shortName: "Cash Flow",
     tagline: "Lowest balance-to-payment ratio",
-    description: "Targets debts that unlock the largest monthly minimum payment relief relative to balance size.",
+    description:
+      "Targets debts that unlock the largest monthly minimum payment relief relative to balance size.",
     bestFor: "Rapidly freeing up monthly cash flow and breathing room.",
   },
   balanceRateRatio: {
@@ -94,7 +99,8 @@ export const STRATEGY_DEFINITIONS: Record<StrategyKey, StrategyMeta> = {
     name: "Balance-to-Rate Blend",
     shortName: "Balanced",
     tagline: "Balanced ratio approach",
-    description: "A hybrid methodology balancing outstanding debt balance against interest rate severity.",
+    description:
+      "A hybrid methodology balancing outstanding debt balance against interest rate severity.",
     bestFor: "A balanced compromise between payoff speed and interest optimization.",
   },
   highestBalance: {
@@ -102,7 +108,8 @@ export const STRATEGY_DEFINITIONS: Record<StrategyKey, StrategyMeta> = {
     name: "Highest Balance First",
     shortName: "Highest Balance",
     tagline: "Largest balances first",
-    description: "Tackles the single largest debt balance first to eliminate the heaviest principal burden.",
+    description:
+      "Tackles the single largest debt balance first to eliminate the heaviest principal burden.",
     bestFor: "Borrowers who want to conquer their biggest loan hurdle first.",
   },
   lowestRate: {
@@ -301,6 +308,7 @@ export function compareAllStrategies(
     "balancePaymentRatio",
     "balanceRateRatio",
     "highestBalance",
+    "lowestRate",
   ];
 
   const seenOrderSignatures = new Set<string>();

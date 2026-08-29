@@ -17,15 +17,123 @@ config:
 
 strings:
   app:
-    title: Calculadora de Deudas Yeti Snowball
-    subtitle: Acelere el pago de sus deudas enfocándose primero en los saldos más pequeños y acumulando los pagos.
-  root:
-    header: Calculadora de deudas yeti snowball
-  not_found:
-    header: 404 No encontrado
-    description: Estás buscando algo que sí existe.
-  debt:
-    interest: La deuda {debtName} tiene una tasa de interés del {interestRate, percent}.
-  balance: Su saldo es {amount, currency}.
-  saved_text: Ahorrado {amount, currency}
-  welcome: ¡Bienvenido a Yeti, {name}!
+    title: Calculadora de Bola de Nieve de Deudas
+    subtitle: Acelera el pago de tus deudas priorizando saldos específicos y reinvirtiendo los pagos.
+
+  debts:
+    title: Deudas Activas ({count})
+    add: "+ Añadir una Deuda"
+    close_form: "✕ Cerrar Formulario"
+    empty: "No hay deudas añadidas todavía. ¡Haz clic en \"+ Añadir una Deuda\" para comenzar!"
+    form:
+      name_label: Nombre de la Deuda
+      name_placeholder: "ej. Tarjeta Visa"
+      balance_label: Saldo
+      rate_label: Tasa de Interés
+      min_payment_label: Pago Mínimo
+      cancel: Cancelar
+      save: Guardar Deuda
+      error_required: Por favor completa todos los campos.
+      error_balance: El saldo debe ser un número positivo.
+      error_rate: La tasa de interés debe ser 0 o mayor.
+      error_min_pay: El pago mínimo debe ser un número positivo.
+    item:
+      rate: "Tasa: {rate}%"
+      min_pay: "Pago Mínimo: {amount, currency}"
+      remove_aria: "Eliminar {name}"
+
+  controls:
+    extra_payment_title: Pago Mensual Adicional
+    extra_payment_sub: Monto adicional reinvertido cada mes
+    nudge_boost: "Ahorra {interest, currency} adicionales en intereses aumentando el pago en {bump, currency}{soonerText}."
+    nudge_sooner: " (y termina {months} meses antes)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Estrategia de Pago
+    switch_strategy: "⇄ Cambiar Estrategia"
+    close_comparison: "✕ Cerrar"
+
+  comparison:
+    title: Comparar Todas las Estrategias de Pago
+    intro: "Selecciona una estrategia para simular su impacto en tu plan de amortización:"
+    active_badge: Activa
+    who_benefits: "A quién beneficia:"
+    payoff_time_label: Tiempo de Pago
+    payoff_time_val: "{months} meses"
+    payoff_time_saved: "-{months} meses"
+    interest_saved_label: Intereses Ahorrados
+    total_interest_sub: "{amount, currency} de interés total"
+    btn_active: "✓ Estrategia Activa"
+    btn_select: Seleccionar Estrategia
+
+  results:
+    payoff_date_title: Fecha de Liquidación
+    total_months: "{months} meses en total"
+    months_saved: "-{months} meses"
+    interest_saved_title: Intereses Ahorrados
+    total_interest_paid: "{amount, currency} de interés total pagado"
+
+  sequence:
+    title: Secuencia de Pago y Reinversión ({strategyName})
+    intro: "Sigue esta secuencia paso a paso. Cuando saldes una deuda, su pago completo se reinvierte en el siguiente objetivo."
+    balance: "Saldo: {balance, currency}"
+    rate: "Tasa: {rate}%"
+    base_min: "Mínimo Base: {amount, currency}/mes"
+    estimated_payoff_label: Liquidación Estimada
+    month_sub: "Mes {month}"
+    snowball_payment_label: Pago Reinvertido
+    snowball_per_month: "{amount, currency}/mes"
+    extra_added: "+{amount, currency} extra añadido"
+    rolled_over: "+{amount, currency} reinvertido"
+
+  schedule:
+    title: Cronograma de Amortización Mensual ({strategyName})
+    show_first_24: Mostrar Primeros 24 Meses
+    show_all: "Mostrar Todo ({months} Meses)"
+    collapse: "Colapsar Cronograma ↑"
+    show_entire: "Mostrar Cronograma Completo ({months} meses) ↓"
+    showing_first_24: "Mostrando los primeros 24 de {total} meses."
+    showing_all: "Mostrando los {total} meses del cronograma."
+    col_month: Mes
+    col_total_paid: Total Pagado
+    col_interest_paid: Intereses Pagados
+    col_remaining_balance: Saldo Restante
+
+  disclaimer:
+    text: "Esta herramienta está diseñada únicamente con fines ilustrativos y educativos y no constituye asesoramiento financiero, legal, de inversión o fiscal. Los plazos de pago y la acumulación de intereses reales pueden variar según los cálculos de los acreedores, las frecuencias de capitalización, la expiración de tasas promocionales y cargos imprevistos. Consulta a un asesor financiero cualificado."
+
+  strategies:
+    lowestBalance:
+      name: Bola de Nieve (Snowball)
+      tagline: Menor saldo primero
+      description: "Al pagar primero los préstamos con el saldo más bajo, puedes aumentar tu bola de nieve rápidamente."
+      bestFor: "Más fácil mental y emocionalmente ya que logras victorias rápidas para mantener la motivación."
+    highestRate:
+      name: Avalancha de Deudas (Avalanche)
+      tagline: Mayor tasa de interés primero
+      description: "Al pagar primero los préstamos con la tasa de interés más alta, pagas menos intereses en total."
+      bestFor: "Ahorra la mayor cantidad de dinero, aunque requiere más disciplina al tardar más en ver las primeras cancelaciones."
+    balancePaymentRatio:
+      name: Optimizador de Flujo de Caja
+      tagline: Menor ratio saldo/pago
+      description: "Identifica las deudas que liberan más pago mínimo mensual en relación con su saldo."
+      bestFor: "Liberar rápidamente flujo de caja mensual y aliviar la presión financiera."
+    balanceRateRatio:
+      name: Balance de Saldo y Tasa
+      tagline: Enfoque equilibrado
+      description: "Una metodología híbrida que equilibra el saldo pendiente con la tasa de interés."
+      bestFor: "Un compromiso equilibrado entre velocidad de cancelación y ahorro en intereses."
+    highestBalance:
+      name: Mayor Saldo Primero
+      tagline: Saldos más grandes primero
+      description: "Ataca primero el saldo más grande para eliminar la carga principal más pesada."
+      bestFor: "Prestatarios que desean superar su mayor deuda primero."
+    lowestRate:
+      name: Menor Tasa Primero
+      tagline: Menor tasa de interés primero
+      description: "Se enfoca en deudas con tasas más bajas antes de pasar a tasas más altas."
+      bestFor: "Preferencias fiscales o de secuenciación específicas."
+    minimumPayment:
+      name: Solo Pagos Mínimos
+      tagline: Sin presupuesto extra
+      description: "Simula el pago de las cuotas mínimas mensuales sin reinversión de pagos."
+      bestFor: "Comparación de referencia básica."

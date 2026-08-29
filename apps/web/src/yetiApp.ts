@@ -43,34 +43,14 @@ export class YetiApp extends ERApp {
     super.connectedCallback();
 
     const mainRoute = new PublicRoute({
-      template: html`
-        <er-grid class="gap-row-large">
-          <er-grid-item span="desktop:6; tablet:4">
-            <er-h1><er-t key="app.title"></er-t></er-h1>
-            <er-spacer size="large"></er-spacer>
-            <p><er-t key="app.subtitle"></er-t></p>
-          </er-grid-item>
-        </er-grid>
-      `,
+      template: html`<yeti-app-ai></yeti-app-ai>`,
     });
 
-    // Root page.
+    // Root page & localized routes.
     this.routeTrie.add("/", mainRoute);
     this.routeTrie.add("/intl/{locale}", mainRoute);
-
-    // AI page.
-    this.routeTrie.add(
-      "/ai",
-      new PublicRoute({
-        template: html`
-          <er-grid class="gap-row-large">
-            <er-grid-item>
-              <yeti-app-ai></yeti-app-ai>
-            </er-grid-item>
-          </er-grid>
-        `,
-      }),
-    );
+    this.routeTrie.add("/ai", mainRoute);
+    this.routeTrie.add("/intl/{locale}/ai", mainRoute);
 
     // 404.
     this.routeTrie.add(

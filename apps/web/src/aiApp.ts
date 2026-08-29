@@ -1,5 +1,8 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { consume } from "@lit/context";
+import { localizationContext } from "@littoral/literally/localization/context";
+import type { Localization } from "@littoral/literally/localization/localization";
 import {
   calculateMinimumOnly,
   calculateSchedule,
@@ -37,6 +40,10 @@ const INITIAL_DEBTS: Debt[] = [
 
 @customElement("yeti-app-ai")
 export class YetiAppAi extends LitElement {
+  @consume({ context: localizationContext, subscribe: true })
+  @state()
+  private localization?: Localization;
+
   @state() private debts: Debt[] = INITIAL_DEBTS;
   @state() private extraPayment: number = 300;
   @state() private currentStrategyKey: StrategyKey = "lowestBalance";
@@ -78,6 +85,40 @@ export class YetiAppAi extends LitElement {
         background: linear-gradient(135deg, var(--text-h), var(--accent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+      }
+
+      .locale-switcher {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(244, 243, 236, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 2px;
+        margin-top: 12px;
+        gap: 2px;
+      }
+
+      .locale-btn {
+        background: transparent;
+        border: none;
+        padding: 4px 12px;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+
+      .locale-btn.active {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .locale-btn:hover:not(.active) {
+        color: var(--text-h);
+        background: rgba(0, 0, 0, 0.05);
       }
 
       /* Card Styles */
@@ -300,17 +341,18 @@ export class YetiAppAi extends LitElement {
         font-size: 13px;
         color: var(--text);
         margin: 6px 0 0 0;
-        line-height: 1.4;
+        line-height: 1.5;
       }
 
       .strategy-best-for {
-        font-size: 12px;
-        color: var(--text-h);
+        font-size: 13px;
+        color: var(--text);
         margin-top: 8px;
+        line-height: 1.5;
       }
 
       .strategy-best-for strong {
-        color: var(--accent);
+        color: var(--text-h);
       }
 
       /* Card Header with Actions */
@@ -647,18 +689,19 @@ export class YetiAppAi extends LitElement {
       .option-desc {
         font-size: 13px;
         color: var(--text);
-        margin: 0 0 10px 0;
-        line-height: 1.4;
+        margin: 0 0 8px 0;
+        line-height: 1.5;
       }
 
       .option-best-for {
-        font-size: 12px;
-        color: var(--text-h);
-        margin: 0;
+        font-size: 13px;
+        color: var(--text);
+        margin: 0 0 14px 0;
+        line-height: 1.5;
       }
 
       .option-best-for span {
-        color: var(--accent);
+        color: var(--text-h);
         font-weight: 600;
       }
 
@@ -932,10 +975,73 @@ export class YetiAppAi extends LitElement {
     `,
   ];
 
+  private formatCurrency(val: number): string {
+    if (this.localization) {
+      return this.localization.formatNumber(val, "currency");
+    }
+    return `$${val.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+  }
+
+  private t(key: string, variables?: Record<string, string | number>): string {
+    if (this.localization) {
+      const translation = this.localization.t(key, variables);
+      if (translation && translation !== "") {
+        return translation;
+      }
+    }
+    return key;
+  }
+
+  private getStrategyName(key: StrategyKey): string {
+    const loc = this.t(`strategies.${key}.name`);
+    return loc && loc !== `strategies.${key}.name`
+      ? loc
+      : STRATEGY_DEFINITIONS[key]?.name || key;
+  }
+
+  private getStrategyTagline(key: StrategyKey): string {
+    const loc = this.t(`strategies.${key}.tagline`);
+    return loc && loc !== `strategies.${key}.tagline`
+      ? loc
+      : STRATEGY_DEFINITIONS[key]?.tagline || "";
+  }
+
+  private getStrategyDescription(key: StrategyKey): string {
+    const loc = this.t(`strategies.${key}.description`);
+    return loc && loc !== `strategies.${key}.description`
+      ? loc
+      : STRATEGY_DEFINITIONS[key]?.description || "";
+  }
+
+  private getStrategyBestFor(key: StrategyKey): string {
+    const loc = this.t(`strategies.${key}.bestFor`);
+    return loc && loc !== `strategies.${key}.bestFor`
+      ? loc
+      : STRATEGY_DEFINITIONS[key]?.bestFor || "";
+  }
+
+  private get currencySymbol(): string {
+    if (this.localization) {
+      const formatted = this.localization.formatNumber(0, "currency");
+      const symbol = formatted.replace(/[\d.,\s]/g, "");
+      return symbol || "$";
+    }
+    return "$";
+  }
+
+  private switchLocale(locale: string) {
+    const targetUrl = locale === "en" ? "/" : `/intl/${locale}`;
+    window.history.pushState(null, "", targetUrl);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }
+
   private handleAddDebt(e: Event) {
     e.preventDefault();
     if (!this.newName || !this.newBalance || !this.newRate || !this.newMinPay) {
-      this.formError = "Please fill in all fields.";
+      this.formError = this.t("debts.form.error_required");
       return;
     }
 
@@ -944,15 +1050,15 @@ export class YetiAppAi extends LitElement {
     const minPay = parseFloat(this.newMinPay);
 
     if (isNaN(balance) || balance <= 0) {
-      this.formError = "Balance must be a positive number.";
+      this.formError = this.t("debts.form.error_balance");
       return;
     }
     if (isNaN(rate) || rate < 0) {
-      this.formError = "Interest rate must be 0 or greater.";
+      this.formError = this.t("debts.form.error_rate");
       return;
     }
     if (isNaN(minPay) || minPay <= 0) {
-      this.formError = "Minimum payment must be a positive number.";
+      this.formError = this.t("debts.form.error_min_pay");
       return;
     }
 
@@ -984,7 +1090,6 @@ export class YetiAppAi extends LitElement {
       this.extraPayment,
       this.currentStrategyKey,
     );
-    const currentMeta = STRATEGY_DEFINITIONS[this.currentStrategyKey];
 
     const interestSaved = Math.max(
       0,
@@ -1022,17 +1127,37 @@ export class YetiAppAi extends LitElement {
       this.currentStrategyKey = comparisonItems[0].key;
     }
 
+    const activeLocale = this.localization?.locale?.startsWith("es") ? "es" : "en";
+    const soonerText =
+      extraMonthsSaved > 0
+        ? this.t("controls.nudge_sooner", { months: extraMonthsSaved })
+        : "";
+
     return html`
       <div class="app-container">
-        <!-- 1. Header (clean without subtitle) -->
+        <!-- 1. Header with Language Switcher -->
         <header class="app-header">
-          <h1>Debt Snowball Calculator</h1>
+          <h1>${this.t("app.title")}</h1>
+          <div class="locale-switcher">
+            <button
+              class="locale-btn ${activeLocale === "en" ? "active" : ""}"
+              @click="${() => this.switchLocale("en")}"
+            >
+              EN
+            </button>
+            <button
+              class="locale-btn ${activeLocale === "es" ? "active" : ""}"
+              @click="${() => this.switchLocale("es")}"
+            >
+              ES
+            </button>
+          </div>
         </header>
 
         <!-- 2. Active Debts Section with Embedded Add Debt Form -->
         <section class="card list-card">
           <div class="card-header-actions">
-            <h2>Active Debts (${this.debts.length})</h2>
+            <h2>${this.t("debts.title", { count: this.debts.length })}</h2>
             <button
               class="btn btn-action-pill"
               @click="${() => {
@@ -1040,7 +1165,7 @@ export class YetiAppAi extends LitElement {
                 this.formError = "";
               }}"
             >
-              ${this.isAddingDebt ? "✕ Close Form" : "+ Add a Debt"}
+              ${this.isAddingDebt ? this.t("debts.close_form") : this.t("debts.add")}
             </button>
           </div>
 
@@ -1054,7 +1179,7 @@ export class YetiAppAi extends LitElement {
                   <form @submit="${this.handleAddDebt}">
                     <div class="form-grid">
                       <div class="input-group">
-                        <label htmlFor="debt-name">Debt Name</label>
+                        <label htmlFor="debt-name">${this.t("debts.form.name_label")}</label>
                         <div class="input-wrapper">
                           <input
                             id="debt-name"
@@ -1063,16 +1188,16 @@ export class YetiAppAi extends LitElement {
                             @input="${(e: Event) => {
                               this.newName = (e.target as HTMLInputElement).value;
                             }}"
-                            placeholder="e.g. Visa Card"
+                            placeholder="${this.t("debts.form.name_placeholder")}"
                             required
                           />
                         </div>
                       </div>
 
                       <div class="input-group">
-                        <label htmlFor="debt-balance">Balance</label>
+                        <label htmlFor="debt-balance">${this.t("debts.form.balance_label")}</label>
                         <div class="input-wrapper prefix">
-                          <span class="input-prefix">$</span>
+                          <span class="input-prefix">${this.currencySymbol}</span>
                           <input
                             id="debt-balance"
                             type="number"
@@ -1089,7 +1214,7 @@ export class YetiAppAi extends LitElement {
                       </div>
 
                       <div class="input-group">
-                        <label htmlFor="debt-rate">Rate</label>
+                        <label htmlFor="debt-rate">${this.t("debts.form.rate_label")}</label>
                         <div class="input-wrapper suffix">
                           <input
                             id="debt-rate"
@@ -1108,9 +1233,11 @@ export class YetiAppAi extends LitElement {
                       </div>
 
                       <div class="input-group">
-                        <label htmlFor="debt-min-payment">Min Payment</label>
+                        <label htmlFor="debt-min-payment"
+                          >${this.t("debts.form.min_payment_label")}</label
+                        >
                         <div class="input-wrapper prefix">
-                          <span class="input-prefix">$</span>
+                          <span class="input-prefix">${this.currencySymbol}</span>
                           <input
                             id="debt-min-payment"
                             type="number"
@@ -1136,9 +1263,11 @@ export class YetiAppAi extends LitElement {
                           this.formError = "";
                         }}"
                       >
-                        Cancel
+                        ${this.t("debts.form.cancel")}
                       </button>
-                      <button type="submit" class="btn btn-primary">Save Debt</button>
+                      <button type="submit" class="btn btn-primary">
+                        ${this.t("debts.form.save")}
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -1148,7 +1277,7 @@ export class YetiAppAi extends LitElement {
           <!-- Debts List -->
           ${this.debts.length === 0
             ? html`<div class="empty-state">
-                <p>No debts added yet. Click "+ Add a Debt" above to get started!</p>
+                <p>${this.t("debts.empty")}</p>
               </div>`
             : html`<div class="debts-list">
                 ${this.debts.map(
@@ -1157,16 +1286,20 @@ export class YetiAppAi extends LitElement {
                       <div class="debt-info">
                         <h4>${debt.name}</h4>
                         <div class="debt-meta">
-                          <span>Rate: ${debt.interestRate}%</span>
-                          <span>Min Pay: $${debt.minimumPayment}</span>
+                          <span>${this.t("debts.item.rate", { rate: debt.interestRate })}</span>
+                          <span
+                            >${this.t("debts.item.min_pay", {
+                              amount: debt.minimumPayment,
+                            })}</span
+                          >
                         </div>
                       </div>
                       <div class="debt-value">
-                        <div class="balance-badge">$${debt.balance.toLocaleString()}</div>
+                        <div class="balance-badge">${this.formatCurrency(debt.balance)}</div>
                         <button
                           class="btn-remove"
                           @click="${() => this.handleRemoveDebt(debt.id)}"
-                          aria-label="Remove ${debt.name}"
+                          aria-label="${this.t("debts.item.remove_aria", { name: debt.name })}"
                         >
                           &times;
                         </button>
@@ -1184,9 +1317,9 @@ export class YetiAppAi extends LitElement {
                 <!-- Additional Snowball Budget Input -->
                 <div class="card metric-card">
                   <div>
-                    <h3>Additional Monthly Payment</h3>
+                    <h3>${this.t("controls.extra_payment_title")}</h3>
                     <div class="metric-input-wrapper">
-                      <span class="metric-prefix">$</span>
+                      <span class="metric-prefix">${this.currencySymbol}</span>
                       <input
                         id="extra-payment"
                         class="metric-input"
@@ -1199,10 +1332,10 @@ export class YetiAppAi extends LitElement {
                           this.extraPayment = Math.max(0, val || 0);
                         }}"
                         placeholder="0.00"
-                        aria-label="Additional Monthly Payment"
+                        aria-label="${this.t("controls.extra_payment_title")}"
                       />
                     </div>
-                    <p class="metric-sub">Extra rollover added each month</p>
+                    <p class="metric-sub">${this.t("controls.extra_payment_sub")}</p>
                   </div>
 
                   ${extraInterestSaved > 0 || extraMonthsSaved > 0
@@ -1210,17 +1343,18 @@ export class YetiAppAi extends LitElement {
                         <div
                           class="nudge-box"
                           @click="${() => (this.extraPayment = proposedPayment)}"
-                          title="Click to increase payment by $${bumpAmount}/mo"
+                          title="${this.t("controls.nudge_boost", {
+                            interest: Math.round(extraInterestSaved),
+                            bump: bumpAmount,
+                            soonerText,
+                          })}"
                         >
                           <div class="nudge-text">
-                            Save an extra
-                            <span class="nudge-green"
-                              >$${Math.round(extraInterestSaved).toLocaleString()}</span
-                            >
-                            in interest by increasing the payment by
-                            <strong>$${bumpAmount}</strong>${extraMonthsSaved > 0
-                              ? ` (and finish ${extraMonthsSaved} mo sooner)`
-                              : ""}.
+                            ${this.t("controls.nudge_boost", {
+                              interest: Math.round(extraInterestSaved),
+                              bump: bumpAmount,
+                              soonerText,
+                            })}
                           </div>
                           <button
                             type="button"
@@ -1230,7 +1364,7 @@ export class YetiAppAi extends LitElement {
                               this.extraPayment = proposedPayment;
                             }}"
                           >
-                            +$${bumpAmount}
+                            ${this.t("controls.nudge_button", { bump: bumpAmount })}
                           </button>
                         </div>
                       `
@@ -1240,22 +1374,29 @@ export class YetiAppAi extends LitElement {
                 <!-- Current Payoff Strategy Display & Switch Button -->
                 <div class="card metric-card">
                   <div class="strategy-header-row">
-                    <h3>Payoff Strategy</h3>
+                    <h3>${this.t("controls.strategy_title")}</h3>
                     <button
                       class="btn btn-action-pill"
                       @click="${() =>
                         (this.isComparingStrategies = !this.isComparingStrategies)}"
                     >
-                      ${this.isComparingStrategies ? "✕ Close" : "⇄ Switch Strategy"}
+                      ${this.isComparingStrategies
+                        ? this.t("controls.close_comparison")
+                        : this.t("controls.switch_strategy")}
                     </button>
                   </div>
                   <div class="strategy-title-badge">
-                    ${currentMeta.name}
-                    <span class="strategy-tagline">${currentMeta.tagline}</span>
+                    ${this.getStrategyName(this.currentStrategyKey)}
+                    <span class="strategy-tagline"
+                      >${this.getStrategyTagline(this.currentStrategyKey)}</span
+                    >
                   </div>
-                  <p class="strategy-desc-text">${currentMeta.description}</p>
+                  <p class="strategy-desc-text">
+                    ${this.getStrategyDescription(this.currentStrategyKey)}
+                  </p>
                   <p class="strategy-best-for">
-                    <strong>Best for:</strong> ${currentMeta.bestFor}
+                    <strong>${this.t("comparison.who_benefits")}</strong>
+                    ${this.getStrategyBestFor(this.currentStrategyKey)}
                   </p>
                 </div>
               </section>
@@ -1267,17 +1408,15 @@ export class YetiAppAi extends LitElement {
           ? html`
               <section class="card comparison-section">
                 <div class="card-header-actions">
-                  <h2>Compare All Payoff Strategies</h2>
+                  <h2>${this.t("comparison.title")}</h2>
                   <button
                     class="btn btn-action-pill"
                     @click="${() => (this.isComparingStrategies = false)}"
                   >
-                    ✕ Close
+                    ${this.t("controls.close_comparison")}
                   </button>
                 </div>
-                <p class="comparison-intro">
-                  Select a strategy below to simulate its impact across your repayment plan:
-                </p>
+                <p class="comparison-intro">${this.t("comparison.intro")}</p>
 
                 <div class="strategy-cards-grid">
                   ${comparisonItems.map((item) => {
@@ -1292,38 +1431,50 @@ export class YetiAppAi extends LitElement {
                       >
                         <div class="option-top">
                           <div class="option-title-row">
-                            <h4>${item.meta.name}</h4>
+                            <h4>${this.getStrategyName(item.key)}</h4>
                             ${isSelected
-                              ? html`<span class="active-badge">Active</span>`
+                              ? html`<span class="active-badge"
+                                  >${this.t("comparison.active_badge")}</span
+                                >`
                               : ""}
                           </div>
-                          <p class="option-desc">${item.meta.description}</p>
+                          <p class="option-desc">${this.getStrategyDescription(item.key)}</p>
                           <p class="option-best-for">
-                            <span>Who it benefits:</span> ${item.meta.bestFor}
+                            <span>${this.t("comparison.who_benefits")}</span>
+                            ${this.getStrategyBestFor(item.key)}
                           </p>
                         </div>
 
                         <div>
                           <div class="option-stats-grid">
                             <div class="stat-box">
-                              <span class="stat-label">Payoff Time</span>
-                              <span class="stat-val">${item.result.totalMonthsToPayoff} mos</span>
+                              <span class="stat-label"
+                                >${this.t("comparison.payoff_time_label")}</span
+                              >
+                              <span class="stat-val"
+                                >${this.t("comparison.payoff_time_val", {
+                                  months: item.result.totalMonthsToPayoff,
+                                })}</span
+                              >
                               ${item.timeSaved > 0
-                                ? html`<span class="stat-sub">-${item.timeSaved} mos</span>`
+                                ? html`<span class="stat-sub"
+                                    >${this.t("comparison.payoff_time_saved", {
+                                      months: item.timeSaved,
+                                    })}</span
+                                  >`
                                 : ""}
                             </div>
                             <div class="stat-box">
-                              <span class="stat-label">Interest Saved</span>
+                              <span class="stat-label"
+                                >${this.t("comparison.interest_saved_label")}</span
+                              >
                               <span class="stat-val" style="color: #10b981;">
-                                $${parseFloat(item.interestSaved).toLocaleString(undefined, {
-                                  maximumFractionDigits: 0,
-                                })}
+                                ${this.formatCurrency(parseFloat(item.interestSaved))}
                               </span>
                               <span class="stat-sub" style="color: var(--text);">
-                                $${parseFloat(item.result.totalInterestPaid).toLocaleString(
-                                  undefined,
-                                  { maximumFractionDigits: 0 },
-                                )} total interest
+                                ${this.t("comparison.total_interest_sub", {
+                                  amount: parseFloat(item.result.totalInterestPaid),
+                                })}
                               </span>
                             </div>
                           </div>
@@ -1335,7 +1486,9 @@ export class YetiAppAi extends LitElement {
                               this.currentStrategyKey = item.key;
                             }}"
                           >
-                            ${isSelected ? "✓ Active Strategy" : "Select Strategy"}
+                            ${isSelected
+                              ? this.t("comparison.btn_active")
+                              : this.t("comparison.btn_select")}
                           </button>
                         </div>
                       </div>
@@ -1352,30 +1505,30 @@ export class YetiAppAi extends LitElement {
               <section class="results-grid">
                 <!-- Card 1: Payoff Date -->
                 <div class="card metric-card highlight">
-                  <h3>Payoff Date</h3>
+                  <h3>${this.t("results.payoff_date_title")}</h3>
                   <div class="metric-value">${activeResult.payoffDate}</div>
                   <p class="metric-sub">
-                    ${activeResult.totalMonthsToPayoff} months total
+                    ${this.t("results.total_months", {
+                      months: activeResult.totalMonthsToPayoff,
+                    })}
                     ${timeSaved > 0
-                      ? html`<span class="saving-pill">-${timeSaved} months</span>`
+                      ? html`<span class="saving-pill"
+                          >${this.t("results.months_saved", { months: timeSaved })}</span
+                        >`
                       : ""}
                   </p>
                 </div>
 
                 <!-- Card 2: Interest Saved (Primary) & Total Interest Paid (Secondary) -->
                 <div class="card metric-card">
-                  <h3>Interest Saved</h3>
+                  <h3>${this.t("results.interest_saved_title")}</h3>
                   <div class="metric-value" style="color: #10b981;">
-                    $${parseFloat(interestSaved).toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
+                    ${this.formatCurrency(parseFloat(interestSaved))}
                   </div>
                   <p class="metric-sub">
-                    $${parseFloat(activeResult.totalInterestPaid).toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })} total interest paid
+                    ${this.t("results.total_interest_paid", {
+                      amount: parseFloat(activeResult.totalInterestPaid),
+                    })}
                   </p>
                 </div>
               </section>
@@ -1401,14 +1554,17 @@ export class YetiAppAi extends LitElement {
           ? html`
               <section class="card payoff-order-card">
                 <div class="card-header-actions">
-                  <h2>Payoff Sequence & Rollovers (${currentMeta.name})</h2>
+                  <h2>
+                    ${this.t("sequence.title", {
+                      strategyName: this.getStrategyName(this.currentStrategyKey),
+                    })}
+                  </h2>
                 </div>
                 <p
                   class="subtitle"
                   style="font-size: 14px; text-align: left; margin: -10px 0 20px 0;"
                 >
-                  Follow this step-by-step sequence. Once each debt is cleared, its full monthly
-                  payment rolls over into the next target.
+                  ${this.t("sequence.intro")}
                 </p>
 
                 <div class="payoff-order-list">
@@ -1429,29 +1585,43 @@ export class YetiAppAi extends LitElement {
                           <div class="step-details">
                             <h4>${step.debtName}</h4>
                             <div class="step-meta">
-                              <span>Balance: $${step.balance.toLocaleString()}</span>
-                              <span>Rate: ${step.rate}%</span>
-                              <span>Base Min: $${step.minimumPayment}/mo</span>
+                              <span
+                                >${this.t("sequence.balance", { balance: step.balance })}</span
+                              >
+                              <span>${this.t("sequence.rate", { rate: step.rate })}</span>
+                              <span
+                                >${this.t("sequence.base_min", {
+                                  amount: step.minimumPayment,
+                                })}</span
+                              >
                             </div>
                           </div>
                         </div>
 
                         <div class="step-right">
                           <div class="step-stat-group">
-                            <span class="step-stat-label">Estimated Payoff</span>
+                            <span class="step-stat-label"
+                              >${this.t("sequence.estimated_payoff_label")}</span
+                            >
                             <span class="step-stat-val">${step.payoffDate}</span>
-                            <span class="step-stat-sub">Month ${step.payoffMonth}</span>
+                            <span class="step-stat-sub"
+                              >${this.t("sequence.month_sub", { month: step.payoffMonth })}</span
+                            >
                           </div>
 
                           <div class="step-stat-group">
-                            <span class="step-stat-label">Snowballed Payment</span>
+                            <span class="step-stat-label"
+                              >${this.t("sequence.snowball_payment_label")}</span
+                            >
                             <span class="step-stat-val highlight">
-                              $${step.snowballPayment.toLocaleString()}/mo
+                              ${this.t("sequence.snowball_per_month", {
+                                amount: step.snowballPayment,
+                              })}
                             </span>
                             <span class="step-stat-sub">
                               ${idx === 0
-                                ? `+$${rolloverAmount.toLocaleString()} extra added`
-                                : `+$${rolloverAmount.toLocaleString()} rolled over`}
+                                ? this.t("sequence.extra_added", { amount: rolloverAmount })
+                                : this.t("sequence.rolled_over", { amount: rolloverAmount })}
                             </span>
                           </div>
                         </div>
@@ -1467,7 +1637,11 @@ export class YetiAppAi extends LitElement {
         ${this.debts.length > 0
           ? html`<section class="card timeline-card">
               <div class="card-header-actions">
-                <h2>Monthly Payoff Schedule (${currentMeta.name})</h2>
+                <h2>
+                  ${this.t("schedule.title", {
+                    strategyName: this.getStrategyName(this.currentStrategyKey),
+                  })}
+                </h2>
                 ${activeResult.timeline.length > 24
                   ? html`
                       <button
@@ -1475,8 +1649,10 @@ export class YetiAppAi extends LitElement {
                         @click="${() => (this.showFullSchedule = !this.showFullSchedule)}"
                       >
                         ${this.showFullSchedule
-                          ? "Show First 24 Months"
-                          : `Show All (${activeResult.timeline.length} Months)`}
+                          ? this.t("schedule.show_first_24")
+                          : this.t("schedule.show_all", {
+                              months: activeResult.timeline.length,
+                            })}
                       </button>
                     `
                   : ""}
@@ -1485,10 +1661,10 @@ export class YetiAppAi extends LitElement {
                 <table class="timeline-table">
                   <thead>
                     <tr>
-                      <th>Month</th>
-                      <th>Total Paid</th>
-                      <th>Interest Paid</th>
-                      <th>Remaining Balance</th>
+                      <th>${this.t("schedule.col_month")}</th>
+                      <th>${this.t("schedule.col_total_paid")}</th>
+                      <th>${this.t("schedule.col_interest_paid")}</th>
+                      <th>${this.t("schedule.col_remaining_balance")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1499,20 +1675,12 @@ export class YetiAppAi extends LitElement {
                       (month) => html`
                         <tr>
                           <td>${month.monthName} ${month.year}</td>
-                          <td>
-                            $${parseFloat(month.totalPaid).toLocaleString(undefined, {
-                              minimumFractionDigits: 2,
-                            })}
-                          </td>
+                          <td>${this.formatCurrency(parseFloat(month.totalPaid))}</td>
                           <td class="interest-col">
-                            $${parseFloat(month.totalInterestCharged).toLocaleString(undefined, {
-                              minimumFractionDigits: 2,
-                            })}
+                            ${this.formatCurrency(parseFloat(month.totalInterestCharged))}
                           </td>
                           <td class="balance-col">
-                            $${parseFloat(month.totalRemainingBalance).toLocaleString(undefined, {
-                              minimumFractionDigits: 2,
-                            })}
+                            ${this.formatCurrency(parseFloat(month.totalRemainingBalance))}
                           </td>
                         </tr>
                       `,
@@ -1523,16 +1691,22 @@ export class YetiAppAi extends LitElement {
                             <div class="show-all-wrapper">
                               <span>
                                 ${this.showFullSchedule
-                                  ? `Showing all ${activeResult.timeline.length} months of payoff schedule.`
-                                  : `Showing first 24 of ${activeResult.timeline.length} months.`}
+                                  ? this.t("schedule.showing_all", {
+                                      total: activeResult.timeline.length,
+                                    })
+                                  : this.t("schedule.showing_first_24", {
+                                      total: activeResult.timeline.length,
+                                    })}
                               </span>
                               <button
                                 class="btn btn-action-pill"
                                 @click="${() => (this.showFullSchedule = !this.showFullSchedule)}"
                               >
                                 ${this.showFullSchedule
-                                  ? "Collapse Schedule ↑"
-                                  : `Show Entire Schedule (${activeResult.timeline.length} months) ↓`}
+                                  ? this.t("schedule.collapse")
+                                  : this.t("schedule.show_entire", {
+                                      months: activeResult.timeline.length,
+                                    })}
                               </button>
                             </div>
                           </td>
@@ -1547,7 +1721,7 @@ export class YetiAppAi extends LitElement {
         <!-- 9. Educational & Legal Disclaimer Footer -->
         <footer class="app-disclaimer">
           <p>
-            <strong>Disclaimer:</strong> This tool is designed strictly for illustrative and educational purposes and does not constitute financial, legal, investment, or tax advice. Actual payoff timelines and interest accruals may vary depending on individual creditor calculations, compounding frequencies, introductory promotional rate expirations, and unexpected fees. Consult a qualified financial advisor for guidance tailored to your specific financial situation.
+            <strong>Disclaimer:</strong> ${this.t("disclaimer.text")}
           </p>
         </footer>
       </div>

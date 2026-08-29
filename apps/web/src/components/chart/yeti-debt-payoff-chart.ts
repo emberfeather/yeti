@@ -1,5 +1,8 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
+import { consume } from "@lit/context";
+import { localizationContext } from "@littoral/literally/localization/context";
+import type { Localization } from "@littoral/literally/localization/localization";
 import type { ChartData, ChartOptions } from "chart.js";
 import type { Debt, TimelineMonth } from "../../calculator";
 import { CHART_PALETTE, getMinimalChartOptions, getThemeTokens } from "./chartTheme";
@@ -11,6 +14,10 @@ import "./yeti-chart";
  */
 @customElement("yeti-debt-payoff-chart")
 export class YetiDebtPayoffChart extends LitElement {
+  @consume({ context: localizationContext, subscribe: true })
+  @state()
+  private localization?: Localization;
+
   @property({ attribute: false })
   debts: Debt[] = [];
 
@@ -183,16 +190,24 @@ export class YetiDebtPayoffChart extends LitElement {
   }
 
   private buildChartOptions(): ChartOptions {
-    return getMinimalChartOptions({
-      scales: {
-        x: {
-          stacked: true,
-        },
-        y: {
-          stacked: true,
+    const formatFn = (val: number) =>
+      this.localization
+        ? this.localization.formatNumber(val, "currency")
+        : `$${val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+    return getMinimalChartOptions(
+      {
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+          },
         },
       },
-    });
+      formatFn,
+    );
   }
 
   render() {
