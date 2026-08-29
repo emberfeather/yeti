@@ -41,7 +41,6 @@ export class YetiChart extends LitElement {
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 250px;
       position: relative;
     }
 
@@ -49,7 +48,6 @@ export class YetiChart extends LitElement {
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: inherit;
     }
 
     canvas {

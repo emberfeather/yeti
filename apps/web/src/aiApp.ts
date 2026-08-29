@@ -1,6 +1,14 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { calculateMinimumOnly, calculateSnowball, type Debt } from "./calculator";
+import {
+  calculateMinimumOnly,
+  calculateSchedule,
+  compareAllStrategies,
+  STRATEGY_DEFINITIONS,
+  type Debt,
+  type StrategyKey,
+} from "./calculator";
+import { CHART_PALETTE } from "./components/chart/chartTheme";
 import "./components/chart/yeti-debt-payoff-chart";
 
 const INITIAL_DEBTS: Debt[] = [
@@ -31,6 +39,12 @@ const INITIAL_DEBTS: Debt[] = [
 export class YetiAppAi extends LitElement {
   @state() private debts: Debt[] = INITIAL_DEBTS;
   @state() private extraPayment: number = 300;
+  @state() private currentStrategyKey: StrategyKey = "lowestBalance";
+
+  // Toggle states
+  @state() private isAddingDebt: boolean = false;
+  @state() private isComparingStrategies: boolean = false;
+  @state() private showFullSchedule: boolean = false;
 
   // Form states for adding a new debt
   @state() private newName: string = "";
@@ -41,91 +55,29 @@ export class YetiAppAi extends LitElement {
 
   static styles = [
     css`
-      /* Modern Glassmorphic Design System */
+      /* Modern Glassmorphic Full-Width Layout */
       .app-container {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 40px 24px;
         box-sizing: border-box;
         text-align: left;
       }
 
       .app-header {
-        margin-bottom: 40px;
+        margin-bottom: 28px;
         text-align: center;
       }
 
-      .header-badge {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--accent);
-        background: var(--accent-bg);
-        border: 1px solid var(--accent-border);
-        padding: 6px 16px;
-        border-radius: 100px;
-        margin-bottom: 16px;
-      }
-
       .app-header h1 {
-        font-size: 44px;
+        font-size: 38px;
         font-weight: 800;
         line-height: 1.1;
-        margin: 0 0 12px 0;
+        margin: 0;
         letter-spacing: -1.2px;
         background: linear-gradient(135deg, var(--text-h), var(--accent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-      }
-
-      .subtitle {
-        font-size: 18px;
-        color: var(--text);
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      /* App Grid Layout */
-      .app-grid {
-        display: grid;
-        grid-template-columns: 380px 1fr;
-        gap: 32px;
-        align-items: start;
-      }
-
-      @media (max-width: 960px) {
-        .app-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Panel Styles */
-      .panel {
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: var(--shadow);
-      }
-
-      .panel-section {
-        margin-bottom: 32px;
-      }
-
-      .panel-section:last-child {
-        margin-bottom: 0;
-      }
-
-      .panel-section h2 {
-        font-size: 18px;
-        font-weight: 700;
-        margin-top: 0;
-        margin-bottom: 16px;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 8px;
-        color: var(--text-h);
       }
 
       /* Card Styles */
@@ -145,155 +97,40 @@ export class YetiAppAi extends LitElement {
       .card h2 {
         font-size: 18px;
         font-weight: 700;
-        margin-top: 0;
-        margin-bottom: 16px;
+        margin: 0;
         color: var(--text-h);
       }
 
-      /* Form & Inputs */
-      .input-group {
-        margin-bottom: 20px;
-      }
-
-      .input-group label {
-        display: block;
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 6px;
-        color: var(--text-h);
-      }
-
-      .input-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
-
-      .input-wrapper input {
-        width: 100%;
-        padding: 12px 16px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        font-size: 16px;
-        background: var(--bg);
-        color: var(--text-h);
-        transition: all 0.2s ease-in-out;
-        box-sizing: border-box;
-      }
-
-      .input-wrapper input:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px var(--accent-bg);
-      }
-
-      .input-wrapper.prefix input {
-        padding-left: 32px;
-      }
-
-      .input-prefix {
-        position: absolute;
-        left: 12px;
-        color: var(--text);
-        font-size: 16px;
-        user-select: none;
-      }
-
-      .input-wrapper.suffix input {
-        padding-right: 32px;
-      }
-
-      .input-suffix {
-        position: absolute;
-        right: 12px;
-        color: var(--text);
-        font-size: 16px;
-        user-select: none;
-      }
-
-      .input-help {
-        font-size: 12px;
-        color: var(--text);
-        margin-top: 6px;
-      }
-
-      .form-row {
+      /* 2-Column Controls Row: Budget + Strategy */
+      .controls-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-
-      .add-debt-form input[type="text"] {
-        width: 100%;
-        padding: 12px 16px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        font-size: 16px;
-        background: var(--bg);
-        color: var(--text-h);
-        box-sizing: border-box;
-        transition: all 0.2s ease-in-out;
-      }
-
-      .add-debt-form input[type="text"]:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px var(--accent-bg);
-      }
-
-      /* Buttons */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 24px;
-        font-size: 15px;
-        font-weight: 600;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-decoration: none;
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        color: #ffffff;
-        width: 100%;
-        margin-top: 8px;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px var(--accent-bg);
-        opacity: 0.9;
-      }
-
-      .btn-primary:active {
-        transform: translateY(0);
-      }
-
-      /* Dashboard Cards */
-      .results-container {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .dashboard-cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 20px;
         margin-bottom: 24px;
       }
 
-      @media (max-width: 600px) {
-        .dashboard-cards {
+      @media (max-width: 860px) {
+        .controls-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* 2-Column Results Row: Payoff Date + Total Interest */
+      .results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      @media (max-width: 640px) {
+        .results-grid {
           grid-template-columns: 1fr;
         }
       }
 
       .metric-card {
-        padding: 24px;
+        padding: 22px 24px;
         margin-bottom: 0;
         display: flex;
         flex-direction: column;
@@ -315,15 +152,46 @@ export class YetiAppAi extends LitElement {
       }
 
       .metric-value {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 800;
         color: var(--text-h);
         line-height: 1.2;
       }
 
+      .metric-input-wrapper {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+
+      .metric-prefix {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .metric-input {
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;
+        color: var(--text-h);
+        background: transparent;
+        border: none;
+        border-bottom: 2px dashed var(--border);
+        padding: 0 4px;
+        width: 140px;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+      }
+
+      .metric-input:focus {
+        border-bottom: 2px solid var(--accent);
+      }
+
       .metric-sub {
         font-size: 13px;
-        margin: 8px 0 0 0;
+        margin: 10px 0 0 0;
         color: var(--text);
         display: flex;
         align-items: center;
@@ -342,6 +210,235 @@ export class YetiAppAi extends LitElement {
       .saving-text {
         color: #10b981;
         font-weight: 600;
+      }
+
+      /* Strategy Display Card */
+      .strategy-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .strategy-header-row h3 {
+        margin: 0;
+      }
+
+      .strategy-title-badge {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-h);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .strategy-tagline {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 2px 8px;
+        border-radius: 6px;
+        background: var(--accent-bg);
+        color: var(--accent);
+        border: 1px solid var(--accent-border);
+      }
+
+      .strategy-desc-text {
+        font-size: 13px;
+        color: var(--text);
+        margin: 6px 0 0 0;
+        line-height: 1.4;
+      }
+
+      .strategy-best-for {
+        font-size: 12px;
+        color: var(--text-h);
+        margin-top: 8px;
+      }
+
+      .strategy-best-for strong {
+        color: var(--accent);
+      }
+
+      /* Card Header with Actions */
+      .card-header-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        font-family: inherit;
+      }
+
+      .btn-action-pill {
+        background: var(--accent-bg);
+        color: var(--accent);
+        border: 1px solid var(--accent-border);
+      }
+
+      .btn-action-pill:hover {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px var(--accent-bg);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(244, 243, 236, 0.4);
+        color: var(--text-h);
+      }
+
+      /* Expandable Add Debt Form Container */
+      .add-debt-panel {
+        background: rgba(244, 243, 236, 0.3);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        animation: fadeIn 0.2s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1fr 1.2fr;
+        gap: 16px;
+        align-items: end;
+      }
+
+      @media (max-width: 768px) {
+        .form-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .input-group {
+        margin-bottom: 0;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text-h);
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .input-wrapper input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text-h);
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .input-wrapper input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-bg);
+      }
+
+      .input-wrapper.prefix input {
+        padding-left: 28px;
+      }
+
+      .input-prefix {
+        position: absolute;
+        left: 10px;
+        color: var(--text);
+        font-size: 14px;
+        user-select: none;
+      }
+
+      .input-wrapper.suffix input {
+        padding-right: 28px;
+      }
+
+      .input-suffix {
+        position: absolute;
+        right: 10px;
+        color: var(--text);
+        font-size: 14px;
+        user-select: none;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+        justify-content: flex-end;
+      }
+
+      .error-message {
+        font-size: 13px;
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-bottom: 14px;
       }
 
       /* Active Debts List */
@@ -375,7 +472,7 @@ export class YetiAppAi extends LitElement {
       }
 
       .debt-info h4 {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         margin: 0 0 4px 0;
         color: var(--text-h);
@@ -423,15 +520,273 @@ export class YetiAppAi extends LitElement {
         background: rgba(239, 68, 68, 0.1);
       }
 
-      /* Error Messages */
-      .error-message {
+      /* Strategy Comparison Grid Section */
+      .comparison-section {
+        border: 1px solid var(--accent-border);
+        background: linear-gradient(180deg, var(--accent-bg), var(--bg));
+        animation: fadeIn 0.25s ease-out;
+      }
+
+      .comparison-intro {
         font-size: 14px;
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.08);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        padding: 10px 14px;
+        color: var(--text);
+        margin: -10px 0 20px 0;
+      }
+
+      .strategy-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .strategy-option-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .strategy-option-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.1);
+      }
+
+      .strategy-option-card.selected {
+        border-color: var(--accent);
+        background: linear-gradient(180deg, var(--accent-bg), var(--bg));
+        box-shadow: 0 0 0 2px var(--accent);
+      }
+
+      .option-top {
+        margin-bottom: 14px;
+      }
+
+      .option-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .option-title-row h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+        color: var(--text-h);
+      }
+
+      .active-badge {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ffffff;
+        background: var(--accent);
+        padding: 3px 8px;
+        border-radius: 100px;
+        flex-shrink: 0;
+      }
+
+      .option-desc {
+        font-size: 13px;
+        color: var(--text);
+        margin: 0 0 10px 0;
+        line-height: 1.4;
+      }
+
+      .option-best-for {
+        font-size: 12px;
+        color: var(--text-h);
+        margin: 0;
+      }
+
+      .option-best-for span {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .option-stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 12px;
+        background: rgba(244, 243, 236, 0.3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 14px;
+      }
+
+      .stat-box {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text);
+        margin-bottom: 2px;
+      }
+
+      .stat-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-h);
+      }
+
+      .stat-sub {
+        font-size: 11px;
+        font-weight: 600;
+        color: #10b981;
+        margin-top: 2px;
+      }
+
+      .btn-select-strategy {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 600;
         border-radius: 8px;
-        margin-bottom: 16px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text-h);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+
+      .strategy-option-card.selected .btn-select-strategy {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .strategy-option-card:hover .btn-select-strategy:not(.selected) {
+        background: var(--accent-bg);
+        color: var(--accent);
+        border-color: var(--accent-border);
+      }
+
+      /* Payoff Order Sequence List */
+      .payoff-order-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .payoff-step-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: rgba(244, 243, 236, 0.25);
+        transition: all 0.2s ease-in-out;
+        gap: 16px;
+      }
+
+      .payoff-step-item:hover {
+        border-color: var(--accent-border);
+        background: var(--accent-bg);
+      }
+
+      .step-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .step-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+        flex-shrink: 0;
+      }
+
+      .step-details h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+        color: var(--text-h);
+      }
+
+      .step-meta {
+        font-size: 13px;
+        color: var(--text);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .step-right {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 700px) {
+        .payoff-step-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .step-right {
+          width: 100%;
+          justify-content: space-between;
+          border-top: 1px solid var(--border);
+          padding-top: 12px;
+        }
+      }
+
+      .step-stat-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      @media (max-width: 700px) {
+        .step-stat-group {
+          align-items: flex-start;
+        }
+      }
+
+      .step-stat-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text);
+        margin-bottom: 2px;
+      }
+
+      .step-stat-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-h);
+      }
+
+      .step-stat-val.highlight {
+        color: var(--accent);
+      }
+
+      .step-stat-sub {
+        font-size: 11px;
+        color: var(--text);
+        margin-top: 2px;
       }
 
       /* Timeline / Table styles */
@@ -492,6 +847,37 @@ export class YetiAppAi extends LitElement {
         text-align: center;
         padding: 16px;
       }
+
+      .show-all-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 4px 0;
+        font-style: normal;
+      }
+
+      /* App Disclaimer Footer */
+      .app-disclaimer {
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .app-disclaimer p {
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--text);
+        max-width: 820px;
+        margin: 0 auto;
+        opacity: 0.85;
+      }
+
+      .app-disclaimer strong {
+        color: var(--text-h);
+      }
     `,
   ];
 
@@ -533,6 +919,7 @@ export class YetiAppAi extends LitElement {
     this.newRate = "";
     this.newMinPay = "";
     this.formError = "";
+    this.isAddingDebt = false;
   }
 
   private handleRemoveDebt(id: string) {
@@ -540,271 +927,527 @@ export class YetiAppAi extends LitElement {
   }
 
   override render() {
-    const snowballResult = calculateSnowball(this.debts, this.extraPayment);
     const baselineResult = calculateMinimumOnly(this.debts);
+    const activeResult = calculateSchedule(
+      this.debts,
+      this.extraPayment,
+      this.currentStrategyKey,
+    );
+    const currentMeta = STRATEGY_DEFINITIONS[this.currentStrategyKey];
 
     const interestSaved = Math.max(
       0,
-      parseFloat(baselineResult.totalInterestPaid) - parseFloat(snowballResult.totalInterestPaid),
+      parseFloat(baselineResult.totalInterestPaid) - parseFloat(activeResult.totalInterestPaid),
     ).toFixed(2);
 
     const timeSaved = Math.max(
       0,
-      baselineResult.totalMonthsToPayoff - snowballResult.totalMonthsToPayoff,
+      baselineResult.totalMonthsToPayoff - activeResult.totalMonthsToPayoff,
     );
+
+    const comparisonItems = compareAllStrategies(this.debts, this.extraPayment, baselineResult);
+    if (
+      comparisonItems.length > 0 &&
+      !comparisonItems.some((item) => item.key === this.currentStrategyKey)
+    ) {
+      this.currentStrategyKey = comparisonItems[0].key;
+    }
 
     return html`
       <div class="app-container">
+        <!-- 1. Header (clean without subtitle) -->
         <header class="app-header">
           <h1>Debt Snowball Calculator</h1>
-          <p class="subtitle">
-            Accelerate your debt payoff by targeting the smallest balances first and rolling over
-            payments.
-          </p>
         </header>
 
-        <main class="app-grid">
-          <!-- Left Column: Input Panel -->
-          <section class="panel input-panel">
-            <div class="panel-section">
-              <h2>1. Monthly Budget</h2>
-              <div class="input-group">
-                <label htmlFor="extra-payment"> Additional Monthly Payment (Snowball) </label>
-                <div class="input-wrapper prefix">
-                  <span class="input-prefix">$</span>
-                  <input
-                    id="extra-payment"
-                    type="number"
-                    min="0"
-                    .value="${String(this.extraPayment)}"
-                    @input="${(e: Event) => {
-                      const val = parseFloat((e.target as HTMLInputElement).value);
-                      this.extraPayment = Math.max(0, val || 0);
-                    }}"
-                    placeholder="0.00"
-                  />
-                </div>
-                <p class="input-help">
-                  Extra money added to your payments each month to accelerate payoff.
-                </p>
-              </div>
-            </div>
+        <!-- 2. Active Debts Section with Embedded Add Debt Form -->
+        <section class="card list-card">
+          <div class="card-header-actions">
+            <h2>Active Debts (${this.debts.length})</h2>
+            <button
+              class="btn btn-action-pill"
+              @click="${() => {
+                this.isAddingDebt = !this.isAddingDebt;
+                this.formError = "";
+              }}"
+            >
+              ${this.isAddingDebt ? "✕ Close Form" : "+ Add a Debt"}
+            </button>
+          </div>
 
-            <div class="panel-section">
-              <h2>2. Add a Debt</h2>
-              <form @submit="${this.handleAddDebt}" class="add-debt-form">
-                ${this.formError ? html`<div class="error-message">${this.formError}</div>` : ""}
+          <!-- Expandable Add Debt Form -->
+          ${this.isAddingDebt
+            ? html`
+                <div class="add-debt-panel">
+                  ${this.formError
+                    ? html`<div class="error-message">${this.formError}</div>`
+                    : ""}
+                  <form @submit="${this.handleAddDebt}">
+                    <div class="form-grid">
+                      <div class="input-group">
+                        <label htmlFor="debt-name">Debt Name</label>
+                        <div class="input-wrapper">
+                          <input
+                            id="debt-name"
+                            type="text"
+                            .value="${this.newName}"
+                            @input="${(e: Event) => {
+                              this.newName = (e.target as HTMLInputElement).value;
+                            }}"
+                            placeholder="e.g. Visa Card"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                <div class="input-group">
-                  <label htmlFor="debt-name">Debt Name</label>
-                  <input
-                    id="debt-name"
-                    type="text"
-                    .value="${this.newName}"
-                    @input="${(e: Event) => {
-                      this.newName = (e.target as HTMLInputElement).value;
-                    }}"
-                    placeholder="e.g. Visa Credit Card"
-                  />
-                </div>
+                      <div class="input-group">
+                        <label htmlFor="debt-balance">Balance</label>
+                        <div class="input-wrapper prefix">
+                          <span class="input-prefix">$</span>
+                          <input
+                            id="debt-balance"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            .value="${this.newBalance}"
+                            @input="${(e: Event) => {
+                              this.newBalance = (e.target as HTMLInputElement).value;
+                            }}"
+                            placeholder="0.00"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                <div class="form-row">
-                  <div class="input-group">
-                    <label htmlFor="debt-balance">Balance</label>
-                    <div class="input-wrapper prefix">
-                      <span class="input-prefix">$</span>
-                      <input
-                        id="debt-balance"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        .value="${this.newBalance}"
-                        @input="${(e: Event) => {
-                          this.newBalance = (e.target as HTMLInputElement).value;
-                        }}"
-                        placeholder="0.00"
-                      />
+                      <div class="input-group">
+                        <label htmlFor="debt-rate">Rate</label>
+                        <div class="input-wrapper suffix">
+                          <input
+                            id="debt-rate"
+                            type="number"
+                            min="0"
+                            step="0.1"
+                            .value="${this.newRate}"
+                            @input="${(e: Event) => {
+                              this.newRate = (e.target as HTMLInputElement).value;
+                            }}"
+                            placeholder="0.0"
+                            required
+                          />
+                          <span class="input-suffix">%</span>
+                        </div>
+                      </div>
+
+                      <div class="input-group">
+                        <label htmlFor="debt-min-payment">Min Payment</label>
+                        <div class="input-wrapper prefix">
+                          <span class="input-prefix">$</span>
+                          <input
+                            id="debt-min-payment"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            .value="${this.newMinPay}"
+                            @input="${(e: Event) => {
+                              this.newMinPay = (e.target as HTMLInputElement).value;
+                            }}"
+                            placeholder="0.00"
+                            required
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="input-group">
-                    <label htmlFor="debt-rate">Interest Rate</label>
-                    <div class="input-wrapper suffix">
-                      <input
-                        id="debt-rate"
-                        type="number"
-                        min="0"
-                        step="0.1"
-                        .value="${this.newRate}"
-                        @input="${(e: Event) => {
-                          this.newRate = (e.target as HTMLInputElement).value;
+                    <div class="form-actions">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        @click="${() => {
+                          this.isAddingDebt = false;
+                          this.formError = "";
                         }}"
-                        placeholder="0.0"
-                      />
-                      <span class="input-suffix">%</span>
+                      >
+                        Cancel
+                      </button>
+                      <button type="submit" class="btn btn-primary">Save Debt</button>
                     </div>
-                  </div>
+                  </form>
                 </div>
+              `
+            : ""}
 
-                <div class="input-group">
-                  <label htmlFor="debt-min-payment"> Minimum Monthly Payment </label>
-                  <div class="input-wrapper prefix">
-                    <span class="input-prefix">$</span>
+          <!-- Debts List -->
+          ${this.debts.length === 0
+            ? html`<div class="empty-state">
+                <p>No debts added yet. Click "+ Add a Debt" above to get started!</p>
+              </div>`
+            : html`<div class="debts-list">
+                ${this.debts.map(
+                  (debt) => html`
+                    <div class="debt-item">
+                      <div class="debt-info">
+                        <h4>${debt.name}</h4>
+                        <div class="debt-meta">
+                          <span>Rate: ${debt.interestRate}%</span>
+                          <span>Min Pay: $${debt.minimumPayment}</span>
+                        </div>
+                      </div>
+                      <div class="debt-value">
+                        <div class="balance-badge">$${debt.balance.toLocaleString()}</div>
+                        <button
+                          class="btn-remove"
+                          @click="${() => this.handleRemoveDebt(debt.id)}"
+                          aria-label="Remove ${debt.name}"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    </div>
+                  `,
+                )}
+              </div>`}
+        </section>
+
+        <!-- 3. Top Controls Row: Budget Input + Strategy Selector -->
+        ${this.debts.length > 0
+          ? html`
+              <section class="controls-grid">
+                <!-- Additional Snowball Budget Input -->
+                <div class="card metric-card">
+                  <h3>Additional Monthly Payment</h3>
+                  <div class="metric-input-wrapper">
+                    <span class="metric-prefix">$</span>
                     <input
-                      id="debt-min-payment"
+                      id="extra-payment"
+                      class="metric-input"
                       type="number"
                       min="0"
-                      step="0.01"
-                      .value="${this.newMinPay}"
+                      step="25"
+                      .value="${String(this.extraPayment)}"
                       @input="${(e: Event) => {
-                        this.newMinPay = (e.target as HTMLInputElement).value;
+                        const val = parseFloat((e.target as HTMLInputElement).value);
+                        this.extraPayment = Math.max(0, val || 0);
                       }}"
                       placeholder="0.00"
+                      aria-label="Additional Monthly Payment"
                     />
                   </div>
+                  <p class="metric-sub">Extra rollover added each month</p>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Add Debt</button>
-              </form>
-            </div>
-          </section>
-
-          <!-- Right Column: Results & Active Debts -->
-          <section class="results-container">
-            <!-- Summary Dashboard -->
-            <div class="dashboard-cards">
-              <div class="card metric-card highlight">
-                <h3>Payoff Date</h3>
-                <div class="metric-value">${snowballResult.payoffDate}</div>
-                <p class="metric-sub">
-                  ${snowballResult.totalMonthsToPayoff} months total
-                  ${timeSaved > 0
-                    ? html`<span class="saving-pill">-${timeSaved} months</span>`
-                    : ""}
-                </p>
-              </div>
-
-              <div class="card metric-card">
-                <h3>Total Interest Paid</h3>
-                <div class="metric-value">
-                  $${parseFloat(snowballResult.totalInterestPaid).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                <!-- Current Payoff Strategy Display & Switch Button -->
+                <div class="card metric-card">
+                  <div class="strategy-header-row">
+                    <h3>Payoff Strategy</h3>
+                    <button
+                      class="btn btn-action-pill"
+                      @click="${() =>
+                        (this.isComparingStrategies = !this.isComparingStrategies)}"
+                    >
+                      ${this.isComparingStrategies ? "✕ Close" : "⇄ Switch Strategy"}
+                    </button>
+                  </div>
+                  <div class="strategy-title-badge">
+                    ${currentMeta.name}
+                    <span class="strategy-tagline">${currentMeta.tagline}</span>
+                  </div>
+                  <p class="strategy-desc-text">${currentMeta.description}</p>
+                  <p class="strategy-best-for">
+                    <strong>Best for:</strong> ${currentMeta.bestFor}
+                  </p>
                 </div>
-                <p class="metric-sub">
-                  ${parseFloat(interestSaved) > 0
-                    ? html`<span class="saving-text">
-                        Saved
-                        $${parseFloat(interestSaved).toLocaleString(undefined, {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </span>`
-                    : "With extra snowball"}
-                </p>
-              </div>
-            </div>
+              </section>
+            `
+          : ""}
 
-            <!-- Active Debts List -->
-            <div class="card list-card">
-              <h2>Active Debts (${this.debts.length})</h2>
-              ${this.debts.length === 0
-                ? html`<div class="empty-state">
-                    <p>No debts added yet. Start by adding one in the left panel!</p>
-                  </div>`
-                : html`<div class="debts-list">
-                    ${this.debts.map(
-                      (debt) => html`
-                        <div class="debt-item">
-                          <div class="debt-info">
-                            <h4>${debt.name}</h4>
-                            <div class="debt-meta">
-                              <span>Rate: ${debt.interestRate}%</span>
-                              <span>Min Pay: $${debt.minimumPayment}</span>
+        <!-- 4. Expandable Strategy Comparison Section -->
+        ${this.isComparingStrategies && this.debts.length > 0
+          ? html`
+              <section class="card comparison-section">
+                <div class="card-header-actions">
+                  <h2>Compare All Payoff Strategies</h2>
+                  <button
+                    class="btn btn-action-pill"
+                    @click="${() => (this.isComparingStrategies = false)}"
+                  >
+                    ✕ Close
+                  </button>
+                </div>
+                <p class="comparison-intro">
+                  Select a strategy below to simulate its impact across your repayment plan:
+                </p>
+
+                <div class="strategy-cards-grid">
+                  ${comparisonItems.map((item) => {
+                    const isSelected = item.key === this.currentStrategyKey;
+
+                    return html`
+                      <div
+                        class="strategy-option-card ${isSelected ? "selected" : ""}"
+                        @click="${() => {
+                          this.currentStrategyKey = item.key;
+                        }}"
+                      >
+                        <div class="option-top">
+                          <div class="option-title-row">
+                            <h4>${item.meta.name}</h4>
+                            ${isSelected
+                              ? html`<span class="active-badge">Active</span>`
+                              : ""}
+                          </div>
+                          <p class="option-desc">${item.meta.description}</p>
+                          <p class="option-best-for">
+                            <span>Who it benefits:</span> ${item.meta.bestFor}
+                          </p>
+                        </div>
+
+                        <div>
+                          <div class="option-stats-grid">
+                            <div class="stat-box">
+                              <span class="stat-label">Payoff Time</span>
+                              <span class="stat-val">${item.result.totalMonthsToPayoff} mos</span>
+                              ${item.timeSaved > 0
+                                ? html`<span class="stat-sub">-${item.timeSaved} mos</span>`
+                                : ""}
+                            </div>
+                            <div class="stat-box">
+                              <span class="stat-label">Interest Saved</span>
+                              <span class="stat-val" style="color: #10b981;">
+                                $${parseFloat(item.interestSaved).toLocaleString(undefined, {
+                                  maximumFractionDigits: 0,
+                                })}
+                              </span>
+                              <span class="stat-sub" style="color: var(--text);">
+                                $${parseFloat(item.result.totalInterestPaid).toLocaleString(
+                                  undefined,
+                                  { maximumFractionDigits: 0 },
+                                )} total interest
+                              </span>
                             </div>
                           </div>
-                          <div class="debt-value">
-                            <div class="balance-badge">$${debt.balance.toLocaleString()}</div>
-                            <button
-                              class="btn-remove"
-                              @click="${() => this.handleRemoveDebt(debt.id)}"
-                              aria-label="Remove ${debt.name}"
-                            >
-                              &times;
-                            </button>
+
+                          <button
+                            class="btn-select-strategy ${isSelected ? "selected" : ""}"
+                            @click="${(e: Event) => {
+                              e.stopPropagation();
+                              this.currentStrategyKey = item.key;
+                            }}"
+                          >
+                            ${isSelected ? "✓ Active Strategy" : "Select Strategy"}
+                          </button>
+                        </div>
+                      </div>
+                    `;
+                  })}
+                </div>
+              </section>
+            `
+          : ""}
+
+        <!-- 5. Results Metrics Row: Payoff Date + Total Interest Paid -->
+        ${this.debts.length > 0
+          ? html`
+              <section class="results-grid">
+                <!-- Card 1: Payoff Date -->
+                <div class="card metric-card highlight">
+                  <h3>Payoff Date</h3>
+                  <div class="metric-value">${activeResult.payoffDate}</div>
+                  <p class="metric-sub">
+                    ${activeResult.totalMonthsToPayoff} months total
+                    ${timeSaved > 0
+                      ? html`<span class="saving-pill">-${timeSaved} months</span>`
+                      : ""}
+                  </p>
+                </div>
+
+                <!-- Card 2: Interest Saved (Primary) & Total Interest Paid (Secondary) -->
+                <div class="card metric-card">
+                  <h3>Interest Saved</h3>
+                  <div class="metric-value" style="color: #10b981;">
+                    $${parseFloat(interestSaved).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </div>
+                  <p class="metric-sub">
+                    $${parseFloat(activeResult.totalInterestPaid).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })} total interest paid
+                  </p>
+                </div>
+              </section>
+            `
+          : ""}
+
+        <!-- 6. Debt Payoff Chart -->
+        ${this.debts.length > 0
+          ? html`
+              <yeti-debt-payoff-chart
+                class="card"
+                .debts="${this.debts}"
+                .timeline="${activeResult.timeline}"
+                .baselineTimeline="${baselineResult.timeline}"
+              ></yeti-debt-payoff-chart>
+            `
+          : ""}
+
+        <!-- 7. Payoff Order & Rollover Sequence Section -->
+        ${this.debts.length > 0 &&
+        activeResult.payoffOrder &&
+        activeResult.payoffOrder.length > 0
+          ? html`
+              <section class="card payoff-order-card">
+                <div class="card-header-actions">
+                  <h2>Payoff Sequence & Rollovers (${currentMeta.name})</h2>
+                </div>
+                <p
+                  class="subtitle"
+                  style="font-size: 14px; text-align: left; margin: -10px 0 20px 0;"
+                >
+                  Follow this step-by-step sequence. Once each debt is cleared, its full monthly
+                  payment rolls over into the next target.
+                </p>
+
+                <div class="payoff-order-list">
+                  ${activeResult.payoffOrder.map((step, idx) => {
+                    const palette = CHART_PALETTE[idx % CHART_PALETTE.length];
+                    const rolloverAmount =
+                      idx === 0
+                        ? step.snowballPayment - step.minimumPayment
+                        : step.snowballPayment -
+                          activeResult.payoffOrder[idx - 1].snowballPayment;
+
+                    return html`
+                      <div class="payoff-step-item">
+                        <div class="step-left">
+                          <div class="step-badge" style="background: ${palette.main}">
+                            ${step.order}
+                          </div>
+                          <div class="step-details">
+                            <h4>${step.debtName}</h4>
+                            <div class="step-meta">
+                              <span>Balance: $${step.balance.toLocaleString()}</span>
+                              <span>Rate: ${step.rate}%</span>
+                              <span>Base Min: $${step.minimumPayment}/mo</span>
+                            </div>
                           </div>
                         </div>
+
+                        <div class="step-right">
+                          <div class="step-stat-group">
+                            <span class="step-stat-label">Estimated Payoff</span>
+                            <span class="step-stat-val">${step.payoffDate}</span>
+                            <span class="step-stat-sub">Month ${step.payoffMonth}</span>
+                          </div>
+
+                          <div class="step-stat-group">
+                            <span class="step-stat-label">Snowballed Payment</span>
+                            <span class="step-stat-val highlight">
+                              $${step.snowballPayment.toLocaleString()}/mo
+                            </span>
+                            <span class="step-stat-sub">
+                              ${idx === 0
+                                ? `+$${rolloverAmount.toLocaleString()} extra added`
+                                : `+$${rolloverAmount.toLocaleString()} rolled over`}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                  })}
+                </div>
+              </section>
+            `
+          : ""}
+
+        <!-- 8. Payoff Schedule Timeline Table -->
+        ${this.debts.length > 0
+          ? html`<section class="card timeline-card">
+              <div class="card-header-actions">
+                <h2>Monthly Payoff Schedule (${currentMeta.name})</h2>
+                ${activeResult.timeline.length > 24
+                  ? html`
+                      <button
+                        class="btn btn-action-pill"
+                        @click="${() => (this.showFullSchedule = !this.showFullSchedule)}"
+                      >
+                        ${this.showFullSchedule
+                          ? "Show First 24 Months"
+                          : `Show All (${activeResult.timeline.length} Months)`}
+                      </button>
+                    `
+                  : ""}
+              </div>
+              <div class="table-responsive">
+                <table class="timeline-table">
+                  <thead>
+                    <tr>
+                      <th>Month</th>
+                      <th>Total Paid</th>
+                      <th>Interest Paid</th>
+                      <th>Remaining Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${(this.showFullSchedule
+                      ? activeResult.timeline
+                      : activeResult.timeline.slice(0, 24)
+                    ).map(
+                      (month) => html`
+                        <tr>
+                          <td>${month.monthName} ${month.year}</td>
+                          <td>
+                            $${parseFloat(month.totalPaid).toLocaleString(undefined, {
+                              minimumFractionDigits: 2,
+                            })}
+                          </td>
+                          <td class="interest-col">
+                            $${parseFloat(month.totalInterestCharged).toLocaleString(undefined, {
+                              minimumFractionDigits: 2,
+                            })}
+                          </td>
+                          <td class="balance-col">
+                            $${parseFloat(month.totalRemainingBalance).toLocaleString(undefined, {
+                              minimumFractionDigits: 2,
+                            })}
+                          </td>
+                        </tr>
                       `,
                     )}
-                  </div>`}
-            </div>
+                    ${activeResult.timeline.length > 24
+                      ? html`<tr class="table-dots">
+                          <td colspan="4">
+                            <div class="show-all-wrapper">
+                              <span>
+                                ${this.showFullSchedule
+                                  ? `Showing all ${activeResult.timeline.length} months of payoff schedule.`
+                                  : `Showing first 24 of ${activeResult.timeline.length} months.`}
+                              </span>
+                              <button
+                                class="btn btn-action-pill"
+                                @click="${() => (this.showFullSchedule = !this.showFullSchedule)}"
+                              >
+                                ${this.showFullSchedule
+                                  ? "Collapse Schedule ↑"
+                                  : `Show Entire Schedule (${activeResult.timeline.length} months) ↓`}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>`
+                      : ""}
+                  </tbody>
+                </table>
+              </div>
+            </section>`
+          : ""}
 
-            <!-- Debt Payoff Chart -->
-            ${this.debts.length > 0
-              ? html`
-                  <yeti-debt-payoff-chart
-                    class="card"
-                    .debts="${this.debts}"
-                    .timeline="${snowballResult.timeline}"
-                    .baselineTimeline="${baselineResult.timeline}"
-                  ></yeti-debt-payoff-chart>
-                `
-              : ""}
-
-            <!-- Payoff Schedule Timeline -->
-            ${this.debts.length > 0
-              ? html`<div class="card timeline-card">
-                  <h2>Monthly Payoff Schedule</h2>
-                  <div class="table-responsive">
-                    <table class="timeline-table">
-                      <thead>
-                        <tr>
-                          <th>Month</th>
-                          <th>Total Paid</th>
-                          <th>Interest Paid</th>
-                          <th>Remaining Balance</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        ${snowballResult.timeline.slice(0, 24).map(
-                          (month) => html`
-                            <tr>
-                              <td>${month.monthName} ${month.year}</td>
-                              <td>
-                                $${parseFloat(month.totalPaid).toLocaleString(undefined, {
-                                  minimumFractionDigits: 2,
-                                })}
-                              </td>
-                              <td class="interest-col">
-                                $${parseFloat(month.totalInterestCharged).toLocaleString(
-                                  undefined,
-                                  { minimumFractionDigits: 2 },
-                                )}
-                              </td>
-                              <td class="balance-col">
-                                $${parseFloat(month.totalRemainingBalance).toLocaleString(
-                                  undefined,
-                                  { minimumFractionDigits: 2 },
-                                )}
-                              </td>
-                            </tr>
-                          `,
-                        )}
-                        ${snowballResult.timeline.length > 24
-                          ? html`<tr class="table-dots">
-                              <td colspan="4">
-                                ... showing first 24 months of payoff schedule ...
-                              </td>
-                            </tr>`
-                          : ""}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>`
-              : ""}
-          </section>
-        </main>
+        <!-- 9. Educational & Legal Disclaimer Footer -->
+        <footer class="app-disclaimer">
+          <p>
+            <strong>Disclaimer:</strong> This tool is designed strictly for illustrative and educational purposes and does not constitute financial, legal, investment, or tax advice. Actual payoff timelines and interest accruals may vary depending on individual creditor calculations, compounding frequencies, introductory promotional rate expirations, and unexpected fees. Consult a qualified financial advisor for guidance tailored to your specific financial situation.
+          </p>
+        </footer>
       </div>
     `;
   }
