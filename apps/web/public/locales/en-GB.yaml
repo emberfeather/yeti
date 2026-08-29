@@ -1,5 +1,5 @@
 config:
-  locale: en-US
+  locale: en-GB
   formats:
     number:
       style: decimal
@@ -7,7 +7,7 @@ config:
       maximumFractionDigits: 2
     currency:
       style: currency
-      currency: USD
+      currency: GBP
       minimumFractionDigits: 2
       maximumFractionDigits: 2
     percent:
@@ -27,7 +27,7 @@ strings:
     empty: "No debts added yet. Click \"+ Add a Debt\" above to get started!"
     form:
       name_label: Debt Name
-      name_placeholder: "e.g. Visa Card"
+      name_placeholder: "e.g. Credit Card"
       balance_label: Balance
       rate_label: Rate
       min_payment_label: Min Payment

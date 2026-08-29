@@ -1,0 +1,139 @@
+config:
+  locale: pl-PL
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: PLN
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Kalkulator Kuli Śnieżnej Zadłużenia
+    subtitle: Przyspiesz spłatę zadłużenia, koncentrując się na wybranych kwotach i przekazując raty dalej.
+
+  debts:
+    title: Zobowiązania ({count})
+    add: "+ Dodaj Zobowiązanie"
+    close_form: "✕ Zamknij Formularz"
+    empty: "Brak dodanych zobowiązań. Kliknij powyżej \"+ Dodaj Zobowiązanie\", aby rozpocząć!"
+    form:
+      name_label: Nazwa Zobowiązania
+      name_placeholder: "np. Karta Kredytowa"
+      balance_label: Saldo Zadłużenia
+      rate_label: Oprocentowanie
+      min_payment_label: Minimalna Rata
+      cancel: Anuluj
+      save: Zapisz Zobowiązanie
+      error_required: Proszę wypełnić wszystkie wymagane pola.
+      error_balance: Saldo musi być liczbą dodatnią.
+      error_rate: Oprocentowanie musi wynosić 0 lub więcej.
+      error_min_pay: Rata minimalna musi być liczbą dodatnią.
+    item:
+      rate: "Oproc: {rate}%"
+      min_pay: "Min Rata: {amount, currency}"
+      remove_aria: "Usuń {name}"
+
+  controls:
+    extra_payment_title: Dodatkowa Miesięczna Wpłata
+    extra_payment_sub: Dodatkowy budżet kuli śnieżnej dodawany co miesiąc
+    nudge_boost: "Zaoszczędź dodatkowo {interest, currency} na odsetkach, zwiększając wpłatę o {bump, currency}{soonerText}."
+    nudge_sooner: " (i zakończ spłatę o {months} mies. wcześniej)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Strategia Spłaty
+    switch_strategy: "⇄ Zmień Strategię"
+    close_comparison: "✕ Zamknij"
+
+  comparison:
+    title: Porównaj Wszystkie Strategie
+    intro: "Wybierz strategię, aby zasymulować jej wpływ na Twój plan spłaty:"
+    active_badge: Aktywna
+    who_benefits: "Dla kogo najlepsza:"
+    payoff_time_label: Czas Spłaty
+    payoff_time_val: "{months} mies."
+    payoff_time_saved: "-{months} mies."
+    interest_saved_label: Zaoszczędzone Odsetki
+    total_interest_sub: "{amount, currency} łącznych odsetek"
+    btn_active: "✓ Aktywna Strategia"
+    btn_select: Wybierz Strategię
+
+  results:
+    payoff_date_title: Data Całkowitej Spłaty
+    total_months: "Łącznie {months} miesięcy"
+    months_saved: "-{months} miesięcy"
+    interest_saved_title: Zaoszczędzone Odsetki
+    total_interest_paid: "{amount, currency} łącznych zapłaconych odsetek"
+
+  sequence:
+    title: Kolejność Spłaty i Przenoszenie Rat ({strategyName})
+    intro: "Postępuj zgodnie z tą kolejnością. Po spłaceniu każdego długu cała jego miesięczna kwota przechodzi na kolejny cel."
+    balance: "Saldo: {balance, currency}"
+    rate: "Oproc: {rate}%"
+    base_min: "Min Baza: {amount, currency}/mies."
+    estimated_payoff_label: Szacowana Spłata
+    month_sub: "Miesiąc {month}"
+    snowball_payment_label: Rata Kuli Śnieżnej
+    snowball_per_month: "{amount, currency}/mies."
+    extra_added: "+{amount, currency} dodano ekstra"
+    rolled_over: "+{amount, currency} przeniesiono"
+
+  schedule:
+    title: Miesięczny Harmonogram Spłat ({strategyName})
+    show_first_24: Pokaż Pierwsze 24 Miesiące
+    show_all: "Pokaż Wszystko ({months} Miesięcy)"
+    collapse: "Zwiń Harmonogram ↑"
+    show_entire: "Pokaż Cały Harmonogram ({months} miesięcy) ↓"
+    showing_first_24: "Wyświetlanie pierwszych 24 z {total} miesięcy."
+    showing_all: "Wyświetlanie wszystkich {total} miesięcy harmonogramu."
+    col_month: Miesiąc
+    col_total_paid: Łącznie Wpłacono
+    col_interest_paid: Zapłacone Odsetki
+    col_remaining_balance: Pozostałe Saldo
+
+  disclaimer:
+    text: "Narzędzie ma charakter wyłącznie edukacyjny i ilustracyjny i nie stanowi doradztwa finansowego, prawnego ani podatkowego. Skonsultuj się z licencjonowanym doradcą finansowym."
+
+  strategies:
+    lowestBalance:
+      name: Kula Śnieżna (Snowball)
+      tagline: Najmniejsze saldo najpierw
+      description: "Spłacając najpierw najmniejsze długi, szybko budujesz impet i motywację."
+      bestFor: "Najłatwiejsza psychologicznie dzięki szybkim wygranym na początku."
+    highestRate:
+      name: Lawina Zadłużenia (Avalanche)
+      tagline: Najwyższe oprocentowanie najpierw
+      description: "Spłacając najpierw długi o najwyższym oprocentowaniu, oszczędzasz najwięcej na odsetkach."
+      bestFor: "Oszczędza najwięcej pieniędzy dla osób kierujących się czystą matematyką."
+    balancePaymentRatio:
+      name: Optymalizator Przepływów
+      tagline: Najniższy wskaźnik saldo/rata
+      description: "Skupia się na długach, które uwalniają najwięcej miesięcznego budżetu w stosunku do kwoty."
+      bestFor: "Szybkie odzyskanie płynności i oddechu w miesięcznym budżecie."
+    balanceRateRatio:
+      name: Zrównoważone Saldo i Stopa
+      tagline: Podejście zbalansowane
+      description: "Metodologia hybrydowa łącząca wielkość salda z wysokością oprocentowania."
+      bestFor: "Zdrowy kompromis między szybkością spłaty a oszczędnością odsetek."
+    highestBalance:
+      name: Największe Saldo Najpierw
+      tagline: Największe kwoty na początku
+      description: "Zaatakuj najpierw największy dług, aby wyeliminować najcięższy ciężar kapitałowy."
+      bestFor: "Dla tych, którzy chcą od razu zmierzyć się ze swoim największym wyzwaniem."
+    lowestRate:
+      name: Najniższa Stopa Najpierw
+      tagline: Najniższe oprocentowanie najpierw
+      description: "Skupia się na najniżej oprocentowanych długach przed przejściem do wyższych."
+      bestFor: "Specyficzne preferencje podatkowe lub organizacyjne."
+    minimumPayment:
+      name: Tylko Minimalne Raty
+      tagline: Brak dodatkowego budżetu
+      description: "Symulacja spłaty wyłącznie rat minimalnych bez efektu kuli śnieżnej."
+      bestFor: "Punkt odniesienia do oceny osiągniętych oszczędności."

@@ -1,0 +1,139 @@
+config:
+  locale: zh-CN
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: CNY
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: 债务滚雪球还款计算器
+    subtitle: 针对特定债务集中偿还，滚动累加还款额，极速摆脱债务负担。
+
+  debts:
+    title: 当前债务 ({count} 笔)
+    add: "+ 添加债务"
+    close_form: "✕ 关闭表单"
+    empty: "暂无债务记录。点击上方 \"+ 添加债务\" 开始规划！"
+    form:
+      name_label: 债务名称
+      name_placeholder: "例如：信用卡"
+      balance_label: 待还本金
+      rate_label: 年利率
+      min_payment_label: 最低还款额
+      cancel: 取消
+      save: 保存债务
+      error_required: 请填写所有必填项。
+      error_balance: 待还本金必须为正数。
+      error_rate: 年利率必须大于或等于 0。
+      error_min_pay: 最低还款额必须为正数。
+    item:
+      rate: "利率: {rate}%"
+      min_pay: "最低还款: {amount, currency}"
+      remove_aria: "删除 {name}"
+
+  controls:
+    extra_payment_title: 每月额外还款预算
+    extra_payment_sub: 每月固定追加的滚雪球还款金额
+    nudge_boost: "每月增加 {bump, currency} 还款，可额外节省 {interest, currency} 利息{soonerText}。"
+    nudge_sooner: "（提前 {months} 个月还清）"
+    nudge_button: "+{bump, currency}"
+    strategy_title: 还款策略
+    switch_strategy: "⇄ 切换策略"
+    close_comparison: "✕ 关闭"
+
+  comparison:
+    title: 对比所有还款策略
+    intro: "选择下方不同策略，模拟查看其对整体还款计划的影响："
+    active_badge: 当前使用
+    who_benefits: "适合人群："
+    payoff_time_label: 还清时间
+    payoff_time_val: "{months} 个月"
+    payoff_time_saved: "-{months} 个月"
+    interest_saved_label: 节省利息
+    total_interest_sub: "总利息 {amount, currency}"
+    btn_active: "✓ 当前策略"
+    btn_select: 选择此策略
+
+  results:
+    payoff_date_title: 预计还清日期
+    total_months: "共需 {months} 个月"
+    months_saved: "提前 {months} 个月"
+    interest_saved_title: 节省利息
+    total_interest_paid: "共支付利息 {amount, currency}"
+
+  sequence:
+    title: 还款顺序与资金滚动明细 ({strategyName})
+    intro: "按照此步骤逐步清偿。每当还清一笔债务，其原本的还款额度将全部滚动追加到下一笔目标债务中。"
+    balance: "本金: {balance, currency}"
+    rate: "利率: {rate}%"
+    base_min: "基础最低: {amount, currency}/月"
+    estimated_payoff_label: 预计还清
+    month_sub: "第 {month} 个月"
+    snowball_payment_label: 滚雪球月还款额
+    snowball_per_month: "{amount, currency}/月"
+    extra_added: "+{amount, currency} 额外追加"
+    rolled_over: "+{amount, currency} 滚动结转"
+
+  schedule:
+    title: 每月还款摊销时间表 ({strategyName})
+    show_first_24: 显示前 24 个月
+    show_all: "显示全部 ({months} 个月)"
+    collapse: "收起明细 ↑"
+    show_entire: "展开全部还款明细 ({months} 个月) ↓"
+    showing_first_24: "正在显示前 24 个月（共 {total} 个月）。"
+    showing_all: "正在显示全部 {total} 个月的还款计划。"
+    col_month: 月份
+    col_total_paid: 当月总还款
+    col_interest_paid: 支付利息
+    col_remaining_balance: 剩余总本金
+
+  disclaimer:
+    text: "本工具仅供模拟和教育参考，不构成任何财务、法律或税务建议。实际还款时间与利息支出可能因金融机构计息方式和费用有所差异。请咨询专业财务顾问。"
+
+  strategies:
+    lowestBalance:
+      name: 债务滚雪球法 (Snowball)
+      tagline: 最小本金优先
+      description: "优先还清本金最少的债务，快速消除债务笔数，建立心理动量。"
+      bestFor: "最易在心理和情绪上坚持，初期能迅速看到成果，信心倍增。"
+    highestRate:
+      name: 债务雪崩法 (Avalanche)
+      tagline: 最高利率优先
+      description: "优先还清利率最高的债务，从数学上最大化减少利息总支出。"
+      bestFor: "节省最多金钱，适合注重收益与理性的借款人。"
+    balancePaymentRatio:
+      name: 现金流优化法
+      tagline: 最优本金还款比
+      description: "优先偿还本金相对较小但月供压力较大的债务，迅速释放每月现金流。"
+      bestFor: "希望快速缓解每月还款压力、改善月度现金流的人群。"
+    balanceRateRatio:
+      name: 本金与利率平衡法
+      tagline: 均衡折中策略
+      description: "综合权衡本金规模与利率高低，实现平衡偿还。"
+      bestFor: "希望兼顾还款速度与利息节省的折中选择。"
+    highestBalance:
+      name: 最大本金优先
+      tagline: 最大本金先行
+      description: "首先攻克最大的一笔债务，提前消除最沉重的本金负担。"
+      bestFor: "希望优先解决最大心理包袱的借款人。"
+    lowestRate:
+      name: 最低利率优先
+      tagline: 低利率先行
+      description: "先偿还低利率债务，再依次偿还高利率债务。"
+      bestFor: "具有特定税务规划或利率安排需求的情况。"
+    minimumPayment:
+      name: 仅按最低还款
+      tagline: 无额外追加
+      description: "模拟仅支付各项债务的最低还款额且不进行资金滚动的基准情况。"
+      bestFor: "作为基准对比，评估各种加速策略的节省效果。"

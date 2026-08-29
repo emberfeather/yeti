@@ -1,0 +1,139 @@
+config:
+  locale: it-IT
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: EUR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Calcolatore Palla di Neve per Debiti
+    subtitle: Accelera l'estinzione dei tuoi debiti concentrandoti sui singoli saldi e reinvestendo i pagamenti.
+
+  debts:
+    title: Debiti ({count})
+    add: "+ Aggiungi un Debito"
+    close_form: "✕ Chiudi Modulo"
+    empty: "Nessun debito aggiunto. Clicca su \"+ Aggiungi un Debito\" per iniziare!"
+    form:
+      name_label: Nome del Debito
+      name_placeholder: "es. Carta di Credito"
+      balance_label: Saldo
+      rate_label: Tasso di Interesse
+      min_payment_label: Rata Minima
+      cancel: Annulla
+      save: Salva Debito
+      error_required: Compila tutti i campi obbligatori.
+      error_balance: Il saldo deve essere un valore positivo.
+      error_rate: Il tasso di interesse deve essere maggiore o uguale a 0.
+      error_min_pay: La rata minima deve essere positiva.
+    item:
+      rate: "Tasso: {rate}%"
+      min_pay: "Rata Min: {amount, currency}"
+      remove_aria: "Rimuovi {name}"
+
+  controls:
+    extra_payment_title: Rata Mensile Aggiuntiva
+    extra_payment_sub: Quota extra reinvestita ogni mese
+    nudge_boost: "Risparmia {interest, currency} di interessi aggiuntivi aumentando la rata di {bump, currency}{soonerText}."
+    nudge_sooner: " (e finisci {months} mesi prima)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Strategia di Rimborso
+    switch_strategy: "⇄ Cambia Strategia"
+    close_comparison: "✕ Chiudi"
+
+  comparison:
+    title: Confronta Tutte le Strategie
+    intro: "Seleziona una strategia per simulare l'impatto sul tuo piano di ammortamento:"
+    active_badge: Attiva
+    who_benefits: "A chi si rivolge:"
+    payoff_time_label: Tempo di Estinzione
+    payoff_time_val: "{months} mesi"
+    payoff_time_saved: "-{months} mesi"
+    interest_saved_label: Interessi Risparmiati
+    total_interest_sub: "{amount, currency} di interessi totali"
+    btn_active: "✓ Strategia Attiva"
+    btn_select: Seleziona Strategia
+
+  results:
+    payoff_date_title: Data di Estinzione
+    total_months: "{months} mesi totali"
+    months_saved: "-{months} mesi"
+    interest_saved_title: Interessi Risparmiati
+    total_interest_paid: "{amount, currency} di interessi totali pagati"
+
+  sequence:
+    title: Sequenza di Rimborso e Reinvestimento ({strategyName})
+    intro: "Segui questa sequenza passo dopo passo. Una volta estinto un debito, l'intero importo della sua rata si trasferisce sul successivo."
+    balance: "Saldo: {balance, currency}"
+    rate: "Tasso: {rate}%"
+    base_min: "Rata Base: {amount, currency}/mese"
+    estimated_payoff_label: Estinzione Stimata
+    month_sub: "Mese {month}"
+    snowball_payment_label: Rata Cumulata
+    snowball_per_month: "{amount, currency}/mese"
+    extra_added: "+{amount, currency} extra aggiunto"
+    rolled_over: "+{amount, currency} reinvestito"
+
+  schedule:
+    title: Piano di Ammortamento Mensile ({strategyName})
+    show_first_24: Mostra Primi 24 Mesi
+    show_all: "Mostra Tutto ({months} Mesi)"
+    collapse: "Riduci Tabella ↑"
+    show_entire: "Mostra Piano Completo ({months} mesi) ↓"
+    showing_first_24: "Visualizzati i primi 24 di {total} mesi."
+    showing_all: "Visualizzati tutti i {total} mesi del piano."
+    col_month: Mese
+    col_total_paid: Totale Pagato
+    col_interest_paid: Interessi Pagati
+    col_remaining_balance: Saldo Residuo
+
+  disclaimer:
+    text: "Questo strumento è progettato esclusivamente per scopi illustrativi ed educativi e non costituisce consulenza finanziaria, legale, fiscale o di investimento. I tempi effettivi e gli interessi possono variare in base ai calcoli dei creditori e alle commissioni. Consulta un consulente finanziario abilitato."
+
+  strategies:
+    lowestBalance:
+      name: Palla di Neve (Snowball)
+      tagline: Saldo più basso prima
+      description: "Estinguendo prima i debiti con il saldo più basso, aumenti rapidamente il tuo slancio."
+      bestFor: "Più facile emotivamente grazie alle rapide vittorie iniziali che mantengono alta la motivazione."
+    highestRate:
+      name: Valanga di Debiti (Avalanche)
+      tagline: Tasso più alto prima
+      description: "Pagando prima i debiti con il tasso di interesse più alto, paghi meno interessi in totale."
+      bestFor: "Massimizza il risparmio economico complessivo."
+    balancePaymentRatio:
+      name: Ottimizzatore di Flusso
+      tagline: Miglior rapporto saldo/rata
+      description: "Punta ai debiti che liberano il maggior importo di rata minima in relazione al loro saldo."
+      bestFor: "Liberare rapidamente liquidità mensile e ridurre lo stress finanziario."
+    balanceRateRatio:
+      name: Bilanciamento Saldo/Tasso
+      tagline: Approccio bilanciato
+      description: "Una metodologia ibrida che bilancia l'entità del saldo con l'onerosità del tasso di interesse."
+      bestFor: "Un compromesso equilibrato tra rapidità di estinzione e risparmio di interessi."
+    highestBalance:
+      name: Saldo Più Alto Prima
+      tagline: Debiti più grandi prima
+      description: "Affronta subito il debito più grande per eliminare la quota capitale più pesante."
+      bestFor: "Chi desidera superare subito l'ostacolo debitorio più impegnativo."
+    lowestRate:
+      name: Tasso Più Basso Prima
+      tagline: Tasso più basso prima
+      description: "Si concentra sui debiti a tasso più basso prima di passare a quelli più onerosi."
+      bestFor: "Esigenze specifiche di pianificazione fiscale o creditizia."
+    minimumPayment:
+      name: Solo Rate Minime
+      tagline: Nessun budget extra
+      description: "Simula il pagamento esclusivo delle rate minime senza reinvestire le rate dei debiti estinti."
+      bestFor: "Valore di riferimento per valutare i tuoi risparmi effettivi."

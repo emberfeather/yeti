@@ -1,0 +1,139 @@
+config:
+  locale: fr-FR
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: EUR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Calculateur Boule de Neige de Dettes
+    subtitle: Accélérez le remboursement de vos dettes en ciblant des soldes spécifiques et en réinvestissant les paiements.
+
+  debts:
+    title: Dettes ({count})
+    add: "+ Ajouter une Dette"
+    close_form: "✕ Fermer le Formulaire"
+    empty: "Aucune dette ajoutée pour le moment. Cliquez sur \"+ Ajouter une Dette\" ci-dessus pour commencer !"
+    form:
+      name_label: Nom de la Dette
+      name_placeholder: "ex. Carte de Crédit"
+      balance_label: Solde
+      rate_label: Taux d'intérêt
+      min_payment_label: Paiement Minimum
+      cancel: Annuler
+      save: Enregistrer la Dette
+      error_required: Veuillez remplir tous les champs.
+      error_balance: Le solde doit être un nombre positif.
+      error_rate: Le taux d'intérêt doit être supérieur ou égal à 0.
+      error_min_pay: Le paiement minimum doit être un nombre positif.
+    item:
+      rate: "Taux : {rate}%"
+      min_pay: "Paiement Min : {amount, currency}"
+      remove_aria: "Supprimer {name}"
+
+  controls:
+    extra_payment_title: Paiement Mensuel Supplémentaire
+    extra_payment_sub: Montant supplémentaire réinvesti chaque mois
+    nudge_boost: "Économisez {interest, currency} d'intérêts en augmentant le paiement de {bump, currency}{soonerText}."
+    nudge_sooner: " (et terminez {months} mois plus tôt)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Stratégie de Remboursement
+    switch_strategy: "⇄ Changer de Stratégie"
+    close_comparison: "✕ Fermer"
+
+  comparison:
+    title: Comparer Toutes les Stratégies
+    intro: "Sélectionnez une stratégie ci-dessous pour simuler son impact sur votre plan de remboursement :"
+    active_badge: Active
+    who_benefits: "À qui cela profite :"
+    payoff_time_label: Durée de Remboursement
+    payoff_time_val: "{months} mois"
+    payoff_time_saved: "-{months} mois"
+    interest_saved_label: Intérêts Économisés
+    total_interest_sub: "{amount, currency} d'intérêts totaux"
+    btn_active: "✓ Stratégie Active"
+    btn_select: Sélectionner la Stratégie
+
+  results:
+    payoff_date_title: Date de Remboursement Total
+    total_months: "{months} mois au total"
+    months_saved: "-{months} mois"
+    interest_saved_title: Intérêts Économisés
+    total_interest_paid: "{amount, currency} d'intérêts totaux payés"
+
+  sequence:
+    title: Séquence de Paiement et Report ({strategyName})
+    intro: "Suivez cette séquence étape par étape. Lorsqu'une dette est remboursée, la totalité de son paiement mensuel est reportée sur la suivante."
+    balance: "Solde : {balance, currency}"
+    rate: "Taux : {rate}%"
+    base_min: "Min de Base : {amount, currency}/mois"
+    estimated_payoff_label: Remboursement Estimé
+    month_sub: "Mois {month}"
+    snowball_payment_label: Paiement Cumulé
+    snowball_per_month: "{amount, currency}/mois"
+    extra_added: "+{amount, currency} supplémentaire ajouté"
+    rolled_over: "+{amount, currency} reporté"
+
+  schedule:
+    title: Échéancier de Remboursement Mensuel ({strategyName})
+    show_first_24: Afficher les 24 Premiers Mois
+    show_all: "Tout Afficher ({months} Mois)"
+    collapse: "Réduire le Tableau ↑"
+    show_entire: "Afficher l'Échéancier Complet ({months} mois) ↓"
+    showing_first_24: "Affichage des 24 premiers mois sur {total}."
+    showing_all: "Affichage des {total} mois de l'échéancier."
+    col_month: Mois
+    col_total_paid: Total Payé
+    col_interest_paid: Intérêts Payés
+    col_remaining_balance: Solde Restant
+
+  disclaimer:
+    text: "Cet outil est conçu uniquement à des fins d'illustration et éducatives et ne constitue pas un conseil financier, juridique, d'investissement ou fiscal. Les délais réels de remboursement et les intérêts accumulés peuvent varier selon les méthodes de calcul des créanciers, la capitalisation et les frais. Consultez un conseiller financier agréé."
+
+  strategies:
+    lowestBalance:
+      name: Boule de Neige (Snowball)
+      tagline: Plus petit solde d'abord
+      description: "En remboursant d'abord les prêts aux soldes les plus faibles, vous augmentez rapidement votre force de frappe."
+      bestFor: "Plus facile mentalement et émotionnellement car vous construisez un élan rapide et valorisant."
+    highestRate:
+      name: Avalanche de Dettes (Avalanche)
+      tagline: Plus fort taux d'intérêt d'abord
+      description: "En remboursant d'abord les prêts avec les taux d'intérêt les plus élevés, vous payez moins d'intérêts au total."
+      bestFor: "Économise le maximum d'argent, mais peut être plus exigeant mentalement au départ."
+    balancePaymentRatio:
+      name: Optimiseur de Trésorerie
+      tagline: Ratio solde/paiement le plus faible
+      description: "Cible les dettes qui libèrent le plus de trésorerie mensuelle par rapport à leur solde."
+      bestFor: "Libérer rapidement du pouvoir d'achat et réduire la charge mentale mensuelle."
+    balanceRateRatio:
+      name: Équilibre Solde / Taux
+      tagline: Approche équilibrée
+      description: "Une méthodologie hybride qui équilibre le solde restant et la sévérité du taux d'intérêt."
+      bestFor: "Un compromis équilibré entre rapidité de remboursement et économies d'intérêts."
+    highestBalance:
+      name: Plus Grand Solde d'Abord
+      tagline: Plus gros soldes en priorité
+      description: "Attaque d'abord le solde le plus important pour éliminer le fardeau principal le plus lourd."
+      bestFor: "Les emprunteurs désireux de vaincre leur dette principale en premier."
+    lowestRate:
+      name: Plus Faible Taux d'Abord
+      tagline: Plus faible taux en priorité
+      description: "Se concentre sur les dettes aux taux les plus bas avant de passer aux taux supérieurs."
+      bestFor: "Préférences spécifiques d'ordre fiscal ou de gestion de dettes."
+    minimumPayment:
+      name: Paiements Minimums Seuls
+      tagline: Aucun budget supplémentaire
+      description: "Simule le paiement strict des mensualités minimales sans aucun report de paiements."
+      bestFor: "Comparaison de référence pour mesurer vos gains."

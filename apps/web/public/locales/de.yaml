@@ -1,0 +1,139 @@
+config:
+  locale: de-DE
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: EUR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Schulden-Schneeball-Rechner
+    subtitle: Beschleunigen Sie Ihre Entschuldung durch gezielte Tilgung und fortlaufende Umschichtung freier Mittel.
+
+  debts:
+    title: Schulden ({count})
+    add: "+ Schuld Hinzufügen"
+    close_form: "✕ Formular Schließen"
+    empty: "Noch keine Schulden eingetragen. Klicken Sie oben auf \"+ Schuld Hinzufügen\", um zu beginnen!"
+    form:
+      name_label: Name der Schuld
+      name_placeholder: "z.B. Kreditkarte"
+      balance_label: Restbetrag
+      rate_label: Zinssatz
+      min_payment_label: Mindestrate
+      cancel: Abbrechen
+      save: Schuld Speichern
+      error_required: Bitte füllen Sie alle Felder aus.
+      error_balance: Der Restbetrag muss eine positive Zahl sein.
+      error_rate: Der Zinssatz muss 0 oder höher sein.
+      error_min_pay: Die Mindestrate muss positiv sein.
+    item:
+      rate: "Zins: {rate}%"
+      min_pay: "Mindestrate: {amount, currency}"
+      remove_aria: "{name} entfernen"
+
+  controls:
+    extra_payment_title: Zusätzliche Monatliche Tilgung
+    extra_payment_sub: Jeden Monat zusätzlich eingesetztes Budget
+    nudge_boost: "Sparen Sie zusätzlich {interest, currency} an Zinsen durch eine Erhöhung um {bump, currency}{soonerText}."
+    nudge_sooner: " (und sind {months} Monate früher schuldenfrei)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Tilgungsstrategie
+    switch_strategy: "⇄ Strategie Wechseln"
+    close_comparison: "✕ Schließen"
+
+  comparison:
+    title: Alle Tilgungsstrategien Vergleichen
+    intro: "Wählen Sie eine Strategie, um deren Einfluss auf Ihren Tilgungsplan zu simulieren:"
+    active_badge: Aktiv
+    who_benefits: "Für wen ideal:"
+    payoff_time_label: Tilgungsdauer
+    payoff_time_val: "{months} Monate"
+    payoff_time_saved: "-{months} Monate"
+    interest_saved_label: Zinsersparnis
+    total_interest_sub: "{amount, currency} Gesamtzinsen"
+    btn_active: "✓ Aktive Strategie"
+    btn_select: Strategie Wählen
+
+  results:
+    payoff_date_title: Schuldenfrei Am
+    total_months: "{months} Monate insgesamt"
+    months_saved: "-{months} Monate"
+    interest_saved_title: Zinsersparnis
+    total_interest_paid: "{amount, currency} gezahlte Gesamtzinsen"
+
+  sequence:
+    title: Tilgungsreihenfolge & Schneeball ({strategyName})
+    intro: "Befolgen Sie diese Schritt-für-Schritt-Reihenfolge. Nach jeder getilgten Schuld fließt deren Rate vollständig in das nächste Ziel."
+    balance: "Restschuld: {balance, currency}"
+    rate: "Zins: {rate}%"
+    base_min: "Basis-Rate: {amount, currency}/Monat"
+    estimated_payoff_label: Voraussichtlich Getilgt
+    month_sub: "Monat {month}"
+    snowball_payment_label: Schneeball-Rate
+    snowball_per_month: "{amount, currency}/Monat"
+    extra_added: "+{amount, currency} extra hinzugefügt"
+    rolled_over: "+{amount, currency} weitergeleitet"
+
+  schedule:
+    title: Monatlicher Tilgungsplan ({strategyName})
+    show_first_24: Erste 24 Monate Anzeigen
+    show_all: "Alle ({months} Monate) Anzeigen"
+    collapse: "Plan Einklappen ↑"
+    show_entire: "Gesamten Tilgungsplan ({months} Monate) Anzeigen ↓"
+    showing_first_24: "Zeige erste 24 von {total} Monaten."
+    showing_all: "Zeige alle {total} Monate des Tilgungsplans."
+    col_month: Monat
+    col_total_paid: Gezahlt Gesamt
+    col_interest_paid: Gezahlte Zinsen
+    col_remaining_balance: Restschuld
+
+  disclaimer:
+    text: "Dieses Tool dient ausschließlich Informations- und Bildungszwecken und stellt keine Finanz-, Rechts-, Steuer- oder Anlageberatung dar. Tatsächliche Tilgungszeiten und Zinsen können je nach Zinsberechnungsmethode, Gebühren und Konditionsänderungen variieren. Konsultieren Sie einen qualifizierten Finanzberater."
+
+  strategies:
+    lowestBalance:
+      name: Schulden-Schneeball (Snowball)
+      tagline: Kleinste Restschuld zuerst
+      description: "Durch die Tilgung der kleinsten Kredite zuerst bauen Sie schnell maximale Motivation und Dynamik auf."
+      bestFor: "Mental und emotional am einfachsten, da schnelle Erfolgserlebnisse die Motivation hochhalten."
+    highestRate:
+      name: Schulden-Lawine (Avalanche)
+      tagline: Höchster Zinssatz zuerst
+      description: "Durch die vorrangige Tilgung der Kredite mit den höchsten Zinsen minimieren Sie die Gesamtzinskosten."
+      bestFor: "Spart mathematisch das meiste Geld, erfordert jedoch anfangs mehr Geduld."
+    balancePaymentRatio:
+      name: Liquiditäts-Optimierer
+      tagline: Niedrigstes Saldo-zu-Raten-Verhältnis
+      description: "Zielt auf Schulden ab, die im Verhältnis zur Kredithöhe den größten monatlichen Mindestbetrag freisetzen."
+      bestFor: "Schnelle Entlastung des monatlichen Budgets und Schaffung finanzieller Flexibilität."
+    balanceRateRatio:
+      name: Saldo-Zins-Balance
+      tagline: Ausgewogener Ansatz
+      description: "Ein ausgewogener Hybridansatz zwischen Kredithöhe und Zinsschwere."
+      bestFor: "Ein gesunder Mittelweg zwischen Tilgungsgeschwindigkeit und Zinsersparnis."
+    highestBalance:
+      name: Höchste Restschuld Zuerst
+      tagline: Größte Kredite zuerst
+      description: "Greift die größte Schuld zuerst an, um den größten Hauptposten frühzeitig zu eliminieren."
+      bestFor: "Kreditnehmer, die ihre größte finanzielle Hürde direkt als Erstes überwinden wollen."
+    lowestRate:
+      name: Niedrigster Zins Zuerst
+      tagline: Niedrigster Zinssatz zuerst
+      description: "Fokussiert sich auf die Kredite mit den niedrigsten Zinsen vor den höher verzinsten Verbindlichkeiten."
+      bestFor: "Spezifische steuerliche oder strategische Kreditprioritäten."
+    minimumPayment:
+      name: Nur Mindestraten
+      tagline: Keine zusätzlichen Tilgungen
+      description: "Simuliert die Rückzahlung mit ausschließlichen Mindestraten ohne Weiterleitung getilgter Raten."
+      bestFor: "Vergleichsmaßstab zur Ermittlung Ihrer Ersparnisse."

@@ -1,0 +1,139 @@
+config:
+  locale: ar-SA
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: SAR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: حاسبة كرة الثلج لسداد الديون
+    subtitle: سدد ديونك بسرعة أكبر من خلال استهداف أرصدة محددة وترحيل الدفعات الشهرية.
+
+  debts:
+    title: الديون ({count})
+    add: "+ إضافة دين"
+    close_form: "✕ إغلاق النموذج"
+    empty: "لم تتم إضافة أي ديون بعد. انقر فوق \"+ إضافة دين\" أعلاه للبدء!"
+    form:
+      name_label: اسم الدين
+      name_placeholder: "مثال: بطاقة ائتمانية"
+      balance_label: الرصيد المتبقي
+      rate_label: نسبة الفائدة
+      min_payment_label: الحد الأدنى للسداد
+      cancel: إلغاء
+      save: حفظ الدين
+      error_required: يرجى ملء جميع الحقول.
+      error_balance: يجب أن يكون الرصيد رقماً موجباً.
+      error_rate: يجب أن تكون نسبة الفائدة 0 أو أكثر.
+      error_min_pay: يجب أن يكون الحد الأدنى رقماً موجباً.
+    item:
+      rate: "الفائدة: {rate}%"
+      min_pay: "الحد الأدنى: {amount, currency}"
+      remove_aria: "حذف {name}"
+
+  controls:
+    extra_payment_title: دفعة إضافية شهرية
+    extra_payment_sub: ميزانية كرة الثلج المضافة شهرياً
+    nudge_boost: "وفر {interest, currency} إضافية من الفوائد بزيادة الدفعة بمقدار {bump, currency}{soonerText}."
+    nudge_sooner: " (وانتهِ قبل {months} شهر)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: استراتيجية السداد
+    switch_strategy: "⇄ تغيير الاستراتيجية"
+    close_comparison: "✕ إغلاق"
+
+  comparison:
+    title: مقارنة جميع استراتيجيات السداد
+    intro: "اختر استراتيجية أدناه لمحاكاة تأثيرها على خطة السداد الخاصة بك:"
+    active_badge: نشط
+    who_benefits: "الفئة المستفيدة:"
+    payoff_time_label: مدة السداد
+    payoff_time_val: "{months} شهر"
+    payoff_time_saved: "-{months} شهر"
+    interest_saved_label: الفائدة الموفرة
+    total_interest_sub: "{amount, currency} إجمالي الفوائد"
+    btn_active: "✓ الاستراتيجية الحالية"
+    btn_select: اختيار الاستراتيجية
+
+  results:
+    payoff_date_title: تاريخ السداد الكامل
+    total_months: "إجمالي {months} شهر"
+    months_saved: "-{months} شهر توفير"
+    interest_saved_title: الفائدة الموفرة
+    total_interest_paid: "{amount, currency} إجمالي الفوائد المدفوعة"
+
+  sequence:
+    title: تسلسل السداد والترحيل ({strategyName})
+    intro: "اتبع هذا التسلسل خطوة بخطوة. بمجرد سداد أي دين، يتم ترحيل كامل دفعته الشهرية إلى الهدف التالي."
+    balance: "الرصيد: {balance, currency}"
+    rate: "الفائدة: {rate}%"
+    base_min: "الحد الأدنى: {amount, currency}/شهر"
+    estimated_payoff_label: السداد المتوقع
+    month_sub: "الشهر {month}"
+    snowball_payment_label: دفعة كرة الثلج
+    snowball_per_month: "{amount, currency}/شهر"
+    extra_added: "+{amount, currency} إضافة إضافية"
+    rolled_over: "+{amount, currency} مرحل"
+
+  schedule:
+    title: جدول السداد الشهري ({strategyName})
+    show_first_24: عرض أول 24 شهراً
+    show_all: "عرض الكل ({months} شهر)"
+    collapse: "طي الجدول ↑"
+    show_entire: "عرض الجدول كاملاً ({months} شهر) ↓"
+    showing_first_24: "عرض أول 24 من إجمالي {total} شهراً."
+    showing_all: "عرض جميع أشهر السداد البالغة {total} شهراً."
+    col_month: الشهر
+    col_total_paid: إجمالي المدفوع
+    col_interest_paid: الفائدة المدفوعة
+    col_remaining_balance: الرصيد المتبقي
+
+  disclaimer:
+    text: "هذه الأداة مصممة لأغراض توضيحية وتعليمية فقط ولا تشكل استشارة مالية أو قانونية أو ضريبية. استشر مستشاراً مالياً مؤهلاً."
+
+  strategies:
+    lowestBalance:
+      name: كرة الثلج (Snowball)
+      tagline: أقل رصيد أولاً
+      description: "سداد الديون ذات الرصيد الأقل أولاً لبناء الحافز والشعور بالإنجاز سريعاً."
+      bestFor: "الأسهل نفسياً وعاطفياً لتحقيق انتصارات سريعة ومواصلة التقدم."
+    highestRate:
+      name: الانهيار الجليدي (Avalanche)
+      tagline: أعلى فائدة أولاً
+      description: "سداد الديون ذات الفائدة الأعلى أولاً لتوفير أكبر قدر ممكن من إجمالي الفوائد."
+      bestFor: "يوفر أقصى قدر من المال لمن يفضل الخيار الرياضي الأمثل."
+    balancePaymentRatio:
+      name: تحسين التدفق النقدي
+      tagline: أفضل نسبة رصيد إلى دفعة
+      description: "يستهدف الديون التي تحرر أكبر قدر من الحد الأدنى للدفعات مقارنة بحجم رصيدها."
+      bestFor: "تحرير سيولة نقدية شهرية سريعة وتخفيف الضغط المالي."
+    balanceRateRatio:
+      name: مزيج الرصيد ونسبة الفائدة
+      tagline: نهج متوازن
+      description: "منهجية هجينة توازن بين حجم الرصيد وشدة معدل الفائدة."
+      bestFor: "حل وسط ومتوازن بين سرعة السداد وتوفير الفوائد."
+    highestBalance:
+      name: الرصيد الأعلى أولاً
+      tagline: الديون الأكبر أولاً
+      description: "مواجهة الدين الأكبر أولاً للتخلص من أثقل عبء أساسي."
+      bestFor: "لمن يرغب في التغلب على أكبر التزام مالي في البداية."
+    lowestRate:
+      name: أقل فائدة أولاً
+      tagline: أقل نسبة فائدة أولاً
+      description: "التركيز على الديون ذات الفائدة الأقل قبل الانتقال إلى الأعلى."
+      bestFor: "لتفضيلات ضريبية أو ترتيبات خاصة."
+    minimumPayment:
+      name: الدفعات الدنيا فقط
+      tagline: بدون ميزانية إضافية
+      description: "محاكاة سداد الحد الأدنى فقط بدون ترحيل الدفعات."
+      bestFor: "مقياس للمقارنة لتقييم وفوراتك."

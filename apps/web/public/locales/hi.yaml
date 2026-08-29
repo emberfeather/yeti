@@ -1,0 +1,139 @@
+config:
+  locale: hi-IN
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: INR
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: ऋण स्नोबॉल पुनर्भुगतान कैलकुलेटर
+    subtitle: विशिष्ट ऋणों को प्राथमिकता देकर और किस्तों को आगे जोड़कर अपना ऋण तेजी से चुकाएं।
+
+  debts:
+    title: सक्रिय ऋण ({count})
+    add: "+ ऋण जोड़ें"
+    close_form: "✕ फॉर्म बंद करें"
+    empty: "अभी तक कोई ऋण नहीं जोड़ा गया है। शुरू करने के लिए ऊपर \"+ ऋण जोड़ें\" पर क्लिक करें!"
+    form:
+      name_label: ऋण का नाम
+      name_placeholder: "उदा. क्रेडिट कार्ड"
+      balance_label: बकाया राशि
+      rate_label: ब्याज दर
+      min_payment_label: न्यूनतम भुगतान
+      cancel: रद्द करें
+      save: ऋण सहेजें
+      error_required: कृपया सभी फ़ील्ड भरें।
+      error_balance: बकाया राशि धनात्मक संख्या होनी चाहिए।
+      error_rate: ब्याज दर 0 या उससे अधिक होनी चाहिए।
+      error_min_pay: न्यूनतम भुगतान धनात्मक होना चाहिए।
+    item:
+      rate: "दर: {rate}%"
+      min_pay: "न्यूनतम: {amount, currency}"
+      remove_aria: "{name} हटाएं"
+
+  controls:
+    extra_payment_title: अतिरिक्त मासिक भुगतान
+    extra_payment_sub: हर महीने जोड़ा गया अतिरिक्त स्नोबॉल बजट
+    nudge_boost: "भुगतान {bump, currency} बढ़ाकर ब्याज में अतिरिक्त {interest, currency} बचाएं{soonerText}।"
+    nudge_sooner: " (और {months} महीने पहले चुकाएं)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: पुनर्भुगतान रणनीति
+    switch_strategy: "⇄ रणनीति बदलें"
+    close_comparison: "✕ बंद करें"
+
+  comparison:
+    title: सभी रणनीतियों की तुलना करें
+    intro: "अपनी पुनर्भुगतान योजना पर प्रभाव देखने के लिए नीचे एक रणनीति चुनें:"
+    active_badge: सक्रिय
+    who_benefits: "किसके लिए सर्वोत्तम:"
+    payoff_time_label: भुगतान अवधि
+    payoff_time_val: "{months} महीने"
+    payoff_time_saved: "-{months} महीने"
+    interest_saved_label: ब्याज बचत
+    total_interest_sub: "{amount, currency} कुल ब्याज"
+    btn_active: "✓ सक्रिय रणनीति"
+    btn_select: रणनीति चुनें
+
+  results:
+    payoff_date_title: पूर्ण भुगतान तिथि
+    total_months: "कुल {months} महीने"
+    months_saved: "-{months} महीने पहले"
+    interest_saved_title: ब्याज बचत
+    total_interest_paid: "{amount, currency} कुल ब्याज भुगतान"
+
+  sequence:
+    title: भुगतान क्रम और रोलओवर विवरण ({strategyName})
+    intro: "इस चरण-दर-चरण क्रम का पालन करें। एक ऋण चुकता होने पर उसका पूरा मासिक भुगतान अगले लक्ष्य में जुड़ जाता है।"
+    balance: "बकाया: {balance, currency}"
+    rate: "दर: {rate}%"
+    base_min: "मूल न्यूनतम: {amount, currency}/माह"
+    estimated_payoff_label: अनुमानित भुगतान
+    month_sub: "महीना {month}"
+    snowball_payment_label: स्नोबॉल भुगतान
+    snowball_per_month: "{amount, currency}/माह"
+    extra_added: "+{amount, currency} अतिरिक्त जोड़ा"
+    rolled_over: "+{amount, currency} रोलओवर किया"
+
+  schedule:
+    title: मासिक भुगतान अनुसूची ({strategyName})
+    show_first_24: पहले 24 महीने दिखाएं
+    show_all: "सभी ({months} महीने) दिखाएं"
+    collapse: "अनुसूची समेटें ↑"
+    show_entire: "पूरी अनुसूची ({months} महीने) दिखाएं ↓"
+    showing_first_24: "{total} में से पहले 24 महीने दिखाए जा रहे हैं।"
+    showing_all: "सभी {total} महीनों की पूरी अनुसूची दिखाई जा रही है।"
+    col_month: महीना
+    col_total_paid: कुल भुगतान
+    col_interest_paid: ब्याज भुगतान
+    col_remaining_balance: शेष बकाया
+
+  disclaimer:
+    text: "यह उपकरण केवल उदाहरण और शैक्षिक उद्देश्यों के लिए है और वित्तीय सलाह नहीं है। वास्तविक समय और ब्याज वित्तीय संस्थानों की गणना विधियों के अनुसार भिन्न हो सकते हैं।"
+
+  strategies:
+    lowestBalance:
+      name: ऋण स्नोबॉल (Snowball)
+      tagline: सबसे कम बकाया पहले
+      description: "सबसे कम बकाया वाले ऋणों को पहले चुकाकर आप तेजी से गति और प्रेरणा प्राप्त करते हैं।"
+      bestFor: "मानसिक रूप से सबसे आसान, क्योंकि शुरुआती सफलताएं प्रेरणा बनाए रखती हैं।"
+    highestRate:
+      name: ऋण हिमस्खलन (Avalanche)
+      tagline: उच्चतम ब्याज दर पहले
+      description: "उच्चतम ब्याज दर वाले ऋणों को पहले चुकाकर आप कुल ब्याज कम चुकाते हैं।"
+      bestFor: "सर्वाधिक पैसे की बचत करता है।"
+    balancePaymentRatio:
+      name: नकदी प्रवाह अनुकूलक
+      tagline: न्यूनतम बकाया/भुगतान अनुपात
+      description: "उन ऋणों को लक्षित करता है जो मासिक न्यूनतम भुगतान से तेजी से राहत दिलाते हैं।"
+      bestFor: "मासिक नकदी प्रवाह को जल्दी सुधारने के लिए।"
+    balanceRateRatio:
+      name: संतुलित अनुपात रणनीति
+      tagline: संतुलित दृष्टिकोण
+      description: "बकाया राशि और ब्याज दर की गंभीरता को संतुलित करने वाली एक हाइब्रिड विधि।"
+      bestFor: "गति और ब्याज बचत के बीच एक संतुलित समझौता।"
+    highestBalance:
+      name: सबसे बड़ा ऋण पहले
+      tagline: बड़ी राशियां पहले
+      description: "सबसे बड़े ऋण को पहले समाप्त करें।"
+      bestFor: "जो अपनी सबसे बड़ी वित्तीय बाधा को पहले जीतना चाहते हैं।"
+    lowestRate:
+      name: सबसे कम दर पहले
+      tagline: कम ब्याज दर पहले
+      description: "उच्च दरों पर जाने से पहले सबसे कम ब्याज दर वाले ऋणों पर ध्यान केंद्रित करता है।"
+      bestFor: "विशिष्ट कर या प्राथमिकता आवश्यकताओं के लिए।"
+    minimumPayment:
+      name: केवल न्यूनतम भुगतान
+      tagline: कोई अतिरिक्त बजट नहीं
+      description: "केवल न्यूनतम मासिक भुगतान करने का अनुकरण करता है।"
+      bestFor: "बचत की तुलना करने के लिए आधार रेखा।"

@@ -1,0 +1,139 @@
+config:
+  locale: sv-SE
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: SEK
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Skuldsnöboll Kalkylator
+    subtitle: Bli skuldfri snabbare genom att fokusera på utvalda skulder och rulla över inbetalningar.
+
+  debts:
+    title: Skulder ({count})
+    add: "+ Lägg till Skuld"
+    close_form: "✕ Stäng Formulär"
+    empty: "Inga skulder tillagda än. Klicka på \"+ Lägg till Skuld\" ovan för att komma igång!"
+    form:
+      name_label: Skuldens Namn
+      name_placeholder: "t.ex. Kreditkort"
+      balance_label: Skuldbelopp
+      rate_label: Ränta
+      min_payment_label: Lägsta Månadsbetalning
+      cancel: Avbryt
+      save: Spara Skuld
+      error_required: Vänligen fyll i alla obligatoriska fält.
+      error_balance: Skuldbeloppet måste vara ett positivt tal.
+      error_rate: Räntan måste vara 0 eller högre.
+      error_min_pay: Lägsta månadsbetalning måste vara positiv.
+    item:
+      rate: "Ränta: {rate}%"
+      min_pay: "Minbetalning: {amount, currency}"
+      remove_aria: "Ta bort {name}"
+
+  controls:
+    extra_payment_title: Extra Månadsbetalning
+    extra_payment_sub: Extra snöbollsbudget som läggs till varje månad
+    nudge_boost: "Spara {interest, currency} extra i ränta genom att öka betalningen med {bump, currency}{soonerText}."
+    nudge_sooner: " (och bli klar {months} månader tidigare)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Återbetalningsstrategi
+    switch_strategy: "⇄ Byt Strategi"
+    close_comparison: "✕ Stäng"
+
+  comparison:
+    title: Jämför Alla Strategier
+    intro: "Välj en strategi nedan för att simulera effekten på din återbetalningsplan:"
+    active_badge: Aktiv
+    who_benefits: "Passar bäst för:"
+    payoff_time_label: Återbetalningstid
+    payoff_time_val: "{months} mån"
+    payoff_time_saved: "-{months} mån"
+    interest_saved_label: Sparad Ränta
+    total_interest_sub: "{amount, currency} total ränta"
+    btn_active: "✓ Aktiv Strategi"
+    btn_select: Välj Strategi
+
+  results:
+    payoff_date_title: Skuldfri Datum
+    total_months: "{months} månader totalt"
+    months_saved: "-{months} månader"
+    interest_saved_title: Sparad Ränta
+    total_interest_paid: "{amount, currency} total ränta betald"
+
+  sequence:
+    title: Återbetalningsordning & Snöboll ({strategyName})
+    intro: "Följ denna steg-för-steg-ordning. När en skuld är helt betald rullas hela dess månadsbelopp över till nästa mål."
+    balance: "Saldo: {balance, currency}"
+    rate: "Ränta: {rate}%"
+    base_min: "Bas Min: {amount, currency}/mån"
+    estimated_payoff_label: Beräknat Klar
+    month_sub: "Månad {month}"
+    snowball_payment_label: Snöbollsbetalning
+    snowball_per_month: "{amount, currency}/mån"
+    extra_added: "+{amount, currency} extra tillagt"
+    rolled_over: "+{amount, currency} överrullat"
+
+  schedule:
+    title: Månatlig Amorteringsplan ({strategyName})
+    show_first_24: Visa Första 24 Månaderna
+    show_all: "Visa Alla ({months} Månader)"
+    collapse: "Fäll ihop Tabell ↑"
+    show_entire: "Visa Hela Planen ({months} månader) ↓"
+    showing_first_24: "Visar de första 24 av totalt {total} månader."
+    showing_all: "Visar alla {total} månader av planen."
+    col_month: Månad
+    col_total_paid: Totalt Betalt
+    col_interest_paid: Ränta Betald
+    col_remaining_balance: Återstående Skuld
+
+  disclaimer:
+    text: "Detta verktyg är endast avsett för illustrativa och utbildande syften och utgör inte finansiell rådgivning. Rådfråga en certifierad finansiell rådgivare."
+
+  strategies:
+    lowestBalance:
+      name: Skuldsnöboll (Snowball)
+      tagline: Lägsta saldo först
+      description: "Genom att betala av de minsta lånen först bygger du snabbt upp fart och motivation."
+      bestFor: "Enklast mentalt och känslomässigt tack vare snabba framsteg."
+    highestRate:
+      name: Skuldavalanche (Avalanche)
+      tagline: Högsta ränta först
+      description: "Genom att prioritera skulder med högst ränta minimerar du den totala räntekostnaden."
+      bestFor: "Sparar mest pengar för den matematiskt fokuserade."
+    balancePaymentRatio:
+      name: Kassaflödesoptimerare
+      tagline: Lägst saldo-till-betalningskvot
+      description: "Fokuserar på skulder som frigör mest månatligt kassaflöde i förhållande till sitt belopp."
+      bestFor: "Snabbare skapa luft och utrymme i månadsekonomin."
+    balanceRateRatio:
+      name: Saldo- och Räntebalans
+      tagline: Balanserat tillvägagångssätt
+      description: "En hybridmetod som väger samman skuldbelopp och räntekostnad."
+      bestFor: "En sund kompromiss mellan återbetalningstakt och räntebesparing."
+    highestBalance:
+      name: Högsta Saldo Först
+      tagline: Största skulderna först
+      description: "Angrip den största skulden först för att eliminera den tyngsta grundbördan."
+      bestFor: "Den som vill övervinna sitt största hinder direkt."
+    lowestRate:
+      name: Lägsta Ränta Först
+      tagline: Lägst ränta först
+      description: "Fokuserar på lån med lägst ränta innan man går vidare till högre."
+      bestFor: "Specifika skatte- eller avbetalningspreferenser."
+    minimumPayment:
+      name: Endast Minsta Betalningar
+      tagline: Ingen extra snöbollsbudget
+      description: "Simulerar återbetalning med enbart minimibelopp utan snöbollseffekt."
+      bestFor: "Jämförelsebas för att utvärdera dina besparingar."

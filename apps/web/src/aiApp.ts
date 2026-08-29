@@ -38,6 +38,32 @@ const INITIAL_DEBTS: Debt[] = [
   },
 ];
 
+interface LocaleOption {
+  code: string;
+  name: string;
+  nativeName: string;
+  flag: string;
+}
+
+const SUPPORTED_LOCALES: LocaleOption[] = [
+  { code: "en", name: "English (US)", nativeName: "English (US)", flag: "🇺🇸" },
+  { code: "en-GB", name: "English (UK)", nativeName: "English (UK)", flag: "🇬🇧" },
+  { code: "es", name: "Spanish", nativeName: "Español", flag: "🇪🇸" },
+  { code: "fr", name: "French", nativeName: "Français", flag: "🇫🇷" },
+  { code: "de", name: "German", nativeName: "Deutsch", flag: "🇩🇪" },
+  { code: "it", name: "Italian", nativeName: "Italiano", flag: "🇮🇹" },
+  { code: "pt-BR", name: "Portuguese (Brazil)", nativeName: "Português (Brasil)", flag: "🇧🇷" },
+  { code: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵" },
+  { code: "zh", name: "Chinese (Simplified)", nativeName: "简体中文", flag: "🇨🇳" },
+  { code: "zh-TW", name: "Chinese (Traditional)", nativeName: "繁體中文", flag: "🇹🇼" },
+  { code: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷" },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳" },
+  { code: "ar", name: "Arabic", nativeName: "العربية", flag: "🇸🇦" },
+  { code: "nl", name: "Dutch", nativeName: "Nederlands", flag: "🇳🇱" },
+  { code: "sv", name: "Swedish", nativeName: "Svenska", flag: "🇸🇪" },
+  { code: "pl", name: "Polish", nativeName: "Polski", flag: "🇵🇱" },
+];
+
 @customElement("yeti-app-ai")
 export class YetiAppAi extends LitElement {
   @consume({ context: localizationContext, subscribe: true })
@@ -85,40 +111,6 @@ export class YetiAppAi extends LitElement {
         background: linear-gradient(135deg, var(--text-h), var(--accent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-      }
-
-      .locale-switcher {
-        display: inline-flex;
-        align-items: center;
-        background: rgba(244, 243, 236, 0.4);
-        border: 1px solid var(--border);
-        border-radius: 100px;
-        padding: 2px;
-        margin-top: 12px;
-        gap: 2px;
-      }
-
-      .locale-btn {
-        background: transparent;
-        border: none;
-        padding: 4px 12px;
-        border-radius: 100px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.2s;
-        font-family: inherit;
-      }
-
-      .locale-btn.active {
-        background: var(--accent);
-        color: #ffffff;
-      }
-
-      .locale-btn:hover:not(.active) {
-        color: var(--text-h);
-        background: rgba(0, 0, 0, 0.05);
       }
 
       /* Card Styles */
@@ -952,11 +944,80 @@ export class YetiAppAi extends LitElement {
         font-style: normal;
       }
 
+      /* Locale Selector Bar at Bottom */
+      .locale-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+
+      .locale-selector-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(244, 243, 236, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 8px 16px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .locale-selector-container:hover,
+      .locale-selector-container:focus-within {
+        border-color: var(--accent);
+        background: var(--bg);
+        box-shadow: 0 0 0 3px var(--accent-bg);
+      }
+
+      .locale-globe-icon {
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      .locale-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .select-wrapper {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .locale-select {
+        appearance: none;
+        -webkit-appearance: none;
+        background: transparent;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-h);
+        padding-right: 22px;
+        cursor: pointer;
+        outline: none;
+        font-family: inherit;
+      }
+
+      .select-arrow {
+        position: absolute;
+        right: 2px;
+        font-size: 11px;
+        color: var(--text);
+        pointer-events: none;
+      }
+
       /* App Disclaimer Footer */
       .app-disclaimer {
-        margin-top: 36px;
-        padding-top: 20px;
-        border-top: 1px solid var(--border);
+        margin-top: 24px;
+        padding-top: 0;
         text-align: center;
       }
 
@@ -1127,7 +1188,14 @@ export class YetiAppAi extends LitElement {
       this.currentStrategyKey = comparisonItems[0].key;
     }
 
-    const activeLocale = this.localization?.locale?.startsWith("es") ? "es" : "en";
+    const currentLoc = this.localization?.locale || "en";
+    const matchedLoc = SUPPORTED_LOCALES.find(
+      (l) =>
+        currentLoc.toLowerCase() === l.code.toLowerCase() ||
+        currentLoc.toLowerCase().startsWith(l.code.toLowerCase() + "-") ||
+        l.code.toLowerCase().startsWith(currentLoc.toLowerCase()),
+    );
+    const activeLocaleCode = matchedLoc ? matchedLoc.code : "en";
     const soonerText =
       extraMonthsSaved > 0
         ? this.t("controls.nudge_sooner", { months: extraMonthsSaved })
@@ -1135,29 +1203,15 @@ export class YetiAppAi extends LitElement {
 
     return html`
       <div class="app-container">
-        <!-- 1. Header with Language Switcher -->
+        <!-- 1. Header (Clean without top switcher) -->
         <header class="app-header">
           <h1>${this.t("app.title")}</h1>
-          <div class="locale-switcher">
-            <button
-              class="locale-btn ${activeLocale === "en" ? "active" : ""}"
-              @click="${() => this.switchLocale("en")}"
-            >
-              EN
-            </button>
-            <button
-              class="locale-btn ${activeLocale === "es" ? "active" : ""}"
-              @click="${() => this.switchLocale("es")}"
-            >
-              ES
-            </button>
-          </div>
         </header>
 
         <!-- 2. Active Debts Section with Embedded Add Debt Form -->
         <section class="card list-card">
           <div class="card-header-actions">
-            <h2>${this.t("debts.title", { count: this.debts.length })}</h2>
+            <h2>${this.t("debts.title", { count: String(this.debts.length) })}</h2>
             <button
               class="btn btn-action-pill"
               @click="${() => {
@@ -1453,13 +1507,13 @@ export class YetiAppAi extends LitElement {
                               >
                               <span class="stat-val"
                                 >${this.t("comparison.payoff_time_val", {
-                                  months: item.result.totalMonthsToPayoff,
+                                  months: String(item.result.totalMonthsToPayoff),
                                 })}</span
                               >
                               ${item.timeSaved > 0
                                 ? html`<span class="stat-sub"
                                     >${this.t("comparison.payoff_time_saved", {
-                                      months: item.timeSaved,
+                                      months: String(item.timeSaved),
                                     })}</span
                                   >`
                                 : ""}
@@ -1509,11 +1563,13 @@ export class YetiAppAi extends LitElement {
                   <div class="metric-value">${activeResult.payoffDate}</div>
                   <p class="metric-sub">
                     ${this.t("results.total_months", {
-                      months: activeResult.totalMonthsToPayoff,
+                      months: String(activeResult.totalMonthsToPayoff),
                     })}
                     ${timeSaved > 0
                       ? html`<span class="saving-pill"
-                          >${this.t("results.months_saved", { months: timeSaved })}</span
+                          >${this.t("results.months_saved", {
+                            months: String(timeSaved),
+                          })}</span
                         >`
                       : ""}
                   </p>
@@ -1605,7 +1661,9 @@ export class YetiAppAi extends LitElement {
                             >
                             <span class="step-stat-val">${step.payoffDate}</span>
                             <span class="step-stat-sub"
-                              >${this.t("sequence.month_sub", { month: step.payoffMonth })}</span
+                              >${this.t("sequence.month_sub", {
+                                month: String(step.payoffMonth),
+                              })}</span
                             >
                           </div>
 
@@ -1651,7 +1709,7 @@ export class YetiAppAi extends LitElement {
                         ${this.showFullSchedule
                           ? this.t("schedule.show_first_24")
                           : this.t("schedule.show_all", {
-                              months: activeResult.timeline.length,
+                              months: String(activeResult.timeline.length),
                             })}
                       </button>
                     `
@@ -1692,10 +1750,10 @@ export class YetiAppAi extends LitElement {
                               <span>
                                 ${this.showFullSchedule
                                   ? this.t("schedule.showing_all", {
-                                      total: activeResult.timeline.length,
+                                      total: String(activeResult.timeline.length),
                                     })
                                   : this.t("schedule.showing_first_24", {
-                                      total: activeResult.timeline.length,
+                                      total: String(activeResult.timeline.length),
                                     })}
                               </span>
                               <button
@@ -1705,7 +1763,7 @@ export class YetiAppAi extends LitElement {
                                 ${this.showFullSchedule
                                   ? this.t("schedule.collapse")
                                   : this.t("schedule.show_entire", {
-                                      months: activeResult.timeline.length,
+                                      months: String(activeResult.timeline.length),
                                     })}
                               </button>
                             </div>
@@ -1718,7 +1776,37 @@ export class YetiAppAi extends LitElement {
             </section>`
           : ""}
 
-        <!-- 9. Educational & Legal Disclaimer Footer -->
+        <!-- 9. Language / Region Selector Bar (Bottom, above disclaimer) -->
+        <div class="locale-bar">
+          <div class="locale-selector-container">
+            <span class="locale-globe-icon" aria-hidden="true">🌐</span>
+            <label for="locale-select" class="locale-label">Language & Region:</label>
+            <div class="select-wrapper">
+              <select
+                id="locale-select"
+                class="locale-select"
+                @change="${(e: Event) => {
+                  const target = e.target as HTMLSelectElement;
+                  this.switchLocale(target.value);
+                }}"
+              >
+                ${SUPPORTED_LOCALES.map(
+                  (loc) => html`
+                    <option
+                      value="${loc.code}"
+                      ?selected="${activeLocaleCode === loc.code}"
+                    >
+                      ${loc.flag} ${loc.nativeName} (${loc.name})
+                    </option>
+                  `,
+                )}
+              </select>
+              <span class="select-arrow" aria-hidden="true">▾</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Educational & Legal Disclaimer Footer -->
         <footer class="app-disclaimer">
           <p>
             <strong>Disclaimer:</strong> ${this.t("disclaimer.text")}

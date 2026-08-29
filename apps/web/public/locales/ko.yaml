@@ -1,0 +1,139 @@
+config:
+  locale: ko-KR
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    currency:
+      style: currency
+      currency: KRW
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: 부채 스노우볼 상환 계산기
+    subtitle: 특정 부채를 집중 상환하고 상환액을 다음 부채로 이월하여 부채를 빠르게 청산합니다.
+
+  debts:
+    title: 등록된 부채 ({count}건)
+    add: "+ 부채 추가"
+    close_form: "✕ 폼 닫기"
+    empty: "아직 등록된 부채가 없습니다. 위의 \"+ 부채 추가\"를 눌러 시작하세요!"
+    form:
+      name_label: 부채명
+      name_placeholder: "예: 신용카드 대출"
+      balance_label: 대출 잔액
+      rate_label: 연이율
+      min_payment_label: 최소 상환액
+      cancel: 취소
+      save: 부채 저장
+      error_required: 모든 필수 항목을 입력해주세요.
+      error_balance: 대출 잔액은 양수를 입력해야 합니다.
+      error_rate: 연이율은 0 이상이어야 합니다.
+      error_min_pay: 최소 상환액은 양수를 입력해야 합니다.
+    item:
+      rate: "금리: {rate}%"
+      min_pay: "최소 상환: {amount, currency}"
+      remove_aria: "{name} 삭제"
+
+  controls:
+    extra_payment_title: 매월 추가 상환 예산
+    extra_payment_sub: 매월 추가로 투입하는 스노우볼 상환액
+    nudge_boost: "매월 {bump, currency} 더 상환하면 이자를 {interest, currency} 추가 절약할 수 있습니다{soonerText}."
+    nudge_sooner: " ({months}개월 조기 완납)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: 상환 전략
+    switch_strategy: "⇄ 전략 변경"
+    close_comparison: "✕ 닫기"
+
+  comparison:
+    title: 모든 상환 전략 비교
+    intro: "전략을 선택하여 상환 일정에 미치는 영향을 시뮬레이션해보세요:"
+    active_badge: 적용 중
+    who_benefits: "추천 대상:"
+    payoff_time_label: 완납 기간
+    payoff_time_val: "{months}개월"
+    payoff_time_saved: "-{months}개월"
+    interest_saved_label: 절약된 이자
+    total_interest_sub: "총이자 {amount, currency}"
+    btn_active: "✓ 현재 전략"
+    btn_select: 이 전략 선택
+
+  results:
+    payoff_date_title: 부채 완납 예정일
+    total_months: "총 {months}개월 소요"
+    months_saved: "{months}개월 단축"
+    interest_saved_title: 절약된 이자
+    total_interest_paid: "총 납부 이자 {amount, currency}"
+
+  sequence:
+    title: 상환 순서 및 이월 일정 ({strategyName})
+    intro: "단계별 순서에 따라 상환하세요. 한 부채를 완납하면 해당 상환 여력이 다음 부채로 그대로 이월됩니다."
+    balance: "잔액: {balance, currency}"
+    rate: "금리: {rate}%"
+    base_min: "기본 최소액: {amount, currency}/월"
+    estimated_payoff_label: 완납 예상일
+    month_sub: "{month}개월차"
+    snowball_payment_label: 스노우볼 상환액
+    snowball_per_month: "{amount, currency}/월"
+    extra_added: "+{amount, currency} 추가 투입"
+    rolled_over: "+{amount, currency} 이월 투입"
+
+  schedule:
+    title: 월별 상환 스케줄표 ({strategyName})
+    show_first_24: 처음 24개월 보기
+    show_all: "전체 ({months}개월) 보기"
+    collapse: "표 접기 ↑"
+    show_entire: "전체 상환 일정 ({months}개월) 보기 ↓"
+    showing_first_24: "총 {total}개월 중 처음 24개월을 표시 중입니다."
+    showing_all: "총 {total}개월 전체 상환 일정을 표시 중입니다."
+    col_month: 월차
+    col_total_paid: 당월 총상환액
+    col_interest_paid: 납부 이자
+    col_remaining_balance: 잔여 원금 합계
+
+  disclaimer:
+    text: "본 도구는 시뮬레이션 및 교육 목적으로 제공되며 금융, 법률 또는 세무 자문을 대신하지 않습니다. 실제 상환 일정과 이자는 금융기관의 정책 및 수수료에 따라 다를 수 있습니다. 전문가와 상담하십시오."
+
+  strategies:
+    lowestBalance:
+      name: 눈덩이 방식 (Snowball)
+      tagline: 잔액 적은 순
+      description: "잔액이 적은 부채부터 먼저 상환하여 빠른 성취감과 상환 동력을 확보합니다."
+      bestFor: "심리적이고 감정적인 성취감을 통해 지속적인 동기부여를 얻고자 하는 분."
+    highestRate:
+      name: 눈사태 방식 (Avalanche)
+      tagline: 고금리 우선
+      description: "금리가 가장 높은 부채부터 먼저 갚아 지출되는 총이자를 최소화합니다."
+      bestFor: "가장 많은 금액을 절약하고 수학적으로 최적화된 방식을 선호하는 분."
+    balancePaymentRatio:
+      name: 현금흐름 최적화
+      tagline: 잔액 대비 상환액 최적
+      description: "잔액 대비 월 최소 상환 부담이 큰 부채를 우선 정리하여 매월 현금 유동성을 확보합니다."
+      bestFor: "월 생활비 부담을 신속히 줄이고 현금흐름을 개선하고 싶은 분."
+    balanceRateRatio:
+      name: 잔액-금리 균형형
+      tagline: 균형 잡힌 절충 전략
+      description: "대출 잔액의 크기와 금리 부담을 종합적으로 고려한 절충형 방식입니다."
+      bestFor: "상환 속도와 이자 절감 효과를 동시에 균형 있게 추구하는 분."
+    highestBalance:
+      name: 최대 잔액 우선
+      tagline: 큰 부채 우선
+      description: "가장 큰 부채부터 먼저 해결하여 심리적인 가장 무거운 짐을 조기에 털어냅니다."
+      bestFor: "가장 큰 대출을 먼저 해결하고 싶은 분."
+    lowestRate:
+      name: 최저 금리 우선
+      tagline: 저금리 우선
+      description: "금리가 낮은 부채부터 먼저 정리합니다."
+      bestFor: "특정 세제 혜택이나 특수 목적이 있는 경우."
+    minimumPayment:
+      name: 최소 상환액만 납부
+      tagline: 추가 상환 없음
+      description: "추가 이월 없이 오직 최소 상환액만 납부할 때의 기준 시뮬레이션입니다."
+      bestFor: "절약 효과를 비교하기 위한 기준선."

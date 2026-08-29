@@ -21,7 +21,7 @@ strings:
     subtitle: Acelera el pago de tus deudas priorizando saldos específicos y reinvirtiendo los pagos.
 
   debts:
-    title: Deudas Activas ({count})
+    title: Deudas ({count})
     add: "+ Añadir una Deuda"
     close_form: "✕ Cerrar Formulario"
     empty: "No hay deudas añadidas todavía. ¡Haz clic en \"+ Añadir una Deuda\" para comenzar!"

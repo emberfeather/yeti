@@ -1,0 +1,139 @@
+config:
+  locale: pt-BR
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: BRL
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Calculadora Bola de Neve de Dívidas
+    subtitle: Acelere a quitação de suas dívidas priorizando saldos específicos e reaproveitando pagamentos.
+
+  debts:
+    title: Dívidas ({count})
+    add: "+ Adicionar Dívida"
+    close_form: "✕ Fechar Formulário"
+    empty: "Nenhuma dívida adicionada ainda. Clique em \"+ Adicionar Dívida\" acima para começar!"
+    form:
+      name_label: Nome da Dívida
+      name_placeholder: "ex: Cartão de Crédito"
+      balance_label: Saldo Devedor
+      rate_label: Taxa de Juros
+      min_payment_label: Pagamento Mínimo
+      cancel: Cancelar
+      save: Salvar Dívida
+      error_required: Por favor, preencha todos os campos.
+      error_balance: O saldo devedor deve ser um número positivo.
+      error_rate: A taxa de juros deve ser 0 ou maior.
+      error_min_pay: O pagamento mínimo deve ser um valor positivo.
+    item:
+      rate: "Taxa: {rate}%"
+      min_pay: "Mínimo: {amount, currency}"
+      remove_aria: "Remover {name}"
+
+  controls:
+    extra_payment_title: Pagamento Mensal Adicional
+    extra_payment_sub: Valor extra reinvestido a cada mês
+    nudge_boost: "Economize {interest, currency} extras em juros aumentando o pagamento em {bump, currency}{soonerText}."
+    nudge_sooner: " (e termine {months} meses antes)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Estratégia de Quitação
+    switch_strategy: "⇄ Mudar Estratégia"
+    close_comparison: "✕ Fechar"
+
+  comparison:
+    title: Comparar Todas as Estratégias
+    intro: "Selecione uma estratégia abaixo para simular o impacto no seu plano de amortização:"
+    active_badge: Ativa
+    who_benefits: "Para quem é ideal:"
+    payoff_time_label: Prazo de Quitação
+    payoff_time_val: "{months} meses"
+    payoff_time_saved: "-{months} meses"
+    interest_saved_label: Juros Economizados
+    total_interest_sub: "{amount, currency} de juros totais"
+    btn_active: "✓ Estratégia Ativa"
+    btn_select: Selecionar Estratégia
+
+  results:
+    payoff_date_title: Data de Quitação
+    total_months: "{months} meses no total"
+    months_saved: "-{months} meses"
+    interest_saved_title: Juros Economizados
+    total_interest_paid: "{amount, currency} de juros totais pagos"
+
+  sequence:
+    title: Sequência de Quitação e Rolagem ({strategyName})
+    intro: "Siga esta sequência passo a passo. Assim que uma dívida for quitada, o valor total do seu pagamento mensal é redirecionado para a próxima."
+    balance: "Saldo: {balance, currency}"
+    rate: "Taxa: {rate}%"
+    base_min: "Mínimo Base: {amount, currency}/mês"
+    estimated_payoff_label: Quitação Estimada
+    month_sub: "Mês {month}"
+    snowball_payment_label: Pagamento Acumulado
+    snowball_per_month: "{amount, currency}/mês"
+    extra_added: "+{amount, currency} extra adicionado"
+    rolled_over: "+{amount, currency} redirecionado"
+
+  schedule:
+    title: Cronograma de Pagamento Mensal ({strategyName})
+    show_first_24: Mostrar Primeiros 24 Meses
+    show_all: "Mostrar Tudo ({months} Meses)"
+    collapse: "Recolher Cronograma ↑"
+    show_entire: "Mostrar Cronograma Completo ({months} meses) ↓"
+    showing_first_24: "Exibindo os primeiros 24 de {total} meses."
+    showing_all: "Exibindo todos os {total} meses do cronograma."
+    col_month: Mês
+    col_total_paid: Total Pago
+    col_interest_paid: Juros Pagos
+    col_remaining_balance: Saldo Restante
+
+  disclaimer:
+    text: "Esta ferramenta foi desenvolvida exclusivamente para fins ilustrativos e educacionais e não constitui consultoria financeira, jurídica ou fiscal. Os prazos reais de quitação e acúmulo de juros podem variar conforme as práticas de cálculo de cada instituição financeira. Consulte um especialista."
+
+  strategies:
+    lowestBalance:
+      name: Bola de Neve (Snowball)
+      tagline: Menor saldo primeiro
+      description: "Ao quitar primeiro as dívidas de menor valor, você cria um impulso psicológico rápido."
+      bestFor: "Mentalmente e emocionalmente mais fácil de executar, pois gera vitórias rápidas."
+    highestRate:
+      name: Avalanche de Dívidas (Avalanche)
+      tagline: Maior taxa de juros primeiro
+      description: "Ao quitar primeiro as dívidas com juros mais altos, você paga menos juros no total."
+      bestFor: "Economiza o máximo de dinheiro no longo prazo."
+    balancePaymentRatio:
+      name: Otimizador de Fluxo de Caixa
+      tagline: Menor razão saldo/pagamento
+      description: "Foca nas dívidas que liberam o maior alívio no pagamento mensal em relação ao seu saldo."
+      bestFor: "Liberar rapidamente fluxo de caixa mensal e fôlego no orçamento."
+    balanceRateRatio:
+      name: Equilíbrio Saldo e Taxa
+      tagline: Abordagem equilibrada
+      description: "Uma metodologia híbrida que balanceia o saldo devedor contra a severidade da taxa de juros."
+      bestFor: "Um compromisso equilibrado entre velocidade de quitação e economia de juros."
+    highestBalance:
+      name: Maior Saldo Primeiro
+      tagline: Maiores dívidas primeiro
+      description: "Ataca primeiro a maior dívida para eliminar o peso principal mais rápido."
+      bestFor: "Quem deseja vencer seu maior desafio financeiro logo no início."
+    lowestRate:
+      name: Menor Taxa Primeiro
+      tagline: Menor taxa de juros primeiro
+      description: "Prioriza dívidas com taxas mais baixas antes de avançar para as de taxas maiores."
+      bestFor: "Preferências fiscais ou de sequenciamento específicas."
+    minimumPayment:
+      name: Apenas Pagamentos Mínimos
+      tagline: Sem orçamento extra
+      description: "Simula o pagamento estrito das parcelas mínimas sem nenhum reaproveitamento de parcelas quitadas."
+      bestFor: "Referência de comparação básica."

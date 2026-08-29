@@ -1,0 +1,139 @@
+config:
+  locale: ja-JP
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    currency:
+      style: currency
+      currency: JPY
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: 借金返済スノーボール計算機
+    subtitle: 目標とする残高に集中して返済額を繰り上げることで、効率的に借金を完済します。
+
+  debts:
+    title: 登録済みの借入 ({count}件)
+    add: "+ 借入を追加"
+    close_form: "✕ フォームを閉じる"
+    empty: "まだ借入が登録されていません。上の「+ 借入を追加」から入力してください。"
+    form:
+      name_label: 借入名
+      name_placeholder: "例: クレジットカード"
+      balance_label: 残高
+      rate_label: 年利
+      min_payment_label: 最低返済額
+      cancel: キャンセル
+      save: 保存する
+      error_required: すべての項目を入力してください。
+      error_balance: 残高は正の数値を入力してください。
+      error_rate: 年利は0以上を入力してください。
+      error_min_pay: 最低返済額は正の数値を入力してください。
+    item:
+      rate: "年利: {rate}%"
+      min_pay: "最低返済: {amount, currency}"
+      remove_aria: "{name}を削除"
+
+  controls:
+    extra_payment_title: 毎月の追加繰上返済額
+    extra_payment_sub: 毎月追加するスノーボール返済予算
+    nudge_boost: "返済額を {bump, currency} 増やすと、利息をさらに {interest, currency} 節約できます{soonerText}。"
+    nudge_sooner: "（完済時期が {months} か月早まります）"
+    nudge_button: "+{bump, currency}"
+    strategy_title: 返済戦略
+    switch_strategy: "⇄ 戦略を変更"
+    close_comparison: "✕ 閉じる"
+
+  comparison:
+    title: すべての返済戦略を比較
+    intro: "以下から戦略を選択して、返済計画への効果をシミュレーションします:"
+    active_badge: 選択中
+    who_benefits: "おすすめの方:"
+    payoff_time_label: 完済までの期間
+    payoff_time_val: "{months} か月"
+    payoff_time_saved: "-{months} か月"
+    interest_saved_label: 節約利息
+    total_interest_sub: "総利息 {amount, currency}"
+    btn_active: "✓ 選択中"
+    btn_select: この戦略を選択
+
+  results:
+    payoff_date_title: 完済予定時期
+    total_months: "合計 {months} か月"
+    months_saved: "-{months} か月短縮"
+    interest_saved_title: 節約利息
+    total_interest_paid: "支払総利息 {amount, currency}"
+
+  sequence:
+    title: 返済順序と繰上推移 ({strategyName})
+    intro: "以下のステップ順に返済を進めます。1つの借入が完済すると、その返済枠がそのまま次の目標に加算されます。"
+    balance: "残高: {balance, currency}"
+    rate: "年利: {rate}%"
+    base_min: "基本最低額: {amount, currency}/月"
+    estimated_payoff_label: 完済予定
+    month_sub: "{month} か月目"
+    snowball_payment_label: スノーボール返済額
+    snowball_per_month: "{amount, currency}/月"
+    extra_added: "+{amount, currency} 追加加算"
+    rolled_over: "+{amount, currency} 繰り上げ合算"
+
+  schedule:
+    title: 月次返済シミュレーション ({strategyName})
+    show_first_24: 最初の24か月を表示
+    show_all: "全期間 ({months} か月) 表示"
+    collapse: "折りたたむ ↑"
+    show_entire: "全返済計画 ({months} か月) を表示 ↓"
+    showing_first_24: "全 {total} か月中、最初の24か月を表示中。"
+    showing_all: "全 {total} か月の返済計画を表示中。"
+    col_month: 年月
+    col_total_paid: 返済総額
+    col_interest_paid: 支払利息
+    col_remaining_balance: 残高合計
+
+  disclaimer:
+    text: "本ツールはシミュレーションおよび教育目的で提供されており、財務、法律、税務上の助言を構成するものではありません。実際の完済時期や利息額は、金融機関の計算方式や手数料により異なる場合があります。専門家にご相談ください。"
+
+  strategies:
+    lowestBalance:
+      name: スノーボール方式 (Snowball)
+      tagline: 残高が少ない順
+      description: "残高の少ない借入から順番に完済することで、短期間で勢いと達成感を得られます。"
+      bestFor: "小さな成功体験を早く積み重ねてモチベーションを維持したい方に最適です。"
+    highestRate:
+      name: アバランチ方式 (Avalanche)
+      tagline: 金利が高い順
+      description: "金利の高い借入から優先して返済することで、支払う総利息を最小限に抑えます。"
+      bestFor: "支払利息を最も多く削減し、合理的に完済したい方に最適です。"
+    balancePaymentRatio:
+      name: キャッシュフロー最適化
+      tagline: 残高/返済額比率が低い順
+      description: "残高に対して毎月の最低返済額が大きい借入を優先し、月々の負担を早く軽くします。"
+      bestFor: "毎月の家計のキャッシュフローを早期に改善したい方に適しています。"
+    balanceRateRatio:
+      name: 残高・金利バランス型
+      tagline: バランス重視アプローチ
+      description: "残高の大きさと金利の負担度合いを組み合わせたハイブリッド方式です。"
+      bestFor: "返済スピードと利息削減のバランスを両立させたい方に適しています。"
+    highestBalance:
+      name: 最大残高優先
+      tagline: 残高が大きい順
+      description: "最も大きな残高を最初に攻略し、心理的な最大の負担を早期に解消します。"
+      bestFor: "最大の借入を真っ先に完済したい方に向いています。"
+    lowestRate:
+      name: 最低金利優先
+      tagline: 金利が低い順
+      description: "金利の低い借入から順に完済します。"
+      bestFor: "特定の税制優遇や返済優先度の理由がある場合に使用します。"
+    minimumPayment:
+      name: 最低返済額のみ
+      tagline: 繰上返済なし
+      description: "毎月の最低返済額のみを支払い続け、繰上を行わない場合の基準値です。"
+      bestFor: "節約効果を比較するためのベースライン。"

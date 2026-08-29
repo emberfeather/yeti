@@ -1,0 +1,139 @@
+config:
+  locale: nl-NL
+  formats:
+    number:
+      style: decimal
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    currency:
+      style: currency
+      currency: EUR
+      minimumFractionDigits: 2
+      maximumFractionDigits: 2
+    percent:
+      style: percent
+      minimumFractionDigits: 1
+      maximumFractionDigits: 2
+
+strings:
+  app:
+    title: Schulden Sneeuwbal Rekenmachine
+    subtitle: Versnel het aflossen van uw schulden door specifieke saldi aan te pakken en betalingen door te schuiven.
+
+  debts:
+    title: Schulden ({count})
+    add: "+ Schuld Toevoegen"
+    close_form: "✕ Formulier Sluiten"
+    empty: "Nog geen schulden toegevoegd. Klik hierboven op \"+ Schuld Toevoegen\" om te beginnen!"
+    form:
+      name_label: Naam van de Schuld
+      name_placeholder: "bijv. Creditcard"
+      balance_label: Saldo
+      rate_label: Rentepercentage
+      min_payment_label: Minimumbetaling
+      cancel: Annuleren
+      save: Schuld Opslaan
+      error_required: Vul alle verplichte velden in.
+      error_balance: Het saldo moet een positief getal zijn.
+      error_rate: Het rentepercentage moet 0 of hoger zijn.
+      error_min_pay: De minimumbetaling moet positief zijn.
+    item:
+      rate: "Rente: {rate}%"
+      min_pay: "Min: {amount, currency}"
+      remove_aria: "Verwijder {name}"
+
+  controls:
+    extra_payment_title: Extra Maandelijkse Aflossing
+    extra_payment_sub: Extra sneeuwbalbudget dat maandelijks wordt ingelegd
+    nudge_boost: "Bespaar {interest, currency} extra aan rente door de betaling te verhogen met {bump, currency}{soonerText}."
+    nudge_sooner: " (en wees {months} maanden eerder schuldenvrij)"
+    nudge_button: "+{bump, currency}"
+    strategy_title: Aflosstrategie
+    switch_strategy: "⇄ Strategie Wijzigen"
+    close_comparison: "✕ Sluiten"
+
+  comparison:
+    title: Alle Aflosstrategieën Vergelijken
+    intro: "Selecteer een strategie om de impact op uw aflossingsplan te simuleren:"
+    active_badge: Actief
+    who_benefits: "Ideaal voor:"
+    payoff_time_label: Aflosduur
+    payoff_time_val: "{months} mnd"
+    payoff_time_saved: "-{months} mnd"
+    interest_saved_label: Rente Bespaard
+    total_interest_sub: "{amount, currency} totale rente"
+    btn_active: "✓ Actieve Strategie"
+    btn_select: Strategie Kiezen
+
+  results:
+    payoff_date_title: Schuldenvrij Op
+    total_months: "{months} maanden in totaal"
+    months_saved: "-{months} maanden"
+    interest_saved_title: Rente Bespaard
+    total_interest_paid: "{amount, currency} totale rente betaald"
+
+  sequence:
+    title: Aflosvolgorde & Sneeuwbaleffect ({strategyName})
+    intro: "Volg deze stap-voor-stap volgorde. Zodra een schuld is afgelost, wordt het volledige maandbedrag doorgeschoven naar het volgende doel."
+    balance: "Saldo: {balance, currency}"
+    rate: "Rente: {rate}%"
+    base_min: "Basis Min: {amount, currency}/mnd"
+    estimated_payoff_label: Verwachte Aflossing
+    month_sub: "Maand {month}"
+    snowball_payment_label: Sneeuwbalbedrag
+    snowball_per_month: "{amount, currency}/mnd"
+    extra_added: "+{amount, currency} extra toegevoegd"
+    rolled_over: "+{amount, currency} doorgeschoven"
+
+  schedule:
+    title: Maandelijks Aflossingsschema ({strategyName})
+    show_first_24: Eerste 24 Maanden Tonen
+    show_all: "Alles Tonen ({months} Maanden)"
+    collapse: "Schema Inklappen ↑"
+    show_entire: "Volledig Schema Tonen ({months} maanden) ↓"
+    showing_first_24: "Eerste 24 van {total} maanden worden getoond."
+    showing_all: "Alle {total} maanden van het schema worden getoond."
+    col_month: Maand
+    col_total_paid: Totaal Betaald
+    col_interest_paid: Rente Betaald
+    col_remaining_balance: Resterend Saldo
+
+  disclaimer:
+    text: "Deze tool is uitsluitend bedoeld voor educatieve en illustratieve doeleinden en vormt geen financieel advies. Raadpleeg een deskundig financieel adviseur."
+
+  strategies:
+    lowestBalance:
+      name: Schulden Sneeuwbal (Snowball)
+      tagline: Laagste saldo eerst
+      description: "Door de kleinste schulden eerst af te lossen bouwt u snel motivatie en vaart op."
+      bestFor: "Mentaal het makkelijkst vol te houden dankzij snelle overwinningen."
+    highestRate:
+      name: Schulden Lawine (Avalanche)
+      tagline: Hoogste rente eerst
+      description: "Door schulden met de hoogste rente eerst aan te pakken bespaart u het meeste geld."
+      bestFor: "Bespaart het maximale bedrag aan rentekosten."
+    balancePaymentRatio:
+      name: Cashflow Optimizer
+      tagline: Laagste saldo/termijn ratio
+      description: "Richt zich op schulden die relatief gezien de meeste maandelijkse cashflow vrijmaken."
+      bestFor: "Snel vergroten van maandelijkse financiële ademruimte."
+    balanceRateRatio:
+      name: Saldo & Rente Balans
+      tagline: Uitgebalanceerde aanpak
+      description: "Een hybride methode die het saldo afweegt tegen de rentekosten."
+      bestFor: "Een gezonde balans tussen aflossnelheid en rentebesparing."
+    highestBalance:
+      name: Hoogste Saldo Eerst
+      tagline: Grootste schulden eerst
+      description: "Pak eerst de grootste schuld aan om de zwaarste last vroegtijdig weg te nemen."
+      bestFor: "Wie direct de grootste uitdaging wil overwinnen."
+    lowestRate:
+      name: Laagste Rente Eerst
+      tagline: Laagste rente eerst
+      description: "Lost eerst de laagste rente af alvorens door te gaan naar hogere rentes."
+      bestFor: "Specifieke fiscale voorkeuren."
+    minimumPayment:
+      name: Alleen Minimumbetalingen
+      tagline: Geen extra budget
+      description: "Simulatie van uitsluitend de minimumbetalingen zonder sneeuwbaleffect."
+      bestFor: "Nulmeting om uw besparingen te vergelijken."
