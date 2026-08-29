@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 0
       maximumFractionDigits: 0
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: KRW
@@ -21,7 +25,7 @@ strings:
     subtitle: 특정 부채를 집중 상환하고 상환액을 다음 부채로 이월하여 부채를 빠르게 청산합니다.
 
   debts:
-    title: 등록된 부채 ({count}건)
+    title: 부채 ({count, integer}건)
     add: "+ 부채 추가"
     close_form: "✕ 폼 닫기"
     empty: "아직 등록된 부채가 없습니다. 위의 \"+ 부채 추가\"를 눌러 시작하세요!"

@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: BRL
@@ -21,7 +25,7 @@ strings:
     subtitle: Acelere a quitação de suas dívidas priorizando saldos específicos e reaproveitando pagamentos.
 
   debts:
-    title: Dívidas ({count})
+    title: Dívidas ({count, integer})
     add: "+ Adicionar Dívida"
     close_form: "✕ Fechar Formulário"
     empty: "Nenhuma dívida adicionada ainda. Clique em \"+ Adicionar Dívida\" acima para começar!"

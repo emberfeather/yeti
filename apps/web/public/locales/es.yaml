@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: EUR
@@ -21,7 +25,7 @@ strings:
     subtitle: Acelera el pago de tus deudas priorizando saldos específicos y reinvirtiendo los pagos.
 
   debts:
-    title: Deudas ({count})
+    title: Deudas ({count, integer})
     add: "+ Añadir una Deuda"
     close_form: "✕ Cerrar Formulario"
     empty: "No hay deudas añadidas todavía. ¡Haz clic en \"+ Añadir una Deuda\" para comenzar!"

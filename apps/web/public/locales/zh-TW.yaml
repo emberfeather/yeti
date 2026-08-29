@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: TWD
@@ -21,7 +25,7 @@ strings:
     subtitle: 針對特定債務集中償還，滾動累加還款額，極速擺脫債務負擔。
 
   debts:
-    title: 當前債務 ({count} 筆)
+    title: 債務 ({count, integer} 筆)
     add: "+ 新增債務"
     close_form: "✕ 關閉表單"
     empty: "尚未新增任何債務。點擊上方 \"+ 新增債務\" 開始規劃！"

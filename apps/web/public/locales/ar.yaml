@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: SAR
@@ -21,7 +25,7 @@ strings:
     subtitle: سدد ديونك بسرعة أكبر من خلال استهداف أرصدة محددة وترحيل الدفعات الشهرية.
 
   debts:
-    title: الديون ({count})
+    title: الديون ({count, integer})
     add: "+ إضافة دين"
     close_form: "✕ إغلاق النموذج"
     empty: "لم تتم إضافة أي ديون بعد. انقر فوق \"+ إضافة دين\" أعلاه للبدء!"

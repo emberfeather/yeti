@@ -1211,7 +1211,7 @@ export class YetiAppAi extends LitElement {
         <!-- 2. Active Debts Section with Embedded Add Debt Form -->
         <section class="card list-card">
           <div class="card-header-actions">
-            <h2>${this.t("debts.title", { count: String(this.debts.length) })}</h2>
+            <h2>${this.t("debts.title", { count: this.debts.length })}</h2>
             <button
               class="btn btn-action-pill"
               @click="${() => {
@@ -1507,13 +1507,13 @@ export class YetiAppAi extends LitElement {
                               >
                               <span class="stat-val"
                                 >${this.t("comparison.payoff_time_val", {
-                                  months: String(item.result.totalMonthsToPayoff),
+                                  months: item.result.totalMonthsToPayoff,
                                 })}</span
                               >
                               ${item.timeSaved > 0
                                 ? html`<span class="stat-sub"
                                     >${this.t("comparison.payoff_time_saved", {
-                                      months: String(item.timeSaved),
+                                      months: item.timeSaved,
                                     })}</span
                                   >`
                                 : ""}
@@ -1563,12 +1563,12 @@ export class YetiAppAi extends LitElement {
                   <div class="metric-value">${activeResult.payoffDate}</div>
                   <p class="metric-sub">
                     ${this.t("results.total_months", {
-                      months: String(activeResult.totalMonthsToPayoff),
+                      months: activeResult.totalMonthsToPayoff,
                     })}
                     ${timeSaved > 0
                       ? html`<span class="saving-pill"
                           >${this.t("results.months_saved", {
-                            months: String(timeSaved),
+                            months: timeSaved,
                           })}</span
                         >`
                       : ""}
@@ -1662,7 +1662,7 @@ export class YetiAppAi extends LitElement {
                             <span class="step-stat-val">${step.payoffDate}</span>
                             <span class="step-stat-sub"
                               >${this.t("sequence.month_sub", {
-                                month: String(step.payoffMonth),
+                                month: step.payoffMonth,
                               })}</span
                             >
                           </div>
@@ -1709,7 +1709,7 @@ export class YetiAppAi extends LitElement {
                         ${this.showFullSchedule
                           ? this.t("schedule.show_first_24")
                           : this.t("schedule.show_all", {
-                              months: String(activeResult.timeline.length),
+                              months: activeResult.timeline.length,
                             })}
                       </button>
                     `
@@ -1750,10 +1750,10 @@ export class YetiAppAi extends LitElement {
                               <span>
                                 ${this.showFullSchedule
                                   ? this.t("schedule.showing_all", {
-                                      total: String(activeResult.timeline.length),
+                                      total: activeResult.timeline.length,
                                     })
                                   : this.t("schedule.showing_first_24", {
-                                      total: String(activeResult.timeline.length),
+                                      total: activeResult.timeline.length,
                                     })}
                               </span>
                               <button
@@ -1763,7 +1763,7 @@ export class YetiAppAi extends LitElement {
                                 ${this.showFullSchedule
                                   ? this.t("schedule.collapse")
                                   : this.t("schedule.show_entire", {
-                                      months: String(activeResult.timeline.length),
+                                      months: activeResult.timeline.length,
                                     })}
                               </button>
                             </div>

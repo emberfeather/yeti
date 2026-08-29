@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: GBP
@@ -21,7 +25,7 @@ strings:
     subtitle: Accelerate your debt payoff by targeting specific balances and rolling over payments.
 
   debts:
-    title: Debts ({count})
+    title: Debts ({count, integer})
     add: "+ Add a Debt"
     close_form: "✕ Close Form"
     empty: "No debts added yet. Click \"+ Add a Debt\" above to get started!"

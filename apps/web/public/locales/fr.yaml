@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: EUR
@@ -21,7 +25,7 @@ strings:
     subtitle: Accélérez le remboursement de vos dettes en ciblant des soldes spécifiques et en réinvestissant les paiements.
 
   debts:
-    title: Dettes ({count})
+    title: Dettes ({count, integer})
     add: "+ Ajouter une Dette"
     close_form: "✕ Fermer le Formulaire"
     empty: "Aucune dette ajoutée pour le moment. Cliquez sur \"+ Ajouter une Dette\" ci-dessus pour commencer !"

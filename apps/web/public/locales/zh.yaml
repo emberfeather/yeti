@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: CNY
@@ -21,7 +25,7 @@ strings:
     subtitle: 针对特定债务集中偿还，滚动累加还款额，极速摆脱债务负担。
 
   debts:
-    title: 当前债务 ({count} 笔)
+    title: 债务 ({count, integer} 笔)
     add: "+ 添加债务"
     close_form: "✕ 关闭表单"
     empty: "暂无债务记录。点击上方 \"+ 添加债务\" 开始规划！"

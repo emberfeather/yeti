@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 0
       maximumFractionDigits: 0
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: JPY
@@ -21,7 +25,7 @@ strings:
     subtitle: 目標とする残高に集中して返済額を繰り上げることで、効率的に借金を完済します。
 
   debts:
-    title: 登録済みの借入 ({count}件)
+    title: 借入 ({count, integer}件)
     add: "+ 借入を追加"
     close_form: "✕ フォームを閉じる"
     empty: "まだ借入が登録されていません。上の「+ 借入を追加」から入力してください。"

@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: EUR
@@ -21,7 +25,7 @@ strings:
     subtitle: Beschleunigen Sie Ihre Entschuldung durch gezielte Tilgung und fortlaufende Umschichtung freier Mittel.
 
   debts:
-    title: Schulden ({count})
+    title: Schulden ({count, integer})
     add: "+ Schuld Hinzufügen"
     close_form: "✕ Formular Schließen"
     empty: "Noch keine Schulden eingetragen. Klicken Sie oben auf \"+ Schuld Hinzufügen\", um zu beginnen!"

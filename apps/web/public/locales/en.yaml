@@ -5,6 +5,10 @@ config:
       style: decimal
       minimumFractionDigits: 2
       maximumFractionDigits: 2
+    integer:
+      style: decimal
+      minimumFractionDigits: 0
+      maximumFractionDigits: 0
     currency:
       style: currency
       currency: USD
@@ -21,7 +25,7 @@ strings:
     subtitle: Accelerate your debt payoff by targeting specific balances and rolling over payments.
 
   debts:
-    title: Debts ({count})
+    title: Debts ({count, integer})
     add: "+ Add a Debt"
     close_form: "✕ Close Form"
     empty: "No debts added yet. Click \"+ Add a Debt\" above to get started!"
@@ -46,7 +50,7 @@ strings:
     extra_payment_title: Additional Monthly Payment
     extra_payment_sub: Extra rollover added each month
     nudge_boost: "Save an extra {interest, currency} in interest by increasing the payment by {bump, currency}{soonerText}."
-    nudge_sooner: " (and finish {months} mo sooner)"
+    nudge_sooner: " (and finish {months, integer} mo sooner)"
     nudge_button: "+{bump, currency}"
     strategy_title: Payoff Strategy
     switch_strategy: "⇄ Switch Strategy"
@@ -58,8 +62,8 @@ strings:
     active_badge: Active
     who_benefits: "Who it benefits:"
     payoff_time_label: Payoff Time
-    payoff_time_val: "{months} mos"
-    payoff_time_saved: "-{months} mos"
+    payoff_time_val: "{months, integer} mos"
+    payoff_time_saved: "-{months, integer} mos"
     interest_saved_label: Interest Saved
     total_interest_sub: "{amount, currency} total interest"
     btn_active: "✓ Active Strategy"
@@ -67,8 +71,8 @@ strings:
 
   results:
     payoff_date_title: Payoff Date
-    total_months: "{months} months total"
-    months_saved: "-{months} months"
+    total_months: "{months, integer} months total"
+    months_saved: "-{months, integer} months"
     interest_saved_title: Interest Saved
     total_interest_paid: "{amount, currency} total interest paid"
 
@@ -79,7 +83,7 @@ strings:
     rate: "Rate: {rate}%"
     base_min: "Base Min: {amount, currency}/mo"
     estimated_payoff_label: Estimated Payoff
-    month_sub: "Month {month}"
+    month_sub: "Month {month, integer}"
     snowball_payment_label: Snowballed Payment
     snowball_per_month: "{amount, currency}/mo"
     extra_added: "+{amount, currency} extra added"
@@ -88,11 +92,11 @@ strings:
   schedule:
     title: Monthly Payoff Schedule ({strategyName})
     show_first_24: Show First 24 Months
-    show_all: "Show All ({months} Months)"
+    show_all: "Show All ({months, integer} Months)"
     collapse: "Collapse Schedule ↑"
-    show_entire: "Show Entire Schedule ({months} months) ↓"
-    showing_first_24: "Showing first 24 of {total} months."
-    showing_all: "Showing all {total} months of payoff schedule."
+    show_entire: "Show Entire Schedule ({months, integer} months) ↓"
+    showing_first_24: "Showing first 24 of {total, integer} months."
+    showing_all: "Showing all {total, integer} months of payoff schedule."
     col_month: Month
     col_total_paid: Total Paid
     col_interest_paid: Interest Paid
