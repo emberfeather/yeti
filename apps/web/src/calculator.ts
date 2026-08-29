@@ -1,4 +1,4 @@
-import { LowestBalanceYetiStrategy, YetiDebt } from "@yeti/snowball";
+import { LowestBalanceYetiStrategy, MinimumPaymentYetiStrategy, YetiDebt } from "@yeti/snowball";
 
 export interface CalculatorInfo {}
 
@@ -17,6 +17,7 @@ export interface TimelineMonth {
   totalPaid: string;
   totalInterestCharged: string;
   totalRemainingBalance: string;
+  debtBalances: Record<string, number>;
 }
 
 export interface SnowballResult {
@@ -26,7 +27,11 @@ export interface SnowballResult {
   timeline: TimelineMonth[];
 }
 
-export function calculateSnowball(debts: Debt[], extraPayment: number): SnowballResult {
+export function calculateSchedule(
+  debts: Debt[],
+  extraPayment: number = 0,
+  strategyType: "snowball" | "minimumOnly" = "snowball",
+): SnowballResult {
   if (debts.length === 0) {
     return {
       payoffDate: "N/A",
@@ -45,8 +50,11 @@ export function calculateSnowball(debts: Debt[], extraPayment: number): Snowball
   const totalMinPayment = debts.reduce((sum, d) => sum + d.minimumPayment, 0);
   const totalBudget = totalMinPayment + extraPayment;
 
-  // 3. Run LowestBalanceYetiStrategy (Snowball)
-  const strategy = new LowestBalanceYetiStrategy(yetiDebts, totalBudget);
+  // 3. Choose strategy
+  const strategy =
+    strategyType === "minimumOnly"
+      ? new MinimumPaymentYetiStrategy(yetiDebts, totalMinPayment)
+      : new LowestBalanceYetiStrategy(yetiDebts, totalBudget);
 
   // 4. Generate the timeline month-by-month
   const maxMonths = strategy.months;
@@ -56,10 +64,30 @@ export function calculateSnowball(debts: Debt[], extraPayment: number): Snowball
   // Track the remaining balance for each debt schedule
   const currentBalances = strategy.schedules.map((s) => s.debt.borrowed);
 
+  // Initial Month 0 state (starting balance before payments)
+  const initialDebtBalances: Record<string, number> = {};
+  let initialTotalBalance = 0;
+  strategy.schedules.forEach((schedule) => {
+    const id = schedule.debt.uid || "debt";
+    initialDebtBalances[id] = schedule.debt.borrowed;
+    initialTotalBalance += schedule.debt.borrowed;
+  });
+
+  timeline.push({
+    monthIndex: 0,
+    monthName: "Start",
+    year: currentDate.getFullYear(),
+    totalPaid: "0.00",
+    totalInterestCharged: "0.00",
+    totalRemainingBalance: initialTotalBalance.toFixed(2),
+    debtBalances: initialDebtBalances,
+  });
+
   for (let m = 1; m <= maxMonths; m++) {
     let totalPaid = 0;
     let totalInterestCharged = 0;
     let totalRemainingBalance = 0;
+    const debtBalances: Record<string, number> = {};
 
     strategy.schedules.forEach((schedule, index) => {
       if (m <= schedule.payments.length) {
@@ -69,10 +97,12 @@ export function calculateSnowball(debts: Debt[], extraPayment: number): Snowball
         currentBalances[index] = Math.max(0, currentBalances[index] - payment.principal);
       }
       totalRemainingBalance += currentBalances[index];
+      const id = schedule.debt.uid || `debt-${index}`;
+      debtBalances[id] = Math.round(currentBalances[index] * 100) / 100;
     });
 
     const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + m - 1, 1);
-    const monthName = targetDate.toLocaleString("default", { month: "long" });
+    const monthName = targetDate.toLocaleString("default", { month: "short" });
     const year = targetDate.getFullYear();
 
     timeline.push({
@@ -82,6 +112,7 @@ export function calculateSnowball(debts: Debt[], extraPayment: number): Snowball
       totalPaid: totalPaid.toFixed(2),
       totalInterestCharged: totalInterestCharged.toFixed(2),
       totalRemainingBalance: totalRemainingBalance.toFixed(2),
+      debtBalances,
     });
   }
 
@@ -98,4 +129,12 @@ export function calculateSnowball(debts: Debt[], extraPayment: number): Snowball
     totalInterestPaid: strategy.interest.toFixed(2),
     timeline,
   };
+}
+
+export function calculateSnowball(debts: Debt[], extraPayment: number): SnowballResult {
+  return calculateSchedule(debts, extraPayment, "snowball");
+}
+
+export function calculateMinimumOnly(debts: Debt[]): SnowballResult {
+  return calculateSchedule(debts, 0, "minimumOnly");
 }

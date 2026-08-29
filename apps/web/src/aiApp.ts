@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { calculateSnowball, type Debt } from "./calculator";
+import { calculateMinimumOnly, calculateSnowball, type Debt } from "./calculator";
+import "./components/chart/yeti-debt-payoff-chart";
 
 const INITIAL_DEBTS: Debt[] = [
   {
@@ -540,7 +541,7 @@ export class YetiAppAi extends LitElement {
 
   override render() {
     const snowballResult = calculateSnowball(this.debts, this.extraPayment);
-    const baselineResult = calculateSnowball(this.debts, 0);
+    const baselineResult = calculateMinimumOnly(this.debts);
 
     const interestSaved = Math.max(
       0,
@@ -738,6 +739,18 @@ export class YetiAppAi extends LitElement {
                     )}
                   </div>`}
             </div>
+
+            <!-- Debt Payoff Chart -->
+            ${this.debts.length > 0
+              ? html`
+                  <yeti-debt-payoff-chart
+                    class="card"
+                    .debts="${this.debts}"
+                    .timeline="${snowballResult.timeline}"
+                    .baselineTimeline="${baselineResult.timeline}"
+                  ></yeti-debt-payoff-chart>
+                `
+              : ""}
 
             <!-- Payoff Schedule Timeline -->
             ${this.debts.length > 0
