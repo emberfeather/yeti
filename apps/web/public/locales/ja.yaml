@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "借金返済スノーボール計算機 - Yeti"
+    description: "Yetiスノーボール計算機で借金完済を加速。返済戦略を比較し、繰り上げ効果をシミュレーションして完済へのタイムラインを可視化します。"
+
   app:
     title: 借金返済スノーボール計算機
     subtitle: 目標とする残高に集中して返済額を繰り上げることで、効率的に借金を完済します。

@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "债务滚雪球还款计算器 - Yeti"
+    description: "使用 Yeti 债务滚雪球计算器加速还清债务。对比不同还款策略，模拟雪球滚存效应，直观查看您的无债时间表。"
+
   app:
     title: 债务滚雪球还款计算器
     subtitle: 针对特定债务集中偿还，滚动累加还款额，极速摆脱债务负担。

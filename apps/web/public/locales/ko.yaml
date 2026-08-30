@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "눈덩이 부채 상환 계산기 - Yeti"
+    description: "Yeti 스노우볼 부채 상환 계산기로 부채 상환을 가속화하세요. 상환 전략을 비교하고, 롤오버 효과를 시뮬레이션하며, 부채 해방 일정을 확인하세요."
+
   app:
     title: 부채 스노우볼 상환 계산기
     subtitle: 특정 부채를 집중 상환하고 상환액을 다음 부채로 이월하여 부채를 빠르게 청산합니다.

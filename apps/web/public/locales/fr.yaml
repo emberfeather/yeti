@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Calculateur Boule de Neige de Dettes - Yeti"
+    description: "Accélérez le remboursement de vos dettes avec le calculateur Yeti. Comparez les stratégies, simulez les reports et visualisez votre calendrier sans dette."
+
   app:
     title: Calculateur Boule de Neige de Dettes
     subtitle: Accélérez le remboursement de vos dettes en ciblant des soldes spécifiques et en réinvestissant les paiements.

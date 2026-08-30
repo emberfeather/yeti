@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Calculadora Bola de Neve de Dívidas - Yeti"
+    description: "Acelere a quitação das suas dívidas com a Calculadora Bola de Neve Yeti. Compare estratégias, simule o efeito bola de neve e visualize sua linha do tempo livre de dívidas."
+
   app:
     title: Calculadora Bola de Neve de Dívidas
     subtitle: Acelere a quitação de suas dívidas priorizando saldos específicos e reaproveitando pagamentos.

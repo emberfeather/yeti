@@ -67,10 +67,48 @@ export class YetiApp extends ERApp {
     );
   }
 
+  private setMetaTag(
+    selector: string,
+    attrName: string,
+    attrVal: string,
+    content: string,
+  ) {
+    let el = document.querySelector(selector);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attrName, attrVal);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  }
+
+  private updateMetadata() {
+    if (!this.localization) return;
+
+    const title =
+      this.localization.t("meta.title") ||
+      `${this.localization.t("app.title")} - Yeti`;
+    if (title) {
+      document.title = title;
+      this.setMetaTag('meta[property="og:title"]', "property", "og:title", title);
+      this.setMetaTag('meta[name="twitter:title"]', "name", "twitter:title", title);
+    }
+
+    const description =
+      this.localization.t("meta.description") ||
+      this.localization.t("app.subtitle");
+    if (description) {
+      this.setMetaTag('meta[name="description"]', "name", "description", description);
+      this.setMetaTag('meta[property="og:description"]', "property", "og:description", description);
+      this.setMetaTag('meta[name="twitter:description"]', "name", "twitter:description", description);
+    }
+  }
+
   private async loadLocale(newLocale: string) {
     try {
       this.localization = await this.localizationManager.load(newLocale);
       document.documentElement.lang = newLocale;
+      this.updateMetadata();
     } catch (e) {
       console.error("Failed to update locale:", e);
     }

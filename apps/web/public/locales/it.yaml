@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Calcolatore Palla di Neve per Debiti - Yeti"
+    description: "Accelera l'estinzione dei tuoi debiti con il calcolatore Palla di Neve Yeti. Confronta le strategie di rimborso, simula i rollover e visualizza il tuo percorso verso la libertà dai debiti."
+
   app:
     title: Calcolatore Palla di Neve per Debiti
     subtitle: Accelera l'estinzione dei tuoi debiti concentrandoti sui singoli saldi e reinvestendo i pagamenti.

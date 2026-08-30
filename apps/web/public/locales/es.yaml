@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Calculadora de Bola de Nieve de Deudas - Yeti"
+    description: "Acelera el pago de tus deudas con la Calculadora de Bola de Nieve de Yeti. Compara estrategias de pago, simula transferencias y visualiza tu camino libre de deudas."
+
   app:
     title: Calculadora de Bola de Nieve de Deudas
     subtitle: Acelera el pago de tus deudas priorizando saldos específicos y reinvirtiendo los pagos.

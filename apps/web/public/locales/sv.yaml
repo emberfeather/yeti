@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Skuldsnöboll Kalkylator - Yeti"
+    description: "Accelerera din skuldfrihet med Yeti Skuldsnöboll Kalkylator. Jämför återbetalningsstrategier, simulera överrullning och visualisera din tidslinje mot skuldfrihet."
+
   app:
     title: Skuldsnöboll Kalkylator
     subtitle: Bli skuldfri snabbare genom att fokusera på utvalda skulder och rulla över inbetalningar.

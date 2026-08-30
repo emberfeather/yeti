@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Kalkulator Kuli Śnieżnej Długów - Yeti"
+    description: "Przyspiesz spłatę długów z kalkulatorem Yeti Kula Śnieżna. Porównaj strategie spłaty, symuluj kumulację rat i zobacz swój harmonogram wolności finansowej."
+
   app:
     title: Kalkulator Kuli Śnieżnej Zadłużenia
     subtitle: Przyspiesz spłatę zadłużenia, koncentrując się na wybranych kwotach i przekazując raty dalej.

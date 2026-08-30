@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Debt Snowball Calculator - Yeti"
+    description: "Accelerate your debt payoff with the Yeti Debt Snowball Calculator. Compare repayment strategies, simulate rollovers, and visualise your debt-free timeline."
+
   app:
     title: Debt Snowball Calculator
     subtitle: Accelerate your debt payoff by targeting specific balances and rolling over payments.

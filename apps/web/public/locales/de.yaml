@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Schulden-Schneeball Rechner - Yeti"
+    description: "Beschleunigen Sie Ihre Schuldentilgung mit dem Yeti Schulden-Schneeball-Rechner. Vergleichen Sie Strategien, simulieren Sie Rollover und visualisieren Sie Ihren Weg in die Schuldenfreiheit."
+
   app:
     title: Schulden-Schneeball-Rechner
     subtitle: Beschleunigen Sie Ihre Entschuldung durch gezielte Tilgung und fortlaufende Umschichtung freier Mittel.

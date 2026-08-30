@@ -20,6 +20,10 @@ config:
       maximumFractionDigits: 2
 
 strings:
+  meta:
+    title: "Schulden Sneeuwbal Calculator - Yeti"
+    description: "Versnel uw schuldaflossing met de Yeti Schulden Sneeuwbal Calculator. Vergelijk aflosstrategieën, simuleer doorrolbetalingen en visualiseer uw schuldenvrije tijdlijn."
+
   app:
     title: Schulden Sneeuwbal Rekenmachine
     subtitle: Versnel het aflossen van uw schulden door specifieke saldi aan te pakken en betalingen door te schuiven.
