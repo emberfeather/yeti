@@ -114,6 +114,9 @@ strings:
     text: "本ツールはシミュレーションおよび教育目的で提供されており、財務、法律、税務上の助言を構成するものではありません。実際の完済時期や利息額は、金融機関の計算方式や手数料により異なる場合があります。専門家にご相談ください。"
 
   footer:
+    language_label: "言語と地域:"
+    currency_label: "通貨:"
+    currency_auto: "デフォルト"
     powered_by: "Powered by"
 
   strategies:

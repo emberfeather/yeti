@@ -114,6 +114,9 @@ strings:
     text: "Detta verktyg är endast avsett för illustrativa och utbildande syften och utgör inte finansiell rådgivning. Rådfråga en certifierad finansiell rådgivare."
 
   footer:
+    language_label: "Språk & Region:"
+    currency_label: "Valuta:"
+    currency_auto: "Standard"
     powered_by: "Drivs av"
 
   strategies:

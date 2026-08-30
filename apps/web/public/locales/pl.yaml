@@ -114,6 +114,9 @@ strings:
     text: "Narzędzie ma charakter wyłącznie edukacyjny i ilustracyjny i nie stanowi doradztwa finansowego, prawnego ani podatkowego. Skonsultuj się z licencjonowanym doradcą finansowym."
 
   footer:
+    language_label: "Język i Region:"
+    currency_label: "Waluta:"
+    currency_auto: "Domyślna"
     powered_by: "Obsługiwane przez"
 
   strategies:

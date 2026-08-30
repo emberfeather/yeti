@@ -114,6 +114,9 @@ strings:
     text: "This tool is designed strictly for illustrative and educational purposes and does not constitute financial, legal, investment, or tax advice. Actual payoff timelines and interest accruals may vary depending on individual creditor calculations, compounding frequencies, introductory promotional rate expirations, and unexpected fees. Consult a qualified financial advisor for guidance tailored to your specific financial situation."
 
   footer:
+    language_label: "Language & Region:"
+    currency_label: "Currency:"
+    currency_auto: "Default"
     powered_by: "Powered by"
 
   strategies:

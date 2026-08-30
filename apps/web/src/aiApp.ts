@@ -12,9 +12,77 @@ import {
   type Debt,
   type StrategyKey,
 } from "./calculator";
-import { loadStoredState, saveStoredState } from "./storage";
+import {
+  loadSavedCurrency,
+  loadStoredState,
+  saveSelectedCurrency,
+  saveStoredState,
+} from "./storage";
 import { CHART_PALETTE } from "./components/chart/chartTheme";
 import "./components/chart/yeti-debt-payoff-chart";
+
+export interface CurrencyOption {
+  code: string;
+  name: string;
+  symbol: string;
+}
+
+export const SUPPORTED_CURRENCIES: CurrencyOption[] = [
+  { code: "USD", name: "US Dollar ($)", symbol: "$" },
+  { code: "EUR", name: "Euro (€)", symbol: "€" },
+  { code: "GBP", name: "British Pound (£)", symbol: "£" },
+  { code: "CAD", name: "Canadian Dollar ($)", symbol: "CA$" },
+  { code: "AUD", name: "Australian Dollar ($)", symbol: "A$" },
+  { code: "JPY", name: "Japanese Yen (¥)", symbol: "¥" },
+  { code: "CNY", name: "Chinese Yuan (¥)", symbol: "¥" },
+  { code: "INR", name: "Indian Rupee (₹)", symbol: "₹" },
+  { code: "BRL", name: "Brazilian Real (R$)", symbol: "R$" },
+  { code: "MXN", name: "Mexican Peso ($)", symbol: "MX$" },
+  { code: "CHF", name: "Swiss Franc (CHF)", symbol: "CHF" },
+  { code: "KRW", name: "South Korean Won (₩)", symbol: "₩" },
+  { code: "SEK", name: "Swedish Krona (kr)", symbol: "kr" },
+  { code: "PLN", name: "Polish Złoty (zł)", symbol: "zł" },
+  { code: "TWD", name: "New Taiwan Dollar (NT$)", symbol: "NT$" },
+  { code: "SAR", name: "Saudi Riyal (﷼)", symbol: "﷼" },
+  { code: "AED", name: "UAE Dirham (AED)", symbol: "AED" },
+  { code: "NZD", name: "New Zealand Dollar ($)", symbol: "NZ$" },
+  { code: "SGD", name: "Singapore Dollar ($)", symbol: "S$" },
+  { code: "HKD", name: "Hong Kong Dollar ($)", symbol: "HK$" },
+  { code: "NOK", name: "Norwegian Krone (kr)", symbol: "kr" },
+  { code: "DKK", name: "Danish Krone (kr)", symbol: "kr" },
+  { code: "ZAR", name: "South African Rand (R)", symbol: "R" },
+  { code: "PHP", name: "Philippine Peso (₱)", symbol: "₱" },
+  { code: "THB", name: "Thai Baht (฿)", symbol: "฿" },
+  { code: "MYR", name: "Malaysian Ringgit (RM)", symbol: "RM" },
+  { code: "IDR", name: "Indonesian Rupiah (Rp)", symbol: "Rp" },
+  { code: "VND", name: "Vietnamese Dong (₫)", symbol: "₫" },
+  { code: "ILS", name: "Israeli New Shekel (₪)", symbol: "₪" },
+  { code: "CLP", name: "Chilean Peso ($)", symbol: "CLP$" },
+  { code: "COP", name: "Colombian Peso ($)", symbol: "COL$" },
+  { code: "PEN", name: "Peruvian Sol (S/)", symbol: "S/" },
+  { code: "TRY", name: "Turkish Lira (₺)", symbol: "₺" },
+];
+
+export const LOCALE_DEFAULT_CURRENCIES: Record<string, string> = {
+  en: "USD",
+  "en-US": "USD",
+  "en-GB": "GBP",
+  es: "EUR",
+  fr: "EUR",
+  de: "EUR",
+  it: "EUR",
+  "pt-BR": "BRL",
+  pt: "BRL",
+  ja: "JPY",
+  zh: "CNY",
+  "zh-TW": "TWD",
+  ko: "KRW",
+  hi: "INR",
+  ar: "SAR",
+  nl: "EUR",
+  pl: "PLN",
+  sv: "SEK",
+};
 
 interface LocaleOption {
   code: string;
@@ -49,6 +117,7 @@ export class YetiAppAi extends LitElement {
   private localization?: Localization;
 
   @state() private saveLocally: boolean = false;
+  @state() private selectedCurrency: string | null = null;
   @state() private debts: Debt[] = [];
   @state() private extraPayment: number = 300;
   @state() private currentStrategyKey: StrategyKey = "lowestBalance";
@@ -67,6 +136,7 @@ export class YetiAppAi extends LitElement {
 
   constructor() {
     super();
+    this.selectedCurrency = loadSavedCurrency();
     const stored = loadStoredState();
     if (stored) {
       this.saveLocally = stored.saveLocally;
@@ -1012,11 +1082,13 @@ export class YetiAppAi extends LitElement {
         font-style: normal;
       }
 
-      /* Locale Selector Bar at Bottom */
+      /* Locale & Currency Selector Bar at Bottom */
       .locale-bar {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
         margin-top: 40px;
         padding-top: 24px;
         border-top: 1px solid var(--border);
@@ -1146,22 +1218,81 @@ export class YetiAppAi extends LitElement {
     `,
   ];
 
-  private formatCurrency(val: number): string {
-    if (this.localization) {
-      return this.localization.formatNumber(val, "currency");
+  private get defaultCurrencyForLocale(): string {
+    const loc = (this.localization?.locale || "en").toLowerCase();
+    for (const [key, cur] of Object.entries(LOCALE_DEFAULT_CURRENCIES)) {
+      if (
+        loc === key.toLowerCase() ||
+        loc.startsWith(key.toLowerCase() + "-") ||
+        key.toLowerCase().startsWith(loc)
+      ) {
+        return cur;
+      }
     }
-    return `$${val.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
+    return "USD";
+  }
+
+  private get effectiveCurrency(): string {
+    return this.selectedCurrency || this.defaultCurrencyForLocale;
+  }
+
+  private switchCurrency(currencyCode: string) {
+    if (currencyCode === "" || currencyCode === "auto") {
+      this.selectedCurrency = null;
+      saveSelectedCurrency(null);
+    } else {
+      this.selectedCurrency = currencyCode;
+      saveSelectedCurrency(currencyCode);
+    }
+    this.requestUpdate();
+  }
+
+  private formatCurrency(val: number): string {
+    const locale = this.localization?.locale || "en-US";
+    const currency = this.effectiveCurrency;
+    try {
+      return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(val);
+    } catch {
+      return `${currency} ${val.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}`;
+    }
   }
 
   private t(key: string, variables?: Record<string, string | number>): string {
     if (this.localization) {
-      const translation = this.localization.t(key, variables);
-      if (translation && translation !== "") {
-        return translation;
+      if (!variables) {
+        return this.localization.t(key);
       }
+      const template = this.localization.t(key);
+      if (!template || template === key) {
+        return key;
+      }
+      return template.replace(
+        /\{([a-zA-Z0-9_]+)(?:\s*,\s*([a-zA-Z0-9_]+))?\}/g,
+        (match, name, formatType) => {
+          if (!(name in variables)) {
+            return match;
+          }
+          const value = variables[name];
+          if (typeof value === "number") {
+            if (formatType === "currency") {
+              return this.formatCurrency(value);
+            }
+            if (formatType) {
+              return this.localization!.formatNumber(value, formatType);
+            }
+            return this.localization!.formatNumber(value, "number");
+          }
+          return String(value);
+        },
+      );
     }
     return key;
   }
@@ -1195,12 +1326,20 @@ export class YetiAppAi extends LitElement {
   }
 
   private get currencySymbol(): string {
-    if (this.localization) {
-      const formatted = this.localization.formatNumber(0, "currency");
-      const symbol = formatted.replace(/[\d.,\s]/g, "");
-      return symbol || "$";
+    const locale = this.localization?.locale || "en-US";
+    const currency = this.effectiveCurrency;
+    try {
+      const parts = new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      }).formatToParts(0);
+      const currencyPart = parts.find((p) => p.type === "currency");
+      if (currencyPart) return currencyPart.value;
+    } catch {
+      // Fallback below
     }
-    return "$";
+    const found = SUPPORTED_CURRENCIES.find((c) => c.code === currency);
+    return found ? found.symbol : currency;
   }
 
   private switchLocale(locale: string) {
@@ -1931,11 +2070,11 @@ export class YetiAppAi extends LitElement {
             </section>`
           : ""}
 
-        <!-- 9. Language / Region Selector Bar (Bottom, above disclaimer) -->
+        <!-- 9. Language / Region & Currency Selector Bar (Bottom, above disclaimer) -->
         <div class="locale-bar">
           <div class="locale-selector-container">
             <span class="locale-globe-icon" aria-hidden="true">🌐</span>
-            <label for="locale-select" class="locale-label">Language & Region:</label>
+            <label for="locale-select" class="locale-label">${this.t("footer.language_label") === "footer.language_label" ? "Language:" : this.t("footer.language_label")}</label>
             <div class="select-wrapper">
               <select
                 id="locale-select"
@@ -1952,6 +2091,36 @@ export class YetiAppAi extends LitElement {
                       ?selected="${activeLocaleCode === loc.code}"
                     >
                       ${loc.flag} ${loc.nativeName} (${loc.name})
+                    </option>
+                  `,
+                )}
+              </select>
+              <span class="select-arrow" aria-hidden="true">▾</span>
+            </div>
+          </div>
+
+          <div class="locale-selector-container">
+            <span class="locale-globe-icon" aria-hidden="true">💱</span>
+            <label for="currency-select" class="locale-label">${this.t("footer.currency_label") === "footer.currency_label" ? "Currency:" : this.t("footer.currency_label")}</label>
+            <div class="select-wrapper">
+              <select
+                id="currency-select"
+                class="locale-select"
+                @change="${(e: Event) => {
+                  const target = e.target as HTMLSelectElement;
+                  this.switchCurrency(target.value);
+                }}"
+              >
+                <option value="" ?selected="${!this.selectedCurrency}">
+                  ${this.t("footer.currency_auto") === "footer.currency_auto" ? "Default" : this.t("footer.currency_auto")} (${this.defaultCurrencyForLocale})
+                </option>
+                ${SUPPORTED_CURRENCIES.map(
+                  (cur) => html`
+                    <option
+                      value="${cur.code}"
+                      ?selected="${this.selectedCurrency === cur.code}"
+                    >
+                      ${cur.code} - ${cur.name}
                     </option>
                   `,
                 )}

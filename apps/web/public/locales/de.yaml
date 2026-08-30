@@ -114,6 +114,9 @@ strings:
     text: "Dieses Tool dient ausschließlich Informations- und Bildungszwecken und stellt keine Finanz-, Rechts-, Steuer- oder Anlageberatung dar. Tatsächliche Tilgungszeiten und Zinsen können je nach Zinsberechnungsmethode, Gebühren und Konditionsänderungen variieren. Konsultieren Sie einen qualifizierten Finanzberater."
 
   footer:
+    language_label: "Sprache & Region:"
+    currency_label: "Währung:"
+    currency_auto: "Standard"
     powered_by: "Unterstützt durch"
 
   strategies:

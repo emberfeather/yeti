@@ -114,6 +114,9 @@ strings:
     text: "Esta herramienta está diseñada únicamente con fines ilustrativos y educativos y no constituye asesoramiento financiero, legal, de inversión o fiscal. Los plazos de pago y la acumulación de intereses reales pueden variar según los cálculos de los acreedores, las frecuencias de capitalización, la expiración de tasas promocionales y cargos imprevistos. Consulta a un asesor financiero cualificado."
 
   footer:
+    language_label: "Idioma y Región:"
+    currency_label: "Moneda:"
+    currency_auto: "Predeterminada"
     powered_by: "Desarrollado por"
 
   strategies:

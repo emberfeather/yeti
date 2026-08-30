@@ -114,6 +114,9 @@ strings:
     text: "Deze tool is uitsluitend bedoeld voor educatieve en illustratieve doeleinden en vormt geen financieel advies. Raadpleeg een deskundig financieel adviseur."
 
   footer:
+    language_label: "Taal & Regio:"
+    currency_label: "Valuta:"
+    currency_auto: "Standaard"
     powered_by: "Aangedreven door"
 
   strategies:

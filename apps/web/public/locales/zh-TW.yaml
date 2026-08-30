@@ -114,6 +114,9 @@ strings:
     text: "本工具僅供模擬和教育參考，不構成任何財務、法律或稅務建議。實際還款時間與利息支出可能因金融機構計息方式和費用有所差異。請諮詢專業財務顧問。"
 
   footer:
+    language_label: "語言與地區："
+    currency_label: "貨幣："
+    currency_auto: "預設"
     powered_by: "Powered by"
 
   strategies:

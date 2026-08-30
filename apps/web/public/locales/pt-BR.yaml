@@ -114,6 +114,9 @@ strings:
     text: "Esta ferramenta foi desenvolvida exclusivamente para fins ilustrativos e educacionais e não constitui consultoria financeira, jurídica ou fiscal. Os prazos reais de quitação e acúmulo de juros podem variar conforme as práticas de cálculo de cada instituição financeira. Consulte um especialista."
 
   footer:
+    language_label: "Idioma e Região:"
+    currency_label: "Moeda:"
+    currency_auto: "Padrão"
     powered_by: "Desenvolvido por"
 
   strategies:

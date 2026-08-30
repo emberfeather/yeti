@@ -114,6 +114,9 @@ strings:
     text: "본 도구는 시뮬레이션 및 교육 목적으로 제공되며 금융, 법률 또는 세무 자문을 대신하지 않습니다. 실제 상환 일정과 이자는 금융기관의 정책 및 수수료에 따라 다를 수 있습니다. 전문가와 상담하십시오."
 
   footer:
+    language_label: "언어 및 지역:"
+    currency_label: "통화:"
+    currency_auto: "기본값"
     powered_by: "Powered by"
 
   strategies:

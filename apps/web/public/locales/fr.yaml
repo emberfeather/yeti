@@ -114,6 +114,9 @@ strings:
     text: "Cet outil est conçu uniquement à des fins d'illustration et éducatives et ne constitue pas un conseil financier, juridique, d'investissement ou fiscal. Les délais réels de remboursement et les intérêts accumulés peuvent varier selon les méthodes de calcul des créanciers, la capitalisation et les frais. Consultez un conseiller financier agréé."
 
   footer:
+    language_label: "Langue & Région :"
+    currency_label: "Devise :"
+    currency_auto: "Par défaut"
     powered_by: "Propulsé par"
 
   strategies:

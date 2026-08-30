@@ -114,6 +114,9 @@ strings:
     text: "本工具仅供模拟和教育参考，不构成任何财务、法律或税务建议。实际还款时间与利息支出可能因金融机构计息方式和费用有所差异。请咨询专业财务顾问。"
 
   footer:
+    language_label: "语言与地区："
+    currency_label: "货币："
+    currency_auto: "默认"
     powered_by: "Powered by"
 
   strategies:

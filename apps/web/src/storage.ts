@@ -9,8 +9,35 @@ export interface YetiStorageState {
 }
 
 export const STORAGE_KEY_V2 = "yeti.v2.data";
+export const STORAGE_KEY_CURRENCY = "yeti.currency";
 export const LEGACY_SAVE_KEY = "yeti.save";
 export const LEGACY_DEBTS_KEY = "yeti.debts";
+
+export function loadSavedCurrency(): string | null {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return null;
+  }
+  try {
+    return window.localStorage.getItem(STORAGE_KEY_CURRENCY);
+  } catch {
+    return null;
+  }
+}
+
+export function saveSelectedCurrency(currency: string | null): void {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return;
+  }
+  try {
+    if (currency) {
+      window.localStorage.setItem(STORAGE_KEY_CURRENCY, currency);
+    } else {
+      window.localStorage.removeItem(STORAGE_KEY_CURRENCY);
+    }
+  } catch (err) {
+    console.error("Error saving Yeti selected currency to localStorage:", err);
+  }
+}
 
 export interface LegacyDebtItem {
   borrowed?: number;
