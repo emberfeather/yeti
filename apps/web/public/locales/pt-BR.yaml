@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} de juros totais"
     btn_active: "✓ Estratégia Ativa"
     btn_select: Selecionar Estratégia
+    duplicates_hidden_one: "{count, integer} estratégia foi ocultada porque possui uma ordem de quitação idêntica."
+    duplicates_hidden_other: "{count, integer} estratégias foram ocultadas porque possuem ordens de quitação idênticas."
 
   results:
     payoff_date_title: Data de Quitação
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Esta ferramenta foi desenvolvida exclusivamente para fins ilustrativos e educacionais e não constitui consultoria financeira, jurídica ou fiscal. Os prazos reais de quitação e acúmulo de juros podem variar conforme as práticas de cálculo de cada instituição financeira. Consulte um especialista."
+
+  footer:
+    powered_by: "Desenvolvido por"
 
   strategies:
     lowestBalance:

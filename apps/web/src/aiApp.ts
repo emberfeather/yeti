@@ -7,6 +7,7 @@ import {
   calculateMinimumOnly,
   calculateSchedule,
   compareAllStrategies,
+  SELECTABLE_STRATEGY_KEYS,
   STRATEGY_DEFINITIONS,
   type Debt,
   type StrategyKey,
@@ -808,6 +809,25 @@ export class YetiAppAi extends LitElement {
         border-color: var(--accent-border);
       }
 
+      .strategy-dedup-notice {
+        margin-top: 20px;
+        padding: 12px 18px;
+        background: var(--social-bg, rgba(244, 243, 236, 0.5));
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .strategy-dedup-notice .dedup-icon {
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+
       /* Payoff Order Sequence List */
       .payoff-order-list {
         display: flex;
@@ -1062,11 +1082,15 @@ export class YetiAppAi extends LitElement {
         pointer-events: none;
       }
 
-      /* App Disclaimer Footer */
+      /* App Disclaimer & Attribution Footer */
       .app-disclaimer {
-        margin-top: 24px;
+        margin-top: 28px;
         padding-top: 0;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
       }
 
       .app-disclaimer p {
@@ -1080,6 +1104,44 @@ export class YetiAppAi extends LitElement {
 
       .app-disclaimer strong {
         color: var(--text-h);
+      }
+
+      .footer-attribution {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .footer-github-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-h);
+        font-weight: 600;
+        text-decoration: none;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        background: var(--social-bg, rgba(244, 243, 236, 0.5));
+        border: 1px solid var(--border);
+        transition: all 0.2s ease;
+      }
+
+      .footer-github-link:hover {
+        background: var(--accent-bg);
+        border-color: var(--accent-border);
+        color: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .footer-github-link svg {
+        width: 15px;
+        height: 15px;
+        fill: currentColor;
+        flex-shrink: 0;
       }
     `,
   ];
@@ -1231,6 +1293,10 @@ export class YetiAppAi extends LitElement {
     );
 
     const comparisonItems = compareAllStrategies(this.debts, this.extraPayment, baselineResult);
+    const hiddenStrategiesCount = Math.max(
+      0,
+      SELECTABLE_STRATEGY_KEYS.length - comparisonItems.length,
+    );
     if (
       comparisonItems.length > 0 &&
       !comparisonItems.some((item) => item.key === this.currentStrategyKey)
@@ -1622,6 +1688,22 @@ export class YetiAppAi extends LitElement {
                     `;
                   })}
                 </div>
+
+                ${hiddenStrategiesCount > 0
+                  ? html`
+                      <div class="strategy-dedup-notice">
+                        <span class="dedup-icon" aria-hidden="true">ℹ️</span>
+                        <span>
+                          ${this.t(
+                            hiddenStrategiesCount === 1
+                              ? "comparison.duplicates_hidden_one"
+                              : "comparison.duplicates_hidden_other",
+                            { count: hiddenStrategiesCount },
+                          )}
+                        </span>
+                      </div>
+                    `
+                  : ""}
               </section>
             `
           : ""}
@@ -1884,6 +1966,21 @@ export class YetiAppAi extends LitElement {
           <p>
             <strong>Disclaimer:</strong> ${this.t("disclaimer.text")}
           </p>
+          <div class="footer-attribution">
+            <span>${this.t("footer.powered_by") === "footer.powered_by" ? "Powered by" : this.t("footer.powered_by")}</span>
+            <a
+              href="https://github.com/emberfeather/yeti"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-github-link"
+              aria-label="Yeti GitHub repository"
+            >
+              <svg viewBox="0 0 19 19" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
+              </svg>
+              <span>Yeti</span>
+            </a>
+          </div>
         </footer>
       </div>
     `;

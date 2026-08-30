@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} إجمالي الفوائد"
     btn_active: "✓ الاستراتيجية الحالية"
     btn_select: اختيار الاستراتيجية
+    duplicates_hidden_one: "تم إخفاء {count, integer} استراتيجية لأن لها ترتيب سداد مكرر."
+    duplicates_hidden_other: "تم إخفاء {count, integer} استراتيجيات لأن لها ترتيب سداد مكرر."
 
   results:
     payoff_date_title: تاريخ السداد الكامل
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "هذه الأداة مصممة لأغراض توضيحية وتعليمية فقط ولا تشكل استشارة مالية أو قانونية أو ضريبية. استشر مستشاراً مالياً مؤهلاً."
+
+  footer:
+    powered_by: "مشغل بواسطة"
 
   strategies:
     lowestBalance:

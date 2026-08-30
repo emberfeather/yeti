@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} de interés total"
     btn_active: "✓ Estrategia Activa"
     btn_select: Seleccionar Estrategia
+    duplicates_hidden_one: "Se ocultó {count, integer} estrategia porque tiene un orden de pago duplicado."
+    duplicates_hidden_other: "Se ocultaron {count, integer} estrategias porque tienen órdenes de pago duplicados."
 
   results:
     payoff_date_title: Fecha de Liquidación
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Esta herramienta está diseñada únicamente con fines ilustrativos y educativos y no constituye asesoramiento financiero, legal, de inversión o fiscal. Los plazos de pago y la acumulación de intereses reales pueden variar según los cálculos de los acreedores, las frecuencias de capitalización, la expiración de tasas promocionales y cargos imprevistos. Consulta a un asesor financiero cualificado."
+
+  footer:
+    powered_by: "Desarrollado por"
 
   strategies:
     lowestBalance:

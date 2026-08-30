@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} total interest"
     btn_active: "✓ Active Strategy"
     btn_select: Select Strategy
+    duplicates_hidden_one: "{count, integer} strategy was hidden because it has a duplicate payoff order."
+    duplicates_hidden_other: "{count, integer} strategies were hidden because they have duplicate payoff orders."
 
   results:
     payoff_date_title: Payoff Date
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "This tool is designed strictly for illustrative and educational purposes and does not constitute financial, legal, investment, or tax advice. Actual payoff timelines and interest accruals may vary depending on individual creditor calculations, compounding frequencies, introductory promotional rate expirations, and unexpected fees. Consult a qualified financial advisor for guidance tailored to your specific financial situation."
+
+  footer:
+    powered_by: "Powered by"
 
   strategies:
     lowestBalance:

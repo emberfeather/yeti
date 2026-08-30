@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} total ränta"
     btn_active: "✓ Aktiv Strategi"
     btn_select: Välj Strategi
+    duplicates_hidden_one: "{count, integer} strategi doldes eftersom den har samma avbetalningsordning."
+    duplicates_hidden_other: "{count, integer} strategier doldes eftersom de har samma avbetalningsordning."
 
   results:
     payoff_date_title: Skuldfri Datum
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Detta verktyg är endast avsett för illustrativa och utbildande syften och utgör inte finansiell rådgivning. Rådfråga en certifierad finansiell rådgivare."
+
+  footer:
+    powered_by: "Drivs av"
 
   strategies:
     lowestBalance:

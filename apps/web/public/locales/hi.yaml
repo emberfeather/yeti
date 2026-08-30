@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} कुल ब्याज"
     btn_active: "✓ सक्रिय रणनीति"
     btn_select: रणनीति चुनें
+    duplicates_hidden_one: "{count, integer} रणनीति छिपाई गई क्योंकि इसका भुगतान क्रम समान है।"
+    duplicates_hidden_other: "{count, integer} रणनीतियाँ छिपाई गईं क्योंकि उनके भुगतान क्रम समान हैं।"
 
   results:
     payoff_date_title: पूर्ण भुगतान तिथि
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "यह उपकरण केवल उदाहरण और शैक्षिक उद्देश्यों के लिए है और वित्तीय सलाह नहीं है। वास्तविक समय और ब्याज वित्तीय संस्थानों की गणना विधियों के अनुसार भिन्न हो सकते हैं।"
+
+  footer:
+    powered_by: "द्वारा संचालित"
 
   strategies:
     lowestBalance:

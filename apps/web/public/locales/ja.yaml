@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "総利息 {amount, currency}"
     btn_active: "✓ 選択中"
     btn_select: この戦略を選択
+    duplicates_hidden_one: "返済順序が重複しているため、{count, integer} 件の戦略を非表示にしました。"
+    duplicates_hidden_other: "返済順序が重複しているため、{count, integer} 件の戦略を非表示にしました。"
 
   results:
     payoff_date_title: 完済予定時期
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "本ツールはシミュレーションおよび教育目的で提供されており、財務、法律、税務上の助言を構成するものではありません。実際の完済時期や利息額は、金融機関の計算方式や手数料により異なる場合があります。専門家にご相談ください。"
+
+  footer:
+    powered_by: "Powered by"
 
   strategies:
     lowestBalance:

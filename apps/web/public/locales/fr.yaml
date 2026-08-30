@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} d'intérêts totaux"
     btn_active: "✓ Stratégie Active"
     btn_select: Sélectionner la Stratégie
+    duplicates_hidden_one: "{count, integer} stratégie a été masquée car elle présente un ordre de remboursement identique."
+    duplicates_hidden_other: "{count, integer} stratégies ont été masquées car elles présentent des ordres de remboursement identiques."
 
   results:
     payoff_date_title: Date de Remboursement Total
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Cet outil est conçu uniquement à des fins d'illustration et éducatives et ne constitue pas un conseil financier, juridique, d'investissement ou fiscal. Les délais réels de remboursement et les intérêts accumulés peuvent varier selon les méthodes de calcul des créanciers, la capitalisation et les frais. Consultez un conseiller financier agréé."
+
+  footer:
+    powered_by: "Propulsé par"
 
   strategies:
     lowestBalance:

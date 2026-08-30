@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "總利息 {amount, currency}"
     btn_active: "✓ 目前策略"
     btn_select: 選擇此策略
+    duplicates_hidden_one: "因還款順序相同，已隱藏 {count, integer} 個策略。"
+    duplicates_hidden_other: "因還款順序相同，已隱藏 {count, integer} 個策略。"
 
   results:
     payoff_date_title: 預計還清日期
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "本工具僅供模擬和教育參考，不構成任何財務、法律或稅務建議。實際還款時間與利息支出可能因金融機構計息方式和費用有所差異。請諮詢專業財務顧問。"
+
+  footer:
+    powered_by: "Powered by"
 
   strategies:
     lowestBalance:

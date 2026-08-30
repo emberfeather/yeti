@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} di interessi totali"
     btn_active: "✓ Strategia Attiva"
     btn_select: Seleziona Strategia
+    duplicates_hidden_one: "{count, integer} strategia è stata nascosta perché ha un ordine di rimborso duplicato."
+    duplicates_hidden_other: "{count, integer} strategie sono state nascoste perché hanno ordini di rimborso duplicati."
 
   results:
     payoff_date_title: Data di Estinzione
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Questo strumento è progettato esclusivamente per scopi illustrativi ed educativi e non costituisce consulenza finanziaria, legale, fiscale o di investimento. I tempi effettivi e gli interessi possono variare in base ai calcoli dei creditori e alle commissioni. Consulta un consulente finanziario abilitato."
+
+  footer:
+    powered_by: "Offerto da"
 
   strategies:
     lowestBalance:

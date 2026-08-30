@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} łącznych odsetek"
     btn_active: "✓ Aktywna Strategia"
     btn_select: Wybierz Strategię
+    duplicates_hidden_one: "{count, integer} strategia została ukryta, ponieważ ma identyczną kolejność spłat."
+    duplicates_hidden_other: "{count, integer} strategie zostały ukryte, ponieważ mają identyczną kolejność spłat."
 
   results:
     payoff_date_title: Data Całkowitej Spłaty
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Narzędzie ma charakter wyłącznie edukacyjny i ilustracyjny i nie stanowi doradztwa finansowego, prawnego ani podatkowego. Skonsultuj się z licencjonowanym doradcą finansowym."
+
+  footer:
+    powered_by: "Obsługiwane przez"
 
   strategies:
     lowestBalance:

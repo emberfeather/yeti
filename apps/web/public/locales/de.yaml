@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} Gesamtzinsen"
     btn_active: "✓ Aktive Strategie"
     btn_select: Strategie Wählen
+    duplicates_hidden_one: "{count, integer} Strategie wurde ausgeblendet, da sie dieselbe Tilgungsreihenfolge hat."
+    duplicates_hidden_other: "{count, integer} Strategien wurden ausgeblendet, da sie dieselbe Tilgungsreihenfolge haben."
 
   results:
     payoff_date_title: Schuldenfrei Am
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Dieses Tool dient ausschließlich Informations- und Bildungszwecken und stellt keine Finanz-, Rechts-, Steuer- oder Anlageberatung dar. Tatsächliche Tilgungszeiten und Zinsen können je nach Zinsberechnungsmethode, Gebühren und Konditionsänderungen variieren. Konsultieren Sie einen qualifizierten Finanzberater."
+
+  footer:
+    powered_by: "Unterstützt durch"
 
   strategies:
     lowestBalance:

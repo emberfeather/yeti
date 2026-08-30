@@ -70,6 +70,8 @@ strings:
     total_interest_sub: "{amount, currency} totale rente"
     btn_active: "✓ Actieve Strategie"
     btn_select: Strategie Kiezen
+    duplicates_hidden_one: "{count, integer} strategie is verborgen omdat deze een dubbele aflosvolgorde heeft."
+    duplicates_hidden_other: "{count, integer} strategieën zijn verborgen omdat ze een dubbele aflosvolgorde hebben."
 
   results:
     payoff_date_title: Schuldenvrij Op
@@ -106,6 +108,9 @@ strings:
 
   disclaimer:
     text: "Deze tool is uitsluitend bedoeld voor educatieve en illustratieve doeleinden en vormt geen financieel advies. Raadpleeg een deskundig financieel adviseur."
+
+  footer:
+    powered_by: "Aangedreven door"
 
   strategies:
     lowestBalance:

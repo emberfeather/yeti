@@ -297,24 +297,24 @@ export interface StrategyComparisonItem {
   timeSaved: number;
 }
 
+export const SELECTABLE_STRATEGY_KEYS: StrategyKey[] = [
+  "lowestBalance",
+  "highestRate",
+  "balancePaymentRatio",
+  "balanceRateRatio",
+  "highestBalance",
+  "lowestRate",
+];
+
 export function compareAllStrategies(
   debts: Debt[],
   extraPayment: number,
   baselineResult: SnowballResult,
 ): StrategyComparisonItem[] {
-  const selectableKeys: StrategyKey[] = [
-    "lowestBalance",
-    "highestRate",
-    "balancePaymentRatio",
-    "balanceRateRatio",
-    "highestBalance",
-    "lowestRate",
-  ];
-
   const seenOrderSignatures = new Set<string>();
   const uniqueItems: StrategyComparisonItem[] = [];
 
-  for (const key of selectableKeys) {
+  for (const key of SELECTABLE_STRATEGY_KEYS) {
     const result = calculateSchedule(debts, extraPayment, key);
     const orderSignature = result.payoffOrder.map((step) => step.debtId).join("->");
 
