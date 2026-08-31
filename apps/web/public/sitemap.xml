@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <!-- Default / English (US) Root -->
+  <url>
+    <loc>https://ballofsnow.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- English (UK) -->
+  <url>
+    <loc>https://ballofsnow.app/intl/en-GB</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Spanish -->
+  <url>
+    <loc>https://ballofsnow.app/intl/es</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- French -->
+  <url>
+    <loc>https://ballofsnow.app/intl/fr</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- German -->
+  <url>
+    <loc>https://ballofsnow.app/intl/de</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Italian -->
+  <url>
+    <loc>https://ballofsnow.app/intl/it</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Portuguese (Brazil) -->
+  <url>
+    <loc>https://ballofsnow.app/intl/pt-BR</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Japanese -->
+  <url>
+    <loc>https://ballofsnow.app/intl/ja</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Simplified Chinese -->
+  <url>
+    <loc>https://ballofsnow.app/intl/zh</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Traditional Chinese -->
+  <url>
+    <loc>https://ballofsnow.app/intl/zh-TW</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Korean -->
+  <url>
+    <loc>https://ballofsnow.app/intl/ko</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Hindi -->
+  <url>
+    <loc>https://ballofsnow.app/intl/hi</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Arabic -->
+  <url>
+    <loc>https://ballofsnow.app/intl/ar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Dutch -->
+  <url>
+    <loc>https://ballofsnow.app/intl/nl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Swedish -->
+  <url>
+    <loc>https://ballofsnow.app/intl/sv</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+
+  <!-- Polish -->
+  <url>
+    <loc>https://ballofsnow.app/intl/pl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ballofsnow.app/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://ballofsnow.app/intl/en-GB" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ballofsnow.app/intl/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ballofsnow.app/intl/fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://ballofsnow.app/intl/de" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://ballofsnow.app/intl/it" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ballofsnow.app/intl/pt-BR" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ballofsnow.app/intl/ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ballofsnow.app/intl/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ballofsnow.app/intl/zh-TW" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://ballofsnow.app/intl/ko" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ballofsnow.app/intl/hi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ballofsnow.app/intl/ar" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://ballofsnow.app/intl/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://ballofsnow.app/intl/sv" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://ballofsnow.app/intl/pl" />
+  </url>
+</urlset>
