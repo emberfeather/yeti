@@ -1,0 +1,17 @@
+{
+  "name": "Debt Snowball Calculator - Yeti",
+  "short_name": "Yeti",
+  "description": "Accelerate your debt payoff with the Yeti Debt Snowball Calculator. Compare repayment strategies, simulate rollovers, and visualize your debt-free timeline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#aa3bff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
