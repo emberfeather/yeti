@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/emberfeather/yeti/compare/web-v0.2.0...web-v0.3.0) (2026-09-01)
+
+
+### Features
+
+* add currency selection support with persistent storage and localized currency formatting ([7e5b2cc](https://github.com/emberfeather/yeti/commit/7e5b2ccb13447b7896c67ba94fac62a2391ee752))
+* add PWA manifest and theme configuration to web app ([980787e](https://github.com/emberfeather/yeti/commit/980787e0b78611c73e2577e89435b629c1ae419e))
+* add SEO canonical tags, robots.txt, and sitemap for improved discoverability ([bc40f98](https://github.com/emberfeather/yeti/commit/bc40f9847b98b9061b402e526dc210e01df93f85))
+* implement dynamic meta tag updates and add localized SEO metadata for all supported languages ([ef19562](https://github.com/emberfeather/yeti/commit/ef19562264289706f291960746432178d2d6563f))
+
 ## [0.2.0](https://github.com/emberfeather/yeti/compare/web-v0.1.0...web-v0.2.0) (2026-08-30)
 
 
